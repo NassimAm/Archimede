@@ -1,4 +1,5 @@
 ﻿using Archimède;
+using System.Text;
 
 //Introduction des Valeurs ========================================================================================================================
 
@@ -58,12 +59,71 @@ for(int i = 0;i<groupeMintermes.groupesMintermes.Length;i++)
     Console.WriteLine("----------------------------------");
 }
 
-/*//Générer les impliquants finaux
+//Générer les impliquants finaux
 bool stop = false;
-while(!stop)
+int count = 0;
+int differentAtIndex = -1;
+bool prime = true;
+List<Impliquant> impliquants = new List<Impliquant>();
+List<Impliquant> finalImpliquants = new List<Impliquant>();
+Console.WriteLine("Impliquants ===================");
+while (stop == false)
 {
-    for(int i=0;i<groupeMintermes.groupesMintermes.Length-1;i++)
+    for (int i = 0; i < groupeMintermes.groupesMintermes.Length - 1; i++)
     {
-
+        for(int j = 0;j<groupeMintermes.groupesMintermes[i].Count;j++)
+        {
+            prime = true;
+            for(int k=0;k<groupeMintermes.groupesMintermes[i+1].Count;k++)
+            {
+                count = 0;
+                differentAtIndex = -1;
+                for (int l=0;l<groupeMintermes.groupesMintermes[i][j].bincode.Length;l++)
+                {
+                    if (groupeMintermes.groupesMintermes[i][j].bincode[l] != groupeMintermes.groupesMintermes[i + 1][k].bincode[l])
+                    {
+                        count += 1;
+                        differentAtIndex = l;
+                    }
+                }
+                if (count > 0)
+                    prime = false;
+                if (count == 1)
+                {
+                    if (differentAtIndex != -1)
+                    {
+                        Impliquant impliquant = new Impliquant(new List<Minterme>() { groupeMintermes.groupesMintermes[i][j], groupeMintermes.groupesMintermes[i + 1][k] });
+                        StringBuilder sb = new StringBuilder(impliquant.bincode);
+                        sb[differentAtIndex] = '-';
+                        impliquant.bincode = sb.ToString();
+                        impliquant.status = false;
+                        impliquants.Add(impliquant);
+                        Console.WriteLine(impliquant.bincode);
+                    }
+                }
+            }
+            if(prime)
+            {
+                Impliquant impliquant = new Impliquant(new List<Minterme>() { groupeMintermes.groupesMintermes[i][j] });
+                impliquant.status = true;
+                finalImpliquants.Add(impliquant);
+                Console.WriteLine(impliquant.bincode);
+            }
+        }
     }
+    Console.WriteLine("==================");
+    if(impliquants.Count != 0)
+    {
+        groupeMintermes.GrouperListes(impliquants);
+        impliquants.Clear();
+    }
+    else
+    {
+        stop = true;
+    }
+}
+
+/*for(int i = 0;i<impliquants.Count;i++)
+{
+    Console.WriteLine(impliquants[i].bincode);
 }*/

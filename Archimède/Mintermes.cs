@@ -51,6 +51,41 @@ namespace Archimède
             this.groupesMintermes = mintermeGroupes;
         }
 
+        public void GrouperListes(List<Impliquant> impliquants)
+        {
+            List<Minterme> mintermes = new List<Minterme>();
+            for(int i=0;i<impliquants.Count;i++)
+            {
+                Minterme minterme = impliquants[i].mintermes[0];
+                minterme.bincode = impliquants[i].bincode;
+                mintermes.Add(minterme);
+            }
+            mintermes = OrdonnerListe(mintermes);
+            int maxnbGroupes = this.nbGroupes;
+            List<Minterme>[] mintermeGroupes = new List<Minterme>[maxnbGroupes + 1];
+            mintermeGroupes[0] = new List<Minterme>();
+            for (int i = 0; i < mintermes.Count; i++)
+            {
+                if (mintermes[i].nbuns == 0)
+                {
+                    mintermeGroupes[0].Add(mintermes[i]);
+                }
+            }
+            for (int i = 1; i <= maxnbGroupes; i++)
+            {
+                mintermeGroupes[i] = new List<Minterme>();
+                for (int j = 0; j < mintermes.Count; j++)
+                {
+                    if (mintermes[j].nbuns == i)
+                    {
+                        mintermeGroupes[i].Add(mintermes[j]);
+                    }
+                }
+            }
+
+            this.groupesMintermes = mintermeGroupes;
+        }
+
         //Ordonne la liste de mintermes en fonction du nombre décimal et retourne la nouvelle liste ordonnée
         public List<Minterme> OrdonnerListe(List<Minterme> mintermes)
         {

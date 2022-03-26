@@ -8,14 +8,14 @@ namespace Archimède
 {
     class Impliquant
     {
-        public Minterme minterme { get; set; }
+        public List<Minterme> mintermes { get; set; }
         public string bincode { get; set; }
         public bool status;
 
-        public Impliquant(Minterme minterme)
+        public Impliquant(List<Minterme> mintermes)
         {
-            this.minterme = minterme;
-            this.bincode = minterme.bincode;
+            this.mintermes = mintermes;
+            this.bincode = mintermes[0].bincode;
             this.status = true;
         }
     }
