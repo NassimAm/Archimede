@@ -45,86 +45,237 @@ for(int i = 0;i<mintermes.Count;i++)
     }
 }
 
-//Créer les groupes ====================================================================================
-
+//Créer les groupes ===================================================================================================================
+//Les groupes sont formés d'impliquants initiaux (les mintermes introduits)
 Mintermes groupeMintermes = new Mintermes(maxNbUns);
-groupeMintermes.GrouperListes(mintermes);
+List<Impliquant> impliquants = groupeMintermes.InitImpliquants(mintermes);
+List<Impliquant> impliquantsPremiers = new List<Impliquant>();
+groupeMintermes.GrouperListes(impliquants);
 
-for(int i = 0;i<groupeMintermes.groupesMintermes.Length;i++)
+/*//Petit affichage de groupage initial
+for(int i = 0;i<groupeMintermes.groupesImpliquants.Length;i++)
 {
-    for(int j=0;j< groupeMintermes.groupesMintermes[i].Count;j++)
+    for(int j=0;j< groupeMintermes.groupesImpliquants[i].Count;j++)
     {
-        Console.WriteLine(groupeMintermes.groupesMintermes[i][j].bincode);
+        Console.WriteLine(groupeMintermes.groupesImpliquants[i][j].bincode);
     }
     Console.WriteLine("----------------------------------");
-}
+}*/
 
-//Générer les impliquants finaux
-bool stop = false;
+//Générer les impliquants premiers
 int count = 0;
-int differentAtIndex = -1;
-bool prime = true;
-List<Impliquant> impliquants = new List<Impliquant>();
-List<Impliquant> finalImpliquants = new List<Impliquant>();
-
-Console.WriteLine("Impliquants ===================");
-while (stop == false)
+int differentAt = -1;
+bool stop = false;
+while(!stop)
 {
-    for (int i = 0; i < groupeMintermes.groupesMintermes.Length - 1; i++)
+    impliquants.Clear();
+    for (int i = 0; i < groupeMintermes.groupesImpliquants.Length - 1; i++)
     {
-        for(int j = 0;j<groupeMintermes.groupesMintermes[i].Count;j++)
+        for (int j = 0; j < groupeMintermes.groupesImpliquants[i].Count; j++)
         {
-            prime = true;
-            for(int k=0;k<groupeMintermes.groupesMintermes[i+1].Count;k++)
+            for (int k = 0; k < groupeMintermes.groupesImpliquants[i + 1].Count; k++)
             {
                 count = 0;
-                differentAtIndex = -1;
-                for (int l=0;l<groupeMintermes.groupesMintermes[i][j].bincode.Length;l++)
+                differentAt = -1;
+                for (int l = 0; l < groupeMintermes.groupesImpliquants[i][j].bincode.Length; l++)
                 {
-                    if (groupeMintermes.groupesMintermes[i][j].bincode[l] != groupeMintermes.groupesMintermes[i + 1][k].bincode[l])
+                    if (groupeMintermes.groupesImpliquants[i][j].bincode[l] != groupeMintermes.groupesImpliquants[i + 1][k].bincode[l])
                     {
                         count += 1;
-                        differentAtIndex = l;
+                        differentAt = l;
                     }
                 }
-                if (count > 0)
-                    prime = false;
+                //Si les deux impliquants sont adjacents
                 if (count == 1)
                 {
-                    if (differentAtIndex != -1)
-                    {
-                        Impliquant impliquant = new Impliquant(new List<Minterme>() { groupeMintermes.groupesMintermes[i][j], groupeMintermes.groupesMintermes[i + 1][k] });
-                        StringBuilder sb = new StringBuilder(impliquant.bincode);
-                        sb[differentAtIndex] = '-';
-                        impliquant.bincode = sb.ToString();
-                        impliquant.status = false;
-                        impliquants.Add(impliquant);
-                        Console.WriteLine(impliquant.bincode);
-                    }
+                    //Les deux impliquants sont traités (status = false)
+                    groupeMintermes.groupesImpliquants[i][j].status = false;
+                    groupeMintermes.groupesImpliquants[i + 1][k].status = false;
+                    //Fusionner leurs mintermes correspondants
+                    groupeMintermes.groupesImpliquants[i][j].mintermes.AddRange(groupeMintermes.groupesImpliquants[i + 1][k].mintermes);
+                    StringBuilder sb = new StringBuilder(groupeMintermes.groupesImpliquants[i][j].bincode);
+                    //Actualiser le code binaire et le simplifier
+                    sb[differentAt] = '-';
+                    groupeMintermes.groupesImpliquants[i][j].bincode = sb.ToString();
+                    //Ajouter le nouveau impliquant créé à la liste des impliquants qu'il faut traiter encore
+                    impliquants.Add(groupeMintermes.groupesImpliquants[i][j]);
                 }
-            }
-            if(prime)
-            {
-                Impliquant impliquant = new Impliquant(new List<Minterme>() { groupeMintermes.groupesMintermes[i][j] });
-                impliquant.status = true;
-                finalImpliquants.Add(impliquant);
-                Console.WriteLine(impliquant.bincode);
             }
         }
     }
-    Console.WriteLine("==================");
-    if(impliquants.Count != 0)
+
+    //Filtrer les impliquants et trouver les impliquants premiers qui ne peuvent plus etre simplifiés
+    for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
+    {
+        for (int j = 0; j < groupeMintermes.groupesImpliquants[i].Count; j++)
+        {
+            //Les impliquants qui n'ont pas d'adjacents donc non traités au dessus (status = true) seront ajoutés aux impliquants premiers directement
+            if (groupeMintermes.groupesImpliquants[i][j].status == true)
+            {
+                impliquantsPremiers.Add(groupeMintermes.groupesImpliquants[i][j]);
+            }
+        }
+    }
+
+    //Si la liste des impliquants qu'il faut encore traiter n'est pas vide donc regrouper les impliquants
+    if(impliquants.Count>0)
     {
         groupeMintermes.GrouperListes(impliquants);
-        impliquants.Clear();
+
+        /*//Petit affichage du groupage
+        Console.WriteLine("=================================");
+        for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
+        {
+            for (int j = 0; j < groupeMintermes.groupesImpliquants[i].Count; j++)
+            {
+                Console.WriteLine(groupeMintermes.groupesImpliquants[i][j].bincode);
+            }
+            Console.WriteLine("----------------------------------");
+        }*/
     }
-    else
+    else //Sinon Arrêter la boucle
     {
         stop = true;
     }
 }
 
-/*for(int i = 0;i<impliquants.Count;i++)
+/*//Petit affichage des impliquants premiers
+for (int i = 0; i < impliquantsPremiers.Count; i++)
 {
-    Console.WriteLine(impliquants[i].bincode);
+    Console.WriteLine(impliquantsPremiers[i].bincode);
+    Console.WriteLine("Mintermes : ");
+    for(int j = 0; j < impliquantsPremiers[i].mintermes.Count;j++)
+    {
+        Console.WriteLine(impliquantsPremiers[i].mintermes[j].bincode);
+    }
 }*/
+
+//Recherche des impliquants premiers essentiels ===================================================================================
+
+/*//Petit affichage de la tables des impliquants premiers
+for (int i = 0; i < mintermes.Count; i++)
+{
+    Console.Write(mintermes[i].bincode + " ");
+}
+Console.WriteLine();
+for (int i = 0; i < impliquantsPremiers.Count; i++)
+{
+    for (int j = 0; j < mintermes.Count; j++)
+    {
+        if (impliquantsPremiers[i].mintermes.Contains(mintermes[j]))
+        {
+            Console.Write("Vrai ");
+        }
+        else
+        {
+            Console.Write("Faux ");
+        }
+    }
+    Console.WriteLine(impliquantsPremiers[i].bincode);
+}
+Console.WriteLine();*/
+
+List<Impliquant> impliquantsEssentiels = new List<Impliquant>();
+int impliquantIndex = -1;
+int mintermeIndex = 0;
+int impliquantLevel = 1;
+
+//Tant que la liste des mintermes n'est pas vide
+while(mintermes.Count>0)
+{
+    mintermeIndex = 0;
+    while (mintermeIndex < mintermes.Count)
+    {
+        count = 0;
+        impliquantIndex = -1;
+        for (int j = 0; j < impliquantsPremiers.Count; j++)
+        {
+            //Si l'impliquant j peut représenter le minterme i
+            if (impliquantsPremiers[j].mintermes.Contains(mintermes[mintermeIndex]))
+            {
+                count += 1;
+                impliquantIndex = j;
+            }
+        }
+        /*Si le minterme i est représenté par impliquantLevel impliquant(s) initialement si le minterme i
+        est représenté uniquement par un impliquant donc il ajouté à la liste des impliquants essentiels
+        et supprimer le minterme de la liste des mintermes car il a ainsi été traité*/
+        if (count == impliquantLevel)
+        {
+            impliquantsEssentiels.Add(impliquantsPremiers[impliquantIndex]);
+            mintermes.RemoveAt(mintermeIndex);
+        }
+        else //Sinon avancer dans la liste des mintermes
+        {
+            mintermeIndex += 1;
+        }
+    }
+
+
+    //Vérifier si en choisissant les impliquants essentiels quels mintermes on a traité
+    mintermeIndex = 0;
+    while (mintermeIndex < mintermes.Count)
+    {
+        count = 0;
+        for (int j = 0; j < impliquantsEssentiels.Count; j++)
+        {
+            //Si l'impliquant essentiel j peut représenter le minterme i
+            if (impliquantsEssentiels[j].mintermes.Contains(mintermes[mintermeIndex]))
+            {
+                count += 1;
+            }
+        }
+        /*Si le minterme est représenté par au moins un impliquant essentiel donc ce minterme est supprimé de la liste des mintermes
+         car il a ainsi été traité*/
+        if (count > 0)
+        {
+            mintermes.RemoveAt(mintermeIndex);
+        }
+        else //Sinon avancer dans la liste des mintermes
+        {
+            mintermeIndex += 1;
+        }
+    }
+    impliquantLevel += 1;
+}
+
+//Supprimer les doublons s'ils existent
+impliquantsEssentiels = impliquantsEssentiels.Distinct().ToList();
+
+/*//Petit Affichage des impliquants essentiels
+for (int i = 0; i < impliquantsEssentiels.Count; i++)
+{
+    Console.WriteLine(impliquantsEssentiels[i].bincode);
+}*/
+
+//Affichage de la formule simplifiée ====================================================================================================
+Console.WriteLine();
+Console.WriteLine("Resultat de simplification : ");
+String resultat = "";
+for(int i=0;i<impliquantsEssentiels.Count;i++)
+{
+    for(int j=0;j<impliquantsEssentiels[i].bincode.Length;j++)
+    {
+        if(impliquantsEssentiels[i].bincode[j] != '-')
+        {
+            //Nommer les variables dans l'ordre alphabétique
+            if (impliquantsEssentiels[i].bincode[j] == '1')
+            {
+                resultat += (char)(65 + j);
+            }
+            else
+            {
+                resultat += "!" + (char)(65 + j);
+            }
+        }
+    }
+    resultat += " + ";
+}
+
+//Enlever le " + " additionnel à la fin
+if(resultat.Length>=3)
+{
+    resultat = resultat.Substring(0,resultat.Length-3);
+}
+
+Console.WriteLine(resultat);

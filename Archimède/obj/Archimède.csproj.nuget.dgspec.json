@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\Archimede-main\\Archimede-main\\Archimède\\Archimède.csproj": {}
+    "D:\\ESI_Prj_2CP\\Première_Implémentation\\Archimede\\Archimède\\Archimède.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\Archimede-main\\Archimede-main\\Archimède\\Archimède.csproj": {
+    "D:\\ESI_Prj_2CP\\Première_Implémentation\\Archimede\\Archimède\\Archimède.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\Archimede-main\\Archimede-main\\Archimède\\Archimède.csproj",
+        "projectUniqueName": "D:\\ESI_Prj_2CP\\Première_Implémentation\\Archimede\\Archimède\\Archimède.csproj",
         "projectName": "Archimède",
-        "projectPath": "C:\\Users\\user\\Desktop\\Archimede-main\\Archimede-main\\Archimède\\Archimède.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\Archimede-main\\Archimede-main\\Archimède\\obj\\",
+        "projectPath": "D:\\ESI_Prj_2CP\\Première_Implémentation\\Archimede\\Archimède\\Archimède.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "D:\\ESI_Prj_2CP\\Première_Implémentation\\Archimede\\Archimède\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

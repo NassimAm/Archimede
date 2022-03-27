@@ -24,26 +24,37 @@ namespace Archimède
         public Mintermes()
         { }
 
-        //Grouper les mintermes binaire en groupe d'après le nombre de 1
+        //Créer les impliquants initiaux
+        public List<Impliquant> InitImpliquants(List<Minterme> mintermes)
+        {
+            List<Impliquant> result = new List<Impliquant>();
+            for(int i = 0;i<mintermes.Count;i++)
+            {
+                result.Add(new Impliquant(new List<Minterme>() { mintermes[i] }));
+            }
+            return result;
+        }
+
+        /*//Grouper les mintermes binaire en groupe d'après le nombre de 1
         public void GrouperListes(List<Minterme> mintermes)
         {
             mintermes = OrdonnerListe(mintermes);
             int maxnbGroupes = this.nbGroupes;
             List<Minterme>[] mintermeGroupes = new List<Minterme>[maxnbGroupes + 1];
             mintermeGroupes[0] = new List<Minterme>();
-            for(int i = 0;i<mintermes.Count;i++)
+            for (int i = 0; i < mintermes.Count; i++)
             {
-                if(mintermes[i].nbuns == 0)
+                if (mintermes[i].nbuns == 0)
                 {
                     mintermeGroupes[0].Add(mintermes[i]);
                 }
             }
-            for(int i = 1;i<=maxnbGroupes;i++)
+            for (int i = 1; i <= maxnbGroupes; i++)
             {
                 mintermeGroupes[i] = new List<Minterme>();
-                for(int j = 0;j<mintermes.Count;j++)
+                for (int j = 0; j < mintermes.Count; j++)
                 {
-                    if(mintermes[j].nbuns == i)
+                    if (mintermes[j].nbuns == i)
                     {
                         mintermeGroupes[i].Add(mintermes[j]);
                     }
@@ -51,6 +62,36 @@ namespace Archimède
             }
 
             this.groupesMintermes = mintermeGroupes;
+        }*/
+
+        //Grouper les mintermes binaire en groupe d'après le nombre de 1
+        public void GrouperListes(List<Minterme> mintermes)
+        {
+            mintermes = OrdonnerListe(mintermes);
+            List<Impliquant> impliquants = InitImpliquants(mintermes);
+            int maxnbGroupes = this.nbGroupes;
+            List<Impliquant>[] mintermeGroupes = new List<Impliquant>[maxnbGroupes + 1];
+            mintermeGroupes[0] = new List<Impliquant>();
+            for (int i = 0; i < impliquants.Count; i++)
+            {
+                if (impliquants[i].mintermes[0].nbuns == 0)
+                {
+                    mintermeGroupes[0].Add(impliquants[i]);
+                }
+            }
+            for (int i = 1; i <= maxnbGroupes; i++)
+            {
+                mintermeGroupes[i] = new List<Impliquant>();
+                for (int j = 0; j < impliquants.Count; j++)
+                {
+                    if (impliquants[j].mintermes[0].nbuns == i)
+                    {
+                        mintermeGroupes[i].Add(impliquants[j]);
+                    }
+                }
+            }
+
+            this.groupesImpliquants = mintermeGroupes;
         }
 
         public void GrouperListes(List<Impliquant> impliquants)
@@ -63,6 +104,7 @@ namespace Archimède
             {
                 if (impliquants[i].mintermes[0].bincode.Count(ch => (ch == '1')) == 0)
                 {
+                    impliquants[i].status = true;
                     mintermeGroupes[0].Add(impliquants[i]);
                 }
             }
@@ -73,6 +115,7 @@ namespace Archimède
                 {
                     if (impliquants[j].mintermes[0].bincode.Count(ch => (ch == '1')) == i)
                     {
+                        impliquants[j].status = true;
                         mintermeGroupes[i].Add(impliquants[j]);
                     }
                 }
