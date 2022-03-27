@@ -66,6 +66,7 @@ int differentAtIndex = -1;
 bool prime = true;
 List<Impliquant> impliquants = new List<Impliquant>();
 List<Impliquant> finalImpliquants = new List<Impliquant>();
+
 Console.WriteLine("Impliquants ===================");
 while (stop == false)
 {
