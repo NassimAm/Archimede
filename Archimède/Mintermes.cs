@@ -130,7 +130,7 @@ namespace Archimède
             List<Minterme> result = new List<Minterme>();
             while(mintermes.Count>0)
             {
-                int min = mintermes[0].nombre;
+                long min = mintermes[0].nombre;
                 int min_index = 0;
                 for(int i=0;i<mintermes.Count;i++)
                 {
@@ -152,7 +152,7 @@ namespace Archimède
             List<Impliquant> result = new List<Impliquant>();
             while (impliquants.Count > 0)
             {
-                int min = impliquants[0].mintermes[0].nombre;
+                long min = impliquants[0].mintermes[0].nombre;
                 int min_index = 0;
                 for (int i = 0; i < impliquants.Count; i++)
                 {

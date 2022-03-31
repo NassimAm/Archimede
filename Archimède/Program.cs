@@ -13,8 +13,8 @@ string[] listMintermesString = mintermesString.Split(',');
 List<Minterme> mintermes = new List<Minterme>();
 for(int i = 0;i<listMintermesString.Length;i++)
 {
-    mintermes.Add(new Minterme(int.Parse(listMintermesString[i])));
-}
+    mintermes.Add(new Minterme(long.Parse(listMintermesString[i])));
+}   
 
 
 

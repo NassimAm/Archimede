@@ -9,7 +9,7 @@ namespace Archimède
     class Minterme: IEquatable<Minterme>
     {
         //Nombre décimal représentant le minterme
-        public int nombre { get  ; set;}
+        public long nombre { get  ; set;}
         //Représentation binaire du minterme
         public string bincode { get; set;}
         //Nombre de 1 dans la représentation binaire
@@ -22,7 +22,7 @@ namespace Archimède
         public static int maxNbVariables = 0;
 
 
-        public Minterme(int nombre)
+        public Minterme(long nombre)
         {
             this.nombre = nombre;
             this.bincode = ConvertionAuBinaire(nombre);
@@ -43,7 +43,7 @@ namespace Archimède
         }
 
         //Convertit un nombre en code binaire
-        private string ConvertionAuBinaire(int nombre)
+        private string ConvertionAuBinaire(long nombre)
         {
             return Convert.ToString(nombre, 2);
         }
