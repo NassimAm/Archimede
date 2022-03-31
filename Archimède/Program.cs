@@ -37,11 +37,7 @@ if(maxMintermeLong>nbVariables)
 //Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
 for(int i = 0;i<mintermes.Count;i++)
 {
-    while(mintermes[i].bincode.Length < nbVariables)
-    {
-        mintermes[i].bincode = "0" + mintermes[i].bincode;
-    }
-    //mintermes[i].bincode = mintermes[i].bincode.PadLeft(nbVariables, '0');
+    mintermes[i].bincode = mintermes[i].bincode.PadLeft(nbVariables, '0');
 }
 
 //Créer les groupes ===================================================================================================================
