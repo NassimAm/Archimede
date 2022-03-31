@@ -255,14 +255,35 @@ for(int i=0;i<impliquantsEssentiels.Count;i++)
     {
         if(impliquantsEssentiels[i].bincode[j] != '-')
         {
+
+            StringBuilder alphabet = new StringBuilder(" ");
+            //
+            if (j >= 26) {
+                alphabet = new StringBuilder("  ");
+                
+                
+                alphabet[0] = (char)((65 + j / 26 - 1));
+                alphabet[1] = (char) (   65 + ( j  % 26 )  )   ;
+                
+            }
+            else  alphabet[0] = (char)(65 + j);
+
+
+
+
+            //
+
+
+
+
             //Nommer les variables dans l'ordre alphabétique
             if (impliquantsEssentiels[i].bincode[j] == '1')
             {
-                resultat += (char)(65 + j);
+                resultat += "(" + alphabet + ")";
             }
             else
             {
-                resultat += "!" + (char)(65 + j);
+                resultat += "!" + "( " + alphabet + " )";
             }
         }
     }
