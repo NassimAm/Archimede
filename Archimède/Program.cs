@@ -1,6 +1,9 @@
 ﻿using Archimède;
 using System.Text;
 
+
+
+
 //Introduction des Valeurs ========================================================================================================================
 
 Console.Write("Entrez le nombre de variables : ");
@@ -11,22 +14,31 @@ string[] listMintermesString = mintermesString.Split(',');
 
 //Creation de la liste des mintermes
 List<Minterme> mintermes = new List<Minterme>();
+
+long parsedInt; 
+
 for(int i = 0;i<listMintermesString.Length;i++)
 {
-    mintermes.Add(new Minterme(int.Parse(listMintermesString[i])));
-}
+    try {
+        parsedInt = long.Parse(listMintermesString[i]);
+        mintermes.Add(new Minterme(parsedInt));
+    }
+    catch(OverflowException ) {
+  
+        mintermes.Add(new Minterme(listMintermesString[i])); 
+    }
+    
+    
+}   
+
+
 
 //Vérifier le nombre maximal de 1 (Calculer le nombre de groupes à créer)
 //En meme temps vérifier le nombre minimal de variables qui correspond à la liste de mintermes
-List<int> listNbUns = new List<int>();
-List<int> listMintermeLong = new List<int>();
-for(int i = 0;i<mintermes.Count;i++)
-{
-    listNbUns.Add(mintermes[i].nbuns);
-    listMintermeLong.Add(mintermes[i].bincode.Length);
-}
-int maxNbUns = listNbUns.Max();
-int maxMintermeLong = listMintermeLong.Max();
+
+int maxNbUns = Minterme.maxNbUns;
+int maxMintermeLong = Minterme.maxNbVariables ;
+
 
 //Dans le cas où le nombre de variables introduit ne correspond pas à la liste de mintermes introduites
 if(maxMintermeLong>nbVariables)
@@ -36,13 +48,11 @@ if(maxMintermeLong>nbVariables)
     nbVariables = maxMintermeLong;
 }
 
+
 //Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
 for(int i = 0;i<mintermes.Count;i++)
 {
-    while(mintermes[i].bincode.Length < nbVariables)
-    {
-        mintermes[i].bincode = "0" + mintermes[i].bincode;
-    }
+    mintermes[i].bincode = mintermes[i].bincode.PadLeft(nbVariables, '0');
 }
 
 //Créer les groupes ===================================================================================================================
@@ -52,7 +62,7 @@ List<Impliquant> impliquants = groupeMintermes.InitImpliquants(mintermes);
 List<Impliquant> impliquantsPremiers = new List<Impliquant>();
 groupeMintermes.GrouperListes(impliquants);
 
-/*//Petit affichage de groupage initial
+//Petit affichage de groupage initial
 for(int i = 0;i<groupeMintermes.groupesImpliquants.Length;i++)
 {
     for(int j=0;j< groupeMintermes.groupesImpliquants[i].Count;j++)
@@ -60,7 +70,8 @@ for(int i = 0;i<groupeMintermes.groupesImpliquants.Length;i++)
         Console.WriteLine(groupeMintermes.groupesImpliquants[i][j].bincode);
     }
     Console.WriteLine("----------------------------------");
-}*/
+}
+Console.ReadKey();
 
 //Générer les impliquants premiers
 int count = 0;
@@ -115,6 +126,8 @@ while(!stop)
                 impliquantsPremiers.Add(groupeMintermes.groupesImpliquants[i][j]);
             }
         }
+        //impliquantsPremiers.AddRange(groupeMintermes.groupesImpliquants[i].FindAll( impliquant => impliquant.status )) ;
+
     }
 
     //Si la liste des impliquants qu'il faut encore traiter n'est pas vide donc regrouper les impliquants
@@ -122,7 +135,7 @@ while(!stop)
     {
         groupeMintermes.GrouperListes(impliquants);
 
-        /*//Petit affichage du groupage
+        //Petit affichage du groupage
         Console.WriteLine("=================================");
         for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
         {
@@ -131,7 +144,7 @@ while(!stop)
                 Console.WriteLine(groupeMintermes.groupesImpliquants[i][j].bincode);
             }
             Console.WriteLine("----------------------------------");
-        }*/
+        }
     }
     else //Sinon Arrêter la boucle
     {
@@ -258,14 +271,35 @@ for(int i=0;i<impliquantsEssentiels.Count;i++)
     {
         if(impliquantsEssentiels[i].bincode[j] != '-')
         {
+
+            StringBuilder alphabet = new StringBuilder(" ");
+            //
+            if (j >= 26) {
+                alphabet = new StringBuilder("  ");
+                
+                
+                alphabet[0] = (char)((65 + j / 26 - 1));
+                alphabet[1] = (char) (   65 + ( j  % 26 )  )   ;
+                
+            }
+            else  alphabet[0] = (char)(65 + j);
+
+
+
+
+            //
+
+
+
+
             //Nommer les variables dans l'ordre alphabétique
             if (impliquantsEssentiels[i].bincode[j] == '1')
             {
-                resultat += (char)(65 + j);
+                resultat += "(" + alphabet + ")";
             }
             else
             {
-                resultat += "!" + (char)(65 + j);
+                resultat += "!" + "( " + alphabet + " )";
             }
         }
     }
@@ -279,3 +313,5 @@ if(resultat.Length>=3)
 }
 
 Console.WriteLine(resultat);
+
+

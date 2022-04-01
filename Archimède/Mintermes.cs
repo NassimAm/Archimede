@@ -127,45 +127,37 @@ namespace Archimède
         //Ordonne la liste de mintermes en fonction du nombre décimal et retourne la nouvelle liste ordonnée
         public List<Minterme> OrdonnerListe(List<Minterme> mintermes)
         {
-            List<Minterme> result = new List<Minterme>();
-            while(mintermes.Count>0)
-            {
-                int min = mintermes[0].nombre;
-                int min_index = 0;
-                for(int i=0;i<mintermes.Count;i++)
-                {
-                    if(mintermes[i].nombre<min)
-                    {
-                        min = mintermes[i].nombre;
-                        min_index = i;
-                    }
-                }
-                result.Add(mintermes[min_index]);
-                mintermes.RemoveAt(min_index);
-            }
-            return result;
+
+           
+            mintermes.Sort( 
+                 delegate(Minterme m1 , Minterme m2) {
+                    if(m1.nombre < 0 ||  m2.nombre < 0  )
+                        return string.Compare(m1.nombreChaine, m2.nombreChaine);
+                    else
+                        return (m1.nombre).CompareTo(m2.nombre);
+                 }
+            );
+
+            return mintermes;
+           
+           
         }
+
+   
 
         //Ordonne la liste d'impliquants en fonction du nombre décimal et retourne la nouvelle liste ordonnée
         public List<Impliquant> OrdonnerListe(List<Impliquant> impliquants)
         {
-            List<Impliquant> result = new List<Impliquant>();
-            while (impliquants.Count > 0)
-            {
-                int min = impliquants[0].mintermes[0].nombre;
-                int min_index = 0;
-                for (int i = 0; i < impliquants.Count; i++)
-                {
-                    if (impliquants[i].mintermes[0].nombre < min)
-                    {
-                        min = impliquants[i].mintermes[0].nombre;
-                        min_index = i;
-                    }
+            impliquants.Sort(
+                delegate (Impliquant m1, Impliquant m2) {
+                    if (m1.mintermes[0].nombre < 0 || m2.mintermes[0].nombre < 0)
+                        return string.Compare(m1.mintermes[0].nombreChaine, m2.mintermes[0].nombreChaine);
+                    else
+                        return (m1.mintermes[0].nombre).CompareTo(m2.mintermes[0].nombre);
                 }
-                result.Add(impliquants[min_index]);
-                impliquants.RemoveAt(min_index);
-            }
-            return result;
+           );
+
+            return impliquants;
         }
 
     }
