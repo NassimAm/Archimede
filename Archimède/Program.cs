@@ -1,6 +1,9 @@
 ﻿using Archimède;
 using System.Text;
 
+
+
+
 //Introduction des Valeurs ========================================================================================================================
 
 Console.Write("Entrez le nombre de variables : ");
@@ -11,9 +14,21 @@ string[] listMintermesString = mintermesString.Split(',');
 
 //Creation de la liste des mintermes
 List<Minterme> mintermes = new List<Minterme>();
+
+long parsedInt; 
+
 for(int i = 0;i<listMintermesString.Length;i++)
 {
-    mintermes.Add(new Minterme(long.Parse(listMintermesString[i])));
+    try {
+        parsedInt = long.Parse(listMintermesString[i]);
+        mintermes.Add(new Minterme(parsedInt));
+    }
+    catch(OverflowException ) {
+  
+        mintermes.Add(new Minterme(listMintermesString[i])); 
+    }
+    
+    
 }   
 
 
@@ -297,3 +312,5 @@ if(resultat.Length>=3)
 }
 
 Console.WriteLine(resultat);
+
+
