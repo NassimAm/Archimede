@@ -136,7 +136,7 @@ namespace Archimède
                 index--;
             }
 
-            return suffix + Convert.ToString( long.Parse(sauv), 2).PadRight(63 , '0');
+            return suffix + Convert.ToString( long.Parse(sauv), 2).PadLeft(63 , '0');
 
         }
 

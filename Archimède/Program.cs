@@ -62,7 +62,7 @@ List<Impliquant> impliquants = groupeMintermes.InitImpliquants(mintermes);
 List<Impliquant> impliquantsPremiers = new List<Impliquant>();
 groupeMintermes.GrouperListes(impliquants);
 
-/*//Petit affichage de groupage initial
+//Petit affichage de groupage initial
 for(int i = 0;i<groupeMintermes.groupesImpliquants.Length;i++)
 {
     for(int j=0;j< groupeMintermes.groupesImpliquants[i].Count;j++)
@@ -70,7 +70,8 @@ for(int i = 0;i<groupeMintermes.groupesImpliquants.Length;i++)
         Console.WriteLine(groupeMintermes.groupesImpliquants[i][j].bincode);
     }
     Console.WriteLine("----------------------------------");
-}*/
+}
+Console.ReadKey();
 
 //Générer les impliquants premiers
 int count = 0;
@@ -134,7 +135,7 @@ while(!stop)
     {
         groupeMintermes.GrouperListes(impliquants);
 
-        /*//Petit affichage du groupage
+        //Petit affichage du groupage
         Console.WriteLine("=================================");
         for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
         {
@@ -143,7 +144,7 @@ while(!stop)
                 Console.WriteLine(groupeMintermes.groupesImpliquants[i][j].bincode);
             }
             Console.WriteLine("----------------------------------");
-        }*/
+        }
     }
     else //Sinon Arrêter la boucle
     {
