@@ -18,6 +18,7 @@ namespace Archimède
         //Nombre de 1 dans la représentation binaire
         public int nbuns { get; set;}
 
+   
         //le max de nombre des uns pour les mintermes
         public static int maxNbUns = 0   ;  
 
@@ -69,7 +70,9 @@ namespace Archimède
         public static string ConvertionAuBinaire(string nombre)
         {
 
-            //n tableau quii represente le puissance de deux 63 -> 100
+            
+
+            //un tableau quii represente les puissances de deux 63 -> 100
             string[] twoPowers = {
   "9223372036854775808"
 , "18446744073709551616"
@@ -197,10 +200,17 @@ namespace Archimède
 
 
 
+      
+
+
+
         public bool Equals(Minterme other)
         {
             if(ReferenceEquals(other, null)) return false;
             if(ReferenceEquals(this, other)) return true;
+            
+            if(nombre < 0 || other.nombre < 0)
+                return string.Equals(nombreChaine, other.nombreChaine);
             return int.Equals(nombre, other.nombre);
         }
 
@@ -212,10 +222,12 @@ namespace Archimède
             return Equals((Minterme)obj);
         }
 
-        /*public override int GetHashCode()
+        public override int GetHashCode()
         {
             return (nombre != null ? nombre.GetHashCode() : 0);
-        }*/
+        }
+
+
 
     }
 }
