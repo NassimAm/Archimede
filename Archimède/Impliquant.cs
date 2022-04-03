@@ -10,13 +10,13 @@ namespace Archimède
     {
 
         //Code binaire de l'impliquant
-        public string bincode { get; set; }
+        public string bincode { get; set; } 
 
         public int nbDontCare { get; set; } 
 
 
         //Staus de l'impliquant (il est à faux si l'impliquant doit encore être traité sinon c'est un impliquant essentiel)
-        public bool status;
+        public bool status ; 
 
 
 
@@ -26,9 +26,11 @@ namespace Archimède
            
             this.bincode = bincode;
             nbDontCare = this.bincode.Count(ch => (ch == '-'));
-            status =  nbDontCare <= 0 ;    
+
+            status =  nbDontCare <= 0 ;   
         }
 
+        
 
         public  bool represente(Minterme minterme) {
 
@@ -45,7 +47,7 @@ namespace Archimède
         
         }
 
-
+       
         public bool represente(Impliquant impliquant)
         {
             for (int i = 0; i < impliquant.bincode.Length; i++)
@@ -59,6 +61,7 @@ namespace Archimède
             }
             return true;
         }
+
 
         public bool represente(String bincode)
         {
@@ -90,6 +93,7 @@ namespace Archimède
             if (obj.GetType() != this.GetType()) return false;
             return Equals((Impliquant)obj);
         }
+        
 
         public override int GetHashCode()
         {

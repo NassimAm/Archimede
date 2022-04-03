@@ -2,12 +2,13 @@
 using System.Text;
 
 
-bool literale = false;
+bool literale = true;
 
-//Introduction des Valeurs ========================================================================================================================
 
+
+
+//Variables globales  pour les 2 litterale et numerique :
 int maxNbUns;
-
 List<Impliquant> impliquantsEnAttente = new List<Impliquant>();
 List<Impliquant> impliquants = new List<Impliquant>();
 List<Minterme> mintermes;
@@ -16,18 +17,20 @@ List<string> stringListMinterm = new List<string>(); // liste des codes binaires
 StringBuilder alphabet;
 List<string> alphabets = new List<string>();
 
+
 if ( literale )
 {
     Console.WriteLine("Entrez une expresseion en forme disjonctif:");
     string expression = Console.ReadLine();
     
-    int indexCh = 0;
+    
+    int indexCh = 0; // index pour parcourir l'expression 
 
-        //premier parcour de l'expression pour determiner les variables utilitses 
+        //premier parcour de l'expression pour determiner les variables utilitses avec les poids fort et faible 
         while (indexCh < expression.Length)
         {
 
-            alphabet = new StringBuilder(); // alphabet represente la variable 
+            alphabet = new StringBuilder(); // alphabet represente la variable (puisque on peut aller a plus de 26 variables l'alphabet sont des string aaa, aabadf ... )
 
             //une boucle pour separer  les operateurs du l'alphabet 
             while ((indexCh < expression.Length) && (expression[indexCh] != '+') && (expression[indexCh] != '.') && (expression[indexCh] != '!'))
@@ -66,7 +69,7 @@ if ( literale )
     StringBuilder bincode;//code binaire d'un minterme 
     StringBuilder term;//minterme
 
-    //deuxieme pour trouver les mintermes 
+    //deuxieme parcour pour trouver les mintermes avec leurs code binaire 
     while (indexCh < expression.Length)
     {
         bincode = new StringBuilder();
@@ -126,35 +129,18 @@ if ( literale )
     Console.WriteLine();
 
 
+
     //calcul de max nombre des uns dans les mintermes
-     maxNbUns = stringListMinterm.MaxBy(x => x.Count(ch => ch == '1')).Count(ch => (ch == '1'));
+    //en fait prend en consideration les (-) comme des 1 
+     maxNbUns = stringListMinterm.MaxBy(x => x.Count(ch => (ch == '1' || ch == '-' )   )).Count(ch =>  (ch == '1' || ch == '-'));
 
-   
-
-
-
-
+ 
     foreach (string mintermBinCode in stringListMinterm)
     {
-
-
-
-        if (mintermBinCode.Contains('-'))
-        {
-            //le minterme n'est pas exprimer en forme canonique
-            impliquantsEnAttente.Add(new Impliquant(mintermBinCode));
-        }
-        else
-        {
-            impliquants.Add(new Impliquant(mintermBinCode));
-        }
-
-
-
+       impliquants.Add(new Impliquant(mintermBinCode));
     }
 
     groupeMintermes = new Mintermes(maxNbUns);
-
 
 
 }
@@ -163,8 +149,10 @@ else {
 
     Console.Write("Entrez le nombre de variables : ");
     int nbVariables = int.Parse(Console.ReadLine());
+
     Console.WriteLine("Entrez la liste de mintermes (séparés par des virgules) : ");
     string mintermesString = Console.ReadLine();
+
     string[] listMintermesString = mintermesString.Split(',');
 
 
@@ -173,15 +161,11 @@ else {
     //En meme temps vérifier le nombre minimal de variables qui correspond à la liste de mintermes
 
 
-
-
-
-
-
     mintermes = new List<Minterme>();
+    
+    
     long parsedInt;
 
-    Minterme minterme; 
     for (int i = 0;i<listMintermesString.Length;i++)
     {
         
@@ -194,8 +178,6 @@ else {
         {
             mintermes.Add(new Minterme(listMintermesString[i]));
         }
-
-        
 
     }
 
@@ -215,15 +197,22 @@ else {
     }
 
 
+
+
     //Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
     for (int i = 0; i < mintermes.Count; i++)
     {
-        mintermes[i].bincode = mintermes[i].bincode.PadLeft(nbVariables, '0');
+        mintermes[i].bincode = mintermes[i].bincode.PadLeft(nbVariables, '0');      
         stringListMinterm.Add(mintermes[i].bincode);
     }
 
+
+
      groupeMintermes = new Mintermes(maxNbUns);
-     impliquants = groupeMintermes.InitImpliquants(mintermes);
+     
+    
+    
+    impliquants = groupeMintermes.InitImpliquants(mintermes);
 
 
 
@@ -231,36 +220,13 @@ else {
 
 
 
-/*
 
 
 
 
-//Vérifier le nombre maximal de 1 (Calculer le nombre de groupes à créer)
-//En meme temps vérifier le nombre minimal de variables qui correspond à la liste de mintermes
-
-*//*int maxNbUns = Math.Max(Minterme.maxNbUns, maxNbUnsX);*//*
-
-int maxNbUns = Minterme.maxNbUns; 
-int maxMintermeLong = Minterme.maxNbVariables ;
 
 
-//Dans le cas où le nombre de variables introduit ne correspond pas à la liste de mintermes introduites
-if(maxMintermeLong>nbVariables)
-{
-    Console.WriteLine("Avertissement : La liste de mintermes introduite depasse le nombre maximal de variables introduit");
-    Console.WriteLine("On travaillera donc suivant la liste de mintermes donc avec " + maxMintermeLong.ToString() +" variables");
-    nbVariables = maxMintermeLong;
-}
 
-
-//Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
-for(int i = 0;i<mintermes.Count;i++)
-{
-    mintermes[i].bincode = mintermes[i].bincode.PadLeft(nbVariables, '0');
-}
-
-*/
 
 //Créer les groupes ===================================================================================================================
 //Les groupes sont formés d'impliquants initiaux (les mintermes introduits)
@@ -269,9 +235,12 @@ for(int i = 0;i<mintermes.Count;i++)
 List<Impliquant> impliquantsPremiers = new List<Impliquant>();
 
 
-groupeMintermes.GrouperListes(impliquants);
 
-/*//Petit affichage de groupage initial
+
+groupeMintermes.GrouperListes(impliquants , 0);
+
+
+//Petit affichage de groupage initial
 Console.WriteLine("\t1-Groupage initial :");
 for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
 {
@@ -281,7 +250,7 @@ for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
     }
     Console.WriteLine("----------------------------------");
 }
-*/
+
 
 //Générer les impliquants premiers
 int count = 0;
@@ -293,6 +262,8 @@ bool stop = false;
 
 
 int cptGroupes = 0; // compteur de nombre de groupages
+
+
 //Impliquant sauvImpliquant; 
 
 while (!stop)
@@ -300,24 +271,38 @@ while (!stop)
     cptGroupes++;
 
     impliquants.Clear();
+
+
     for (int i = 0; i < groupeMintermes.groupesImpliquants.Length - 1; i++)
     {
         for (int j = 0; j < groupeMintermes.groupesImpliquants[i].Count; j++)
         {
-            for (int k = 0; k < groupeMintermes.groupesImpliquants[i + 1].Count; k++)
+
+            if (groupeMintermes.groupesImpliquants[i][j].nbDontCare >= cptGroupes)
             {
+                // on va  traiter ce minterm dans les prochaine groupes
+                 continue; 
+
+            }
+
+            for (int k = 0; k < groupeMintermes.groupesImpliquants[i + 1].Count; k++)
+            {                              
                 count = 0;
                 differentAt = -1;
                 for (int l = 0; l < groupeMintermes.groupesImpliquants[i][j].bincode.Length; l++)
-                {                 
+                {
+                    //les tires dans ce que sont soit des 0 soit des 1  soit des x dans on peut dire qu'il n'y a pas de difference (continue pour passer a la prochaine iteration )
+                    if ((groupeMintermes.groupesImpliquants[i + 1][k].nbDontCare >= cptGroupes ) && (groupeMintermes.groupesImpliquants[i + 1][k].bincode[l] == '-')) continue; 
+
+
                     if (groupeMintermes.groupesImpliquants[i][j].bincode[l] != groupeMintermes.groupesImpliquants[i + 1][k].bincode[l])
                     {
                         count += 1;
                         differentAt = l;
-                        
                     }
 
-                    if(count > 1) break  ;
+                    if (count > 1) break;
+                    
                 }
 
 
@@ -340,6 +325,7 @@ while (!stop)
         }
     }
 
+
     //Filtrer les impliquants et trouver les impliquants premiers qui ne peuvent plus etre simplifiés
     for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
     {
@@ -347,21 +333,11 @@ while (!stop)
     }
 
 
-    if (literale) {
-        impliquants.AddRange(impliquantsEnAttente.Where(m => m.nbDontCare == cptGroupes).ToList()); // filtrer les impliquannts qui contient cptGroupe - 
-        impliquantsEnAttente.RemoveAll(m => (m.nbDontCare == cptGroupes));// supprimer ces derniers 
-
-
-
-        while (impliquants.Count == 0 && impliquantsEnAttente.Count > 0)
-        {
-            cptGroupes++;
-            impliquants.AddRange(impliquantsEnAttente.Where(m => m.nbDontCare == cptGroupes).ToList());
-            impliquantsEnAttente.RemoveAll(m => (m.nbDontCare == cptGroupes));
-        }
-
+    
+    for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
+    {
+        impliquants.AddRange(groupeMintermes.groupesImpliquants[i].FindAll(impliquant =>  (    impliquant.bincode.Count(ch => ch == '-') >= cptGroupes)  ));
     }
-
 
 
 
@@ -370,10 +346,11 @@ while (!stop)
     {
 
         impliquants = impliquants.Distinct().ToList() ;
-        groupeMintermes.GrouperListes(impliquants);
+          
+        groupeMintermes.GrouperListes(impliquants , cptGroupes);
 
         //Petit affichage du groupage
-  /*      Console.WriteLine("\t-Groupage :" + cptGroupes);
+/*        Console.WriteLine("\t-Groupage :" + cptGroupes);
         for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
         {
             for (int j = 0; j < groupeMintermes.groupesImpliquants[i].Count; j++)
@@ -395,30 +372,19 @@ impliquantsPremiers = impliquantsPremiers.Distinct().ToList(); //suprimer les im
 
 
 //Petit affichage des impliquants premiers
-Console.WriteLine("Les impliquants premiers : ");
+/*Console.WriteLine("\nLes impliquants premiers : \n");
 for (int i = 0; i < impliquantsPremiers.Count; i++)
 {
     Console.WriteLine(impliquantsPremiers[i].bincode);
 }
+*/
 
-
-
-//Recherche des impliquants premiers essentiels ===================================================================================
-
-/*//Petit affichage de la tables des impliquants premiers
-for (int i = 0; i < mintermes.Count; i++)
-{
-    Console.Write(mintermes[i].bincode + " ");
-}
-Console.WriteLine();*/
 
 
 List<Impliquant> impliquantsEssentiels = new List<Impliquant>();
 int impliquantIndex = -1;
 int mintermeIndex = 0;
 int impliquantLevel = 1;
-
-
 
 
 //Tant que la liste des mintermes n'est pas vide
