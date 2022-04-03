@@ -6,26 +6,31 @@ using System.Threading.Tasks;
 
 namespace Archimède
 {
-    class Minterme: IEquatable<Minterme>
+
+    
+    class Minterme: IEquatable<Minterme> 
     {
+         
         //Nombre décimal représentant le minterme
-        public long nombre { get  ; set;}
+        public  long  nombre { get  ; set;}
 
         //Nombre décimal comme chaine de caractere  représentant le minterme 
-        public string nombreChaine { get; set;}
+        public string nombreChaine { get; set;}  
         //Représentation binaire du minterme
         public string bincode { get; set;}
         //Nombre de 1 dans la représentation binaire
-        public int nbuns { get; set;}
+        public int nbuns { get; set;} 
 
+        
+   
         //le max de nombre des uns pour les mintermes
         public static int maxNbUns = 0   ;  
 
         //la longeur maximale des minterme cree 
-        public static int maxNbVariables = 0;
+        public static int maxNbVariables = 0;   
 
 
-        public Minterme(long nombre)
+        public Minterme(long nombre) 
         {
             this.nombre = nombre;
             this.bincode = ConvertionAuBinaire(nombre);
@@ -69,7 +74,9 @@ namespace Archimède
         public static string ConvertionAuBinaire(string nombre)
         {
 
-            //n tableau quii represente le puissance de deux 63 -> 100
+            
+
+            //un tableau quii represente les puissances de deux 63 -> 100
             string[] twoPowers = {
   "9223372036854775808"
 , "18446744073709551616"
@@ -142,7 +149,7 @@ namespace Archimède
 
 
         //soustraire num2 de num1 avec num2 et num1 des string (sans parser en entier )
-        public static string soustraire(string num1 , string num2)
+        public static string soustraire(string num1 , string num2) 
         {
 
             StringBuilder result = new StringBuilder("");
@@ -197,10 +204,18 @@ namespace Archimède
 
 
 
+      
+
+
+
         public bool Equals(Minterme other)
         {
             if(ReferenceEquals(other, null)) return false;
             if(ReferenceEquals(this, other)) return true;
+ 
+            
+            if(nombre < 0 || other.nombre < 0)
+                return string.Equals(nombreChaine, other.nombreChaine);
             return int.Equals(nombre, other.nombre);
         }
 
@@ -212,10 +227,12 @@ namespace Archimède
             return Equals((Minterme)obj);
         }
 
-        /*public override int GetHashCode()
+        public override int GetHashCode()
         {
             return (nombre != null ? nombre.GetHashCode() : 0);
-        }*/
+        }
+
+
 
     }
 }
