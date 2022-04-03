@@ -21,7 +21,7 @@ List<string> alphabets = new List<string>();
 if ( literale )
 {
     Console.WriteLine("Entrez une expresseion en forme disjonctif:");
-    string expression = Console.ReadLine();
+    string expression = Console.ReadLine().Replace(" ","");
     
     
     int indexCh = 0; // index pour parcourir l'expression 
