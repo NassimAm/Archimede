@@ -26,8 +26,7 @@ namespace Archimède
            
             this.bincode = bincode;
             nbDontCare = this.bincode.Count(ch => (ch == '-'));
-
-            status =  nbDontCare <= 0 ;   
+            status =  true ;   
         }
 
         

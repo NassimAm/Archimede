@@ -37,7 +37,7 @@ namespace Archimède
         }
 
 
-        public void GrouperListes(List<Impliquant> impliquants , int cptGroupe)
+        public void GrouperListes(List<Impliquant> impliquants )
         {
          
 
@@ -49,12 +49,13 @@ namespace Archimède
                 
                 mintermeGroupes[i] = new List<Impliquant>();
 
+
                 for (int j = 0; j < impliquants.Count; j++)
                 {
-                    if ((impliquants[j].bincode.Count(ch => (ch == '1')||(ch == '-'))   - cptGroupe ) == i)
+                    if ((impliquants[j].bincode.Count(ch => (ch == '1'))   ) == i )
                     {
-                        if(impliquants[j].nbDontCare == cptGroupe ) impliquants[j].status = true;
-                        else impliquants[j].status = false;
+
+                        impliquants[j].status = true;
                         mintermeGroupes[i].Add(impliquants[j]);
                     }
                 }
