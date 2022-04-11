@@ -675,8 +675,9 @@ else
 
     //Covertir P en forme disjonctive
     StringBuilder petrick_exp = new StringBuilder();
-    string P_postfix = ExprBool.To_RNP(P);
-    ExprBool? root = ExprBool.expressionTree(P_postfix);
+    string P_postfix = "";
+    ExprBool.To_RNP(P,ref P_postfix,alphabets);
+    ExprBool? root = ExprBool.expressionTree(P_postfix,alphabets);
     root = ExprBool.dnf(root);
     ExprBool.inorder(root,petrick_exp);
     Console.WriteLine("P = " + petrick_exp.ToString());
