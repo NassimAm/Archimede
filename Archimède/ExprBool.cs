@@ -8,7 +8,7 @@ namespace dnf
 {
 
 
-    //type des noeuds de l'arbre v
+    //type des noeuds de l'arbre syntaxique
     enum Type
     {
 
@@ -276,7 +276,7 @@ namespace dnf
                         d = tete.fd.fd;
 
 
-                    //(a|b) & (c|d) => a&b | a&c | b&c | b&d
+                    //(a|b) & (c|d) => a&c | a&d | b&c | b&d
 
 
                     ExprBool
@@ -446,60 +446,60 @@ namespace dnf
             }
         }
 
-        /// <summary>returns the reverse polish notation of an expression written in infix notation</summary>
-        public static string To_RNP(string infix)
-        {
-            string postfix = "";
-            char x;
-            bool stop;
-            Stack<char> st = new Stack<char>();
-            foreach (char chr in infix)
-            {
-                if (chr == '(')
-                {
-                    st.Push(chr);
-                }
-                else if (ExprBool.isOperator(chr))
-                {
-                    stop = false;
-                    while (!stop && st.Count > 0)
-                    {
-                        x = st.Pop();
-                        if (Priority(x) < Priority(chr) || x == '(')
-                        {
-                            st.Push(x);
-                            stop = true;
-                        }
-                        else
-                        {
-                            postfix += x;
-                        }
-                    }
-                    st.Push(chr);
-                }
-                else if (chr == ')')
-                {
-                    stop = false;
-                    while (!stop && st.Count > 0)
-                    {
-                        x = st.Pop();
-                        if (x == '(')
-                            stop = true;
-                        else
-                            postfix += x;
-                    }
-                }
-                else
-                { // chr is an operand
-                    postfix += chr;
-                }
-            }
-            while (st.Count > 0)
-            {
-                postfix += st.Pop();
-            }
-            return postfix;
-        }
+        // /// <summary>returns the reverse polish notation of an expression written in infix notation</summary>
+        // public static string To_RNP(string infix)  // the original To-RNP method 
+        // {
+        //     string postfix = "";
+        //     char x;
+        //     bool stop;
+        //     Stack<char> st = new Stack<char>();
+        //     foreach (char chr in infix)
+        //     {
+        //         if (chr == '(')
+        //         {
+        //             st.Push(chr);
+        //         }
+        //         else if (ExprBool.isOperator(chr))
+        //         {
+        //             stop = false;
+        //             while (!stop && st.Count > 0)
+        //             {
+        //                 x = st.Pop();
+        //                 if ((Priority(x) < Priority(chr)) || x == '(')
+        //                 {
+        //                     st.Push(x);
+        //                     stop = true;
+        //                 }
+        //                 else
+        //                 {
+        //                     postfix += x;
+        //                 }
+        //             }
+        //             st.Push(chr);
+        //         }
+        //         else if (chr == ')')
+        //         {
+        //             stop = false;
+        //             while (!stop && st.Count > 0)
+        //             {
+        //                 x = st.Pop();
+        //                 if (x == '(')
+        //                     stop = true;
+        //                 else
+        //                     postfix += x;
+        //             }
+        //         }
+        //         else
+        //         { // chr is an operand
+        //             postfix += chr;
+        //         }
+        //     }
+        //     while (st.Count > 0)
+        //     {
+        //         postfix += st.Pop();
+        //     }
+        //     return postfix;
+        // }
 
 
 
@@ -517,7 +517,194 @@ namespace dnf
         /// parse a boolean expression (postfix) to a binary expression tree,
         /// and return a root for this tree.
         /// </summary>
-        public static ExprBool expressionTree(String postfix)
+        // public static ExprBool expressionTree(String postfix)  // the original `expressionTree` method (works only if the expression's variables are characters)
+        // {
+
+        //     Stack<ExprBool> st = new Stack<ExprBool>();
+        //     ExprBool t1, t2, temp;
+        //     Dictionary<char, Type> operators = new Dictionary<char, Type>();
+        //     operators.Add('!', Type.NON);
+        //     operators.Add('&', Type.ET);
+        //     operators.Add('|', Type.OU);
+        //     operators.Add('.', Type.ET);
+        //     operators.Add('+', Type.OU);
+
+
+        //     int i = 0;
+        //     while (i < postfix.Length)  // we loop through the expression
+        //     {
+        //         if (!isOperator(postfix[i]))
+        //         {    // value found
+
+        //             temp = new ExprBool($"{postfix[i]}");
+        //             st.Push(temp);
+        //             i++;
+
+
+
+        //         }
+        //         else
+        //         {  // operator found
+
+        //             if (postfix[i] == '!')
+        //             { //  unary operator 
+        //                 temp = new ExprBool(Type.NON, null, null);  // creates a node temp with the operator as value
+
+        //                 t1 = st.Pop();
+
+        //                 temp.fd = t1;
+        //                 st.Push(temp);
+        //             }
+        //             else
+        //             { //  binary operator
+        //                 // pop two values of the stack
+        //                 t1 = st.Pop();
+        //                 t2 = st.Pop();
+
+        //                 if (postfix[i] == '^') // XOR
+        //                 {
+        //                     ExprBool
+        //                         notB = new ExprBool(Type.NON, null, t1),
+        //                         notA = new ExprBool(Type.NON, null, t2),
+        //                         A_notB = new ExprBool(Type.ET, t2, notB),
+        //                         B_notA = new ExprBool(Type.ET, t1, notA),
+        //                         AxorB = new ExprBool(Type.OU, A_notB, B_notA);
+        //                     st.Push(AxorB);
+        //                 }
+        //                 else if (postfix[i] == '§') // XNOR
+        //                 {
+        //                     ExprBool
+        //                         notB = new ExprBool(Type.NON, null, t1),
+        //                         notA = new ExprBool(Type.NON, null, t2),
+        //                         A_notB = new ExprBool(Type.OU, t2, notB),
+        //                         B_notA = new ExprBool(Type.OU, t1, notA),
+        //                         AxnorB = new ExprBool(Type.ET, A_notB, B_notA);
+        //                     st.Push(AxnorB);
+        //                 }
+        //                 else if (postfix[i] == '>')
+        //                 { // NAND
+        //                     ExprBool
+        //                         notA = new ExprBool(Type.NON, null, t2),
+        //                         notB = new ExprBool(Type.NON, null, t1),
+        //                         notA_notB = new ExprBool(Type.ET, notA, notB);
+        //                     st.Push(notA_notB);
+        //                 }
+        //                 else if (postfix[i] == '<')
+        //                 { // NOR
+        //                     ExprBool
+        //                         notA = new ExprBool(Type.NON, null, t2),
+        //                         notB = new ExprBool(Type.NON, null, t1),
+        //                         notA_notB = new ExprBool(Type.OU, notA, notB);
+        //                     st.Push(notA_notB);
+        //                 }
+        //                 else if (postfix[i] == '-')
+        //                 {   // IMPLICATION : (a → b) = !a+b
+        //                     ExprBool
+        //                         notA = new ExprBool(Type.NON, null, t2),
+        //                         notA_B = new ExprBool(Type.OU, notA, t1);
+        //                     st.Push(notA_B);
+        //                 }
+        //                 else if (postfix[i] == '=')
+        //                 {   // EQUIVALENCE : (a ←→ b) = (!a+b).(!b+a)
+        //                     ExprBool
+        //                         notA = new ExprBool(Type.NON, null, t2),
+        //                         notB = new ExprBool(Type.NON, null, t1),
+        //                         notA_B = new ExprBool(Type.OU, notA, t1),
+        //                         notB_A = new ExprBool(Type.OU, notB, t2),
+        //                         A_B = new ExprBool(Type.ET, notA_B, notB_A);
+        //                     st.Push(A_B);
+        //                 }
+        //                 else
+        //                 {  // operator is 'AND' or 'OR' 
+        //                     temp = new ExprBool(operators[postfix[i]], t2, t1);
+        //                     st.Push(temp);
+        //                 }
+
+        //             }
+
+        //             i++;
+
+        //         }
+
+        //     }
+        //     temp = st.Pop(); // we pop the remaining node in the stack, which will be the tree's root
+        //     return temp;
+        // }
+
+
+        public static void To_RNP(string infix, ref string postfix, List<string> vars)
+        {
+            string variable = "";
+            char x;
+            bool stop;
+            Stack<char> st = new Stack<char>();
+            foreach (char chr in infix)
+            {
+                if (chr == '(')
+                {
+                    if (variable.CompareTo("") != 0)
+                    {
+                        vars.Add(variable);
+                        variable = "";
+                    }
+                    st.Push(chr);
+                }
+                else if (ExprBool.isOperator(chr))
+                {
+                    if (variable.CompareTo("") != 0)
+                    {
+                        vars.Add(variable);
+                        variable = "";
+                    }
+                    stop = false;
+                    while (!stop && st.Count > 0)
+                    {
+                        x = st.Pop();
+                        if ((Priority(x) < Priority(chr)) || x == '(')
+                        {
+                            st.Push(x);
+                            stop = true;
+                        }
+                        else
+                        {
+                            postfix += x;
+                        }
+                    }
+                    st.Push(chr);
+                }
+                else if (chr == ')')
+                {
+                    if (variable.CompareTo("") != 0)
+                    {
+                        vars.Add(variable);
+                        variable = "";
+                    }
+                    stop = false;
+                    while (!stop && st.Count > 0)
+                    {
+                        x = st.Pop();
+                        if (x == '(')
+                            stop = true;
+                        else
+                            postfix += x;
+                    }
+                }
+                else
+                { // chr is an operand
+                    postfix += chr;
+                    variable += chr;
+                }
+            }
+            while (st.Count > 0)
+            {
+                postfix += st.Pop();
+            }
+            if (variable.CompareTo("") != 0)
+                vars.Add(variable);
+        }
+
+        /// <summary>same as expressionTree , but works if the variables were strings</summary>
+        public static ExprBool expressionTree(String postfix, List<string> vars)
         {
 
             Stack<ExprBool> st = new Stack<ExprBool>();
@@ -527,16 +714,21 @@ namespace dnf
             operators.Add('&', Type.ET);
             operators.Add('|', Type.OU);
             operators.Add('.', Type.ET);
+            operators.Add('+', Type.OU);
 
+            string variable = "";
 
-
-            for (int i = 0; i < postfix.Length; i++)  // we loop through the expression
+            int i = 0, j = 0;
+            while (i < postfix.Length)  // we loop through the expression
             {
                 if (!isOperator(postfix[i]))
                 {    // value found
-                    temp = new ExprBool($"{postfix[i]}");
+                    variable = vars[j++];
 
+                    temp = new ExprBool(variable);
                     st.Push(temp);
+                    i += variable.Length;
+
                 }
                 else
                 {  // operator found
@@ -614,15 +806,32 @@ namespace dnf
                             temp = new ExprBool(operators[postfix[i]], t2, t1);
                             st.Push(temp);
                         }
-
                     }
 
+                    i++;
                 }
-
             }
             temp = st.Pop(); // we pop the remaining node in the stack, which will be the tree's root
             return temp;
         }
+
+
+
+        /// <summary>
+        /// parse a boolean expression (infix) to a binary expression tree,
+        /// and return a root for this tree.
+        /// </summary>
+        public static ExprBool? ParseExpression(string infix)
+        {
+            List<string> vars = new List<string>();
+            string? postfix = "";
+            To_RNP(infix, ref postfix, vars);
+
+            return expressionTree(postfix, vars);
+
+        }
+
+
 
         /// <summary>
         /// inorder traversal for a binary tree
@@ -631,7 +840,6 @@ namespace dnf
         {
             if (root == null)
                 return;
-
 
             inorder(root.fg);
 
@@ -642,11 +850,8 @@ namespace dnf
                 case Type.OU: Console.Write("+"); break;
                 case Type.VALEUR: Console.Write(root.info); break;
 
-
             }
             inorder(root.fd);
-
-
 
         }
 
@@ -654,8 +859,6 @@ namespace dnf
         {
             if (root == null)
                 return;
-
-
 
             inorder(root.fg, expression);
 
@@ -669,8 +872,6 @@ namespace dnf
             }
 
             inorder(root.fd, expression);
-
-
 
         }
         /// <summary>
@@ -690,10 +891,8 @@ namespace dnf
                 case Type.OU: Console.Write("+"); break;
                 case Type.VALEUR: Console.Write(root.info); break;
 
-
             }
         }
-
 
 
 
@@ -779,9 +978,6 @@ namespace dnf
         }
 
         // end tree visualisation
-
-
-
 
     }
 
