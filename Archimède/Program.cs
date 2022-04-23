@@ -325,7 +325,7 @@ else {
 
 
 List<Impliquant> impliquantsPremiers = new List<Impliquant>();
-groupeMintermes.GrouperListes(impliquants );
+groupeMintermes.GrouperListes(impliquants);
 
 
 //Petit affichage de groupage initial
@@ -415,7 +415,7 @@ if (!utiliserPetrick) //Quine McCluskey seul
                         if ((impliquantsEnAttente[k].nbDontCare >= cptGroupes) && (impliquantsEnAttente[k].bincode[l] == '-')) continue;
 
 
-                        if (groupeMintermes.groupesImpliquants[i][j].bincode[l] != impliquantsEnAttente[k].bincode[l] && groupeMintermes.groupesImpliquants[i][j].bincode[l] != '-')
+                        if (groupeMintermes.groupesImpliquants[i][j].bincode[l] != impliquantsEnAttente[k].bincode[l])
                         {
                             count += 1;
                             differentAt = l;
@@ -426,7 +426,7 @@ if (!utiliserPetrick) //Quine McCluskey seul
                     }
 
                     //Si les deux impliquants sont adjacents
-                    if (count == 1)
+                    if (count == 1 && groupeMintermes.groupesImpliquants[i][j].bincode[differentAt] != '-')
                     {
                         //Les deux impliquants sont traités (status = false)
                         groupeMintermes.groupesImpliquants[i][j].status = false;
@@ -654,8 +654,14 @@ else
 
     impliquantsPremiers.AddRange(impliquants);
 
+    for(int i=0;i<impliquantsPremiers.Count; i++)
+    {
+        Console.WriteLine(i.ToString()+" --> "+impliquantsPremiers[i].bincode);
+    }
+
     //Construire les produits de sommes pour les impliquants (P = (I1+I2).(I3+I4)....)
     string P = "";
+    List<string> listVars = new List<string>();
     count = 0;
     for(int i=0;i<stringListMinterm.Count;i++)
     {
@@ -665,6 +671,10 @@ else
             if(impliquantsPremiers[j].represente(stringListMinterm[i]))
             {
                 P += j.ToString()+"|";
+                if(!listVars.Contains(j.ToString()))
+                {
+                    listVars.Add(j.ToString());
+                }
             }
         }
         P = P.Substring(0, P.Length - 1);
@@ -676,8 +686,8 @@ else
     //Covertir P en forme disjonctive
     StringBuilder petrick_exp = new StringBuilder();
     string P_postfix = "";
-    ExprBool.To_RNP(P,ref P_postfix,alphabets);
-    ExprBool? root = ExprBool.expressionTree(P_postfix,alphabets);
+    ExprBool.To_RNP(P,ref P_postfix,listVars);
+    ExprBool? root = ExprBool.expressionTree(P_postfix,listVars);
     root = ExprBool.dnf(root);
     ExprBool.inorder(root,petrick_exp);
     Console.WriteLine("P = " + petrick_exp.ToString());
