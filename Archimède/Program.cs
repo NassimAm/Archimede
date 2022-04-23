@@ -19,7 +19,7 @@ List<string> alphabets = new List<string>();
 int nbVariables;
 
 string choix;
-Console.WriteLine("Voulez vous introduire une formule de forme litterale ou numerique ? ");
+/*Console.WriteLine("Voulez vous introduire une formule de forme litterale ou numerique ? ");
 Console.WriteLine("1- Litterale\t2- Numerique");
 choix = Console.ReadLine();
 switch(choix)
@@ -52,7 +52,7 @@ switch (choix)
             break;
         }
 }
-
+*/
 if (literale)
 {
     if(!utiliserPetrick)
@@ -446,9 +446,53 @@ if (!utiliserPetrick) //Quine McCluskey seul
             }
         }
 
+        int finalGroupeIndex = groupeMintermes.groupesImpliquants.Length - 1;
+        for (int j = 0; j < groupeMintermes.groupesImpliquants[finalGroupeIndex].Count; j++)
+        {
+            for (int k = 0; k < impliquantsEnAttente.Count; k++)
+            {
 
-        //Filtrer les impliquants et trouver les impliquants premiers qui ne peuvent plus etre simplifiés
-        for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
+                count = 0;
+                differentAt = -1;
+
+                for (int l = 0; l < groupeMintermes.groupesImpliquants[finalGroupeIndex][j].bincode.Length; l++)
+                {
+                    //les tires dans ce que sont soit des 0 soit des 1  soit des x donc on peut dire qu'il n'y a pas de difference (continue pour passer a la prochaine iteration )
+                    if ((impliquantsEnAttente[k].nbDontCare >= cptGroupes) && (impliquantsEnAttente[k].bincode[l] == '-')) continue;
+
+
+                    if (groupeMintermes.groupesImpliquants[finalGroupeIndex][j].bincode[l] != impliquantsEnAttente[k].bincode[l])
+                    {
+                        count += 1;
+                        differentAt = l;
+                    }
+
+                    if (count > 1) break;
+
+                }
+
+                //Si les deux impliquants sont adjacents
+                if (count == 1 && groupeMintermes.groupesImpliquants[finalGroupeIndex][j].bincode[differentAt] != '-')
+                {
+                    //Les deux impliquants sont traités (status = false)
+                    groupeMintermes.groupesImpliquants[finalGroupeIndex][j].status = false;
+
+
+                    //Actualiser le code binaire et le simplifier
+                    StringBuilder sb = new StringBuilder(groupeMintermes.groupesImpliquants[finalGroupeIndex][j].bincode);
+                    sb[differentAt] = '-';
+
+                    //Ajouter le nouveau impliquant créé à la liste des impliquants qu'il faut traiter encore
+                    impliquants.Add(new Impliquant(sb.ToString()));
+                }
+
+            }
+
+        }
+
+
+            //Filtrer les impliquants et trouver les impliquants premiers qui ne peuvent plus etre simplifiés
+            for (int i = 0; i < groupeMintermes.groupesImpliquants.Length; i++)
         {
             impliquantsPremiers.AddRange(groupeMintermes.groupesImpliquants[i].FindAll(impliquant => impliquant.status));
         }
