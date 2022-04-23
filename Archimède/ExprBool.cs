@@ -753,8 +753,8 @@ namespace dnf
                             ExprBool
                                 notB = new ExprBool(Type.NON, null, t1),
                                 notA = new ExprBool(Type.NON, null, t2),
-                                A_notB = new ExprBool(Type.ET, t2, notB),
-                                B_notA = new ExprBool(Type.ET, t1, notA),
+                                A_notB = new ExprBool(Type.ET, t2.clone(), notB),
+                                B_notA = new ExprBool(Type.ET, t1.clone(), notA),
                                 AxorB = new ExprBool(Type.OU, A_notB, B_notA);
                             st.Push(AxorB);
                         }
@@ -763,8 +763,8 @@ namespace dnf
                             ExprBool
                                 notB = new ExprBool(Type.NON, null, t1),
                                 notA = new ExprBool(Type.NON, null, t2),
-                                A_notB = new ExprBool(Type.OU, t2, notB),
-                                B_notA = new ExprBool(Type.OU, t1, notA),
+                                A_notB = new ExprBool(Type.OU, t2.clone(), notB),
+                                B_notA = new ExprBool(Type.OU, t1.clone(), notA),
                                 AxnorB = new ExprBool(Type.ET, A_notB, B_notA);
                             st.Push(AxnorB);
                         }
