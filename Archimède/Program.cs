@@ -20,6 +20,7 @@ int nbVariables;
 
 string choix;
 /*Console.WriteLine("Voulez vous introduire une formule de forme litterale ou numerique ? ");
+// choix de la forme, soit numérique, soit littérale.
 Console.WriteLine("1- Litterale\t2- Numerique");
 choix = Console.ReadLine();
 switch(choix)
