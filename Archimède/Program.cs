@@ -7,7 +7,7 @@ bool literale = true;
 bool completionVariables = false;
 bool utiliserPetrick = false;
 
-//Variables globales  pour les 2 litterale et numerique :
+//Variables globales pour les 2 litterale et numerique :
 int maxNbUns;
 List<Impliquant> impliquantsEnAttente = new List<Impliquant>();
 List<Impliquant> impliquants = new List<Impliquant>();
