@@ -27,7 +27,7 @@ namespace ArchimedeFront.Pages
             navBar.Opacity = 0;
             logoFooter.Opacity = 0;
 
-            _PageContent.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step3.xaml", UriKind.Absolute));
+            _PageContent.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/InputFormula.xaml", UriKind.Absolute));
         }
 
         

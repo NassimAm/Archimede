@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS ROG\\OneDrive\\Desktop\\c#\\ArchimedeFront\\ArchimedeFront\\ArchimedeFront.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS ROG\\OneDrive\\Desktop\\c#\\OriginalProject\\Archimede\\ArchimedeFront\\ArchimedeFront.csproj",
       "projectName": "ArchimedeFront",
-      "projectPath": "C:\\Users\\ASUS ROG\\OneDrive\\Desktop\\c#\\ArchimedeFront\\ArchimedeFront\\ArchimedeFront.csproj",
+      "projectPath": "C:\\Users\\ASUS ROG\\OneDrive\\Desktop\\c#\\OriginalProject\\Archimede\\ArchimedeFront\\ArchimedeFront.csproj",
       "packagesPath": "C:\\Users\\ASUS ROG\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS ROG\\OneDrive\\Desktop\\c#\\ArchimedeFront\\ArchimedeFront\\obj\\",
+      "outputPath": "C:\\Users\\ASUS ROG\\OneDrive\\Desktop\\c#\\OriginalProject\\Archimede\\ArchimedeFront\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
