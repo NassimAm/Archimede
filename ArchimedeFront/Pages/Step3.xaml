@@ -1,0 +1,23 @@
+﻿<Page x:Class="ArchimedeFront.Pages.Step3"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ArchimedeFront.Pages"
+      mc:Ignorable="d" 
+      >
+
+        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
+            Etape 3
+            </TextBlock>
+        <TextBlock Style="{StaticResource paragraphe}" FontSize="26" Margin="40,10" TextWrapping="Wrap" >
+            Comparer chaque terme d’un groupe avec chacun des termes du groupe suivant. Si deux termes diffèrent par un seul bit, un nouveau terme est produit avec un “X” à la position où il y a différence. Marquer les deux termes ayant engendréun nouveau terme.
+        </TextBlock>
+            
+         
+            
+
+        </StackPanel>
+
+</Page>
