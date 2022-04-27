@@ -1,0 +1,119 @@
+﻿<Page x:Class="ArchimedeFront.Pages.Template"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ArchimedeFront.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Height="auto" Width="auto"
+      >
+
+    <Grid Background="White" Width="auto" Height="auto">
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="slider" Grid.Column="0" Width="60" >
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="auto"/>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ToggleButton Name="menu" 
+                     Grid.Row="0" Margin="0,20,0,0"  Background="Transparent" BorderBrush="Transparent" Style="{StaticResource DefaultButton}"  Checked="menu_Checked" Unchecked="menu_Unchecked">
+                <ToggleButton.Triggers>
+
+                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                        <BeginStoryboard>
+
+                            <Storyboard x:Name="HideStackPanel">
+
+                                <DoubleAnimation    
+                                                
+                                                Storyboard.TargetName="slider"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="250" To="60"
+                                                Duration="0:0:0.2">
+
+                                </DoubleAnimation>
+
+                            </Storyboard>
+
+                        </BeginStoryboard>
+
+                    </EventTrigger>
+
+                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                        <BeginStoryboard>
+
+                            <Storyboard x:Name="ShowStackPanel">
+
+                                <DoubleAnimation
+                                                
+                                                Storyboard.TargetName="slider"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="60" To="250"
+                                                Duration="0:0:0.2">
+
+                                </DoubleAnimation>
+
+                            </Storyboard>
+
+                        </BeginStoryboard>
+
+                    </EventTrigger>
+
+                </ToggleButton.Triggers>
+                <Viewbox Width="28" VerticalAlignment="Top">
+
+                    <Path x:Name="menuIcon" 
+                        Fill="#fff"
+                        Data="{DynamicResource MENU_ICON}"                
+                        VerticalAlignment="Top"
+                    />
+
+                </Viewbox>
+            </ToggleButton>
+
+            <StackPanel  Name="navBar" Margin="22,50"  Grid.Row="1">
+                <TextBlock Style="{StaticResource fontRegularGothic}"  Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8">Accueil</TextBlock>
+                <Border BorderThickness="0,1" BorderBrush="White" >
+                    <TextBlock Style="{StaticResource fontRegularGothic}" Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8" >Documentation</TextBlock>
+                </Border>
+                <TextBlock Style="{StaticResource fontRegularGothic}" Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8">Site web</TextBlock>
+
+            </StackPanel>
+
+            <StackPanel Name="logoFooter" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,8">
+                <Image Source="pack://application:,,,/Assets/Archimede_Logo.png" Width="40" Margin="0,0,10,0"></Image>
+                <TextBlock  Width="auto" Style="{StaticResource fontRajdhani}"  VerticalAlignment="Bottom"  Grid.Row="2" Foreground="White" TextAlignment="Center" FontSize="28"  >
+                     Archimède
+                </TextBlock>
+            </StackPanel>
+
+        </Grid>
+
+      
+            <Frame Name="_PageContent" Grid.Column="1"/>
+       
+        
+    </Grid>
+</Page>
