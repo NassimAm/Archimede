@@ -1,0 +1,43 @@
+﻿<Page x:Class="ArchimedeFront.Pages.Step1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ArchimedeFront.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="Step1">
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" >
+        <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
+            Etape 1
+        </TextBlock>
+
+        <TextBlock Style="{StaticResource paragraphe}" FontSize="26"> 
+            Nassim the goat
+        </TextBlock>
+
+        <Frame Name="_NextStep2"  NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" ></Frame>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="100,30,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
+                <!-- <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Margin="0,0,10,0">Passer</TextBlock>
+                <ContentControl   ContentTemplate="{StaticResource down}" />-->
+                <Button Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click"/>
+
+            </StackPanel>
+            <StackPanel Margin="10,30,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+                <Button Style="{StaticResource expandButton}" ContentStringFormat="Suivant" Click="nextStepButton_click" />
+            </StackPanel>
+
+        </Grid>
+    </StackPanel>
+</Page>
