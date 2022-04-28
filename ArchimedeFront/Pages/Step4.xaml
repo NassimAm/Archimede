@@ -16,41 +16,9 @@
         <TextBlock Style="{StaticResource paragraphe}" FontSize="26" MaxWidth="900"> 
             Répéter l’étape 3 avec les nouveaux termes jusqu’à ce qu’il n’y ait plus d’association possible
         </TextBlock>
-
-
-        <StackPanel x:Name="groupesTable" Margin="10,30" >
-           <!-- <StackPanel Orientation="Horizontal" Margin="10,2">
-                <Viewbox Width="24"  Margin="0,0,14,0"> 
-                    <Path  
-                        Fill="#C4C4C4"
-                        Data="{DynamicResource CHECKED_ICON}"                
-                    />
-                </Viewbox>
-                <TextBlock Style="{StaticResource paragraphe}" FontSize="28" >
-                    00001
-                </TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,2">
-                <Grid Width="24"  Margin="0,0,14,0">
-                    <Ellipse Style="{StaticResource greenDot}"/>
-                </Grid>
-               
-                <TextBlock Style="{StaticResource paragraphe}" FontSize="28" >
-                    00001
-                </TextBlock>
-            </StackPanel>
-            <StackPanel  Orientation="Horizontal" Margin="10,2" >
-                <Viewbox Width="24"  Margin="0,0,14,0">
-                    <Path  
-                        Style="{StaticResource greenIcon}"
-                        Data="{DynamicResource RIGHT_ARROW_ICON}"                
-                    />
-                </Viewbox>
-                <TextBlock Style="{StaticResource paragraphe}" FontSize="28" >
-                    00001
-                </TextBlock>
-            </StackPanel> -->
-        </StackPanel>
+        <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
+            <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" />
+        </ScrollViewer>
 
 
     </StackPanel>
