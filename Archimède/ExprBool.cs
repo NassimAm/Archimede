@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace dnf
 {
 
-
     //type des noeuds de l'arbre syntaxique
     enum Type
     {
@@ -18,8 +17,6 @@ namespace dnf
         NON
 
     };
-
-
 
     class ExprBool
     {
@@ -75,8 +72,6 @@ namespace dnf
 
 
 
-
-
         /// <summary>
         /// cette fonction foncionne si l'arbre est en forme DNF 
         ///elle retourne une liste des mintermes 
@@ -85,7 +80,7 @@ namespace dnf
         public void getMintermes(List<ExprBool> mintermes)
         {
 
-            switch (type)
+            switch (this.type)
             {
                 case Type.OU:
                     fg.getMintermes(mintermes);
@@ -119,6 +114,205 @@ namespace dnf
             return clonedTree;
         }
 
+
+
+        /// <summary>
+        /// gets the Conjonctive Normal Form from an expression's syntactic tree of root `tete`,
+        /// </summary>
+        /// <remarks>Note : the root of the equivalent tree doesn't have to be `tete`</remarks>
+        /// <returns>the root of the equivalent syntactic tree in CNF</returns>
+        public static ExprBool? cnf(ExprBool tete)
+        {
+            if (tete == null) return null;
+
+            //hauteur ==  1   
+            if (tete.type == Type.VALEUR) return tete;//a
+
+            //hauteur == 2
+            switch (tete.type)
+            {
+                case Type.NON:
+                    if (tete.fd.type == Type.VALEUR) return tete;  //!a 
+                    break;
+
+                case Type.OU:
+                case Type.ET:
+                    if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.VALEUR) return tete; //a+b , a.b
+                    break;
+
+                default:
+                    return null;
+            }
+
+            // hauteur >= 3 : things get more complicated
+
+            // on doit assurer que les sous-arbres gauche et droit de `tete` soient en forme normale conjonctive
+            tete.fg = cnf(tete.fg);
+            tete.fd = cnf(tete.fd);
+
+            if (tete.type == Type.NON)
+            {
+                if (tete.fd.type == Type.NON)
+                    // double negation
+                    return cnf(tete.fd.fd);
+                tete = negation(tete.fd); // tete.fd est soit un "OU" ou bien un "ET", donc on doit le remplacer `tete` par sa negation (en appliquant les lois de DE MORGAN)
+                return cnf(tete);
+            }
+
+
+            //  si un noeud est une valeur , on va le mettre a gauche 
+            //  Conventional order: (fg.type , fd.type)  (OU, NON), (ET, NON), (ET, OU).
+
+            if (tete.fg.type != Type.VALEUR && tete.fd.type == Type.VALEUR) (tete.fg, tete.fd) = (tete.fd, tete.fg);
+
+
+            if (tete.fg.type == Type.NON && (tete.fd.type == Type.OU || tete.fd.type == Type.ET)) (tete.fg, tete.fd) = (tete.fd, tete.fg);
+            else if (tete.fg.type == Type.OU && tete.fd.type == Type.ET) (tete.fg, tete.fd) = (tete.fd, tete.fg);
+
+
+
+            // un "ET" entre deux formules en forme conjonctive est une forme conjonctive (on sait bien que tete.fd et tete.fg sont en forme conjonctive)
+            if (tete.type == Type.ET) return tete;
+
+            // un "OU" entre deux formules en forme conjonctive n'est pas forcément une forme conjonctive
+            if (tete.type == Type.OU)
+            {   // plusieurs cas possibles :
+                if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.NON) return tete; // c'est une CNF : a + !b
+
+                if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.OU) return tete; //  c'est une CNF : a + (b + c)
+
+                if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.ET)  // il faut distribuer :
+                {
+
+                    // x  + ( a  .  b)  =  (x + a) . (x + b)
+                    ExprBool
+
+                        x = tete.fg,
+                        a = tete.fd.fg,
+                        b = tete.fd.fd,
+
+
+                    xa = new ExprBool(Type.OU, x.clone(), a.clone()), // x+a
+                    xb = new ExprBool(Type.OU, x.clone(), b.clone()); // x+b
+
+                    xa = cnf(xa);
+                    xb = cnf(xb);
+
+                    ExprBool xa_xb = new ExprBool(Type.ET, xa, xb);  // (x + a) . (x + b)
+
+                    return xa_xb;
+
+                }
+
+                // une disjonction des disjonctions des litteraux est une forme conjonctive
+                if (tete.fg.type == Type.OU && tete.fd.type == Type.OU) return tete;  // a + b + c + d
+
+                // une disjonction des litteraux est bien une forme conjonctive
+                if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.VALEUR) return tete; // a + b
+
+                //  tete.fd.type ne peut pas etre "ET" ou "OU" ou "VALEUR" (à cause de l'ordre conventionel),  donc c'est forcément un "NON"
+                if (tete.fg.type == Type.NON) return tete; // !a + !b → c'est une disjonction des litteraux
+
+
+                //  tete.fg.type peut etre "OU" ou bien "ET" (à cause de l'ordre conventionel)
+                if (tete.fd.type == Type.NON)
+                {
+
+                    if (tete.fg.type == Type.OU) return tete;  // (a + b) + !c → c'est une CNF
+                    else
+                    {
+                        //  (a . b) + !c => (a + !c) . (b + !c):
+                        ExprBool
+
+                         a = tete.fg.fg,
+
+                         b = tete.fg.fd,
+
+                         not_c = tete.fd, // !c
+
+                         a_notc = new ExprBool(Type.OU, a.clone(), not_c.clone()), //a + !c
+                         b_notc = new ExprBool(Type.OU, b.clone(), not_c.clone()); //b + !c
+
+                        a_notc = cnf(a_notc);
+                        b_notc = cnf(b_notc);
+
+                        ExprBool aNotc_bNotc = new ExprBool(Type.ET, a_notc, b_notc); // (a+!c) . (b+!c)
+
+                        return (aNotc_bNotc);
+
+                    }
+
+                }
+
+
+                //  tete.fd.type ne peut pas etre ni un 'NON' (ce cas est traité déjà) , ni une 'VALEUR', 
+                //  donc il peut etre 'OU' ou 'ET' 
+                if (tete.fg.type == Type.ET)
+                {
+                    if (tete.fd.type == Type.ET)
+                    {
+                        ExprBool
+                        a = tete.fg.fg,
+                        b = tete.fg.fd,
+                        c = tete.fd.fg,
+                        d = tete.fd.fd;
+
+                        // (a.b) + (c.d) => (a+c) . (a+d) . (b+c) . (b+d)
+
+
+                        ExprBool
+                            ouNoeud1 = new ExprBool(Type.OU, a.clone(), c.clone()),  // a+c
+
+                            ouNoeud2 = new ExprBool(Type.OU, a.clone(), d.clone()),  // a+d
+
+                            ouNoeud3 = new ExprBool(Type.OU, b.clone(), c.clone()),  // b+c
+
+                            ouNoeud4 = new ExprBool(Type.OU, b.clone(), d.clone());  // b+d
+
+
+                        ouNoeud1 = cnf(ouNoeud1);
+                        ouNoeud2 = cnf(ouNoeud2);
+                        ouNoeud3 = cnf(ouNoeud3);
+                        ouNoeud4 = cnf(ouNoeud4);
+
+                        ExprBool
+
+                           gEtNoeud = new ExprBool(Type.ET, ouNoeud1, ouNoeud2), // le noeud fils gauche de la nouvelle tete = (a+c).(a+d)
+
+                           dEtNoeud = new ExprBool(Type.ET, ouNoeud3, ouNoeud4); // le noeud fils droit de la nouvelle tete  = (b+c).(b+d)
+
+                        ExprBool newTete = new ExprBool(Type.ET, gEtNoeud, dEtNoeud);  // la nouvelle tete : ((a+c).(a+d)).((b+c).(b+d))
+
+                        return newTete;
+                    }
+                    // une disjonction d'une conjonction et une disjonction ne donne pas une forme normale conjonctive (donc il faut distribuer)
+                    if (tete.fd.type == Type.OU)
+                    {
+                        // (a.b) + (c+d) → (a+c+d).(b+c+d) ←→ (a + (c+d)).(b + (c+d))
+
+                        ExprBool?
+                        x = tete.fd,
+                        a = tete.fg.fg,
+                        b = tete.fg.fd,
+
+                        xa = new ExprBool(Type.OU, x.clone(), a.clone()),
+                        xb = new ExprBool(Type.OU, x.clone(), b.clone());
+
+                        xa = cnf(xa);
+                        xb = cnf(xb);
+
+                        ExprBool xa_xb = new ExprBool(Type.ET, xa, xb);
+
+                        return xa_xb;
+                    }
+
+                }
+
+            }  // if (tete.type == Type.OU)
+
+            return null;
+
+        }
 
 
         /// <summary>
@@ -187,10 +381,10 @@ namespace dnf
             // un OU entre deux formules en forme disjonctive reste une forme disjonctive
             if (tete.type == Type.OU) return tete;
 
-            // un ET entre deux formules en forme disjonctive ne donne pas une forme disjonctive
+            // un ET entre deux formules en forme disjonctive ne donne pas forcément une forme disjonctive
             if (tete.type == Type.ET)
             {
-
+                // on est d'accord que tete.fd.type ne peut pas etre une valeur (toute valeur est mise à gauche)
                 if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.NON) return tete;  // a . !b
                 if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.ET) return tete; //a . (b . c)
 
@@ -225,9 +419,8 @@ namespace dnf
                 if (tete.fg.type == Type.VALEUR && tete.fd.type == Type.VALEUR) return tete; // a.b
 
 
-                //  tete.fd.type ne peut pas etre "ET" ou "OU",
-                //  donc il peut etre une "VALEUR" ou un "NON"
-                if (tete.fg.type == Type.NON) return tete;
+                //  tete.fd.type ne peut pas etre "ET" ou "OU" ou "VALEUR" (à cause de l'ordre conventionel),  donc c'est un "NON"
+                if (tete.fg.type == Type.NON) return tete; // !a.!b
 
 
                 //  tete.fg.type peut etre "OU" ou bien "ET" (à cause de l'ordre conventionel)
@@ -265,7 +458,7 @@ namespace dnf
 
 
                 //  tete.fd.type ne peut pas etre 'ET' ,
-                // donc il peut etre 'OU' ou 'NON' , Mais le cas 'NON' a été traité auparavent
+                // donc il peut etre 'OU' ou 'NON' , Mais les cas 'OU' et 'NON' ont été traités auparavant
                 if (tete.fg.type == Type.OU)
                 {
                     // on est sur que tete.fd.type == 'OU'
@@ -329,7 +522,7 @@ namespace dnf
                 }
 
 
-            }   //tete.type == Type.ET (Line 194)
+            }   //tete.type == Type.ET 
 
 
             return null;
@@ -339,7 +532,7 @@ namespace dnf
 
 
 
-        /// <summary>returns the negation of a DNF expression</summary>
+        /// <summary>returns the negation of a DNF or a CNF expression</summary>
         public static ExprBool? negation(ExprBool tete)
         {
             List<ExprBool> minterms = new List<ExprBool>();
@@ -831,7 +1024,117 @@ namespace dnf
 
         }
 
+        public static bool ContainsNegations(List<string> minterms)
+        {
+            foreach (string minterm in minterms)
+            {
+                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm))
+                    return true;
+            }
+            return false;
+        }
 
+        // for DNF
+        public static bool IsNegatedMinterm(string minterm)
+        {
+            string[] literrals = minterm.Split('.');
+            for (int i = 0; i < literrals.Length; i++)
+            {
+                if (literrals.Contains(literrals[i]) && literrals.Contains("!" + literrals[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static List<string> RemoveDuplicatedMinterms(List<string> minterms)
+        {
+            return new List<string>(new HashSet<string>(minterms));
+        }
+
+        public static string SimplifyDNFExpression(string input_dnf)
+        {
+            string[] minterms = input_dnf.Split('+'); // minterms of the input expression
+            List<string> out_minterms = new List<string>(); // list of output minterms list
+
+            for (int i = 0; i < minterms.Length; i++)
+            {
+                if (!IsNegatedMinterm(minterms[i]))
+                {
+                    // eliminate idempotence using a HashSet
+                    HashSet<string> litterals = new HashSet<string>(minterms[i].Split('.'));
+                    List<string> minterm = new List<string>(litterals);
+                    minterm.Sort();
+                    out_minterms.Add(string.Join('.', minterm));
+                }
+                else
+                    out_minterms.Add("0");
+
+
+            }
+            out_minterms = RemoveDuplicatedMinterms(out_minterms);
+            if (ContainsNegations(out_minterms))
+                return "1";
+            if (out_minterms.Count == out_minterms.Count(minterm => minterm.Equals("0")))
+            {
+                return "0";
+            }
+            return string.Join('+', out_minterms.Where(minterm => minterm != "0"));
+        }
+
+
+
+        // for CNF
+        public static bool IsNegatedMaxterm(string minterm)
+        {
+            string[] literrals = minterm.Split('+');
+            for (int i = 0; i < literrals.Length; i++)
+            {
+                if (literrals.Contains(literrals[i]) && literrals.Contains("!" + literrals[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        public static List<string> RemoveDuplicatedMaxterms(List<string> maxterms)
+        {
+            return new List<string>(new HashSet<string>(maxterms));
+        }
+
+        public static string SimplifyCNFExpression(string input_cnf)
+        {
+            string[] maxterms = input_cnf.Split('.'); // minterms of the input expression
+            List<string> out_maxterms = new List<string>(); // list of output minterms list
+
+            for (int i = 0; i < maxterms.Length; i++)
+            {
+                if (!IsNegatedMaxterm(maxterms[i]))
+                {
+                    // eliminate idempotence using a HashSet
+                    HashSet<string> litterals = new HashSet<string>(maxterms[i].Split('+'));
+                    List<string> maxterm = new List<string>(litterals);
+                    maxterm.Sort();
+                    out_maxterms.Add(string.Join('+', maxterm));
+                }
+                else
+                    out_maxterms.Add("1");
+
+
+            }
+            out_maxterms = RemoveDuplicatedMaxterms(out_maxterms);
+            if (ContainsNegations(out_maxterms))
+                return "0";
+
+            if (out_maxterms.Count == out_maxterms.Count(maxterm => maxterm.Equals("1")))
+            {
+                return "1";
+            }
+            return string.Join('.', out_maxterms.Where(maxterm => maxterm != "1"));
+        }
 
         /// <summary>
         /// inorder traversal for a binary tree
