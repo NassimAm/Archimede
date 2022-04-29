@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Archimede_Logo.png" />
+    <None Remove="Fonts\LeagueGothic-Font.ttf" />
+    <None Remove="Fonts\Product Sans Bold.ttf" />
+    <None Remove="Fonts\Rajdhani-Bold.ttf" />
+    <None Remove="Fonts\Urbanist-VariableFont_wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Archimede_Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\LeagueGothic-Font.ttf" />
+    <Resource Include="Fonts\Product Sans Bold.ttf" />
+    <Resource Include="Fonts\Rajdhani-Bold.ttf" />
+    <Resource Include="Fonts\Urbanist-VariableFont_wght.ttf" />
+  </ItemGroup>
+
+</Project>

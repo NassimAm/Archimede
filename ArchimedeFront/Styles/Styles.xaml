@@ -1,0 +1,361 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ArchimedeFront.Styles">
+
+
+
+    <!-- font families-->
+    <Style x:Key="fontRegularGothic">
+        <Setter Property="TextElement.FontFamily"
+            Value="/Fonts/#League Gothic" />
+    </Style>
+
+    <Style x:Key="fontRajdhani">
+        <Setter Property="TextElement.FontFamily"
+            Value="/Fonts/#Rajdhani" />
+    </Style>
+    <Style x:Key="fontUrbanist">
+        <Setter Property="TextElement.FontFamily"
+            Value="/Fonts/#Urbanist" />
+    </Style>
+    <Style x:Key="fontProductSans">
+        <Setter Property="TextElement.FontFamily"
+            Value="/Fonts/#Product Sans" />
+    </Style>
+
+
+    <!-- button style to prevent default behavior-->
+    <Style TargetType="ToggleButton" x:Key="DefaultButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="MyContentPresenter" 
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+       
+    </Style>
+    
+    
+
+    <!-- operator buttons style (and , or , not ...) -->
+    <Style TargetType="Button" x:Key="operatorButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="#002725" CornerRadius="16" MinWidth="64"  >
+                        
+                        <TextBlock 
+                                          x:Name="MyContentPresenter" 
+                                          Style="{StaticResource fontUrbanist}"
+                                          TextAlignment="Center"
+                                          FontSize="18"
+                                          MinWidth="64"
+                                          Padding="0,8"
+                                          Text="{TemplateBinding Content}"
+                                          
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- big green buttons style-->
+    <Style TargetType="Button" x:Key="greenButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border  Background="{TemplateBinding Background}" BorderThickness="3"  CornerRadius="16" MinWidth="190"  >
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                    <GradientStop Offset="1"   Color="#00E17C"/>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <TextBlock 
+                                          x:Name="contentText" 
+                                          Style="{StaticResource fontUrbanist}"
+                                          TextAlignment="Center"
+                                          FontSize="24"
+                                          MinWidth="190"
+                                          FontWeight="Bold"
+                                          Padding="0,10"
+                                          Text="{TemplateBinding Content}"
+                                          
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" >
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                        <GradientStop Offset="1"   Color="#00E17C"/>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                            <GradientStop Offset="1"   Color="#00E17C"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="contentText" Property="Foreground"  Value="white"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- Radio buttons style -->
+    <Style TargetType="{x:Type RadioButton}" x:Key="customRadioButton">
+        
+        <Setter Property="TextElement.Foreground"
+            Value="Black" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <BulletDecorator Background="White" Cursor="Hand">
+                        <BulletDecorator.Bullet>
+                            <Grid Height="20" Width="20">
+                                <!--Define size of the Bullet-->
+                                <!--The two borders-->
+                                <Border Name="RadioOuter" Background="Transparent"  BorderThickness="2" CornerRadius="8">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                <GradientStop Offset="1"   Color="#00E17C"/>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                </Border>
+                                <Border  Name="RadioMark" CornerRadius="8" Margin="4"  Visibility="Hidden" >
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                            <LinearGradientBrush.GradientStops>
+                                                <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                <GradientStop Offset="1"   Color="#00E17C"/>
+                                            </LinearGradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                            </Grid>
+                        </BulletDecorator.Bullet>
+                        <!--Text element-->
+                        <TextBlock Style="{StaticResource fontUrbanist}" Margin="10,1,0,0" Foreground="black"  FontSize="28" VerticalAlignment="Center">
+                            
+                        <ContentPresenter />
+                        </TextBlock>
+                    </BulletDecorator>
+                    <!--If item is checked, trigger the visibility of the mark-->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <!--If item is checked, trigger the visibility of the mark and change the color of the selected bullet into a darker gray for better highlighting-->
+                            <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RadioOuter" Property="BorderBrush" >
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                            <GradientStop Offset="1"   Color="#00E17C"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <!--Green Tittle-->
+    <Style TargetType="{x:Type TextBlock}" x:Key="greenTitle">
+        <Setter Property="FontFamily" Value="/Fonts/#Product Sans" />
+        <Setter Property="Foreground">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Margin" Value="0,6"/>
+
+    </Style>
+    
+    <!--Paragraphe text-->
+    
+    <Style TargetType="{x:Type TextBlock}" x:Key="paragraphe">
+      
+        <Setter Property="FontFamily" Value="/Fonts/#Urbanist" />
+        <Setter Property="Foreground"  Value="#002725"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+
+
+    </Style>
+    
+    <!--bourdure pour les groupes-->
+    <Style TargetType="{x:Type Border}" x:Key="dashedBorder">
+        <Setter  Property="BorderBrush" >
+            <Setter.Value>
+                <DrawingBrush Viewport="0,0,8,16" ViewportUnits="Absolute" TileMode="Tile">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="#002725">
+                                <GeometryDrawing.Geometry>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="0,0,60,60" />
+                                        <RectangleGeometry Rect="60,60,60,60" />
+                                    </GeometryGroup>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+      <!--Green dots-->
+    
+    <Style TargetType="Ellipse" x:Key="greenDot">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12" />
+    </Style>
+    
+    <!-- Green Icon-->
+    <Style TargetType="Path" x:Key="greenIcon">
+        <Setter Property="Fill">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <!--Implicants style -->
+    <!--Checked Implicant-->
+    <Style TargetType="ContentControl" x:Key="checkedImplicant">
+        <Setter Property="Content">
+            <Setter.Value>
+                <StackPanel  Orientation="Horizontal" Margin="10,2" >
+                    <Viewbox Width="24"  Margin="0,0,14,0">
+                        <Path  
+                        Style="{StaticResource greenIcon}"
+                        Data="{DynamicResource RIGHT_ARROW_ICON}"                
+                    />
+                    </Viewbox>
+                    <TextBlock Style="{StaticResource paragraphe}" FontSize="28" >
+                    00001
+                    </TextBlock>
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
+    
+  
+
+    <DataTemplate x:Key="down">
+        <Border CornerRadius="34" Width="34" Height="34" Padding="4" BorderThickness="3">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Viewbox Width="16"  >
+                <Path     
+                        Data="{DynamicResource DOWN_ARROW_ICON}"   
+                        VerticalAlignment="Center"
+                    >
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                <GradientStop Offset="1"   Color="#00E17C"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+
+            </Viewbox>
+
+        </Border>
+    </DataTemplate>
+
+
+    
+    <!--expand buttons-->
+    <Style TargetType="Button" x:Key="expandButton">
+
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    
+                        <StackPanel Orientation="Horizontal"  >
+                            <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
+                            <ContentControl   ContentTemplate="{StaticResource down}" />
+                        </StackPanel>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+</ResourceDictionary>
