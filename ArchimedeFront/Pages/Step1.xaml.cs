@@ -25,13 +25,51 @@ namespace ArchimedeFront.Pages
         public Step1()
         {
             InitializeComponent();
+
+            List<string> mintermes = new List<string>();
+            List<string> bincodes = new List<string>();
+            mintermes.Add("!A!BC!D");
+            bincodes.Add("0010");
+            mintermes.Add("!AB!C!D");
+            bincodes.Add("0100");
+            mintermes.Add("!AB!CD");
+            bincodes.Add("0101");
+            mintermes.Add("!ABC!D");
+            bincodes.Add("0110");
+            mintermes.Add("!ABCD");
+            bincodes.Add("0111");
+            mintermes.Add("A!B!CD");
+            bincodes.Add("1001");
+            mintermes.Add("AB!CD");
+            bincodes.Add("1101");
+
+            WrapPanel wrappanel;
+            for (int i = 0;i < mintermes.Count;i++)
+            {
+                wrappanel = new WrapPanel();
+                wrappanel.Orientation = Orientation.Vertical;
+                wrappanel.VerticalAlignment = VerticalAlignment.Top;
+                wrappanel.Margin = new Thickness(10, 0, 10, 10);
+                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(0, 0, 0, 10), Text = mintermes[i]});
+                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(0, 0, 0, 0), Text = bincodes[i]});
+                mintermesList.Children.Add(wrappanel);
+
+                if(i != mintermes.Count-1)
+                {
+                    wrappanel = new WrapPanel();
+                    wrappanel.Orientation = Orientation.Vertical;
+                    wrappanel.VerticalAlignment = VerticalAlignment.Top;
+                    wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(0, 0, 0, 0), Text = "+"});
+                    mintermesList.Children.Add(wrappanel);
+                }
+            }
         }
 
         private void nextStepButton_click(object sender, RoutedEventArgs e)
         {
             switch (stepNumber)
             {
-                case 1:
+                /*case 1:
                     _NextStep2.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step2.xaml", UriKind.RelativeOrAbsolute));
 
                     break;
@@ -43,7 +81,11 @@ namespace ArchimedeFront.Pages
                     _NextStep4.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step4.xaml", UriKind.RelativeOrAbsolute));
 
                     break;
+                case 4:
+                    _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
+                    break;*/
                 default:
+                    _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
                     break;
             }
 

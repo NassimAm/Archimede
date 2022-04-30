@@ -12,10 +12,13 @@
             Etape 3
             </TextBlock>
         <TextBlock Style="{StaticResource paragraphe}" FontSize="26" Margin="40,10" TextWrapping="Wrap" >
-            Comparer chaque terme d’un groupe avec chacun des termes du groupe suivant. Si deux termes diffèrent par un seul bit, un nouveau terme est produit avec un “X” à la position où il y a différence. Marquer les deux termes ayant engendréun nouveau terme.
+            Comparer chaque terme d’un groupe avec chacun des termes du groupe suivant. Si deux termes diffèrent par un seul bit, un nouveau terme est produit avec un “X” à la position où il y a différence. Marquer les deux termes ayant engendré
+un nouveau terme.
         </TextBlock>
-            
-        </StackPanel>
+        <TextBlock Style="{StaticResource paragraphe}" FontSize="36" FontWeight="Bold" Margin="40,10" TextWrapping="Wrap" >
+            Exemple
+        </TextBlock>
+    </StackPanel>
 
     
 

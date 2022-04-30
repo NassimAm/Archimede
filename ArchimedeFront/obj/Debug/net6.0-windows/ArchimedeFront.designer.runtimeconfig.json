@@ -12,9 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\ASUS ROG\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\ASUS ROG\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      "C:\\Users\\USER\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\USER\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

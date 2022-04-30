@@ -358,4 +358,27 @@
 
 
     </Style>
+    
+    <!--Cercle Impliquants Essentiaux-->
+    <Style TargetType="Border" x:Key="ImpliquantEssentielBordure">
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="#002725"/>
+        <Setter Property="Width" Value="19"/>
+        <Setter Property="Height" Value="19"/>
+    </Style>
+
+    <Style TargetType="Ellipse" x:Key="ImpliquantNonEssentielCercle">
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Fill" Value="#002725"/>
+    </Style>
+
+    <Style TargetType="Ellipse" x:Key="ImpliquantEssentielCercle">
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Fill" Value="#002725"/>
+        <Setter Property="Stroke" Value="White"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+    </Style>
 </ResourceDictionary>
