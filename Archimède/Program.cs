@@ -3,6 +3,7 @@ using dnf;
 using System.Text;
 
 
+
 bool literale = true;
 bool completionVariables = false;
 bool utiliserPetrick = false;
