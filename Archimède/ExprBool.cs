@@ -14,7 +14,8 @@ namespace dnf
         VALEUR,
         ET,
         OU,
-        NON
+        NON,
+        NAND
 
     };
 
@@ -63,6 +64,9 @@ namespace dnf
                     break;
                 case Type.OU:
                     this.info = "+";
+                    break;
+                case Type.NAND:
+                    this.info = "#";
                     break;
 
             }
@@ -177,7 +181,7 @@ namespace dnf
 
             // hauteur >= 3 : things get more complicated
 
-           
+
 
             if (tete.type == Type.NON)
             {
@@ -186,7 +190,7 @@ namespace dnf
                     return cnf(tete.fd.fd);
 
                 tete = negationDNF(dnf(tete.fd)); // tete.fd est soit un "OU" ou bien un "ET", donc on doit le remplacer `tete` par sa negation (en appliquant les lois de DE MORGAN)
-                return tete;
+                return tete; 
             }
 
             // on doit assurer que les sous-arbres gauche et droit de `tete` soient en forme normale conjonctive
@@ -381,7 +385,7 @@ namespace dnf
 
             //hauteur >= 3
 
-        
+
 
             //!( negation d'une expression en forme disjonctif )
             if (tete.type == Type.NON)
@@ -635,7 +639,7 @@ namespace dnf
         {
             List<ExprBool> minterms = new List<ExprBool>();
             tete.getMintermesCNF(minterms);
-            
+
             StringBuilder mintermString;
 
             string[] literales;
@@ -1243,39 +1247,29 @@ namespace dnf
                 return;
             inorder(root.fg);
 
-            switch (root.type)
-            {
-                case Type.NON: Console.Write("!"); break;
-                case Type.ET: Console.Write("."); break;
-                case Type.OU: Console.Write("+"); break;
-                case Type.VALEUR: Console.Write(root.info); break;
+            Console.Write(root.info);
 
-            }
             inorder(root.fd);
-            
+
 
         }
 
         /// <summary>
         /// inorder traversal for a binary tree with parathesis for better reading
         /// </summary>
-        public static void inorderCNF(ExprBool? root)
+        public static void inorderParanthese(ExprBool? root)
         {
             if (root == null)
                 return;
-            if (root.type == Type.OU) Console.Write("(");
-            inorderCNF(root.fg);
+            if (root.type == Type.OU || root.type == Type.NAND) Console.Write("(");
+           
+            inorderParanthese(root.fg);
 
-            switch (root.type)
-            {
-                case Type.NON: Console.Write("!"); break;
-                case Type.ET: Console.Write("."); break;
-                case Type.OU: Console.Write("+"); break;
-                case Type.VALEUR: Console.Write(root.info); break;
+            Console.Write(root.info);
 
-            }
-            inorderCNF(root.fd);
-            if (root.type == Type.OU) Console.Write(")");
+            inorderParanthese(root.fd);
+          
+            if (root.type == Type.OU || root.type == Type.NAND) Console.Write(")");
 
         }
 
@@ -1283,7 +1277,7 @@ namespace dnf
         {
             if (root == null)
                 return;
-            
+
 
             inorder(root.fg, expression);
 
@@ -1403,6 +1397,91 @@ namespace dnf
         }
 
         // end tree visualisation
+
+
+
+
+
+
+        //exprimer l'expression avec que des nand : 
+
+        public static ExprBool? onlyNand(ExprBool? root)
+        {
+            if (root == null) return null; 
+            if(root.type == Type.VALEUR) return root;
+            
+
+            //hauteur ==  1   
+            if (root.type == Type.VALEUR) return root;//a
+
+            //hauteur == 2
+            switch (root.type)
+            {
+                case Type.NON:
+                    if (root.fd.type == Type.VALEUR) return  new ExprBool(Type.NAND , root , root.clone() );  //!a 
+                    break;
+
+                case Type.ET:
+                    if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR)
+                    {
+                        //a.b
+                        ExprBool a_b = new ExprBool(Type.NAND, root.fg, root.fd); //( a nand b )
+                        return new ExprBool(Type.NAND , a_b , a_b.clone()); // ( a nand b ) nand  ( a nand b )
+                    }
+                    break;
+                case Type.OU:
+                    if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR) {
+                        //a+b
+                        ExprBool a_a = new ExprBool(Type.NAND, root.fg, root.fg.clone()); //( a nand a )
+                        ExprBool b_b = new ExprBool(Type.NAND, root.fd, root.fd.clone()); //( a nand a )
+
+                        return new ExprBool(Type.NAND, a_a, b_b); // ( a nand a ) nand  ( b nand b )
+                    }
+                    break;
+
+                default:
+                    return null;
+            }
+
+            //hauteur >= 3
+
+            if(root.type == Type.NON)
+            {
+                if (root.fd.type == Type.ET) return new ExprBool(Type.NAND, onlyNand(root.fd.fg), onlyNand(root.fd.fd) );
+                else if (root.fd.type == Type.NON) return onlyNand(root.fd.fd); //double negation 
+                else
+                {
+                    ExprBool a = onlyNand(root.fd);
+                    return new ExprBool(Type.NAND, a, a.clone());
+                }
+            }
+
+            if(root.type == Type.OU)
+            {
+                if(root.fg.type == Type.NON && root.fd.type == Type.NON)
+                {
+                    //!a+!b = !(a.b) = a nand b 
+                    return new ExprBool(Type.NAND, root.fg.fd, root.fd.fd); 
+                }
+                else
+                {
+                    ExprBool a = onlyNand(root.fg);
+                    ExprBool b = onlyNand(root.fd);
+                    ExprBool a_a = new ExprBool(Type.NAND, a, a.clone()); //( a nand a )
+                    ExprBool b_b = new ExprBool(Type.NAND, b, b.clone()); //( a nand a )
+
+                    return new ExprBool(Type.NAND, a_a, b_b); // ( a nand a ) nand  ( b nand b )
+                }
+            }
+            if(root.type == Type.ET)
+            {
+                ExprBool a_b = new ExprBool(Type.NAND, onlyNand( root.fg), onlyNand(root.fd)); //( a nand b )
+                
+                return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nand b ) nand  ( a nand b )
+            }
+
+            return null;
+        }
 
     }
 
