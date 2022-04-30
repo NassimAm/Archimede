@@ -8,9 +8,9 @@
       >
 
     <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,82,0,0">
-            <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
+        <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
             Etape 3
-            </TextBlock>
+        </TextBlock>
         <TextBlock Style="{StaticResource paragraphe}" FontSize="26" Margin="40,10" TextWrapping="Wrap" >
             Comparer chaque terme d’un groupe avec chacun des termes du groupe suivant. Si deux termes diffèrent par un seul bit, un nouveau terme est produit avec un “X” à la position où il y a différence. Marquer les deux termes ayant engendré
 un nouveau terme.
@@ -18,8 +18,28 @@ un nouveau terme.
         <TextBlock Style="{StaticResource paragraphe}" FontSize="36" FontWeight="Bold" Margin="40,10" TextWrapping="Wrap" >
             Exemple
         </TextBlock>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Style="{StaticResource paragraphe}" FontSize="26" Margin="0,10" Text="0010"/>
+                    <TextBlock Grid.Column="1" Style="{StaticResource paragraphe}" FontSize="26" Margin="0,10" Text="0110"/>
+                </Grid>
+                <TextBlock Grid.Row="1" Style="{StaticResource paragraphe}" FontSize="26" Margin="0,10" Text="0X10"/>
+            </Grid>
+        </Grid>
     </StackPanel>
-
-    
-
 </Page>

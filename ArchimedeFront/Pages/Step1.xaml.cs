@@ -69,7 +69,7 @@ namespace ArchimedeFront.Pages
         {
             switch (stepNumber)
             {
-                /*case 1:
+                case 1:
                     _NextStep2.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step2.xaml", UriKind.RelativeOrAbsolute));
 
                     break;
@@ -83,9 +83,11 @@ namespace ArchimedeFront.Pages
                     break;
                 case 4:
                     _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
-                    break;*/
+                    break;
+                case 5:
+                    _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
+                    break;
                 default:
-                    _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
                     break;
             }
 

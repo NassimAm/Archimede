@@ -38,6 +38,7 @@
         <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" ></Frame>
 
         <Grid>
             <Grid.ColumnDefinitions>

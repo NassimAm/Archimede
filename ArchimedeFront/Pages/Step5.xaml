@@ -21,13 +21,13 @@
             <StackPanel Name="ImpliquantsEssentiauxTable"/>
         </ScrollViewer>
 
-        <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="8" MaxWidth="500" Margin="0,30,0,20" >
-            <WrapPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0">
+        <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" Margin="0,30,0,20" >
+            <WrapPanel Height="35" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,7,0,0">
                 <Border Style="{StaticResource ImpliquantEssentielBordure}">
                     <Ellipse Style="{StaticResource ImpliquantEssentielCercle}"/>
                 </Border>
 
-                <TextBlock Style="{StaticResource paragraphe}" Margin="15,0" FontSize="26"> 
+                <TextBlock Style="{StaticResource paragraphe}" Margin="15,0" FontSize="20"> 
                     Impliquant premier essentiel
                 </TextBlock>
             </WrapPanel>

@@ -114,3 +114,5 @@ D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFron
 D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\ref\ArchimedeFront.dll
 D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step5.g.cs
 D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step5.baml
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step6.g.cs
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step6.baml
