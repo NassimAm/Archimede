@@ -46,22 +46,53 @@ class Synthese
     {
         List<string> minterms = (expression.Split('+')).ToList();
         List<ExprBoolNode> children = new List<ExprBoolNode>(minterms.Count);
-        foreach (string minterm in minterms)
+        ExprBoolNode root;
+        if (minterms.Count == 1)
         {
-            children.Add(new ExprBoolNode(minterm));
+            string[] litterals = minterms[0].Split('.');
+            List<ExprBoolNode> litterlasNodes = new List<ExprBoolNode>(litterals.Length);
+            if (litterals.Length == 1)
+            {
+                root = new ExprBoolNode(litterals[0]);
+            }
+            else
+            {
+                foreach (var litteral in litterals)
+                {
+                    litterlasNodes.Add(new ExprBoolNode(litteral));
+                }
+                root = new ExprBoolNode(dnf.Type.ET, litterlasNodes);
+            }
+
+        }
+        else
+        {
+            foreach (string minterm in minterms)
+            {
+                children.Add(new ExprBoolNode(minterm));
+            }
+
+            root = new ExprBoolNode(dnf.Type.OU, children);
         }
 
-        ExprBoolNode root = new ExprBoolNode(dnf.Type.OU, children);
 
         for (var i = 0; i < root.children.Count; i++)
         {
             string[] litterals = root.children[i].info.Split('.');
             List<ExprBoolNode> litterlasNodes = new List<ExprBoolNode>(litterals.Length);
-            foreach (var litteral in litterals)
+            if (litterals.Length == 1)
             {
-                litterlasNodes.Add(new ExprBoolNode(litteral));
+                root.children[i] = new ExprBoolNode(litterals[0]);
             }
-            root.children[i] = new ExprBoolNode(dnf.Type.ET, litterlasNodes);
+            else
+            {
+                foreach (var litteral in litterals)
+                {
+                    litterlasNodes.Add(new ExprBoolNode(litteral));
+                }
+                root.children[i] = new ExprBoolNode(dnf.Type.ET, litterlasNodes);
+            }
+
         }
         return root;
 
@@ -71,22 +102,53 @@ class Synthese
     {
         List<string> maxterms = (expression.Split('.')).ToList();
         List<ExprBoolNode> children = new List<ExprBoolNode>(maxterms.Count);
-        foreach (string maxterm in maxterms)
+        ExprBoolNode root;
+        if (maxterms.Count == 1)
         {
-            children.Add(new ExprBoolNode(maxterm));
+            string[] litterals = maxterms[0].Split('+');
+            List<ExprBoolNode> litterlasNodes = new List<ExprBoolNode>(litterals.Length);
+            if (litterals.Length == 1)
+            {
+                root = new ExprBoolNode(litterals[0]);
+            }
+            else
+            {
+                foreach (var litteral in litterals)
+                {
+                    litterlasNodes.Add(new ExprBoolNode(litteral));
+                }
+                root = new ExprBoolNode(dnf.Type.OU, litterlasNodes);
+            }
+
+        }
+        else
+        {
+            foreach (string maxterm in maxterms)
+            {
+                children.Add(new ExprBoolNode(maxterm));
+            }
+
+            root = new ExprBoolNode(dnf.Type.ET, children);
         }
 
-        ExprBoolNode root = new ExprBoolNode(dnf.Type.ET, children);
 
         for (var i = 0; i < root.children.Count; i++)
         {
             string[] litterals = root.children[i].info.Split('+');
             List<ExprBoolNode> litterlasNodes = new List<ExprBoolNode>(litterals.Length);
-            foreach (var litteral in litterals)
+            if (litterals.Length == 1)
             {
-                litterlasNodes.Add(new ExprBoolNode(litteral));
+                root.children[i] = new ExprBoolNode(litterals[0]);
             }
-            root.children[i] = new ExprBoolNode(dnf.Type.OU, litterlasNodes);
+            else
+            {
+                foreach (var litteral in litterals)
+                {
+                    litterlasNodes.Add(new ExprBoolNode(litteral));
+                }
+                root.children[i] = new ExprBoolNode(dnf.Type.OU, litterlasNodes);
+            }
+
         }
         return root;
 
@@ -105,6 +167,7 @@ class Synthese
         File.AppendAllText(path, "strict graph arbre {\n");
         File.AppendAllText(path, "\tordering = out;\n");
         File.AppendAllText(path, "\tsplines = false;\n");
+        File.AppendAllText(path, "\trankdir = \"RL\";\n");
         File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
         foreach (ExprBoolNode term in root.children)
         {
