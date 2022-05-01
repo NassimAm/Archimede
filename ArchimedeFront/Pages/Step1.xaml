@@ -27,7 +27,7 @@
         </TextBlock>
 
         <TextBlock Style="{StaticResource paragraphe}" FontSize="26"> 
-            Exprimer les &lt;&lt; mintermes &gt;&gt; sous forme binaire
+            Exprimer les « mintermes » sous forme binaire
         </TextBlock>
 
         <ScrollViewer Name="mintermesListContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0" >
