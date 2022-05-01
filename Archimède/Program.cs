@@ -254,24 +254,32 @@ namespace Archimède
                         //Nommer les variables dans l'ordre alphabétique
                         if (impliquantsEssentiels[i].bincode[j] == '1')
                         {
-                            resultat += "(" + alpha + ")";
+                            resultat += alpha + ".";
                         }
                         else
                         {
-                            resultat += "!" + "( " + alpha + " )";
+                            resultat += "!" + alpha + ".";
                         }
                     }
                 }
-                resultat += " + ";
+                //Enlever le " . " additionnel à la fin
+                if (resultat.Length >= 1)
+                {
+                    resultat = resultat.Substring(0, resultat.Length - 1);
+                }
+                resultat += "+";
             }
 
             //Enlever le " + " additionnel à la fin
-            if (resultat.Length >= 3)
+            if (resultat.Length >= 1)
             {
-                resultat = resultat.Substring(0, resultat.Length - 3);
+                resultat = resultat.Substring(0, resultat.Length - 1);
             }
 
             Console.WriteLine(resultat);
+
+            Synthese.ExprBoolNode tree = Synthese.N_ary_DNF_ExpressionTree(resultat);
+            Synthese.Circuit_Visualisation(tree);
             #endregion
 
         }
