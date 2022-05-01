@@ -190,7 +190,8 @@ namespace dnf
                     return cnf(tete.fd.fd);
 
                 tete = negationDNF(dnf(tete.fd)); // tete.fd est soit un "OU" ou bien un "ET", donc on doit le remplacer `tete` par sa negation (en appliquant les lois de DE MORGAN)
-                return tete; 
+                
+                return tete;
             }
 
             // on doit assurer que les sous-arbres gauche et droit de `tete` soient en forme normale conjonctive
@@ -1262,7 +1263,7 @@ namespace dnf
             if (root == null)
                 return;
             if (root.type == Type.OU || root.type == Type.NAND) Console.Write("(");
-           
+            
             inorderParanthese(root.fg);
 
             Console.Write(root.info);
@@ -1407,9 +1408,8 @@ namespace dnf
 
         public static ExprBool? onlyNand(ExprBool? root)
         {
-            if (root == null) return null; 
-            if(root.type == Type.VALEUR) return root;
-            
+            if (root == null) return null;
+            if (root.type == Type.VALEUR) return root;
 
             //hauteur ==  1   
             if (root.type == Type.VALEUR) return root;//a
@@ -1418,7 +1418,8 @@ namespace dnf
             switch (root.type)
             {
                 case Type.NON:
-                    if (root.fd.type == Type.VALEUR) return  new ExprBool(Type.NAND , root , root.clone() );  //!a 
+                
+                    if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NAND, root, root.clone());  //!a 
                     break;
 
                 case Type.ET:
@@ -1426,11 +1427,12 @@ namespace dnf
                     {
                         //a.b
                         ExprBool a_b = new ExprBool(Type.NAND, root.fg, root.fd); //( a nand b )
-                        return new ExprBool(Type.NAND , a_b , a_b.clone()); // ( a nand b ) nand  ( a nand b )
+                        return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nand b ) nand  ( a nand b )
                     }
                     break;
                 case Type.OU:
-                    if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR) {
+                    if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR)
+                    {
                         //a+b
                         ExprBool a_a = new ExprBool(Type.NAND, root.fg, root.fg.clone()); //( a nand a )
                         ExprBool b_b = new ExprBool(Type.NAND, root.fd, root.fd.clone()); //( a nand a )
@@ -1445,9 +1447,9 @@ namespace dnf
 
             //hauteur >= 3
 
-            if(root.type == Type.NON)
+            if (root.type == Type.NON)
             {
-                if (root.fd.type == Type.ET) return new ExprBool(Type.NAND, onlyNand(root.fd.fg), onlyNand(root.fd.fd) );
+                if (root.fd.type == Type.ET) return new ExprBool(Type.NAND, onlyNand(root.fd.fg), onlyNand(root.fd.fd));
                 else if (root.fd.type == Type.NON) return onlyNand(root.fd.fd); //double negation 
                 else
                 {
@@ -1456,12 +1458,12 @@ namespace dnf
                 }
             }
 
-            if(root.type == Type.OU)
+            if (root.type == Type.OU)
             {
-                if(root.fg.type == Type.NON && root.fd.type == Type.NON)
+                if (root.fg.type == Type.NON && root.fd.type == Type.NON)
                 {
                     //!a+!b = !(a.b) = a nand b 
-                    return new ExprBool(Type.NAND, root.fg.fd, root.fd.fd); 
+                    return new ExprBool(Type.NAND, root.fg.fd, root.fd.fd);
                 }
                 else
                 {
@@ -1473,14 +1475,77 @@ namespace dnf
                     return new ExprBool(Type.NAND, a_a, b_b); // ( a nand a ) nand  ( b nand b )
                 }
             }
-            if(root.type == Type.ET)
+          
+            if (root.type == Type.ET)
             {
-                ExprBool a_b = new ExprBool(Type.NAND, onlyNand( root.fg), onlyNand(root.fd)); //( a nand b )
-                
+                ExprBool a_b = new ExprBool(Type.NAND, onlyNand(root.fg), onlyNand(root.fd)); //( a nand b )
+
                 return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nand b ) nand  ( a nand b )
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// returns true if the tree rooted at (root) is in disjunctive normal form
+        /// </summary>
+        /// <param name="root">the root of the tree representing the boolean expression</param>
+        public static bool isDisjunctiveNormalForm(ExprBool root)
+        {
+            if (root.type == Type.VALEUR)
+            {
+                return (root.fg == null && root.fd == null);
+            }
+            if (root.type == Type.NON)
+            {
+                if (root.fg != null || root.fd == null || !isDisjunctiveNormalForm(root.fd))
+                    return false;
+                return (root.fd.type == Type.VALEUR || root.fd.type == Type.NON);
+            }
+            if (root.type == Type.ET)
+            {
+                if (root.fg == null || root.fd == null || !isDisjunctiveNormalForm(root.fg) || !isDisjunctiveNormalForm(root.fd))
+                    return false;
+                return (root.fg.type != Type.OU && root.fd.type != Type.OU);
+            }
+            if (root.type == Type.OU)
+            {
+                if (root.fg == null || root.fd == null || !isDisjunctiveNormalForm(root.fg) || !isDisjunctiveNormalForm(root.fd))
+                    return false;
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// returns true if the tree rooted at (root) is in conjunctive normal form
+        /// </summary>
+        /// <param name="root">the root of the tree representing the boolean expression</param>
+        public static bool isConjunctiveNormalForm(ExprBool root)
+        {
+            if (root.type == Type.VALEUR)
+            {
+                return (root.fg == null && root.fd == null);
+            }
+            if (root.type == Type.NON)
+            {
+                if (root.fg != null || root.fd == null || !isConjunctiveNormalForm(root.fd))
+                    return false;
+                return (root.fd.type == Type.VALEUR || root.fd.type == Type.NON);
+            }
+            if (root.type == Type.OU)
+            {
+                if (root.fg == null || root.fd == null || !isConjunctiveNormalForm(root.fg) || !isConjunctiveNormalForm(root.fd))
+                    return false;
+                return (root.fg.type != Type.ET && root.fd.type != Type.ET);
+            }
+            if (root.type == Type.ET)
+            {
+                if (root.fg == null || root.fd == null || !isConjunctiveNormalForm(root.fg) || !isConjunctiveNormalForm(root.fd))
+                    return false;
+                return true;
+            }
+            return false;
         }
 
     }
