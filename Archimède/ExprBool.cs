@@ -190,6 +190,7 @@ namespace dnf
                     return cnf(tete.fd.fd);
 
                 tete = negationDNF(dnf(tete.fd)); // tete.fd est soit un "OU" ou bien un "ET", donc on doit le remplacer `tete` par sa negation (en appliquant les lois de DE MORGAN)
+                
                 return tete;
             }
 
@@ -1262,13 +1263,13 @@ namespace dnf
             if (root == null)
                 return;
             if (root.type == Type.OU || root.type == Type.NAND) Console.Write("(");
-
+            
             inorderParanthese(root.fg);
 
             Console.Write(root.info);
 
             inorderParanthese(root.fd);
-
+          
             if (root.type == Type.OU || root.type == Type.NAND) Console.Write(")");
 
         }
@@ -1410,7 +1411,6 @@ namespace dnf
             if (root == null) return null;
             if (root.type == Type.VALEUR) return root;
 
-
             //hauteur ==  1   
             if (root.type == Type.VALEUR) return root;//a
 
@@ -1418,6 +1418,7 @@ namespace dnf
             switch (root.type)
             {
                 case Type.NON:
+                
                     if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NAND, root, root.clone());  //!a 
                     break;
 
@@ -1474,6 +1475,7 @@ namespace dnf
                     return new ExprBool(Type.NAND, a_a, b_b); // ( a nand a ) nand  ( b nand b )
                 }
             }
+          
             if (root.type == Type.ET)
             {
                 ExprBool a_b = new ExprBool(Type.NAND, onlyNand(root.fg), onlyNand(root.fd)); //( a nand b )
