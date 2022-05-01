@@ -7,46 +7,46 @@ using System.Threading.Tasks;
 namespace Archimède
 {
 
-    
-    class Minterme: IEquatable<Minterme> 
+
+    class Minterme : IEquatable<Minterme>
     {
-         
+
         //Nombre décimal représentant le minterme
-        public  long  nombre { get  ; set;}
+        public long nombre { get; set; }
 
         //Nombre décimal comme chaine de caractere  représentant le minterme 
-        public string nombreChaine { get; set;}  
+        public string nombreChaine { get; set; }
         //Représentation binaire du minterme
-        public string bincode { get; set;}
+        public string bincode { get; set; }
         //Nombre de 1 dans la représentation binaire
-        public int nbuns { get; set;} 
+        public int nbuns { get; set; }
 
-        
-   
+
+
         //le max de nombre des uns pour les mintermes
-        public static int maxNbUns = 0   ;  
+        public static int maxNbUns = 0;
 
         //la longeur maximale des minterme cree 
-        public static int maxNbVariables = 0;   
+        public static int maxNbVariables = 0;
 
 
-        public Minterme(long nombre) 
+        public Minterme(long nombre)
         {
             this.nombre = nombre;
             this.bincode = ConvertionAuBinaire(nombre);
             this.nbuns = NombreDeUns(this.bincode);
 
 
-            
+
             if (this.nbuns > maxNbUns) maxNbUns = this.nbuns;
-            if(this.bincode.Length > maxNbVariables) maxNbVariables = this.bincode.Length;
+            if (this.bincode.Length > maxNbVariables) maxNbVariables = this.bincode.Length;
 
 
         }
 
         public Minterme(string nombreChaine)
         {
-            this.nombre = -1; 
+            this.nombre = -1;
             this.nombreChaine = nombreChaine;
             this.bincode = ConvertionAuBinaire(nombreChaine);
             this.nbuns = NombreDeUns(this.bincode);
@@ -59,22 +59,33 @@ namespace Archimède
 
         }
 
-        //Compte le nombre de 1 dans un code binaire
+
+        /// <returns>
+        /// nombre de 1 dans un code binaire
+        /// </returns>
+
         private int NombreDeUns(string codebinaire)
         {
             return codebinaire.Count(ch => (ch == '1'));
         }
 
-        //Convertit un nombre en code binaire
+        /// <summary>
+        /// Convertit un nombre en code binaire
+        /// </summary>
         public static string ConvertionAuBinaire(long nombre)
         {
             return Convert.ToString(nombre, 2);
         }
 
+
+        /// <summary>
+        /// conversion en binaire d'un grand nombre (>63bits) 
+        /// </summary>
+        /// <param name="nombre">un nombre represente comme une chaine de charactere</param>
         public static string ConvertionAuBinaire(string nombre)
         {
 
-            
+
 
             //un tableau quii represente les puissances de deux 63 -> 100
             string[] twoPowers = {
@@ -118,24 +129,26 @@ namespace Archimède
 , "1267650600228229401496703205376"
 };
 
-        
-            int index = twoPowers.Length -1 ;
+
+            int index = twoPowers.Length - 1;
             string suffix = "";
-            string resultat ;
+            string resultat;
             string sauv = nombre;
-            bool ajouter = false; 
+            bool ajouter = false;
 
 
-            while (index >= 0) {
-                
-                
+            while (index >= 0)
+            {
+
+
                 resultat = soustraire(sauv, twoPowers[index]);
                 if (resultat[0] == '-')
                 {
-                    if(ajouter) suffix += "0";
+                    if (ajouter) suffix += "0";
 
                 }
-                else {
+                else
+                {
                     sauv = resultat;
                     suffix += "1";
                     ajouter = true;
@@ -143,25 +156,32 @@ namespace Archimède
                 index--;
             }
 
-            return suffix + Convert.ToString( long.Parse(sauv), 2).PadLeft(63 , '0');
+            return suffix + Convert.ToString(long.Parse(sauv), 2).PadLeft(63, '0');
 
         }
 
 
-        //soustraire num2 de num1 avec num2 et num1 des string (sans parser en entier )
-        public static string soustraire(string num1 , string num2) 
+        /// <summary>
+        /// soustraire num2 de num1  (sans parser en entier )
+        /// -c-a-d  bit par bit- 
+        /// num2 et num1 des string
+        /// </summary>
+        /// <returns>le resultat de la soustraction s'il est positive ,
+        /// sinon "-"
+        /// </returns>
+        public static string soustraire(string num1, string num2)
         {
 
             StringBuilder result = new StringBuilder("");
 
-            if (num1.Length < num2.Length)  num1 = num1.PadLeft(num2.Length , '0'); 
-            else num2 =  num2.PadLeft(num1.Length , '0');
+            if (num1.Length < num2.Length) num1 = num1.PadLeft(num2.Length, '0');
+            else num2 = num2.PadLeft(num1.Length, '0');
 
-            
-            if (string.Compare(num1, num2) < 0) return "-"; 
-           
 
-            int digits = num1.Length ;
+            if (string.Compare(num1, num2) < 0) return "-";
+
+
+            int digits = num1.Length;
 
             int digit1;
             int digit2;
@@ -169,13 +189,13 @@ namespace Archimède
             int digitResult;
             int carry = 0;
 
-            
 
-            for (int i = digits - 1; i >= 0 ; i--)
+
+            for (int i = digits - 1; i >= 0; i--)
             {
                 digit1 = (int)Char.GetNumericValue(num1[i]);
                 digit2 = (int)Char.GetNumericValue(num2[i]);
-                
+
 
                 digitResult = digit1 - digit2 + carry;
 
@@ -194,27 +214,27 @@ namespace Archimède
                     carry = 0;
                 }
 
-                result.Insert(0 , digitResult);
+                result.Insert(0, digitResult);
 
 
-            }   
+            }
 
-            return result.ToString(); 
+            return result.ToString();
         }
 
 
 
-      
+
 
 
 
         public bool Equals(Minterme other)
         {
-            if(ReferenceEquals(other, null)) return false;
-            if(ReferenceEquals(this, other)) return true;
- 
-            
-            if(nombre < 0 || other.nombre < 0)
+            if (ReferenceEquals(other, null)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+
+            if (nombre < 0 || other.nombre < 0)
                 return string.Equals(nombreChaine, other.nombreChaine);
             return int.Equals(nombre, other.nombre);
         }
