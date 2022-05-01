@@ -1548,6 +1548,94 @@ namespace dnf
             return false;
         }
 
+        public static List<string> getVariables(string expression)
+        {
+            int indexCh = 0; // index pour parcourir l'expression 
+            StringBuilder alphabet;
+            List<string> alphabets = new List<string>();
+
+
+            //premier parcour de l'expression pour determiner les variables utilitses avec les poids fort et faible 
+            while (indexCh < expression.Length)
+            {
+
+                alphabet = new StringBuilder(); // alphabet represente la variable (puisque on peut aller a plus de 26 variables l'alphabet sont des string aaa, aabadf ... )
+
+                //une boucle pour separer  les operateurs du l'alphabet 
+                while ((indexCh < expression.Length) && (expression[indexCh] != '+') && (expression[indexCh] != '.') && (expression[indexCh] != '!'))
+                {
+
+                    alphabet.Append(expression[indexCh]);
+                    indexCh++;
+                }
+
+                //si cette alphabet n'est pas traites deja on l'insere dans la liste d'alphabets
+                if ((alphabet.Length > 0) && (!alphabets.Contains(alphabet.ToString())))
+                {
+                    alphabets.Add(alphabet.ToString());
+                }
+
+                indexCh++;
+            }
+            return alphabets;
+        }
+        public static List<string> getMinterms(string expression, List<string> alphabets)
+        {
+            int indexCh = 0;
+            StringBuilder bincode;
+            StringBuilder term;
+
+            List<string> stringListMinterm = new List<string>();
+            while (indexCh < expression.Length)
+            {
+                bincode = new StringBuilder();
+                term = new StringBuilder();
+
+                //sparer le minterme dans la variable term 
+                while ((indexCh < expression.Length) && (expression[indexCh] != '+'))
+                {
+                    term.Append(expression[indexCh]);
+                    indexCh++;
+                }
+
+                string[] termAlphabets = term.ToString().Split('.'); //tableau qui va contenir les varibales present dans un minterm 
+
+                for (int i = 0; i < alphabets.Count; i++)
+                {
+
+
+                    if (termAlphabets.Contains(alphabets[i]) && termAlphabets.Contains("!" + alphabets[i]))
+                    {
+                        // a.!a = vide 
+                        bincode.Clear();
+                        break;
+
+                    }
+                    else if (termAlphabets.Contains(alphabets[i]))
+                    {
+                        // a
+
+                        bincode.Append('1');
+                    }
+                    else if (termAlphabets.Contains("!" + alphabets[i]))
+                    {
+                        // !a 
+                        bincode.Append('0');
+                    }
+                    else
+                    {
+                        // a n'est pas present donc soit 0 soit 1 => -
+                        bincode.Append('-');
+                    }
+                }
+
+                if (bincode.Length > 0) stringListMinterm.Add(bincode.ToString());
+                indexCh++;
+            }
+
+            return stringListMinterm.Distinct().ToList(); ;
+        }
+
     }
 
 }
