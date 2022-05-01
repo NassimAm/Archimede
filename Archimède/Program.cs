@@ -828,5 +828,6 @@ if(resultat.Length>=1)
 Console.WriteLine(resultat);
 
 Synthese.ExprBoolNode tree = Synthese.N_ary_DNF_ExpressionTree(resultat);
+/*Synthese.Tree_Visualisation(tree);*/
 Synthese.Circuit_Visualisation(tree);
 

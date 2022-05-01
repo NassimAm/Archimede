@@ -1,14 +1,19 @@
 strict graph arbre {
 	ordering = out;
 	splines = false;
-	rankdir = "RL";
- "746452304c7642a58621fcab4482186f" [label="OR"] 
- "97e215a8601144d68b83430d54e0e454" [label="a"] 
+ "d56e67945afd49c28487551f76b1e24f" [label="AND"] 
+ "3af85c44d9494ee0bce4c9ded2419806" [label="a"] 
   "NIL0" [style=invis];
-  "746452304c7642a58621fcab4482186f" -- "97e215a8601144d68b83430d54e0e454"; 
-  "746452304c7642a58621fcab4482186f" -- "NIL0"  [style=invis];
- "802b07e630cb45dc979747f8bd742524" [label="b"] 
+  "d56e67945afd49c28487551f76b1e24f" -- "3af85c44d9494ee0bce4c9ded2419806"; 
+  "d56e67945afd49c28487551f76b1e24f" -- "NIL0"  [style=invis];
+ "49924516a2064eab9ca4721c75bdcf34" [label="NON"] 
   "NIL1" [style=invis];
-  "746452304c7642a58621fcab4482186f" -- "802b07e630cb45dc979747f8bd742524"; 
-  "746452304c7642a58621fcab4482186f" -- "NIL1"  [style=invis];
+  "d56e67945afd49c28487551f76b1e24f" -- "49924516a2064eab9ca4721c75bdcf34"; 
+  "d56e67945afd49c28487551f76b1e24f" -- "NIL1"  [style=invis];
+ "ca2c5c87351b49188c21bb5264812b1d" [label="b"] 
+  "49924516a2064eab9ca4721c75bdcf34" -- "ca2c5c87351b49188c21bb5264812b1d"; 
+ "1b8c4f5b2f094898b22d28dd8feef790" [label="c"] 
+  "NIL2" [style=invis];
+  "d56e67945afd49c28487551f76b1e24f" -- "1b8c4f5b2f094898b22d28dd8feef790"; 
+  "d56e67945afd49c28487551f76b1e24f" -- "NIL2"  [style=invis];
 }

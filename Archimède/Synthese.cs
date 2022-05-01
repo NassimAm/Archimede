@@ -285,7 +285,15 @@ class Synthese
         File.AppendAllText(path, "\tnode[width=0.5, height=0.5, shape=box, fontsize=16];\n");
         File.AppendAllText(path, "\tedge[arrowhead=none,penwidth=2];\n");
         if(root.info != "OR")
-            File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", root.info, root.id));
+            if(!root.info.Contains('!'))
+                File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", root.info, root.id));
+            else
+            {
+                string var_id = ExprBool.generateID();
+                File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NOT.png\",fixedsize=true,shape=plaintext] \n", root.id));
+                File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", root.info.Replace("!",""), var_id));
+                File.AppendAllText(path, String.Format("\t\"{0}\" -- \"{1}\"\n", var_id, root.id));
+            }
         else
             File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/OR.png\",fixedsize=true,shape=plaintext] \n", root.id));
 
@@ -293,7 +301,15 @@ class Synthese
         foreach (ExprBoolNode term in root.children)
         {
             if(term.info != "AND")
-                File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", term.info, term.id));
+                if (!term.info.Contains('!'))
+                    File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", term.info, term.id));
+                else
+                {
+                    string var_id = ExprBool.generateID();
+                    File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NOT.png\",fixedsize=true,shape=plaintext] \n", term.id));
+                    File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", term.info.Replace("!", ""), var_id));
+                    File.AppendAllText(path, String.Format("\t\"{0}\" -- \"{1}\"\n", var_id, term.id));
+                }
             else
                 File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/AND.png\",fixedsize=true,shape=plaintext] \n", term.id));
             listentrees += "\""+term.id+"\",";
@@ -312,8 +328,18 @@ class Synthese
             listentrees = "{";
             foreach (ExprBoolNode litteral in term.children)
             {
-                File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", litteral.info, litteral.id));
+                if (!litteral.info.Contains('!'))
+                    File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", litteral.info, litteral.id));  
+                else
+                {
+                    string var_id = ExprBool.generateID();
+                    File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NOT.png\",fixedsize=true,shape=plaintext] \n", litteral.id));
+                    File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", litteral.info.Replace("!", ""), var_id));
+                    File.AppendAllText(path, String.Format("\t\"{0}\" -- \"{1}\"\n", var_id, litteral.id));
+                }
+                    
                 listentrees += "\"" + litteral.id + "\",";
+
             }
             if (listentrees != "{")
             {
