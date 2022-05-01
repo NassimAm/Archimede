@@ -50,7 +50,7 @@ class Synthese
         if (minterms.Count == 1)
         {
             string[] litterals = minterms[0].Split('.');
-            List<ExprBoolNode> litterlasNodes = new List<ExprBoolNode>(litterals.Length);
+            List<ExprBoolNode> litteralsNodes = new List<ExprBoolNode>(litterals.Length);
             if (litterals.Length == 1)
             {
                 root = new ExprBoolNode(litterals[0]);
@@ -59,9 +59,10 @@ class Synthese
             {
                 foreach (var litteral in litterals)
                 {
-                    litterlasNodes.Add(new ExprBoolNode(litteral));
+                    litteralsNodes.Add(new ExprBoolNode(litteral));
                 }
-                root = new ExprBoolNode(dnf.Type.ET, litterlasNodes);
+
+                root = new ExprBoolNode(dnf.Type.ET, litteralsNodes);
             }
 
         }
@@ -79,18 +80,18 @@ class Synthese
         for (var i = 0; i < root.children.Count; i++)
         {
             string[] litterals = root.children[i].info.Split('.');
-            List<ExprBoolNode> litterlasNodes = new List<ExprBoolNode>(litterals.Length);
+            List<ExprBoolNode> litteralsNodes = new List<ExprBoolNode>(litterals.Length);
             if (litterals.Length == 1)
             {
                 root.children[i] = new ExprBoolNode(litterals[0]);
             }
             else
             {
-                foreach (var litteral in litterals)
+                foreach (string litteral in litterals)
                 {
-                    litterlasNodes.Add(new ExprBoolNode(litteral));
+                    litteralsNodes.Add(new ExprBoolNode(litteral));
                 }
-                root.children[i] = new ExprBoolNode(dnf.Type.ET, litterlasNodes);
+                root.children[i] = new ExprBoolNode(dnf.Type.ET, litteralsNodes);
             }
 
         }
@@ -167,25 +168,85 @@ class Synthese
         File.AppendAllText(path, "strict graph arbre {\n");
         File.AppendAllText(path, "\tordering = out;\n");
         File.AppendAllText(path, "\tsplines = false;\n");
-        File.AppendAllText(path, "\trankdir = \"RL\";\n");
-        File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
+        // File.AppendAllText(path, "\trankdir = \"RL\";\n");
+        if (root.info.Contains('!'))
+        {
+            // negated root
+            string NOT_id = ExprBool.generateID();
+            File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", "NON", NOT_id)); // generate a 'NOT' nod
+            File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info.Remove(0, 1), root.id));
+            File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", NOT_id, root.id));
+        }
+        else
+            File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
         foreach (ExprBoolNode term in root.children)
         {
-            File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", term.info, term.id));
-            File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
-            File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, term.id));
-            File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbnils++));
-            File.AppendAllText(path, " [style=invis];\n");
+            if (term.type == dnf.Type.VALEUR)
+            {
+                if (term.info.Contains('!'))
+                {
+                    // negated term
+                    string NOT_id = ExprBool.generateID();
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", "NON", NOT_id)); // generate a 'NOT' node
+                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, NOT_id));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbnils++));
+                    File.AppendAllText(path, " [style=invis];\n");
+
+
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", term.info.Remove(0, 1), term.id));
+
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", NOT_id, term.id));
+
+                }
+                else
+                {
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", term.info, term.id));
+                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, term.id));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbnils++));
+                    File.AppendAllText(path, " [style=invis];\n");
+                }
+            }
+            else
+            {
+                File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", term.info, term.id));
+                File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
+                File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, term.id));
+                File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbnils++));
+                File.AppendAllText(path, " [style=invis];\n");
+            }
+
         }
         foreach (ExprBoolNode term in root.children)
         {
             foreach (ExprBoolNode litteral in term.children)
             {
-                File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", litteral.info, litteral.id));
-                File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
-                File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", term.id, litteral.id));
-                File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", term.id, nbnils++));
-                File.AppendAllText(path, " [style=invis];\n");
+                if (litteral.info.Contains('!'))
+                {
+                    // negated term
+                    string NOT_id = ExprBool.generateID();
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", "NON", NOT_id)); // generate a 'NOT' node
+                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", term.id, NOT_id));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", term.id, nbnils++));
+                    File.AppendAllText(path, " [style=invis];\n");
+
+
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", litteral.info.Remove(0, 1), litteral.id));
+
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", NOT_id, litteral.id));
+
+                }
+                else
+                {
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", litteral.info, litteral.id));
+                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbnils));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", term.id, litteral.id));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", term.id, nbnils++));
+                    File.AppendAllText(path, " [style=invis];\n");
+                }
+
             }
         }
         File.AppendAllText(path, "}\n");
