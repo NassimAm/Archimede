@@ -202,13 +202,86 @@ class Synthese
         process.Start();
         process.Close();
         // ouverture du fichier 'tree.png'
-        startInfo.Arguments = "/C tree2.png";
+        startInfo.Arguments = "/C .\\tree2.png";
         process.StartInfo = startInfo;
         process.Start();
         // End visualisation
     }
 
+    public static void Circuit_Visualisation(ExprBoolNode root)
+    {
+        string? path = Directory.GetCurrentDirectory() + "\\synthese.txt";
+        // creer le fichier text 'tree2.txt'
+        File.WriteAllText(path, "");
+        // nombre des noeuds nils
+        int nbnils = 0;
+        string listentrees = "";
+        // construction du fichier 'tree.txt' (en langage DOT)
+        File.AppendAllText(path, "graph arbre{\n");
+        File.AppendAllText(path, "\tsplines = ortho;\n");
+        File.AppendAllText(path, "\trankdir=\"LR\";\n");
+        File.AppendAllText(path, "\tranksep=1;\n");
+        File.AppendAllText(path, "\tnode[width=0.5, height=0.5, shape=box, fontsize=16];\n");
+        File.AppendAllText(path, "\tedge[arrowhead=none,penwidth=2];\n");
+        if(root.info != "OR")
+            File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", root.info, root.id));
+        else
+            File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/OR.png\",fixedsize=true,shape=plaintext] \n", root.id));
 
+        listentrees += "{";
+        foreach (ExprBoolNode term in root.children)
+        {
+            if(term.info != "AND")
+                File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", term.info, term.id));
+            else
+                File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/AND.png\",fixedsize=true,shape=plaintext] \n", term.id));
+            listentrees += "\""+term.id+"\",";
+        }
+        if(listentrees != "{")
+        {
+            listentrees = listentrees.Substring(0, listentrees.Length - 1);
+            listentrees += "}";
+            File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,width=.001,height = {1}] \n", nbnils,root.children.Count / 4));
+            File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\"\n",nbnils,root.id));
+            File.AppendAllText(path, String.Format("\t{0} -- \"NIL{1}\"\n", listentrees,nbnils++));
+        }
+
+        foreach (ExprBoolNode term in root.children)
+        {
+            listentrees = "{";
+            foreach (ExprBoolNode litteral in term.children)
+            {
+                File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", litteral.info, litteral.id));
+                listentrees += "\"" + litteral.id + "\",";
+            }
+            if (listentrees != "{")
+            {
+                listentrees = listentrees.Substring(0, listentrees.Length - 1);
+                listentrees += "}";
+                File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,width=.001,height = {1}] \n", nbnils, term.children.Count / 4));
+                File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\"\n", nbnils, term.id));
+                File.AppendAllText(path, String.Format("\t{0} -- \"NIL{1}\"\n", listentrees, nbnils++));
+            }
+        }
+        File.AppendAllText(path, "}\n");
+        // End construction
+
+        // conversion du fichier text en fichier png
+        System.Diagnostics.Process process = new System.Diagnostics.Process();
+        System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+        // hide the terminal
+        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+        startInfo.FileName = "cmd.exe";
+        startInfo.Arguments = "/C dot -Tpng synthese.txt -o synthese.png";
+        process.StartInfo = startInfo;
+        process.Start();
+        process.Close();
+        // ouverture du fichier 'tree.png'
+        startInfo.Arguments = "/C .\\synthese.png";
+        process.StartInfo = startInfo;
+        process.Start();
+        // End visualisation
+    }
 }
 
 
