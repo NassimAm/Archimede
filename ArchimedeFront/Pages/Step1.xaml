@@ -37,10 +37,13 @@
         <Frame Name="_NextStep2"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" ></Frame>
+        <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
+            <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" />
+        </ScrollViewer>
         <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" ></Frame>
 
-        <Grid>
+        <Grid Name="expandButtons">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
@@ -48,13 +51,10 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="100,30,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
-                <!-- <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Margin="0,0,10,0">Passer</TextBlock>
-                <ContentControl   ContentTemplate="{StaticResource down}" />-->
                 <Button Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click"/>
-
             </StackPanel>
             <StackPanel Margin="10,30,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                <Button Style="{StaticResource expandButton}" ContentStringFormat="Suivant" Click="nextStepButton_click" />
+                <Button Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" />
             </StackPanel>
 
         </Grid>
