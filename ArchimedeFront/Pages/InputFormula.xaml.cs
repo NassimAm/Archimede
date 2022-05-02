@@ -31,5 +31,47 @@ namespace ArchimedeFront.Pages
            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
 
         }
+
+        private void operator_Click(object sender, RoutedEventArgs e)
+        {
+            string res ;
+
+            switch(((Button)sender).Name)
+            {
+                
+                case "et":
+                    res = ".";
+                    break;
+                case "ou":
+                    res = "+";
+                    break;
+                case "non":
+                    res = "!";
+                    break;
+                case "nand":
+                    res = ">";
+                    break;
+                case "nor":
+                    res = "<";
+                    break;
+                case "xor":
+                    res = "^";
+                    break;
+                case "xnor":
+                    res = "*";
+                    break;
+                case "paranthese":
+                    res = "( )";
+                    break;
+                default:
+                    return;
+                   
+
+            }
+
+            expression.Text = expression.Text + res;
+        }
+
+        
     }
 }

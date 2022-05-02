@@ -30,17 +30,22 @@
                     </LinearGradientBrush>
                 </Border.BorderBrush>
 
-                <TextBox VerticalAlignment="Center"  MaxWidth="900" AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
+                <TextBox Name="expression" VerticalAlignment="Center"  MaxWidth="900" AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
 
 
             </Border>
 
-            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,20">
-                <Button Style="{StaticResource operatorButton}" Margin="10,4" >ET</Button>
-                <Button Style="{StaticResource operatorButton}" Margin="10,4">OU</Button>
-                <Button Style="{StaticResource operatorButton}" Margin="10,4">NON</Button>
-                <Button Style="{StaticResource operatorButton}" Margin="10,4">( )</Button>
-            </WrapPanel>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,20" MaxWidth="400" >
+                <Button Name="et" Style="{StaticResource operatorButton}" Margin="10,6"  Click="operator_Click">ET</Button>
+            <Button Name="ou" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">OU</Button>
+            <Button Name="non" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">NON</Button>
+            <Button  Name="nand" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">NAND</Button>
+            <Button Name="nor" Style="{StaticResource operatorButton}" Margin="10,6"  Click="operator_Click">NOR</Button>
+            <Button Name="xor" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">XOR</Button>
+            <Button  Name="xnor" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">XNOR</Button>
+            <Button Name="paranthese" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">( )</Button>
+
+        </WrapPanel>
 
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
                 <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" >Simplification</Button>

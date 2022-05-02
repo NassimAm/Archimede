@@ -71,6 +71,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+       
     </Style>
 
     <!-- big green buttons style-->
