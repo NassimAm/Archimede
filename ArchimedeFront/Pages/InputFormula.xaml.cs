@@ -23,7 +23,10 @@ namespace ArchimedeFront.Pages
         public InputFormula()
         {
             InitializeComponent();
-            show_error("hi");
+            remove_error();
+            numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
+
+
             AlignableWrapPanel buttons = new AlignableWrapPanel();
             Button operatorButton ;
             string[] operators = { "ET", "OU", "NON", "NAND", "NOR", "XOR", "XNOR", "( )" };
@@ -38,7 +41,7 @@ namespace ArchimedeFront.Pages
             }
             
             operatorButtonsContainer.Children.Add(buttons);
-   
+        
         }
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
@@ -110,12 +113,31 @@ namespace ArchimedeFront.Pages
             errorMessage.Text = message;
             errorContainer.Visibility = Visibility.Visible;
         }
-        private void remove_error(string message)
+        private void remove_error()
         {
             buttonsContainer.Opacity = 1;
             buttonsContainer.IsHitTestVisible = true;
             errorContainer.Visibility = Visibility.Collapsed;
             
+        }
+
+        private void literale_Checked(object sender, RoutedEventArgs e)
+        {
+            if (numberOfVariablesInput == null) return;
+            numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
+            expression.Text = "A.B + !A.B.C";
+            operatorButtonsContainer.Visibility = Visibility.Visible;
+            buttonsContainer.Margin = new Thickness(0, 24, 0, 24);
+        }
+
+        private void numerique_Checked(object sender, RoutedEventArgs e)
+        {
+            if (numberOfVariablesInput == null) return;
+            numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
+            expression.Text = "0,1,2,3,10";
+            
+            operatorButtonsContainer.Visibility = Visibility.Collapsed;
+            buttonsContainer.Margin = new Thickness(0, 64, 0, 24);
         }
     }
 

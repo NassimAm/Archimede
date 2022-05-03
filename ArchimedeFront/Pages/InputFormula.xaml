@@ -16,8 +16,8 @@
                 Veuillez introduire votre expression
             </TextBlock>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,28">
-                <RadioButton Style="{StaticResource customRadioButton}"  IsChecked="True" FontSize="100" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0">Expression littérale</RadioButton>
-                <RadioButton Style="{StaticResource customRadioButton}" FontSize="29" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0">Expression numérique</RadioButton>
+                <RadioButton Name="literale" Style="{StaticResource customRadioButton}"  IsChecked="True" FontSize="100" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0"  Checked="literale_Checked">Expression littérale</RadioButton>
+                <RadioButton Name="numerique" Style="{StaticResource customRadioButton}" FontSize="29" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0" Checked="numerique_Checked">Expression numérique</RadioButton>
             </WrapPanel>
 
             <Border BorderThickness="2" CornerRadius="14" MaxWidth="700"  Height="52" Margin="10,0">
@@ -25,13 +25,24 @@
                     <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                         <LinearGradientBrush.GradientStops>
                             <GradientStop Offset="0.1"  Color="#00CBBD" />
-                            <GradientStop Offset="1"   Color="#00E17C"/>
+                            <GradientStop Offset="1"   Color="#00E17C"  />
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
 
-                <TextBox Name="expression" VerticalAlignment="Center"  MaxWidth="900" AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
-
+                <Grid VerticalAlignment="Center" MaxWidth="900" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="1*"/>
+                        <ColumnDefinition Name="numberOfVariablesInput"  Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBox Grid.Column="0" Name="expression" VerticalAlignment="Center" Foreground="#424242" HorizontalAlignment="Stretch"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0,0,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="0,1,2,3,10" ></TextBox>
+                    <Border  Grid.Column="1"  BorderThickness="2" BorderBrush="#002725" Opacity="0.8" Height="40" CornerRadius="6" Padding="2" Background="Transparent" Margin="0,0,6,0">
+                        <TextBox  Background="Transparent" BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3"></TextBox>
+                    </Border>
+                </Grid>
+                
+                
 
             </Border>
 
