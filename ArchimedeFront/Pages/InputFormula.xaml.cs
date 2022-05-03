@@ -61,17 +61,31 @@ namespace ArchimedeFront.Pages
                     res = "*";
                     break;
                 case "paranthese":
-                    res = "( )";
+                    res = "()";
                     break;
                 default:
                     return;
                    
-
+               
             }
 
             expression.Text = expression.Text + res;
+            if(((Button)sender).Name == "paranthese")
+            {
+                expression.CaretIndex = expression.Text.Length-1;
+            }
+            else
+            {
+                expression.CaretIndex = expression.Text.Length;
+            }
+
+            expression.ScrollToEnd(); 
+            expression.Focus();
         }
 
-        
+        private void simplifyButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

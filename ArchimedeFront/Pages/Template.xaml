@@ -94,11 +94,11 @@
             </ToggleButton>
 
             <StackPanel  Name="navBar" Margin="22,50"  Grid.Row="1">
-                <TextBlock Style="{StaticResource fontRegularGothic}"  Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8">Accueil</TextBlock>
-                <Border BorderThickness="0,1" BorderBrush="White" >
-                    <TextBlock Style="{StaticResource fontRegularGothic}" Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8" >Documentation</TextBlock>
+                <TextBlock Name="toHomePage" Style="{StaticResource fontRegularGothic}"  Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8" Cursor="Hand" PreviewMouseDown="toHomePage_PreviewMouseDown">Accueil</TextBlock>
+                <Border  BorderThickness="0,1" BorderBrush="White" >
+                    <TextBlock Name="toDocumentation" Style="{StaticResource fontRegularGothic}" Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8" Cursor="Hand" PreviewMouseDown="toDocumentation_PreviewMouseDown" >Documentation</TextBlock>
                 </Border>
-                <TextBlock Style="{StaticResource fontRegularGothic}" Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8">Site web</TextBlock>
+                <TextBlock Name="toWebSite" Style="{StaticResource fontRegularGothic}" Foreground="White" TextAlignment="Center" FontSize="36" Margin="0,8" Cursor="Hand" PreviewMouseDown="toWebSite_PreviewMouseDown">Site web</TextBlock>
 
             </StackPanel>
 
@@ -107,7 +107,7 @@
                 <TextBlock  Width="auto" Style="{StaticResource fontRajdhani}"  VerticalAlignment="Bottom"  Grid.Row="2" Foreground="White" TextAlignment="Center" FontSize="28"  >
                      Archimède
                 </TextBlock>
-                <Button Click="Button_Click">Click ME</Button>
+                
             </StackPanel>
 
         </Grid>

@@ -420,7 +420,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     
-                        <StackPanel Orientation="Horizontal"  >
+                        <StackPanel Orientation="Horizontal"  Background="Transparent" >
                             <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
                             <ContentControl   ContentTemplate="{StaticResource down}" />
                         </StackPanel>
@@ -443,7 +443,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
 
-                    <StackPanel Orientation="Horizontal"  >
+                    <StackPanel Orientation="Horizontal" Background="Transparent" >
                         <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
                         <ContentControl   ContentTemplate="{StaticResource right}" />
                     </StackPanel>

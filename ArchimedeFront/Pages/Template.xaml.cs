@@ -56,9 +56,24 @@ namespace ArchimedeFront.Pages
             logoFooter.Opacity = 0;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+       
+
+        private void toHomePage_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Home.xaml", UriKind.Absolute));
+
+        }
+
+        private void toWebSite_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        
+
+        private void toDocumentation_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
