@@ -49,16 +49,16 @@ namespace ArchimedeFront.Pages
                     res = "!";
                     break;
                 case "nand":
-                    res = ">";
+                    res = "↑";
                     break;
                 case "nor":
-                    res = "<";
+                    res = "↓";
                     break;
                 case "xor":
-                    res = "^";
+                    res = "⊕";
                     break;
                 case "xnor":
-                    res = "*";
+                    res = "⊙";
                     break;
                 case "paranthese":
                     res = "()";
