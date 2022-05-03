@@ -24,5 +24,11 @@ namespace ArchimedeFront.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Template.xaml", UriKind.Absolute));
+
+        }
     }
 }

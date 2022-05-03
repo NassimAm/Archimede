@@ -71,7 +71,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-       
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#d1d1d1" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- big green buttons style-->
@@ -130,6 +134,44 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
                 
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- big green buttons style-->
+    <Style TargetType="Button" x:Key="commencer">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border    CornerRadius="38"  Padding="24,10" Width="auto" >
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                    <GradientStop Offset="1"   Color="#00E17C"/>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock 
+                                            Width="auto"
+                                       
+                                          Style="{StaticResource fontProductSans}"
+                                          TextAlignment="Center"
+                                          FontSize="38"
+                                          FontWeight="Bold"
+                                          Foreground="#fff"
+                                          Text="Commencer"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" >
+                            
+                        </TextBlock>
+                    </Border>
+                  
+                </ControlTemplate>
+
             </Setter.Value>
         </Setter>
     </Style>

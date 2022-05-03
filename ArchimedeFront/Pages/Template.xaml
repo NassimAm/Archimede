@@ -107,13 +107,15 @@
                 <TextBlock  Width="auto" Style="{StaticResource fontRajdhani}"  VerticalAlignment="Bottom"  Grid.Row="2" Foreground="White" TextAlignment="Center" FontSize="28"  >
                      Archimède
                 </TextBlock>
+                <Button Click="Button_Click">Click ME</Button>
             </StackPanel>
 
         </Grid>
-
-      
-            <Frame Name="_PageContent" Grid.Column="1"/>
-       
         
+        <ScrollViewer Grid.Column="1" >
+            <Frame Name="_PageContent"  NavigationUIVisibility="Hidden" />
+        </ScrollViewer>
+
     </Grid>
+
 </Page>
