@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -80,6 +81,7 @@ namespace ArchimedeFront.Pages
                     step1.Margin = new Thickness(0, 0, 0,82);
                    
                     stepNumber++;
+                    expandButtons.BringIntoView();
                     break;
                 case 2:
                     _NextStep3.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step3.xaml", UriKind.RelativeOrAbsolute));
@@ -87,6 +89,7 @@ namespace ArchimedeFront.Pages
                   
 
                     stepNumber++;
+                    expandButtons.BringIntoView();
                     break;
                 case 3:
                     _NextStep4.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step4.xaml", UriKind.RelativeOrAbsolute));
@@ -99,7 +102,7 @@ namespace ArchimedeFront.Pages
                     groupes[0] = new List<string> { "0000" };
                     groupes[1] = new List<string> { "0001", "1000", "0100" };
                     groupes[2] = new List<string> { "0101", "1001", "1100" };
-                    groupes[3] = new List<string> { "1101", "1110", "1101", "1110", "1101", "1110", "1101", "1110" };
+                    groupes[3] = new List<string> {  "1101", "1110", "1101", "1110", "1101", "1110" };
 
 
                     Border border;
@@ -123,9 +126,10 @@ namespace ArchimedeFront.Pages
                             groupesTable.Children.Add(border);
 
                         }
+                        groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
                         groupesMatrix.Children.Add(groupesTable);
                       stepNumber = -1;
-
+                    expandButtons.BringIntoView();
                     break;
                 case -1:
                      nbVariables = 4;
@@ -133,7 +137,7 @@ namespace ArchimedeFront.Pages
                     groupes[0] = new List<string> { "0000" };
                     groupes[1] = new List<string> { "0001", "1000", "0100" };
                     groupes[2] = new List<string> { "0101", "1001", "1100" };
-                    groupes[3] = new List<string> { "1101", "1110", "1101", "1110", "1101", "1110", "1101", "1110" };
+                    groupes[3] = new List<string> { "1101", "1110", "1101", "1110", "1101"};
 
 
                      
@@ -149,24 +153,25 @@ namespace ArchimedeFront.Pages
 
 
                         }
-
                         border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = nbVariables * 20, Child = null };
                         groupesTable.Children.Add(border);
 
                     }
+                    groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
                     groupesMatrix.Children.Add(groupesTable);
                     step4Number++;
                     if (step4Number == 4) {
                         expandBottomButton.Style = FindResource("expandButton") as Style;
                         stepNumber = 4;
                     }
-                    
+                    expandButtons.BringIntoView();
                     break;
                 case 4:
                     _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
                     groupesTableContainer.Margin = new Thickness(0, 0, 0, 82);
                
                     stepNumber++;
+                    expandButtons.BringIntoView();
                     break;
                 case 5:
                     _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
@@ -177,9 +182,12 @@ namespace ArchimedeFront.Pages
                     break;
                 default:
                     break;
+
+
+               
             }
 
-            expandButtons.BringIntoView();
+           
 
             
 

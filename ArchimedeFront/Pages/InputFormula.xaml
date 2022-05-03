@@ -9,8 +9,8 @@
       Background="White"
       >
 
-   
 
+    <ScrollViewer>
         <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Style="{StaticResource fontProductSans}" FontSize="46" Foreground="#002725" TextWrapping="Wrap" TextAlignment="Center" >
                 Veuillez introduire votre expression
@@ -38,29 +38,28 @@
         <Grid Name="operatorButtonsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,20,4,0">
             
         </Grid>
-          <!--
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,20" MaxWidth="400" >
-            <Button Name="et" Style="{StaticResource operatorButton}" Margin="10,6"  Click="operator_Click">ET</Button>
-            <Button Name="ou" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">OU</Button>
-            <Button Name="non" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">NON</Button>
-            <Button  Name="nand" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">NAND</Button>
-            <Button Name="nor" Style="{StaticResource operatorButton}" Margin="10,6"  Click="operator_Click">NOR</Button>
-            <Button Name="xor" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">XOR</Button>
-            <Button  Name="xnor" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">
-               
-                XNOR</Button>
-            <Button Name="paranthese" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">( )</Button>
 
-        </WrapPanel>-->
+            <StackPanel Name="errorContainer" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,22,10,0">
+                <Border BorderThickness="2" BorderBrush="Red" Width="24" Height="24" CornerRadius="24" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource fontProductSans}" FontSize="18" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">!</TextBlock>
 
-            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
+                </Border>
+
+                <TextBlock Style="{StaticResource paragraphe}" FontSize="20" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0,4,0"> Erreur signalée :</TextBlock>
+                <TextBlock Name="errorMessage" Style="{StaticResource paragraphe}" FontSize="20"   Margin="0" VerticalAlignment="Center">Opérateur(s) non existant(s)</TextBlock>
+
+            </StackPanel>
+
+
+
+            <WrapPanel Name="buttonsContainer" Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
                 <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" MouseEnter="simplifyButton_MouseEnter">Simplification</Button>
                 <Button Style="{StaticResource greenButton}" Margin="14,4" >Synthèse</Button>
             </WrapPanel>
 
         </StackPanel>
 
-    
+    </ScrollViewer>
 
 
 </Page>

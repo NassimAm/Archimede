@@ -23,6 +23,7 @@ namespace ArchimedeFront.Pages
         public InputFormula()
         {
             InitializeComponent();
+            show_error("hi");
             AlignableWrapPanel buttons = new AlignableWrapPanel();
             Button operatorButton ;
             string[] operators = { "ET", "OU", "NON", "NAND", "NOR", "XOR", "XNOR", "( )" };
@@ -84,7 +85,7 @@ namespace ArchimedeFront.Pages
             }
 
             expression.Text = expression.Text + res;
-            if(((Button)sender).Name == "paranthese")
+            if((string) ((Button)sender).Content == "( )")
             {
                 expression.CaretIndex = expression.Text.Length-1;
             }
@@ -100,6 +101,21 @@ namespace ArchimedeFront.Pages
         private void simplifyButton_MouseEnter(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void show_error(string message)
+        {
+            buttonsContainer.Opacity = 0.3;
+            buttonsContainer.IsHitTestVisible = false;
+            errorMessage.Text = message;
+            errorContainer.Visibility = Visibility.Visible;
+        }
+        private void remove_error(string message)
+        {
+            buttonsContainer.Opacity = 1;
+            buttonsContainer.IsHitTestVisible = true;
+            errorContainer.Visibility = Visibility.Collapsed;
+            
         }
     }
 

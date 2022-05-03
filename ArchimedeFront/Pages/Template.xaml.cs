@@ -35,7 +35,7 @@ namespace ArchimedeFront.Pages
 
         private void menu_Checked(object sender, RoutedEventArgs e)
         {
-
+            _PageContent.IsHitTestVisible = false;
             _PageContent.Effect = new BlurEffect() { Radius = 14, KernelType = KernelType.Gaussian };
             menuIcon.SetResourceReference(Path.DataProperty, "EXIT_ICON");
             menu.Margin = new Thickness(0, 12, 16, 0);
@@ -47,6 +47,7 @@ namespace ArchimedeFront.Pages
 
         private void menu_Unchecked(object sender, RoutedEventArgs e)
         {
+            _PageContent.IsHitTestVisible=true;
             _PageContent.Effect = null;
 
             menuIcon.SetResourceReference(Path.DataProperty, "MENU_ICON");

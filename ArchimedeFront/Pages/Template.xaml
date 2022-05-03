@@ -112,9 +112,9 @@
 
         </Grid>
         
-        <ScrollViewer x:Name="scrollviewer" Grid.Column="1" >
+        <Grid  Grid.Column="1" >
             <Frame Name="_PageContent"  NavigationUIVisibility="Hidden" />
-        </ScrollViewer>
+        </Grid>
 
     </Grid>
 
