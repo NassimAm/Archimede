@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Step5">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,82,0,0">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
         <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
             Etape 5
         </TextBlock>

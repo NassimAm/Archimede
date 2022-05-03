@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       >
 
-    <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,82,0,0" d:Background="White">
+    <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center"  >
         <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
             Etape 3
         </TextBlock>

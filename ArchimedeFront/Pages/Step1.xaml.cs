@@ -26,6 +26,8 @@ namespace ArchimedeFront.Pages
         public Step1()
         {
             InitializeComponent();
+            
+
 
             List<string> mintermes = new List<string>();
             List<string> bincodes = new List<string>();
@@ -75,14 +77,22 @@ namespace ArchimedeFront.Pages
             {
                 case 1:
                     _NextStep2.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step2.xaml", UriKind.RelativeOrAbsolute));
+                    step1.Margin = new Thickness(0, 0, 0,82);
+                   
                     stepNumber++;
                     break;
                 case 2:
                     _NextStep3.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step3.xaml", UriKind.RelativeOrAbsolute));
+                    _NextStep2.Margin = new Thickness(0, 0, 0, 82);
+                  
+
                     stepNumber++;
                     break;
                 case 3:
                     _NextStep4.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step4.xaml", UriKind.RelativeOrAbsolute));
+                    _NextStep3.Margin = new Thickness(0, 0, 0, 82);
+                 
+                  
                     expandBottomButton.Style =  FindResource("expandButtonHoriz")  as Style; 
                     int nbVariables = 4;
                     List<string>[] groupes = new List<string>[4];
@@ -154,16 +164,22 @@ namespace ArchimedeFront.Pages
                     break;
                 case 4:
                     _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
+                    groupesTableContainer.Margin = new Thickness(0, 0, 0, 82);
+               
                     stepNumber++;
                     break;
                 case 5:
                     _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
+                    _NextStep5.Margin = new Thickness(0, 0, 0, 82);
+                    _NextStep6.BringIntoView();
                     expandButtons.Visibility = Visibility.Collapsed;
                     stepNumber++;
                     break;
                 default:
                     break;
             }
+
+            expandButtons.BringIntoView();
 
             
 

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using ArchimedeFront.Styles;
 namespace ArchimedeFront.Pages
 {
     /// <summary>
@@ -23,6 +23,20 @@ namespace ArchimedeFront.Pages
         public InputFormula()
         {
             InitializeComponent();
+            AlignableWrapPanel buttons = new AlignableWrapPanel();
+            Button operatorButton ;
+            string[] operators = { "ET", "OU", "NON", "NAND", "NOR", "XOR", "XNOR", "( )" };
+
+            buttons.HorizontalContentAlignment = HorizontalAlignment.Center;
+            buttons.MaxWidth = 500;
+            foreach(string o in operators)
+            {
+                operatorButton = new Button() { Style = FindResource("operatorButton") as Style, Margin = new Thickness(14, 6, 14, 6)  , Content = o , HorizontalAlignment = HorizontalAlignment.Center};
+                operatorButton.Click += new RoutedEventHandler( operator_Click );
+                buttons.Children.Add(operatorButton);
+            }
+            
+            operatorButtonsContainer.Children.Add(buttons);
    
         }
 
@@ -36,31 +50,31 @@ namespace ArchimedeFront.Pages
         {
             string res ;
 
-            switch(((Button)sender).Name)
+            switch(((Button)sender).Content)
             {
                 
-                case "et":
+                case "ET":
                     res = ".";
                     break;
-                case "ou":
+                case "OU":
                     res = "+";
                     break;
-                case "non":
+                case "NON":
                     res = "!";
                     break;
-                case "nand":
+                case "NAND":
                     res = "↑";
                     break;
-                case "nor":
+                case "NOR":
                     res = "↓";
                     break;
-                case "xor":
+                case "XOR":
                     res = "⊕";
                     break;
-                case "xnor":
+                case "XNOR":
                     res = "⊙";
                     break;
-                case "paranthese":
+                case "( )":
                     res = "()";
                     break;
                 default:
@@ -88,4 +102,7 @@ namespace ArchimedeFront.Pages
 
         }
     }
+
+
+
 }

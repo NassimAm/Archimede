@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Archimède" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        Icon="pack://application:,,,/Assets/Archimede_Logo.png">
         
 
 

@@ -20,7 +20,7 @@
                 <RadioButton Style="{StaticResource customRadioButton}" FontSize="29" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0">Expression numérique</RadioButton>
             </WrapPanel>
 
-            <Border BorderThickness="2" CornerRadius="20" MaxWidth="700"  Height="52" Margin="10,0">
+            <Border BorderThickness="2" CornerRadius="14" MaxWidth="700"  Height="52" Margin="10,0">
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                         <LinearGradientBrush.GradientStops>
@@ -35,6 +35,10 @@
 
             </Border>
 
+        <Grid Name="operatorButtonsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,20,4,0">
+            
+        </Grid>
+          <!--
         <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,20" MaxWidth="400" >
             <Button Name="et" Style="{StaticResource operatorButton}" Margin="10,6"  Click="operator_Click">ET</Button>
             <Button Name="ou" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">OU</Button>
@@ -47,7 +51,7 @@
                 XNOR</Button>
             <Button Name="paranthese" Style="{StaticResource operatorButton}" Margin="10,6" Click="operator_Click">( )</Button>
 
-        </WrapPanel>
+        </WrapPanel>-->
 
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
                 <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" MouseEnter="simplifyButton_MouseEnter">Simplification</Button>
