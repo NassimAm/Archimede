@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:ArchimedeFront"
         xmlns:p="clr-namespace:ArchimedeFront.Pages" 
         mc:Ignorable="d"
-        Title="Archimède" Height="700" Width="1200">
+        Title="Archimède" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+        
 
 
 
