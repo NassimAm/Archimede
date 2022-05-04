@@ -5,31 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+
 using System.Windows.Input;
-using System.Windows.Media;
+
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 using ArchimedeFront.Styles;
+using Archimède;
 namespace ArchimedeFront.Pages
+
 {
     /// <summary>
     /// Interaction logic for InputFormula.xaml
     /// </summary>
     public partial class InputFormula : Page
     {
-        bool isExpressionFocused  = false;
         int caretPosition = 0;
         public InputFormula()
         {
             InitializeComponent();
+            Data.resete();
             remove_error();
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
+            caretPosition=expression.Text.Length -1;
+            Data.literal = true;
+
 
             AlignableWrapPanel buttons = new AlignableWrapPanel();
             Button operatorButton ;
@@ -50,8 +52,54 @@ namespace ArchimedeFront.Pages
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
         {
-           NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+           
+           Data.expression = expression.Text;
+            
+            if ( numerique.IsChecked == true)
+            {
+                Data.literal = false;
+                Data.nbVariables = int.Parse(nbVariables.Text);
+                Data.expression = expression.Text.Replace(" ","");
+                Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
+                long parsedInt;
 
+                foreach(string minterm in Data.listMintermesString)
+                {
+
+                    try
+                    {
+                        parsedInt = long.Parse(minterm);
+                        Data.mintermes.Add(new Minterme(parsedInt));
+                    }
+                    catch (OverflowException)
+                    {
+                        Data.mintermes.Add(new Minterme(minterm));
+                    }
+
+                }
+
+                int maxNbUns = Minterme.maxNbUns;
+                
+
+                if (Minterme.maxNbVariables > Data.nbVariables)
+                {
+                    show_error("La liste de mintermes introduite depasse le nombre maximal de variables introduit ");
+                    Data.resete();
+                    return;
+                }
+
+
+
+
+
+            }
+            else
+            {
+                Data.literal = true;
+            }
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+            
+            
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)
@@ -119,15 +167,17 @@ namespace ArchimedeFront.Pages
         }
         private void remove_error()
         {
+            if(buttonsContainer != null) { 
             buttonsContainer.Opacity = 1;
             buttonsContainer.IsHitTestVisible = true;
             errorContainer.Visibility = Visibility.Collapsed;
-            
+            }
         }
 
         private void literale_Checked(object sender, RoutedEventArgs e)
         {
             if (numberOfVariablesInput == null) return;
+            
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             expression.Text = "A.B + !A.B.C";
             operatorButtonsContainer.Visibility = Visibility.Visible;
@@ -139,7 +189,7 @@ namespace ArchimedeFront.Pages
         {
             if (numberOfVariablesInput == null) return;
             
-
+            
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
             
@@ -153,9 +203,16 @@ namespace ArchimedeFront.Pages
             guidePopUp.BeginAnimation(OpacityProperty, da);
         }
 
-       
+        private void nbVariables_SelectionChanged(object sender, RoutedEventArgs e)
+        {
 
-       
+            remove_error();
+        }
+
+        private void expression_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            remove_error();
+        }
     }
 
 

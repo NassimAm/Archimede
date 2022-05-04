@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using dnf;
+using Archimède;
+using System.Diagnostics;
 
 namespace ArchimedeFront.Pages
 {
@@ -23,30 +18,62 @@ namespace ArchimedeFront.Pages
     {
          int stepNumber = 1;
          int step4Number = 0;
+        bool stop = false;
 
         public Step1()
         {
             InitializeComponent();
-             stepNumber = 1;
-             step4Number = 0;
+
+            List<string> mintermes;
+            if (Data.literal)
+            {
+                Data.expressionTransforme = ExprBool.transformerDNF(Data.expression.Replace(" ", ""));
+                expression.Text = Data.expressionTransforme;
+                Data.variables = ExprBool.getVariables(Data.expressionTransforme);
+                Data.nbVariables = Data.variables.Count;
+                Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
+                int maxNbUns = Data.stringListMinterm.MaxBy(x => x.Count(ch => (ch == '1' || ch == '-'))).Count(ch => (ch == '1' || ch == '-'));
+
+                foreach (string mintermBinCode in Data.stringListMinterm)
+                {
+                    Impliquant impliquant = new Impliquant(mintermBinCode);
+                    if (impliquant.nbDontCare > 0) Data.impliquantsEnAttente.Add(impliquant); // ces impliquants vont etre traités dans les prochaine groupe 
+                    else (Data.impliquants).Add(impliquant); // impliquants  en forme canonique 
+                }
+
+                Data.groupeMintermes = new Mintermes(maxNbUns);
+                 mintermes = Data.expressionTransforme.Split("+").ToList();
+            }
+            else
+            {
+                expression.Text = Data.expression;
+                //Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
+                for (int i = 0; i < Data.mintermes.Count; i++)
+                {
+                    Data.mintermes[i].bincode = Data.mintermes[i].bincode.PadLeft(Data.nbVariables, '0');
+                    Data.stringListMinterm.Add(Data.mintermes[i].bincode);
+
+                }
+                Data.groupeMintermes = new Mintermes(Minterme.maxNbUns);
+                Data.impliquants = Data.groupeMintermes.InitImpliquants(Data.mintermes);
+                Data.stringListMinterm = Data.stringListMinterm.Distinct().ToList();
+                mintermes = Data.listMintermesString;
+            }
+           
 
 
-            List<string> mintermes = new List<string>() { "!A!BC!D" , "!AB!C!D" ,"!AB!CD", "!ABC!D", "!ABCD", "A!B!CD", "AB!CD" };
-            List<string> bincodes = new List<string>() { "0010" , "0100" , "0101" , "0110" , "0111" , "1001" , "1101" };
-          
 
 
-
-          
+            
             WrapPanel wrappanel;
-            for (int i = 0;i < mintermes.Count;i++)
+            for (int i = 0;i < Data.stringListMinterm.Count;i++)
             {
                 wrappanel = new WrapPanel();
                 wrappanel.Orientation = Orientation.Vertical;
                 wrappanel.VerticalAlignment = VerticalAlignment.Top;
                 wrappanel.Margin = new Thickness(10, 0, 10, 10);
                 wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(0, 0, 0, 10), Text = mintermes[i]});
-                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(0, 0, 0, 0), Text = bincodes[i]});
+                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(0, 0, 0, 0), Text = Data.stringListMinterm[i]});
                 mintermesList.Children.Add(wrappanel);
 
                 if(i != mintermes.Count-1)
@@ -85,73 +112,225 @@ namespace ArchimedeFront.Pages
                  
                   
                     expandBottomButton.Style =  FindResource("expandButtonHoriz")  as Style; 
-                    int nbVariables = 4;
-                    List<string>[] groupes = new List<string>[4];
-                    groupes[0] = new List<string> { "0000" };
-                    groupes[1] = new List<string> { "0001", "1000", "0100" };
-                    groupes[2] = new List<string> { "0101", "1001", "1100" };
-                    groupes[3] = new List<string> {  "1101", "1110", "1101", "1110", "1101", "1110" };
+                    int nbVariables = Data.nbVariables;
 
-
+                    Data.cptGroupes++;
+                    Data.impliquants = Data.groupeMintermes.generateNextGroupeImpliquants(Data.cptGroupes, Data.impliquantsEnAttente);
+                   //affichage du groupe
                     Border border;
                     StackPanel groupesTable;
 
-                    
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
-                        foreach (List<string> groupe in groupes)
+                        foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
-                            foreach (string bincode in groupe)
+                            if(groupe.Count > 0)
                             {
-                                if (bincode.StartsWith("0"))
-                                    groupesTable.Children.Add(generateCheckedImplicant(bincode));
-                                else groupesTable.Children.Add(generatePrimeImplicant(bincode));
-
-
+                                foreach (Impliquant impliquant in groupe)
+                                {
+                                    if (impliquant.status)
+                                     groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
+                                    else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
 
                             }
 
                             border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = nbVariables * 20, Child = null };
-                            groupesTable.Children.Add(border);
+                                groupesTable.Children.Add(border);
+                            }
+                            
 
                         }
+
+                        if (Data.literal && Data.impliquantsEnAttente.Count > 0)
+                        {
+                            foreach (Impliquant impliquant in Data.impliquantsEnAttente)
+                            {
+                                groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
+                            }
+
+                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = nbVariables * 16, Child = null };
+                            groupesTable.Children.Add(border);
+                        }
+
                         groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
                         groupesMatrix.Children.Add(groupesTable);
-                      stepNumber = -1;
+                        
+                        stepNumber = -1;
+                    // fin d'affichage 
                     expandButtons.BringIntoView();
+
+
+                    //Filtrer les impliquants et trouver les impliquants premiers qui ne peuvent plus etre simplifiés
+                    for (int i = 0; i < Data.groupeMintermes.groupesImpliquants.Length; i++)
+                    {
+                        Data.impliquantsPremiers.AddRange(Data.groupeMintermes.groupesImpliquants[i].FindAll(impliquant => impliquant.status));
+                    }
+
+                    if (Data.literal)
+                    {
+                        Data.impliquants.AddRange(Data.impliquantsEnAttente.Where(m => m.nbDontCare == Data.cptGroupes).ToList()); // filtrer les impliquannts qui contient cptGroupe - 
+                        Data.impliquantsEnAttente.RemoveAll(m => (m.nbDontCare == Data.cptGroupes));// supprimer ces derniers 
+
+
+                        //dans le cas ou il y'a pas d'adjacents mais la liste des impliquants en attente n'est pas vide 
+                        while (Data.impliquants.Count == 0 && Data.impliquantsEnAttente.Count > 0)
+                        {
+                            Data.cptGroupes++;
+                            Data.impliquants.AddRange(Data.impliquantsEnAttente.Where(m => m.nbDontCare == Data.cptGroupes).ToList());
+                            Data.impliquantsEnAttente.RemoveAll(m => (m.nbDontCare == Data.cptGroupes));
+                        }
+
+                    }
+                    if (Data.impliquants.Count > 0)
+                    {
+                        Data.impliquants = Data.impliquants.Distinct().ToList();
+                        Data.groupeMintermes.GrouperListes(Data.impliquants);
+                        stop = false;
+
+
+                         
+
+                        groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
+                        foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
+                        {
+                            if(groupe.Count > 0)
+                            {
+                                foreach (Impliquant impliquant in groupe)
+                                {
+
+                                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                                }
+
+                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = Data.nbVariables * 20, Child = null };
+                                groupesTable.Children.Add(border);
+                            }   
+                            
+
+                        }
+
+                        groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
+                        groupesMatrix.Children.Add(groupesTable);
+
+
+                    }
+                    else //Sinon Arrêter la boucle
+                    {
+                        stop = true;
+                    }
+
                     break;
                 case -1:
-                     nbVariables = 4;
-                    groupes = new List<string>[4];
-                    groupes[0] = new List<string> { "0000" };
-                    groupes[1] = new List<string> { "0001", "1000", "0100" };
-                    groupes[2] = new List<string> { "0101", "1001", "1100" };
-                    groupes[3] = new List<string> { "1101", "1110", "1101", "1110", "1101"};
-
-
-                     
-                    groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
-                    foreach (List<string> groupe in groupes)
+                    if (!stop)
                     {
-                        foreach (string bincode in groupe)
-                        {
-                            if (bincode.StartsWith("0"))
-                                groupesTable.Children.Add(generateCheckedImplicant(bincode));
-                            else groupesTable.Children.Add(generatePrimeImplicant(bincode));
+                        Data.cptGroupes++;
+                        Data.impliquants = Data.groupeMintermes.generateNextGroupeImpliquants(Data.cptGroupes, Data.impliquantsEnAttente);
+                        //affichage du groupe
+                       
 
+                        groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
+                        foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
+                        {
+                            if(groupe.Count > 0)
+                            {
+                                foreach (Impliquant impliquant in groupe)
+                                {
+                                    if (impliquant.status)
+                                        groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
+                                    else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+
+                                }
+
+                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = Data.nbVariables * 20, Child = null };
+                                groupesTable.Children.Add(border);
+                            }
+                            
+
+                        }
+                        if (Data.literal && Data.impliquantsEnAttente.Count > 0)
+                        {
+                            foreach (Impliquant impliquant in Data.impliquantsEnAttente)
+                            {
+                                groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
+                            }
+
+                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = Data.nbVariables * 16, Child = null };
+                            groupesTable.Children.Add(border);
+                        }
+
+                        groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
+                        groupesMatrix.Children.RemoveAt(groupesMatrix.Children.Count - 1);
+                        groupesMatrix.Children.Add(groupesTable);
+
+                        // fin d'affichage 
+                        
+
+
+                        //Filtrer les impliquants et trouver les impliquants premiers qui ne peuvent plus etre simplifiés
+                        for (int i = 0; i < Data.groupeMintermes.groupesImpliquants.Length; i++)
+                        {
+                            Data.impliquantsPremiers.AddRange(Data.groupeMintermes.groupesImpliquants[i].FindAll(impliquant => impliquant.status));
+                        }
+
+                        if (Data.literal)
+                        {
+                            Data.impliquants.AddRange(Data.impliquantsEnAttente.Where(m => m.nbDontCare == Data.cptGroupes).ToList()); // filtrer les impliquannts qui contient cptGroupe - 
+                            Data.impliquantsEnAttente.RemoveAll(m => (m.nbDontCare == Data.cptGroupes));// supprimer ces derniers 
+
+
+                            //dans le cas ou il y'a pas d'adjacents mais la liste des impliquants en attente n'est pas vide 
+                            while (Data.impliquants.Count == 0 && Data.impliquantsEnAttente.Count > 0)
+                            {
+                                Data.cptGroupes++;
+                                Data.impliquants.AddRange(Data.impliquantsEnAttente.Where(m => m.nbDontCare == Data.cptGroupes).ToList());
+                                Data.impliquantsEnAttente.RemoveAll(m => (m.nbDontCare == Data.cptGroupes));
+                            }
+
+                        }
+                        if (Data.impliquants.Count > 0)
+                        {
+                            Data.impliquants = Data.impliquants.Distinct().ToList();
+                            Data.groupeMintermes.GrouperListes(Data.impliquants);
+                            stop = false;
+
+
+                            groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
+                            foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
+                            {
+                                if(groupe.Count > 0)
+                                {
+                                    foreach (Impliquant impliquant in groupe)
+                                    {
+
+                                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                                    }
+
+                                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = Data.nbVariables * 20, Child = null };
+                                    groupesTable.Children.Add(border);
+                                }
+                                
+
+                            }
+
+                            groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
+                            groupesMatrix.Children.Add(groupesTable);
 
 
                         }
-                        border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = nbVariables * 20, Child = null };
-                        groupesTable.Children.Add(border);
+                        else //Sinon Arrêter la boucle
+                        {
+                            stop = true;
+                            expandBottomButton.Style = FindResource("expandButton") as Style;
+                            stepNumber = 4;
+                        }
 
                     }
-                    groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
-                    groupesMatrix.Children.Add(groupesTable);
-                    step4Number++;
-                    if (step4Number == 4) {
+                    else
+                    {
                         expandBottomButton.Style = FindResource("expandButton") as Style;
                         stepNumber = 4;
                     }
+                    
+                        
+                   
                     expandButtons.BringIntoView();
                     break;
                 case 4:
@@ -216,8 +395,8 @@ namespace ArchimedeFront.Pages
         private StackPanel generateSelectedImplicant(string bincode)
         {
             StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
-            Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new Path() { Style = FindResource("greenIcon") as Style, Data = (Geometry)FindResource("RIGHT_ARROW_ICON") } };
-            TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode };
+            Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new Path() { Style = FindResource("greenIcon") as Style, Data = (Geometry)FindResource("RIGHT_ARROW_ICON") , Fill =Brushes.Red } };
+            TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode , Foreground = Brushes.Red };
             result.Children.Add(viewbox);
             result.Children.Add(text);
             return result;

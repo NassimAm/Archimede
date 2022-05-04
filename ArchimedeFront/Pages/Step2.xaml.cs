@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Archimède;
 namespace ArchimedeFront.Pages
 {
     /// <summary>
@@ -25,39 +25,45 @@ namespace ArchimedeFront.Pages
         {
             InitializeComponent();
 
-            int nbVariables = 4;
 
-            List<string>[] groupes = new List<string>[12];
-            groupes[0] = new List<string> { "0000"};
-            groupes[1] = new List<string> { "0001" , "1000" , "0100"};
-            groupes[2] = new List<string> { "0101", "1001", "1100" };
-            groupes[3] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1110" };
-            groupes[4] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101",  "1101", "1110" };
-            groupes[5] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
-            groupes[6] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
-            groupes[7] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
-            groupes[8] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
-            groupes[9] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
-            groupes[10] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
-            groupes[11] = new List<string> { "0111", "1101", "1110", "1101", "1110", "1101", "1101", "1110" };
+            int nbVariables = Data.nbVariables;
+            Data.groupeMintermes.GrouperListes(Data.impliquants);
 
 
 
 
 
             Border border;
-            StackPanel groupeContainer;
+            
 
-            foreach (List<string> groupe in groupes)
+            foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
             {
-                foreach(string bincode in groupe)
-                {
-                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style , FontSize = 28 , Margin = new Thickness(36,2,36,2) , Text = bincode});
-                }
+                if(groupe.Count > 0) { 
+                    foreach(Impliquant impliquant in groupe)
+                    {
+                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style , FontSize = 28 , Margin = new Thickness(36,2,36,2) , Text = impliquant.bincode});
+                    }
                 
-                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0) , Width = nbVariables*16 , Child = null  };
+                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4) , Width = nbVariables*16 , Child = null  };
+                    groupesTable.Children.Add(border);
+                }
+            }
+
+            if(Data.literal && Data.impliquantsEnAttente.Count > 0)
+            {
+                foreach (Impliquant impliquant in Data.impliquantsEnAttente)
+                {
+                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, Foreground=Brushes.Red,FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                }
+
+                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = nbVariables * 16, Child = null };
                 groupesTable.Children.Add(border);
             }
+          
+
+
+            groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
+
 
 
 

@@ -22,7 +22,7 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
-            <TextBox VerticalAlignment="Center"  MaxWidth="900" IsReadOnly="True" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
+            <TextBox Name="expression" VerticalAlignment="Center"  MaxWidth="900" IsReadOnly="True" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
         </Border>
         
         <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
