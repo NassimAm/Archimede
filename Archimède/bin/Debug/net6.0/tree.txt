@@ -1,0 +1,11 @@
+strict graph arbre {
+	ordering = out;
+	splines = false;
+ "97abfa5c578043a6b2f62a39cf3b703c" [label="OR"] 
+ "188711b20af549fca6f82c0ab960fd62" [label="c"] 
+ "92c20579b26c4beeab79229d317b4cbb" [label="AND"] 
+ "4113fcadbd194c098da1cbfadf981385" [label="b"] 
+ "b310a6b4b9b74f6ba3ec6e6651184dc3" [label="a"] 
+	"92c20579b26c4beeab79229d317b4cbb" -- {"4113fcadbd194c098da1cbfadf981385","b310a6b4b9b74f6ba3ec6e6651184dc3"}
+	"97abfa5c578043a6b2f62a39cf3b703c" -- {"188711b20af549fca6f82c0ab960fd62","92c20579b26c4beeab79229d317b4cbb"}
+}

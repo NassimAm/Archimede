@@ -4,40 +4,15 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"08ba95a7903d49a7ac643dcde38138b5" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"752e1b13a9f6422b9fea74ea290f5ec6" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"a823ba3d77b04db5902f2eeea63fcc9b" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"4dc659139a764ea0a24bab3f638195d2" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"d17a4bc17d70410199963da2ac8ea551" [label="h"] 
-	"d17a4bc17d70410199963da2ac8ea551" -- "4dc659139a764ea0a24bab3f638195d2"
-	"63ec3304f3244f27ae95b1530ce6f841" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NIL0" [label="",shape = box,width=.001,height = 1] 
-	"NIL0" -- "08ba95a7903d49a7ac643dcde38138b5"
-	{"752e1b13a9f6422b9fea74ea290f5ec6","a823ba3d77b04db5902f2eeea63fcc9b","4dc659139a764ea0a24bab3f638195d2","63ec3304f3244f27ae95b1530ce6f841"} -- "NIL0"
-	"71fd91d565994d7db97dcbbbd2949532" [label="a"] 
-	"2fce15af55f84cf3adbac0df6a9a652f" [label="b"] 
-	"e935fe88516e4df596fda8eb8e76ff6a" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"c2903da00bb646c1884535b5fbe0dcbc" [label="c"] 
-	"c2903da00bb646c1884535b5fbe0dcbc" -- "e935fe88516e4df596fda8eb8e76ff6a"
-	"724aa2de10c1449aab9e422109e56446" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"a763e93a85f44dd4966c8788dbd2eaf8" [label="d"] 
-	"a763e93a85f44dd4966c8788dbd2eaf8" -- "724aa2de10c1449aab9e422109e56446"
-	"NIL1" [label="",shape = box,width=.001,height = 1] 
-	"NIL1" -- "752e1b13a9f6422b9fea74ea290f5ec6"
-	{"71fd91d565994d7db97dcbbbd2949532","2fce15af55f84cf3adbac0df6a9a652f","e935fe88516e4df596fda8eb8e76ff6a","724aa2de10c1449aab9e422109e56446"} -- "NIL1"
-	"d0f6fc1e9a5e46ff9c450d199176b701" [label="e"] 
-	"91c2abe50e31499ebb9ea29321b90a62" [label="f"] 
-	"25f8277a15b84e55a266500e9d2bd572" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"610bc0a23a1b4763aa3af6b6dfe7e404" [label="g"] 
-	"610bc0a23a1b4763aa3af6b6dfe7e404" -- "25f8277a15b84e55a266500e9d2bd572"
-	"NIL2" [label="",shape = box,width=.001,height = 0] 
-	"NIL2" -- "a823ba3d77b04db5902f2eeea63fcc9b"
-	{"d0f6fc1e9a5e46ff9c450d199176b701","91c2abe50e31499ebb9ea29321b90a62","25f8277a15b84e55a266500e9d2bd572"} -- "NIL2"
-	"612ead8c99484b2a8b56edc51dccd3a0" [label="i"] 
-	"f6879b920b7e4501a3dd16c40971042b" [label="j"] 
-	"6e681807fbbd468aa3199c04e4da6b60" [label="k"] 
-	"327024ac6c08488ab3b5a085c6b71188" [label="l"] 
-	"NIL3" [label="",shape = box,width=.001,height = 1] 
-	"NIL3" -- "63ec3304f3244f27ae95b1530ce6f841"
-	{"612ead8c99484b2a8b56edc51dccd3a0","f6879b920b7e4501a3dd16c40971042b","6e681807fbbd468aa3199c04e4da6b60","327024ac6c08488ab3b5a085c6b71188"} -- "NIL3"
+	"97abfa5c578043a6b2f62a39cf3b703c" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"188711b20af549fca6f82c0ab960fd62" [label="c"] 
+	"92c20579b26c4beeab79229d317b4cbb" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"4113fcadbd194c098da1cbfadf981385" [label="b"] 
+	"b310a6b4b9b74f6ba3ec6e6651184dc3" [label="a"] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "92c20579b26c4beeab79229d317b4cbb"
+	{"4113fcadbd194c098da1cbfadf981385","b310a6b4b9b74f6ba3ec6e6651184dc3"} -- "NIL0"
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "97abfa5c578043a6b2f62a39cf3b703c"
+	{"188711b20af549fca6f82c0ab960fd62","92c20579b26c4beeab79229d317b4cbb"} -- "NIL1"
 }

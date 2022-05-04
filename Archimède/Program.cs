@@ -277,11 +277,16 @@ namespace Archimède
             }
 
             Console.WriteLine(resultat);
-
-            Synthese.ExprBoolNode tree = Synthese.N_ary_DNF_ExpressionTree(resultat);
-            Synthese.Circuit_Visualisation(tree);
             #endregion
 
+            #region SYNTHESE
+            Console.Write("Expression (Test Synthese): ");
+            string exp =  Console.ReadLine();
+            Synthese.ExprBoolNode tree = Synthese.To_N_ary(exp);
+            Synthese.Affich_Arbre(tree);
+            Synthese.Tree_Visualisation(tree);
+            Synthese.Circuit_Visualisation(tree);
+            #endregion
         }
     }
 }
