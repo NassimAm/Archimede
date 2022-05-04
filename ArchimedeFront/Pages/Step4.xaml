@@ -9,17 +9,12 @@
       
       Title="Step4">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,82,0,0">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
         <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
             Etape 4
         </TextBlock>
         <TextBlock Style="{StaticResource paragraphe}" FontSize="26" MaxWidth="900"> 
             Répéter l’étape 3 avec les nouveaux termes jusqu’à ce qu’il n’y ait plus d’association possible
         </TextBlock>
-        <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
-            <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" />
-        </ScrollViewer>
-
-
     </StackPanel>
 </Page>

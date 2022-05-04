@@ -24,5 +24,49 @@ namespace ArchimedeFront.Pages
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Template.xaml", UriKind.Absolute));
+
+        }
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(e.NewSize.Width >= 1400)
+            {
+                logoArchimede.MaxWidth = 500;
+                logoArchimede.Margin = new Thickness(80, 0, 80, 0);
+
+            }
+            else
+            {
+                logoArchimede.MaxWidth = 300;
+                logoArchimede.Margin = new Thickness(20, 0, 20, 0);
+ 
+            }
+            if ( e.NewSize.Width >= 750 && e.NewSize.Width <= 900) {
+                bienvenueText.FontSize = 64;
+            }
+            else if (e.NewSize.Width > 900 && e.NewSize.Width < 1400 || e.NewSize.Width<750)
+            {
+                bienvenueText.FontSize = 74;
+            }
+            else
+            {
+                bienvenueText.FontSize = 90;
+            }
+           
+            if (e.NewSize.Width <= 750)
+            {
+                
+                logoSection.Width = new GridLength(0 , GridUnitType.Pixel);
+            }
+           else
+            {
+                logoSection.Width = new GridLength(3, GridUnitType.Star); 
+            }
+            
+        }
     }
 }

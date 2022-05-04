@@ -8,8 +8,11 @@
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="Step1">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" >
-        <Border BorderThickness="2" CornerRadius="20" MaxWidth="700" MinWidth="300" Height="52" Margin="0,10,10,100">
+    <ScrollViewer Name="scrollViewer" >
+        
+    
+    <StackPanel Name="step1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <Border BorderThickness="2" CornerRadius="14" MaxWidth="700" MinWidth="300" Height="52" Margin="24,10,24,10">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
@@ -27,7 +30,7 @@
         </TextBlock>
 
         <TextBlock Style="{StaticResource paragraphe}" FontSize="26"> 
-            Exprimer les &lt;&lt; mintermes &gt;&gt; sous forme binaire
+            Exprimer les « mintermes » sous forme binaire
         </TextBlock>
 
         <ScrollViewer Name="mintermesListContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0" >
@@ -37,26 +40,27 @@
         <Frame Name="_NextStep2"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" ></Frame>
+        <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
+            <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" />
+        </ScrollViewer>
         <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" ></Frame>
 
-        <Grid>
+        <Grid Name="expandButtons">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="100,30,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
-                <!-- <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Margin="0,0,10,0">Passer</TextBlock>
-                <ContentControl   ContentTemplate="{StaticResource down}" />-->
+            <StackPanel Margin="100,0,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
                 <Button Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click"/>
-
             </StackPanel>
-            <StackPanel Margin="10,30,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                <Button Style="{StaticResource expandButton}" ContentStringFormat="Suivant" Click="nextStepButton_click" />
+            <StackPanel Margin="10,0,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+                <Button Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" />
             </StackPanel>
 
         </Grid>
     </StackPanel>
+    </ScrollViewer>
 </Page>

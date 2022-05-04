@@ -9,48 +9,98 @@
       Background="White"
       >
 
-   
 
+    <ScrollViewer>
         <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Style="{StaticResource fontProductSans}" FontSize="46" Foreground="#002725" TextWrapping="Wrap" TextAlignment="Center" >
                 Veuillez introduire votre expression
             </TextBlock>
             <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,28">
-                <RadioButton Style="{StaticResource customRadioButton}"  IsChecked="True" FontSize="100" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0">Expression littérale</RadioButton>
-                <RadioButton Style="{StaticResource customRadioButton}" FontSize="29" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0">Expression numérique</RadioButton>
+                <RadioButton Name="literale" Style="{StaticResource customRadioButton}"  IsChecked="True" FontSize="100" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0"  Checked="literale_Checked">Expression littérale</RadioButton>
+                <RadioButton Name="numerique" Style="{StaticResource customRadioButton}" FontSize="29" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0" Checked="numerique_Checked">Expression numérique</RadioButton>
             </WrapPanel>
 
-            <Border BorderThickness="2" CornerRadius="20" MaxWidth="700" MinWidth="300" Height="52" Margin="10,0">
+            <Border BorderThickness="2" CornerRadius="14" MaxWidth="700"  Height="52" Margin="10,0">
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                         <LinearGradientBrush.GradientStops>
                             <GradientStop Offset="0.1"  Color="#00CBBD" />
-                            <GradientStop Offset="1"   Color="#00E17C"/>
+                            <GradientStop Offset="1"   Color="#00E17C"  />
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
 
-                <TextBox VerticalAlignment="Center"  MaxWidth="900" AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
+                <Grid VerticalAlignment="Center" MaxWidth="900"  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="1*"/>
+                        <ColumnDefinition Name="numberOfVariablesInput"  Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBox Grid.Column="0" Name="expression" VerticalAlignment="Center" Foreground="#424242" HorizontalAlignment="Stretch"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0,0,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="0,1,2,3,10" ></TextBox>
+                    <Border  Name="numberInput" Grid.Column="1"  BorderThickness="2" BorderBrush="#002725" Opacity="0.8" Height="40" CornerRadius="6" Padding="2" Background="White" Margin="0,0,6,0" >
 
+                        <TextBox    BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="3" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White"  ></TextBox>
+
+                    </Border>
+                </Grid>
+                
+                
 
             </Border>
+            <Grid Name="guidePopUp"  HorizontalAlignment="Right" Margin="16,4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Viewbox Width="180" Height="52" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Path x:Name="Caret"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Grid.Row="0"
+                    Panel.ZIndex="1"
+                    Data="M159,8.72H133.26L129.85.8a.49.49,0,0,0-.9,0l-3.4,7.92H4.41A3.92,3.92,0,0,0,.5,12.64V35.79A3.91,3.91,0,0,0,4.41,39.7H159a3.91,3.91,0,0,0,3.91-3.91V12.64A3.92,3.92,0,0,0,159,8.72Z"
+                    Stroke="Black"
+                    StrokeThickness="1"
+                    Fill="Transparent" 
+                    ClipToBounds="True"
+                    />
+                </Viewbox>
+                <TextBlock Style="{StaticResource paragraphe}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    Le nombre de variable
+                </TextBlock>
+            </Grid>
 
-            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,20">
-                <Button Style="{StaticResource operatorButton}" Margin="10,4" >ET</Button>
-                <Button Style="{StaticResource operatorButton}" Margin="10,4">OU</Button>
-                <Button Style="{StaticResource operatorButton}" Margin="10,4">NON</Button>
-                <Button Style="{StaticResource operatorButton}" Margin="10,4">( )</Button>
-            </WrapPanel>
 
-            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
-                <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" >Simplification</Button>
+
+
+
+
+
+
+            <Grid Name="operatorButtonsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,20,4,0">
+            
+        </Grid>
+
+            <StackPanel Name="errorContainer" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,22,10,0">
+                <Border BorderThickness="2" BorderBrush="Red" Width="24" Height="24" CornerRadius="24" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource fontProductSans}" FontSize="18" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">!</TextBlock>
+
+                </Border>
+
+                <TextBlock Style="{StaticResource paragraphe}" FontSize="20" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0,4,0"> Erreur signalée :</TextBlock>
+                <TextBlock Name="errorMessage" Style="{StaticResource paragraphe}" FontSize="20"   Margin="0" VerticalAlignment="Center">Opérateur(s) non existant(s)</TextBlock>
+
+            </StackPanel>
+
+          
+            <WrapPanel Name="buttonsContainer" Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
+                <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" MouseEnter="simplifyButton_MouseEnter">Simplification</Button>
                 <Button Style="{StaticResource greenButton}" Margin="14,4" >Synthèse</Button>
-
             </WrapPanel>
 
         </StackPanel>
 
-    
+    </ScrollViewer>
 
 
 </Page>

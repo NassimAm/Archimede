@@ -9,7 +9,7 @@
       Title="Step2">
 
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,82,0,0">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" >
         <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
             Etape 2
         </TextBlock>

@@ -24,38 +24,7 @@ namespace ArchimedeFront.Pages
         {
             InitializeComponent();
 
-            int nbVariables = 4;
-            List<string>[] groupes = new List<string>[4];
-            groupes[0] = new List<string> { "0000" };
-            groupes[1] = new List<string> { "0001", "1000", "0100" };
-            groupes[2] = new List<string> { "0101", "1001", "1100" };
-            groupes[3] = new List<string> { "1101", "1110", "1101", "1110", "1101", "1110", "1101", "1110" };
-
-
-            Border border;
-            StackPanel groupesTable;
-
-            for (int i = 0; i < 10; i++)
-            {
-                groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
-                foreach (List<string> groupe in groupes)
-                {
-                    foreach (string bincode in groupe)
-                    {
-                        if (bincode.StartsWith("0"))
-                            groupesTable.Children.Add(generateCheckedImplicant(bincode));
-                        else groupesTable.Children.Add(generatePrimeImplicant(bincode));
-
-
-
-                    }
-
-                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 0, 36, 0), Width = nbVariables * 20, Child = null };
-                    groupesTable.Children.Add(border);
-
-                }
-                groupesMatrix.Children.Add(groupesTable);
-            }
+           
 
 
 

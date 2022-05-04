@@ -54,15 +54,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="#002725" CornerRadius="16" MinWidth="64"  >
+                    <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="#002725" CornerRadius="10" Width="auto"   >
                         
                         <TextBlock 
                                           x:Name="MyContentPresenter" 
                                           Style="{StaticResource fontUrbanist}"
                                           TextAlignment="Center"
                                           FontSize="18"
-                                          MinWidth="64"
-                                          Padding="0,8"
+                                          Width="auto"
+                                          Padding="12,8"
                                           Text="{TemplateBinding Content}"
                                           
                                           HorizontalAlignment="Center" 
@@ -71,6 +71,11 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#d1d1d1" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- big green buttons style-->
@@ -80,7 +85,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border  Background="{TemplateBinding Background}" BorderThickness="3"  CornerRadius="16" MinWidth="190"  >
+                    <Border  Background="{TemplateBinding Background}" BorderThickness="3"  CornerRadius="20" MinWidth="190"  >
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
                                 <LinearGradientBrush.GradientStops>
@@ -129,6 +134,44 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
                 
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- big green buttons style-->
+    <Style TargetType="Button" x:Key="commencer">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border    CornerRadius="28"  Padding="24,10" Width="auto" >
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                    <GradientStop Offset="1"   Color="#00E17C"/>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock 
+                                            Width="auto"
+                                       
+                                          Style="{StaticResource fontProductSans}"
+                                          TextAlignment="Center"
+                                          FontSize="38"
+                                          FontWeight="Bold"
+                                          Foreground="#fff"
+                                          Text="Commencer"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" >
+                            
+                        </TextBlock>
+                    </Border>
+                  
+                </ControlTemplate>
+
             </Setter.Value>
         </Setter>
     </Style>
@@ -334,8 +377,38 @@
         </Border>
     </DataTemplate>
 
+    <DataTemplate x:Key="right">
+        <Border CornerRadius="34" Width="34" Height="34" Padding="4,4,2,4" BorderThickness="3">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Viewbox Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Path     
+                        Data="{DynamicResource EXPAND_RIGHT_ICON}"   
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                    >
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                <GradientStop Offset="1"   Color="#00E17C"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
 
-    
+            </Viewbox>
+
+        </Border>
+    </DataTemplate>
+
+
+
     <!--expand buttons-->
     <Style TargetType="Button" x:Key="expandButton">
 
@@ -347,7 +420,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     
-                        <StackPanel Orientation="Horizontal"  >
+                        <StackPanel Orientation="Horizontal"  Background="Transparent" >
                             <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
                             <ContentControl   ContentTemplate="{StaticResource down}" />
                         </StackPanel>
@@ -357,8 +430,31 @@
         </Setter>
 
 
-    </Style>
+    </Style> 
     
+    <!--Expand horizontallement-->
+    <Style TargetType="Button" x:Key="expandButtonHoriz">
+
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <StackPanel Orientation="Horizontal" Background="Transparent" >
+                        <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
+                        <ContentControl   ContentTemplate="{StaticResource right}" />
+                    </StackPanel>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+
     <!--Cercle Impliquants Essentiaux-->
     <Style TargetType="Border" x:Key="ImpliquantEssentielBordure">
         <Setter Property="CornerRadius" Value="8"/>
