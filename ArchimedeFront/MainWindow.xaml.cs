@@ -27,18 +27,7 @@ namespace ArchimedeFront
         {
             InitializeComponent();
             window.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Home.xaml", UriKind.RelativeOrAbsolute));
-
-
-
-
-
         }
-
-
-
-
-
-
 
     }
 }

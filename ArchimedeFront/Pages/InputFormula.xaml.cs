@@ -34,7 +34,7 @@ namespace ArchimedeFront.Pages
 
 
             AlignableWrapPanel buttons = new AlignableWrapPanel();
-            Button operatorButton ;
+            Button operatorButton;
             string[] operators = { "ET", "OU", "NON", "NAND", "NOR", "XOR", "XNOR", "( )" };
 
             buttons.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -87,11 +87,6 @@ namespace ArchimedeFront.Pages
                     Data.resete();
                     return;
                 }
-
-
-
-
-
             }
             else
             {

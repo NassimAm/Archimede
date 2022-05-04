@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Archimède;
 
 namespace ArchimedeFront.Pages
 {
@@ -23,6 +24,8 @@ namespace ArchimedeFront.Pages
         public Step6()
         {
             InitializeComponent();
+            string resultat = Mintermes.getResultatExpression(Data.literal,Data.impliquantsEssentiels,Data.variables);
+            FonctionSimplifieContainer.Text = resultat;
         }
     }
 }
