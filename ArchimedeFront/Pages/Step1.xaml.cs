@@ -21,31 +21,19 @@ namespace ArchimedeFront.Pages
     /// </summary>
     public partial class Step1 : Page
     {
-        static int stepNumber = 1;
-        static int step4Number = 0;
+         int stepNumber = 1;
+         int step4Number = 0;
 
         public Step1()
         {
             InitializeComponent();
-            
+             stepNumber = 1;
+             step4Number = 0;
 
 
-            List<string> mintermes = new List<string>();
-            List<string> bincodes = new List<string>();
-            mintermes.Add("!A!BC!D");
-            bincodes.Add("0010");
-            mintermes.Add("!AB!C!D");
-            bincodes.Add("0100");
-            mintermes.Add("!AB!CD");
-            bincodes.Add("0101");
-            mintermes.Add("!ABC!D");
-            bincodes.Add("0110");
-            mintermes.Add("!ABCD");
-            bincodes.Add("0111");
-            mintermes.Add("A!B!CD");
-            bincodes.Add("1001");
-            mintermes.Add("AB!CD");
-            bincodes.Add("1101");
+            List<string> mintermes = new List<string>() { "!A!BC!D" , "!AB!C!D" ,"!AB!CD", "!ABC!D", "!ABCD", "A!B!CD", "AB!CD" };
+            List<string> bincodes = new List<string>() { "0010" , "0100" , "0101" , "0110" , "0111" , "1001" , "1101" };
+          
 
 
 

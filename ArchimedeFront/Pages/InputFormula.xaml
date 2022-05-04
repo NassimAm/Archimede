@@ -30,23 +30,54 @@
                     </LinearGradientBrush>
                 </Border.BorderBrush>
 
-                <Grid VerticalAlignment="Center" MaxWidth="900" >
+                <Grid VerticalAlignment="Center" MaxWidth="900"  >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition  Width="1*"/>
                         <ColumnDefinition Name="numberOfVariablesInput"  Width="60"/>
                     </Grid.ColumnDefinitions>
                     
                     <TextBox Grid.Column="0" Name="expression" VerticalAlignment="Center" Foreground="#424242" HorizontalAlignment="Stretch"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0,0,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="0,1,2,3,10" ></TextBox>
-                    <Border  Grid.Column="1"  BorderThickness="2" BorderBrush="#002725" Opacity="0.8" Height="40" CornerRadius="6" Padding="2" Background="Transparent" Margin="0,0,6,0">
-                        <TextBox  Background="Transparent" BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3"></TextBox>
+                    <Border  Name="numberInput" Grid.Column="1"  BorderThickness="2" BorderBrush="#002725" Opacity="0.8" Height="40" CornerRadius="6" Padding="2" Background="White" Margin="0,0,6,0" >
+
+                        <TextBox    BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="3" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White"  ></TextBox>
+
                     </Border>
                 </Grid>
                 
                 
 
             </Border>
+            <Grid Name="guidePopUp"  HorizontalAlignment="Right" Margin="16,4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Viewbox Width="180" Height="52" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Path x:Name="Caret"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Grid.Row="0"
+                    Panel.ZIndex="1"
+                    Data="M159,8.72H133.26L129.85.8a.49.49,0,0,0-.9,0l-3.4,7.92H4.41A3.92,3.92,0,0,0,.5,12.64V35.79A3.91,3.91,0,0,0,4.41,39.7H159a3.91,3.91,0,0,0,3.91-3.91V12.64A3.92,3.92,0,0,0,159,8.72Z"
+                    Stroke="Black"
+                    StrokeThickness="1"
+                    Fill="Transparent" 
+                    ClipToBounds="True"
+                    />
+                </Viewbox>
+                <TextBlock Style="{StaticResource paragraphe}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0">
+                    Le nombre de variable
+                </TextBlock>
+            </Grid>
 
-        <Grid Name="operatorButtonsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,20,4,0">
+
+
+
+
+
+
+
+            <Grid Name="operatorButtonsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,20,4,0">
             
         </Grid>
 
@@ -61,8 +92,7 @@
 
             </StackPanel>
 
-
-
+          
             <WrapPanel Name="buttonsContainer" Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
                 <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" MouseEnter="simplifyButton_MouseEnter">Simplification</Button>
                 <Button Style="{StaticResource greenButton}" Margin="14,4" >Synthèse</Button>

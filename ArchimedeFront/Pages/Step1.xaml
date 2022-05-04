@@ -8,11 +8,11 @@
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="Step1">
 
-    <ScrollViewer>
+    <ScrollViewer Name="scrollViewer" >
         
     
     <StackPanel Name="step1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-        <Border BorderThickness="2" CornerRadius="14" MaxWidth="700" MinWidth="300" Height="52" Margin="24,0,24,100">
+        <Border BorderThickness="2" CornerRadius="14" MaxWidth="700" MinWidth="300" Height="52" Margin="24,10,24,10">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
@@ -53,10 +53,10 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="100,10,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
+            <StackPanel Margin="100,0,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
                 <Button Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click"/>
             </StackPanel>
-            <StackPanel Margin="10,10,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+            <StackPanel Margin="10,0,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
                 <Button Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" />
             </StackPanel>
 

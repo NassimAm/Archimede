@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -20,12 +21,15 @@ namespace ArchimedeFront.Pages
     /// </summary>
     public partial class InputFormula : Page
     {
+        bool isExpressionFocused  = false;
+        int caretPosition = 0;
         public InputFormula()
         {
             InitializeComponent();
             remove_error();
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
-
+            guidePopUp.Visibility = Visibility.Collapsed;
+            expression.Text = "A.B + !A.B.C";
 
             AlignableWrapPanel buttons = new AlignableWrapPanel();
             Button operatorButton ;
@@ -52,9 +56,11 @@ namespace ArchimedeFront.Pages
 
         private void operator_Click(object sender, RoutedEventArgs e)
         {
+            
             string res ;
+            
 
-            switch(((Button)sender).Content)
+            switch (((Button)sender).Content)
             {
                 
                 case "ET":
@@ -87,18 +93,16 @@ namespace ArchimedeFront.Pages
                
             }
 
-            expression.Text = expression.Text + res;
-            if((string) ((Button)sender).Content == "( )")
-            {
-                expression.CaretIndex = expression.Text.Length-1;
-            }
-            else
-            {
-                expression.CaretIndex = expression.Text.Length;
-            }
 
-            expression.ScrollToEnd(); 
+            caretPosition = expression.CaretIndex;
+            expression.Text = expression.Text.Substring(0,caretPosition) + res + expression.Text.Substring(caretPosition);
             expression.Focus();
+            expression.CaretIndex = caretPosition + 1;
+            
+            
+
+            
+            
         }
 
         private void simplifyButton_MouseEnter(object sender, MouseEventArgs e)
@@ -128,17 +132,30 @@ namespace ArchimedeFront.Pages
             expression.Text = "A.B + !A.B.C";
             operatorButtonsContainer.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 24, 0, 24);
+            guidePopUp.Visibility = Visibility.Collapsed;
         }
 
         private void numerique_Checked(object sender, RoutedEventArgs e)
         {
             if (numberOfVariablesInput == null) return;
+            
+
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
             
             operatorButtonsContainer.Visibility = Visibility.Collapsed;
-            buttonsContainer.Margin = new Thickness(0, 64, 0, 24);
+            guidePopUp.Visibility = Visibility.Visible;
+            buttonsContainer.Margin = new Thickness(0, 58, 0, 24);
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 1;
+            da.To = 0;
+            da.Duration = new Duration(TimeSpan.FromSeconds(4));
+            guidePopUp.BeginAnimation(OpacityProperty, da);
         }
+
+       
+
+       
     }
 
 
