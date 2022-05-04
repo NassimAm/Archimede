@@ -19,7 +19,7 @@
 
 
         <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0" >
-            <WrapPanel Name="groupesTable" HorizontalAlignment="Center" Margin="0,20" Orientation="Vertical" Height="500" />
+            <WrapPanel Name="groupesTable" HorizontalAlignment="Center" Margin="0,20" Orientation="Vertical" MaxHeight="500" />
         </ScrollViewer>
 
         

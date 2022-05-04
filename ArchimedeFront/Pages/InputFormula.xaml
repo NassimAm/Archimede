@@ -36,10 +36,10 @@
                         <ColumnDefinition Name="numberOfVariablesInput"  Width="60"/>
                     </Grid.ColumnDefinitions>
                     
-                    <TextBox Grid.Column="0" Name="expression" VerticalAlignment="Center" Foreground="#424242" HorizontalAlignment="Stretch"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0,0,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="0,1,2,3,10" ></TextBox>
+                    <TextBox Grid.Column="0" Name="expression" VerticalAlignment="Center" Foreground="#424242" HorizontalAlignment="Stretch"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0,0,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="0,1,2,3,10" SelectionChanged="expression_SelectionChanged"></TextBox>
                     <Border  Name="numberInput" Grid.Column="1"  BorderThickness="2" BorderBrush="#002725" Opacity="0.8" Height="40" CornerRadius="6" Padding="2" Background="White" Margin="0,0,6,0" >
 
-                        <TextBox    BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="3" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White"  ></TextBox>
+                        <TextBox Name="nbVariables"   BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="3" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="nbVariables_SelectionChanged" ></TextBox>
 
                     </Border>
                 </Grid>
