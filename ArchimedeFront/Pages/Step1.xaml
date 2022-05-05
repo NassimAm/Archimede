@@ -12,7 +12,7 @@
         
     
     <StackPanel Name="step1" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-        <Border BorderThickness="2" CornerRadius="14" MaxWidth="700" MinWidth="300" Height="52" Margin="24,10,24,10">
+        <Border BorderThickness="2" CornerRadius="14"  MinWidth="300" Height="52" Margin="24,10,24,10">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
@@ -22,7 +22,7 @@
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
-            <TextBox Name="expression" VerticalAlignment="Center"  MaxWidth="900" IsReadOnly="True" Style="{StaticResource fontUrbanist}" Margin="16,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
+            <TextBox Name="expression" VerticalAlignment="Center"  MaxWidth="900" IsReadOnly="True" Style="{StaticResource fontUrbanist}" Margin="4,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="A.B + !A.B.C" />
         </Border>
         
         <TextBlock Style="{StaticResource greenTitle}" FontSize="54" TextAlignment="Center">
@@ -41,7 +41,7 @@
         <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" ></Frame>
         <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
-            <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" />
+            <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" VerticalAlignment="Top" Margin="26,0"/>
         </ScrollViewer>
         <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" ></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" ></Frame>

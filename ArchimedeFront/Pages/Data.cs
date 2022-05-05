@@ -27,10 +27,10 @@ namespace ArchimedeFront.Pages
         public static void resete()
         {
          literal = true ;
-        expression = ""; //l'expression a simplifier ;
+         expression = ""; //l'expression a simplifier ;
          expressionTransforme = ""; //l'expression apres transformation en dnf 
          variables = new List<string>(); // liste des variables ;
-         int nbVariables = 0;
+          nbVariables = 0;
          stringListMinterm = new List<string>(); // liste des codes binaires du chaque minterms 
          impliquantsEnAttente = new List<Impliquant>();
          impliquants = new List<Impliquant>();
