@@ -24,14 +24,12 @@ namespace ArchimedeFront.Pages
         {
             InitializeComponent();
 
-            List<string> mintermes;
+            List<string> mintermes = new List<string>() ;
             if (Data.literal)
             {
-                Data.expressionTransforme = ExprBool.transformerDNF(Data.expression.Replace(" ", ""));
-                
-                Data.variables = ExprBool.getVariables(Data.expressionTransforme);
-                Data.nbVariables = Data.variables.Count;
-                Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
+              
+
+                if(Data.stringListMinterm.Count > 0) { 
                 int maxNbUns = Data.stringListMinterm.MaxBy(x => x.Count(ch => (ch == '1' || ch == '-'))).Count(ch => (ch == '1' || ch == '-'));
 
                 foreach (string mintermBinCode in Data.stringListMinterm)
@@ -42,8 +40,21 @@ namespace ArchimedeFront.Pages
                 }
 
                  Data.groupeMintermes = new Mintermes(maxNbUns);
-                 mintermes = Data.expressionTransforme.Split("+").ToList();
-                expression.Text = string.Join(" + ", mintermes);
+                 for(int i = 0; i < Data.stringListMinterm.Count; i++)
+                 {
+                    // mintermes[i] = string.Join(".", mintermes[i].Split(".").ToList().OrderBy(var => { if (var[0] == '!') return var[1..]; return var; }).ToList());
+                    mintermes.Add( Minterme.bincodeToMinterm(Data.stringListMinterm[i], Data.variables));
+                 }
+
+                 Data.expressionTransforme = string.Join(" + ", mintermes);
+                 expression.Text = Data.expressionTransforme;
+
+                }
+                else
+                {
+                   
+
+                }
             }
             else
             {
@@ -110,7 +121,7 @@ namespace ArchimedeFront.Pages
                 case 3:
                     _NextStep4.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step4.xaml", UriKind.RelativeOrAbsolute));
                     _NextStep3.Margin = new Thickness(0, 0, 0, 82);
-                    groupesTableContainer.Height = 450;
+                    groupesTableContainer.MaxHeight = 450;
                     groupesTableContainer.Margin = new Thickness(26, 10, 26, 10);
                   
                     expandBottomButton.Style =  FindResource("expandButtonHoriz")  as Style; 
@@ -135,7 +146,8 @@ namespace ArchimedeFront.Pages
 
                             }
 
-                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = nbVariables * 8, Child = null };
+                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
+                                HorizontalAlignment = HorizontalAlignment.Center};
                                 groupesTable.Children.Add(border);
                             }
                             
@@ -148,8 +160,9 @@ namespace ArchimedeFront.Pages
                             {
                                 groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
                             }
-
-                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36,8), Width = nbVariables * 8, Child = null };
+                             
+                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36,8), Width = Data.nbVariables * 14, Child = null ,
+                            HorizontalAlignment=HorizontalAlignment.Center};
                             groupesTable.Children.Add(border);
                         }
 
@@ -204,7 +217,8 @@ namespace ArchimedeFront.Pages
                                     groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
                                 }
 
-                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 8, Child = null };
+                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null ,
+                                HorizontalAlignment=HorizontalAlignment.Center};
                                 groupesTable.Children.Add(border);
                             }   
                             
@@ -243,7 +257,8 @@ namespace ArchimedeFront.Pages
 
                                 }
 
-                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 8, Child = null };
+                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null 
+                                    , HorizontalAlignment = HorizontalAlignment.Center };
                                 groupesTable.Children.Add(border);
                             }
                             
@@ -256,7 +271,8 @@ namespace ArchimedeFront.Pages
                                 groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
                             }
 
-                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 8, Child = null };
+                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
+                                HorizontalAlignment=HorizontalAlignment.Center };
                             groupesTable.Children.Add(border);
                         }
 
@@ -308,7 +324,8 @@ namespace ArchimedeFront.Pages
                                         groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
                                     }
 
-                                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = Data.nbVariables * 8, Child = null };
+                                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = Data.nbVariables * 14, Child = null
+                                        , HorizontalAlignment=HorizontalAlignment.Center };
                                     groupesTable.Children.Add(border);
                                 }
                                 

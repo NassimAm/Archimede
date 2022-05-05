@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 
 using ArchimedeFront.Styles;
 using Archimède;
+using dnf;
 namespace ArchimedeFront.Pages
 
 {
@@ -90,6 +91,17 @@ namespace ArchimedeFront.Pages
             else
             {
                 Data.literal = true;
+                Data.expressionTransforme = ExprBool.transformerDNF(Data.expression.Replace(" ", ""));
+                Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
+                Data.nbVariables = Data.variables.Count;
+                Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
+
+                if( Data.stringListMinterm.Count == 0)
+                {
+                    Data.resultatFaux = true;
+                    NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.Absolute));
+                    return;
+                }
             }
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
             

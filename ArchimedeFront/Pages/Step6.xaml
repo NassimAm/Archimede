@@ -13,7 +13,7 @@
             L'expression après simplification
         </TextBlock>
 
-        <Border BorderThickness="2" CornerRadius="5" MaxWidth="500" MinWidth="300" Height="52" Margin="10,10">
+        <Border BorderThickness="2" CornerRadius="5" Width="auto" MinWidth="300" Height="54" Margin="10,10">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
@@ -22,7 +22,7 @@
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            <TextBlock Name ="FonctionSimplifieContainer" Style="{StaticResource paragraphe}" Margin="15,10" FontSize="26" VerticalAlignment="Center" TextWrapping="NoWrap" Text="!AC!D  +  A!CD  +  !AB"/>
+            <TextBox Name ="FonctionSimplifieContainer" Style="{StaticResource fontUrbanist}"  Margin="15,4" FontSize="26" VerticalAlignment="Center" TextWrapping="NoWrap" IsReadOnly="True" BorderThickness="0" AcceptsReturn="False" Background="Transparent"/>
         </Border>
     </StackPanel>
 </Page>

@@ -705,17 +705,17 @@ namespace dnf
             {
                 case '!':
                     return 7;
-
-                case '§':   // XNOR
+                
+                case '⊙':   // XNOR
                     return 6;
 
-                case '>':   // NAND
+                case '↑':   // NAND
                     return 6;
 
-                case '<':   // NOR
+                case '↓':   // NOR
                     return 6;
 
-                case '^':   // XOR  
+                case '⊕':   // XOR  
                     return 5;
 
                 case '&':
@@ -803,7 +803,9 @@ namespace dnf
 
         public static bool isOperator(char ch)
         {
-            if (ch == '!' || ch == '&' || ch == '.' || ch == '|' || ch == '+' || ch == '>' || ch == '<' || ch == '^' || ch == '§' || ch == '-' || ch == '=')
+            
+            if (ch == '!' || ch == '&' || ch == '.' || ch == '|' || ch == '+' || ch == '>' || ch == '<' || ch == '^' || ch == '§' || ch == '-' || ch == '=' ||
+                ch == '↑' || ch == '↓' || ch == '⊕' || ch == '⊙' )
             {
                 return true;
             }
@@ -1043,8 +1045,8 @@ namespace dnf
                         // pop two values of the stack
                         t1 = st.Pop();
                         t2 = st.Pop();
-
-                        if (postfix[i] == '^') // XOR
+                        
+                        if (postfix[i] == '^' || postfix[i] == '⊕') // XOR
                         {
                             ExprBool
                                 notB = new ExprBool(Type.NON, null, t1),
@@ -1054,7 +1056,7 @@ namespace dnf
                                 AxorB = new ExprBool(Type.OU, A_notB, B_notA);
                             st.Push(AxorB);
                         }
-                        else if (postfix[i] == '§') // XNOR
+                        else if (postfix[i] == '§' || postfix[i] == '⊙') // XNOR
                         {
                             ExprBool
                                 notB = new ExprBool(Type.NON, null, t1),
@@ -1064,7 +1066,7 @@ namespace dnf
                                 AxnorB = new ExprBool(Type.ET, A_notB, B_notA);
                             st.Push(AxnorB);
                         }
-                        else if (postfix[i] == '>')
+                        else if (postfix[i] == '>' || postfix[i] == '↑')
                         { // NAND
                             ExprBool
                                 notA = new ExprBool(Type.NON, null, t2),
@@ -1072,7 +1074,7 @@ namespace dnf
                                 notA_notB = new ExprBool(Type.ET, notA, notB);
                             st.Push(notA_notB);
                         }
-                        else if (postfix[i] == '<')
+                        else if (postfix[i] == '<' || postfix[i]== '↓')
                         { // NOR
                             ExprBool
                                 notA = new ExprBool(Type.NON, null, t2),

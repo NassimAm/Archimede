@@ -223,6 +223,32 @@ namespace Archimède
         }
 
 
+        public static string bincodeToMinterm(string bincode , List<string> alphabets)
+        {
+            string result = "";
+            string alpha;
+            for (int j = 0; j < bincode.Length; j++)
+            {
+                if (bincode[j] != '-')
+                {
+                    alpha = alphabets[j];
+
+                    //Nommer les variables dans l'ordre alphabétique
+                    if (bincode[j] == '1')
+                    {
+                        result += alpha + ".";
+                    }
+                    else
+                    {
+                        result += "!" + alpha + ".";
+                    }
+                }
+            }
+            if(result.Length > 0) return result.Substring(0 , result.Length - 1);
+            return result;
+        }
+
+
 
 
 
@@ -249,7 +275,7 @@ namespace Archimède
 
         public override int GetHashCode()
         {
-            return (nombre != null ? nombre.GetHashCode() : 0);
+            return nombre.GetHashCode() ;
         }
 
 
