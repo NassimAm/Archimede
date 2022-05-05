@@ -28,7 +28,7 @@ namespace ArchimedeFront.Pages
             if (Data.literal)
             {
                 Data.expressionTransforme = ExprBool.transformerDNF(Data.expression.Replace(" ", ""));
-                expression.Text = Data.expressionTransforme;
+                
                 Data.variables = ExprBool.getVariables(Data.expressionTransforme);
                 Data.nbVariables = Data.variables.Count;
                 Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
@@ -41,12 +41,13 @@ namespace ArchimedeFront.Pages
                     else (Data.impliquants).Add(impliquant); // impliquants  en forme canonique 
                 }
 
-                Data.groupeMintermes = new Mintermes(maxNbUns);
+                 Data.groupeMintermes = new Mintermes(maxNbUns);
                  mintermes = Data.expressionTransforme.Split("+").ToList();
+                expression.Text = string.Join(" + ", mintermes);
             }
             else
             {
-                expression.Text = Data.expression;
+                expression.Text = string.Join(" ,",Data.listMintermesString);
                 //Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
                 for (int i = 0; i < Data.mintermes.Count; i++)
                 {
@@ -109,7 +110,7 @@ namespace ArchimedeFront.Pages
                 case 3:
                     _NextStep4.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step4.xaml", UriKind.RelativeOrAbsolute));
                     _NextStep3.Margin = new Thickness(0, 0, 0, 82);
-                    groupesTableContainer.Height = 500;
+                    groupesTableContainer.Height = 450;
                     groupesTableContainer.Margin = new Thickness(26, 10, 26, 10);
                   
                     expandBottomButton.Style =  FindResource("expandButtonHoriz")  as Style; 
@@ -349,9 +350,16 @@ namespace ArchimedeFront.Pages
                 case 5:
                     _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
                     _NextStep5.Margin = new Thickness(0, 0, 0, 82);
-                    _NextStep6.BringIntoView();
-                    expandButtons.Visibility = Visibility.Collapsed;
+                   
+                    skipButton.Visibility = Visibility.Collapsed;
+                     expandBottomButton.Style = FindResource("returnButton") as Style;
+                    expandBottomButton.ContentStringFormat = "Retour";
+                    expandButtons.BringIntoView();
+
                     stepNumber++;
+                    break;
+                case 6:
+                    NavigationService.Navigate((new Uri("pack://application:,,,/Pages/InputFormula.xaml", UriKind.RelativeOrAbsolute)));
                     break;
                 default:
                     break;

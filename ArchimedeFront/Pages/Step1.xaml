@@ -54,7 +54,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="100,0,10,30" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
-                <Button Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click"/>
+                <Button Name="skipButton" Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click"/>
             </StackPanel>
             <StackPanel Margin="10,0,100,30" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
                 <Button Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" />

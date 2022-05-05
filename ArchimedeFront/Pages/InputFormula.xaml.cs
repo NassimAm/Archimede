@@ -24,7 +24,6 @@ namespace ArchimedeFront.Pages
         public InputFormula()
         {
             InitializeComponent();
-            Data.resete();
             remove_error();
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
@@ -52,7 +51,7 @@ namespace ArchimedeFront.Pages
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
         {
-           
+           Data.resete();
            Data.expression = expression.Text;
             
             if ( numerique.IsChecked == true)
