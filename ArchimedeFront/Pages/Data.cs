@@ -23,20 +23,22 @@ namespace ArchimedeFront.Pages
         public static Mintermes groupeMintermes;
         public static int  cptGroupes = 0 ;
         public static List<Impliquant> impliquantsPremiers = new List<Impliquant>();
-
+        public static List<Impliquant> impliquantsEssentiels = new List<Impliquant>();
         public static void resete()
         {
-         literal = true ;
-         expression = ""; //l'expression a simplifier ;
-         expressionTransforme = ""; //l'expression apres transformation en dnf 
-         variables = new List<string>(); // liste des variables ;
-          nbVariables = 0;
-         stringListMinterm = new List<string>(); // liste des codes binaires du chaque minterms 
-         impliquantsEnAttente = new List<Impliquant>();
-         impliquants = new List<Impliquant>();
-         mintermes = new List<Minterme>();
-        groupeMintermes = null;
-    }
+
+            literal = true ;
+            expression = ""; //l'expression a simplifier ;
+            expressionTransforme = ""; //l'expression apres transformation en dnf 
+            variables = new List<string>(); // liste des variables ;
+            nbVariables = 0;
+            stringListMinterm = new List<string>(); // liste des codes binaires du chaque minterms 
+            impliquantsEnAttente = new List<Impliquant>();
+            impliquants = new List<Impliquant>();
+            mintermes = new List<Minterme>();
+            groupeMintermes = null;
+        }
+
 
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
+using Archimède;
 
 namespace ArchimedeFront.Pages
 {
@@ -20,38 +22,21 @@ namespace ArchimedeFront.Pages
     /// </summary>
     public partial class Step5 : Page
     {
-        int nb_Variables;
         public Step5()
         {
             InitializeComponent();
 
-            nb_Variables = 4;
-
-            List<string> mintermes = new List<string>();
-            mintermes.Add("0010");
-            mintermes.Add("0100");
-            mintermes.Add("0101");
-            mintermes.Add("0110");
-            mintermes.Add("0111");
-            mintermes.Add("1001");
-            mintermes.Add("1101");
-
-            List<string> impliquantsPremiers = new List<string>();
-            impliquantsPremiers.Add("0010");
-            impliquantsPremiers.Add("-101");
-            impliquantsPremiers.Add("1-01");
-            impliquantsPremiers.Add("01--");
-
-
+            Mintermes.getListImpliquantsEssentiaux(ref Data.impliquantsEssentiels, Data.stringListMinterm, Data.impliquantsPremiers);
             /*Generation du premier rang ===========================================================*/
             WrapPanel wrappanel = new WrapPanel();
             wrappanel.Orientation = Orientation.Horizontal;
             wrappanel.VerticalAlignment = VerticalAlignment.Center;
             wrappanel.Margin = new Thickness(0,20, 0, 0);
-            wrappanel.Children.Add(new Border() {BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 0), Margin= new Thickness(16*nb_Variables+40, 0, 0, 0), Child = null});
-            for(int i = 0; i < mintermes.Count; i++)
+            wrappanel.Children.Add(new Border() {BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 0), Margin= new Thickness(16*Data.nbVariables+40, 0, 0, 0), Child = null});
+            for(int i = 0; i < Data.mintermes.Count; i++)
             {
-                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center, FontSize = 28,Width = 16 * nb_Variables + 40, Text = mintermes[i] });
+                Trace.WriteLine(Data.mintermes[i].bincode);
+                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center, FontSize = 28,Width = 16 * Data.nbVariables + 40, Text = Data.mintermes[i].bincode});
             }
             Border border = new Border() {BorderBrush=Brushes.Gray, BorderThickness = new Thickness(0, 0, 0, 2), Child = wrappanel };
 
@@ -59,22 +44,28 @@ namespace ArchimedeFront.Pages
 
             /*Generation des autres rangs du tableau*/
             WrapPanel wrappanelinterne;
-            for(int i=0;i<impliquantsPremiers.Count;i++)
+
+            for(int i=0;i<Data.impliquantsPremiers.Count;i++)
             {
                 wrappanelinterne = new WrapPanel();
                 wrappanelinterne.Orientation = Orientation.Horizontal;
                 wrappanelinterne.VerticalAlignment = VerticalAlignment.Center;
                 wrappanelinterne.Margin = new Thickness(0, 10, 0, 10);
-                wrappanelinterne.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center,Width = 16 * nb_Variables + 40, FontSize = 28, Text = impliquantsPremiers[i]});
+                wrappanelinterne.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center,Width = 16 * Data.nbVariables + 40, FontSize = 28, Text = Data.impliquantsPremiers[i].bincode});
                 border = new Border() { BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 0), Child = wrappanelinterne};
 
                 wrappanel = new WrapPanel() {Orientation = Orientation.Horizontal, VerticalAlignment=VerticalAlignment.Center};
                 wrappanel.Children.Add(border);
 
-                for(int j=0;j<mintermes.Count;j++)
+                for(int j=0;j<Data.mintermes.Count;j++)
                 {
-                    if (impliquantsPremiers[i][0] == mintermes[j][0])
-                        wrappanel.Children.Add(generateImpliquantEssentielCase());
+                    if (Data.impliquantsPremiers[i].represente(Data.mintermes[j]))
+                    {
+                        if(Data.impliquantsEssentiels.Contains(Data.impliquantsPremiers[i]))
+                            wrappanel.Children.Add(generateImpliquantEssentielCase());
+                        else
+                            wrappanel.Children.Add(generateImpliquantCase());
+                    }
                     else
                         wrappanel.Children.Add(generateCaseVide());
                 }
@@ -87,7 +78,7 @@ namespace ArchimedeFront.Pages
             WrapPanel panel = new WrapPanel();
             panel.Orientation = Orientation.Horizontal;
             panel.HorizontalAlignment = HorizontalAlignment.Center;
-            panel.Width = nb_Variables * 16 + 40;
+            panel.Width = Data.nbVariables * 16 + 40;
             panel.Height = 15;
             panel.Margin = new Thickness(0, 10, 0, 10);
             panel.Children.Add(new Ellipse() { Style = FindResource("ImpliquantNonEssentielCercle") as Style, Margin = new Thickness((panel.Width - 15) / 2, 0, 0, 0) });
@@ -98,7 +89,7 @@ namespace ArchimedeFront.Pages
             WrapPanel panel = new WrapPanel();
             panel.Orientation = Orientation.Horizontal;
             panel.HorizontalAlignment = HorizontalAlignment.Center;
-            panel.Width = nb_Variables * 16 + 40;
+            panel.Width = Data.nbVariables * 16 + 40;
             panel.Height = 19;
             panel.Margin = new Thickness(0, 10, 0, 10);
             panel.Children.Add(new Border() { Style=FindResource("ImpliquantEssentielBordure") as Style,Margin = new Thickness((panel.Width - 15) / 2, 0, 0, 0),Child = new Ellipse() {Style = FindResource("ImpliquantEssentielCercle") as Style } });
@@ -109,7 +100,7 @@ namespace ArchimedeFront.Pages
             WrapPanel panel = new WrapPanel();
             panel.Orientation = Orientation.Horizontal;
             panel.HorizontalAlignment = HorizontalAlignment.Center;
-            panel.Width = nb_Variables * 16 + 40;
+            panel.Width = Data.nbVariables * 16 + 40;
             panel.Height = 15;
             panel.Margin = new Thickness(0, 10, 0, 10);
             return panel;
