@@ -377,6 +377,37 @@
         </Border>
     </DataTemplate>
 
+    <DataTemplate x:Key="left">
+        <Border CornerRadius="34" Width="34" Height="34" Padding="4" BorderThickness="3">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Viewbox Width="16"   >
+                 <Path     
+                        Margin="0,0,2,0"
+                        Data="{DynamicResource RETOUR_ICON}"   
+                        VerticalAlignment="Center"
+                    >
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                <GradientStop Offset="1"   Color="#00E17C"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                </Path>
+
+            </Viewbox>
+
+        </Border>
+    </DataTemplate>
+
     <DataTemplate x:Key="right">
         <Border CornerRadius="34" Width="34" Height="34" Padding="4,4,2,4" BorderThickness="3">
             <Border.BorderBrush>
@@ -446,6 +477,28 @@
                     <StackPanel Orientation="Horizontal" Background="Transparent" >
                         <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
                         <ContentControl   ContentTemplate="{StaticResource right}" />
+                    </StackPanel>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+    </Style>
+
+    <Style TargetType="Button" x:Key="returnButton">
+
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <StackPanel Orientation="Horizontal" Background="Transparent" >
+                        <ContentControl   ContentTemplate="{StaticResource left}"  Margin="10,0"/>
+                        <TextBlock Style="{StaticResource greenTitle}" FontSize="28" Padding="0,0,10,0" Text="{TemplateBinding ContentStringFormat}" />
                     </StackPanel>
 
                 </ControlTemplate>

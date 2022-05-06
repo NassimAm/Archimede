@@ -337,13 +337,13 @@ namespace Archimède
                 {
                     resultat = resultat.Substring(0, resultat.Length - 1);
                 }
-                resultat += "+";
+                resultat += " + ";
             }
 
             //Enlever le " + " additionnel à la fin
             if (resultat.Length >= 1)
             {
-                resultat = resultat.Substring(0, resultat.Length - 1);
+                resultat = resultat.Substring(0, resultat.Length - 3);
             }
             return resultat;
         }

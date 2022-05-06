@@ -24,8 +24,17 @@ namespace ArchimedeFront.Pages
         public Step6()
         {
             InitializeComponent();
-            string resultat = Mintermes.getResultatExpression(Data.literal,Data.impliquantsEssentiels,Data.variables);
-            FonctionSimplifieContainer.Text = resultat;
+            if(Data.resultatFaux )
+            {
+                FonctionSimplifieContainer.Text = "FAUX";
+            }
+            else
+            {
+                string resultat = Mintermes.getResultatExpression(Data.literal, Data.impliquantsEssentiels, Data.variables);
+                if (resultat.Length == 0) FonctionSimplifieContainer.Text = "VRAI";
+                else FonctionSimplifieContainer.Text = resultat;
+            }
+            
         }
     }
 }

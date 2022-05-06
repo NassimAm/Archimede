@@ -16,7 +16,7 @@
 
         <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"     >
             <TextBlock Name="bienvenueText" Style="{StaticResource greenTitle}" FontSize="74" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="800">
-                Bienvenue dans Archimède
+                Bienvenu dans Archimède
             </TextBlock>
             <Button Name="commencerText" Style="{StaticResource commencer}"  Width="260" Margin="0,30,0,0" Click="Button_Click">
                 Commencer

@@ -80,17 +80,21 @@
             <Grid Name="operatorButtonsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,20,4,0">
             
         </Grid>
-
-            <StackPanel Name="errorContainer" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,22,10,0">
-                <Border BorderThickness="2" BorderBrush="Red" Width="24" Height="24" CornerRadius="24" HorizontalAlignment="Center">
-                    <TextBlock Style="{StaticResource fontProductSans}" FontSize="18" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">!</TextBlock>
-
-                </Border>
-
-                <TextBlock Style="{StaticResource paragraphe}" FontSize="20" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0,4,0"> Erreur signalée :</TextBlock>
-                <TextBlock Name="errorMessage" Style="{StaticResource paragraphe}" FontSize="20"   Margin="0" VerticalAlignment="Center">Opérateur(s) non existant(s)</TextBlock>
-
-            </StackPanel>
+            <ScrollViewer  Height="60" Width="auto"  VerticalScrollBarVisibility="Auto"  >
+                <StackPanel Name="errorsContainer"  Margin="0,0,0,15" >
+                    <StackPanel Name="errorContainer" Orientation="Horizontal" HorizontalAlignment="Left"  Margin="10,2,10,8">
+                        <StackPanel  Orientation="Horizontal" VerticalAlignment="Top">
+                            <Border BorderThickness="2" BorderBrush="Red" Width="24" Height="24" CornerRadius="24" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource fontProductSans}" FontSize="18" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center">!</TextBlock>
+                            </Border>
+                            <TextBlock Style="{StaticResource paragraphe}" FontSize="20" Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8,0,4,0" > Erreur signalée :</TextBlock>
+                        </StackPanel>
+                        <TextBlock Name="errorMessage" Style="{StaticResource paragraphe}" FontSize="20"   Margin="0" VerticalAlignment="Top" TextWrapping="Wrap">Opérateur(s) non existant(s)</TextBlock>
+                    </StackPanel>
+                   
+                </StackPanel>
+            </ScrollViewer>
+            
 
           
             <WrapPanel Name="buttonsContainer" Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">

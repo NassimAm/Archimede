@@ -17,7 +17,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid Name="slider" Grid.Column="0" Width="60" >
+        <Grid Name="slider" Grid.Column="0" Width="60" Margin="0,0,6,0" >
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
