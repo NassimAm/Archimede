@@ -24,6 +24,7 @@ namespace ArchimedeFront.Pages
         public static int cptGroupes = 0;
         public static List<Impliquant> impliquantsPremiers = new List<Impliquant>();
         public static List<Impliquant> impliquantsEssentiels = new List<Impliquant>();
+        public static List<List<char>> impliquantsType = new List<List<char>>();
         public static bool resultatFaux = false;
 
         public static void resete()
@@ -42,6 +43,7 @@ namespace ArchimedeFront.Pages
             cptGroupes = 0;
             impliquantsPremiers = new List<Impliquant>();
             impliquantsEssentiels = new List<Impliquant>();
+            impliquantsType = new List<List<char>>();
             resultatFaux = false;
         }
     }

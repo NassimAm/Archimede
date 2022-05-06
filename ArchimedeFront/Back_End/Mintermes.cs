@@ -207,30 +207,43 @@ namespace Archimède
 
         }
 
-        public static void getListImpliquantsEssentiaux(ref List<Impliquant> impliquantsEssentiels, List<string> stringListMinterm, List<Impliquant> impliquantsPremiers)
+        public static void getListImpliquantsEssentiaux(ref List<Impliquant> impliquantsEssentiels, List<string> stringListMinterm, List<Impliquant> impliquantsPremiers, List<List<char>> impliquantType)
         {
             int impliquantIndex = -1;
             int mintermeIndex = 0;
+            int realmintermeIndex = 0;
             int impliquantLevel = 1;
             int count;
 
+            //'N' : ne représente pas le minterme
+            for(int i=0;i<impliquantsPremiers.Count; i++)
+            {
+                impliquantType.Add(Enumerable.Repeat('N', stringListMinterm.Count).ToList());
+            }
+            
 
+            List<string> stringListMintermCopy = new List<string>();
+            stringListMintermCopy.AddRange(stringListMinterm);
             //Tant que la liste des mintermes n'est pas vide
-            while (stringListMinterm.Count > 0)
+            while (stringListMintermCopy.Count > 0)
             {
 
                 mintermeIndex = 0;
-                while (mintermeIndex < stringListMinterm.Count)
+                while (mintermeIndex < stringListMintermCopy.Count)
                 {
                     count = 0;
                     impliquantIndex = -1;
+                    realmintermeIndex = stringListMinterm.IndexOf(stringListMintermCopy[mintermeIndex]);
                     for (int j = 0; j < impliquantsPremiers.Count; j++)
                     {
                         //Si l'impliquant j peut représenter le minterme i
-                        if (impliquantsPremiers[j].represente(stringListMinterm[mintermeIndex]))
+                        if (impliquantsPremiers[j].represente(stringListMintermCopy[mintermeIndex]))
                         {
                             count += 1;
                             impliquantIndex = j;
+                            //'R': représente le minterme
+                            if(impliquantType[impliquantIndex][realmintermeIndex] != 'E')
+                                impliquantType[impliquantIndex][realmintermeIndex] = 'R';
                         }
                     }
                     /*Si le minterme i est représenté par impliquantLevel impliquant(s) initialement si le minterme i
@@ -240,8 +253,9 @@ namespace Archimède
                     {
 
                         impliquantsEssentiels.Add(impliquantsPremiers[impliquantIndex]);
-
-                        stringListMinterm.RemoveAt(mintermeIndex);
+                        //'E': est essentiel pour le minterme
+                        impliquantType[impliquantIndex][realmintermeIndex] = 'E';
+                        stringListMintermCopy.RemoveAt(mintermeIndex);
 
                     }
                     else //Sinon avancer dans la liste des mintermes
@@ -253,13 +267,13 @@ namespace Archimède
 
                 //Vérifier si en choisissant les impliquants essentiels quels mintermes on a traité
                 mintermeIndex = 0;
-                while (mintermeIndex < stringListMinterm.Count)
+                while (mintermeIndex < stringListMintermCopy.Count)
                 {
                     count = 0;
                     for (int j = 0; j < impliquantsEssentiels.Count; j++)
                     {
                         //Si l'impliquant essentiel j peut représenter le minterme i
-                        if (impliquantsEssentiels[j].represente(stringListMinterm[mintermeIndex]))
+                        if (impliquantsEssentiels[j].represente(stringListMintermCopy[mintermeIndex]))
                         {
                             count += 1;
                         }
@@ -268,7 +282,7 @@ namespace Archimède
                      car il a ainsi été traité*/
                     if (count > 0)
                     {
-                        stringListMinterm.RemoveAt(mintermeIndex);
+                        stringListMintermCopy.RemoveAt(mintermeIndex);
                     }
                     else //Sinon avancer dans la liste des mintermes
                     {
@@ -276,9 +290,6 @@ namespace Archimède
                     }
                 }
                 impliquantLevel += 1;
-
-
-
             }
 
             //Supprimer les doublons s'ils existent

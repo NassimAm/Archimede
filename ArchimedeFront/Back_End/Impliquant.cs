@@ -18,9 +18,6 @@ namespace Archimède
         //Staus de l'impliquant (il est à faux si l'impliquant doit encore être traité sinon c'est un impliquant essentiel)
         public bool status;
 
-
-
-
         public Impliquant(string bincode)
         {
 

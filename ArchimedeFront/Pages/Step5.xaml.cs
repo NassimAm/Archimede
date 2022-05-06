@@ -25,18 +25,17 @@ namespace ArchimedeFront.Pages
         public Step5()
         {
             InitializeComponent();
-
-            Mintermes.getListImpliquantsEssentiaux(ref Data.impliquantsEssentiels, Data.stringListMinterm, Data.impliquantsPremiers);
+            Mintermes.getListImpliquantsEssentiaux(ref Data.impliquantsEssentiels, Data.stringListMinterm, Data.impliquantsPremiers,Data.impliquantsType);
             /*Generation du premier rang ===========================================================*/
             WrapPanel wrappanel = new WrapPanel();
             wrappanel.Orientation = Orientation.Horizontal;
             wrappanel.VerticalAlignment = VerticalAlignment.Center;
             wrappanel.Margin = new Thickness(0,20, 0, 0);
             wrappanel.Children.Add(new Border() {BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 0), Margin= new Thickness(16*Data.nbVariables+40, 0, 0, 0), Child = null});
-            for(int i = 0; i < Data.mintermes.Count; i++)
+            for(int i = 0; i < Data.stringListMinterm.Count; i++)
             {
-                Trace.WriteLine(Data.mintermes[i].bincode);
-                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center, FontSize = 28,Width = 16 * Data.nbVariables + 40, Text = Data.mintermes[i].bincode});
+                Trace.WriteLine(Data.stringListMinterm[i]);
+                wrappanel.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center, FontSize = 28,Width = 16 * Data.nbVariables + 40, Text = Data.stringListMinterm[i]});
             }
             Border border = new Border() {BorderBrush=Brushes.Gray, BorderThickness = new Thickness(0, 0, 0, 2), Child = wrappanel };
 
@@ -57,17 +56,17 @@ namespace ArchimedeFront.Pages
                 wrappanel = new WrapPanel() {Orientation = Orientation.Horizontal, VerticalAlignment=VerticalAlignment.Center};
                 wrappanel.Children.Add(border);
 
-                for(int j=0;j<Data.mintermes.Count;j++)
+                for(int j=0;j<Data.stringListMinterm.Count;j++)
                 {
-                    if (Data.impliquantsPremiers[i].represente(Data.mintermes[j]))
-                    {
-                        if(Data.impliquantsEssentiels.Contains(Data.impliquantsPremiers[i]))
-                            wrappanel.Children.Add(generateImpliquantEssentielCase());
-                        else
-                            wrappanel.Children.Add(generateImpliquantCase());
-                    }
+                    if (Data.impliquantsType[i][j] == 'E')
+                        wrappanel.Children.Add(generateImpliquantEssentielCase());
                     else
-                        wrappanel.Children.Add(generateCaseVide());
+                    {
+                        if (Data.impliquantsType[i][j] == 'R')
+                            wrappanel.Children.Add(generateImpliquantCase());
+                        else
+                            wrappanel.Children.Add(generateCaseVide());
+                    }      
                 }
 
                 ImpliquantsEssentiauxTable.Children.Add(wrappanel);
