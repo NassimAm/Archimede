@@ -19,12 +19,12 @@ namespace ArchimedeFront.Pages
         
          int stepNumber = 1;
          bool stop = false;
-         bool continu = true ;
+         bool avecTrace = true ;
 
         public Step1()
         {
            
-
+            avecTrace = true ;
             List<string> mintermes = new List<string>() ;
             if (Data.literal)
             {
@@ -400,7 +400,7 @@ namespace ArchimedeFront.Pages
 
         private void skipButton_Click(object sender, RoutedEventArgs e)
         {
-           
+                    avecTrace = false;
                     nextStepButton_click(sender, e);
             
         }
@@ -440,34 +440,42 @@ namespace ArchimedeFront.Pages
 
         private void _NextStep2_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            if(!avecTrace)
             nextStepButton_click(sender, null);
         }
 
         private void _NextStep3_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            if(!avecTrace)
             nextStepButton_click(sender, null);
         }
 
         private void _NextStep4_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            nextStepButton_click(sender, null);
-            while(stepNumber == -1)
+            if (!avecTrace)
             {
-                nextStepButton_click(sender, null);
+                    nextStepButton_click(sender, null);
+                    while(stepNumber == -1)
+                    {
+                        nextStepButton_click(sender, null);
 
+                    }
+                    nextStepButton_click(sender, null);
             }
-            nextStepButton_click(sender, null);
+            
 
         }
 
         private void _NextStep5_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            if(!avecTrace)
             nextStepButton_click(sender, null);
         }
 
         private void _NextStep6_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             //nextStepButton_click(sender, null);
+            avecTrace = true;
 
         }
     }

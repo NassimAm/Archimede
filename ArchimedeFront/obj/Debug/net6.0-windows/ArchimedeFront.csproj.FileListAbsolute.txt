@@ -120,3 +120,7 @@ C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\o
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step6.g.cs
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step5.baml
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Step6.baml
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Synthese.g.cs
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Synthese.baml
+C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Synthese.g.cs
+C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Synthese.baml
