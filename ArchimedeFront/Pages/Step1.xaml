@@ -37,14 +37,14 @@
             <WrapPanel Name="mintermesList" HorizontalAlignment="Center" Margin="0,20" Orientation="Horizontal" Height="100" />
         </ScrollViewer>
 
-        <Frame Name="_NextStep2"  NavigationUIVisibility="Hidden" ></Frame>
-        <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" ></Frame>
-        <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="_NextStep2"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep2_LoadCompleted" ></Frame>
+        <Frame Name="_NextStep3"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep3_LoadCompleted"></Frame>
+        <Frame Name="_NextStep4"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep4_LoadCompleted"></Frame>
         <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
             <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" VerticalAlignment="Top" Margin="26,0"/>
         </ScrollViewer>
-        <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" ></Frame>
-        <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" ></Frame>
+        <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
+        <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep6_LoadCompleted"></Frame>
 
         <Grid Name="expandButtons" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

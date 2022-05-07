@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,15 +24,15 @@ namespace ArchimedeFront.Pages
 
         public Step2()
         {
-            InitializeComponent();
+
+           
 
 
             int nbVariables = Data.nbVariables;
             Data.groupeMintermes.GrouperListes(Data.impliquants);
 
 
-
-
+            InitializeComponent();
 
             Border border;
             
@@ -65,15 +66,11 @@ namespace ArchimedeFront.Pages
             groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
 
 
-
-
-        }
-
-
-        private void skipButton_Click(object sender, RoutedEventArgs e)
-        {
+           
 
         }
+
+
 
     }
 }
