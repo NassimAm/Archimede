@@ -104,8 +104,11 @@ namespace ArchimedeFront.Pages
                 }
             }
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
-            
-            
+        }
+
+        private void syntheseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Synthese.xaml", UriKind.Absolute));
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)

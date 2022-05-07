@@ -99,7 +99,7 @@
           
             <WrapPanel Name="buttonsContainer" Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
                 <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" MouseEnter="simplifyButton_MouseEnter">Simplification</Button>
-                <Button Style="{StaticResource greenButton}" Margin="14,4" >Synthèse</Button>
+                <Button Style="{StaticResource greenButton}" Margin="14,4" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
             </WrapPanel>
 
         </StackPanel>
