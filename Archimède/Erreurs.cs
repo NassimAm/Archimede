@@ -8,119 +8,154 @@ namespace DetectionErreurs
 {
     class Erreurs
     {
-       
-        
-        
-            //Nombre d'erreur 
-            
+        //fonction qui retourne "vrai" si le caractere en cours est un operateur binaire
+        public static bool estOperateurBinaire(char caractere)
+        {
+            if (caractere == '+' || caractere == '.' || caractere == '↑' || caractere == '↓' || caractere == '⊕' || caractere == '⊙')
+                return true;
+            return false;
+        }
 
-            //fonction qui retourne "vrai" si le caractere en cours est un operateur binaire {+,.}
-            static bool estOperateurBinaire(char caractere)
+        public static bool estUneVariable(char caractere)
+        {
+            if (char.IsLetterOrDigit(caractere) || caractere == '_')
+                return true;
+            return false;
+        }
+
+        public static List<string> DetectionErreurs(string f)
+        {
+            f = f.Replace(" ", "");
+
+            List<string> erreursList = new List<string>();
+
+            //initialiser le nombre de parentheses ouverantes et fermantes
+            int open = 0, close = 0;
+
+            //la fonction vide est toujours fausse
+            if (f.Length == 0)
             {
-                bool bin;
-                if (caractere == '+' || caractere == '.')
-                {
-                    bin = true;
-                }
-                else 
-                    bin = false;
-                return bin;
+                //erreursList.Add("0");
+                erreursList.Add("Fonction vide.");
             }
 
-            
-            
-            public static void DetectErreurs (string f){
-                int nbrErreur = 0;
-               
-                //initialiser le nombre de parentheses ouverantes et fermantes
-                int open = 0, close = 0; 
 
-                //la fonction vide est toujours correcte
-                //if (f.Length == 0) resultat = true;  
 
-                //Detection d'erreur au debut de la fonction
-                if (estOperateurBinaire(f[0]) || f[0] == ')')
+            else if (f.Length == 1)
+            {
+                if (!estUneVariable(f[0]))
                 {
-                    Console.WriteLine("Erreur au debut de la fonction");
-                    nbrErreur++;
+
+                    if (estOperateurBinaire(f[0]))
+                    {
+                        erreursList.Add("Position 1 : Une fonction ne peut pas commencer par un operateur binaire (" + f[0] + ").");
+                        //erreursList.Add("0-1");
+                    }
+                    else if (f[0] == '!')
+                    {
+                        erreursList.Add("Position 1 : La fonction introduite est incompléte.");
+                    }
+                    else
+                    {
+                        erreursList.Add("Position 1 : " + f[0] + " n'est pas inclus dans le langage");
+                    }
                 }
-
-                //Detection d'erreur à la fin de la fonction
-                if (estOperateurBinaire(f[f.Length - 1]) || f[f.Length - 1] == '(' || f[f.Length - 1] == '!')
-                {
-                    Console.WriteLine("Erreur à la fin de la fonction");
-                    nbrErreur++;
-                }
-
-                //sinon on parcour la fonction caractere par caractere
-                for (int i = 0; i < f.Length; i++)
-                 {
-                        //{.,+,!} suivi de {.,+,)}
-                        if ((i < f.Length - 1) && (estOperateurBinaire(f[i]) || f[i] == '!'))
-                        {
-                            if (estOperateurBinaire(f[i+1]) || f[i + 1] == ')')
-                            {
-                                Console.WriteLine("Deux operateurs d'affilé au niveau de aaaa " + (i + 1));
-                                nbrErreur++;
-                            }
-                        }
-                        //{!} pas precedé par {.,+,!,(}
-                        else if (f[i] == '!')
-                        {
-                            if ((i>0) && (f[i - 1] != '.') && (f[i - 1] != '+') && (f[i - 1] != '!') && (f[i - 1] != '('))
-                            {
-                                Console.WriteLine("position de l'erreur : " + (i + 1));
-                                nbrErreur++;
-                            }
-                        }
-                        
-                        else if (f[i] == '(')
-                        {
-                            //{(} pas precedé par {.,+,!,(}
-                            if (i > 0 && f[i - 1] != '.' && f[i - 1] != '+' && f[i - 1] != '!' && f[i - 1] != '(')
-                            {
-                                Console.WriteLine("position de l'erreur : " + (i + 1));
-                                //resultat = false;
-                            }
-                            //{ ( } suivi de { +,. }
-                            if (f[i + 1] == '+' || f[i + 1] == '.')
-                            {
-                                Console.WriteLine("position de l'erreur : " + (i + 1));
-                                nbrErreur++;
-                                //resultat = false;
-                            }
-                            open++; // incremnter le nbr de p o
-                        }
-                        else if (f[i] == ')')
-                        {
-                            //{ ) } pas suivi de {+,.,)}
-                            if ((i < f.Length - 1) && ((f[i + 1] != '+') && (f[i + 1] != '.') && (f[i + 1] != ')')))
-                            {
-                                Console.WriteLine("position de l'erreur : " + (i + 1));
-                                nbrErreur++;
-                                //resultat = false;
-                            }
-                            close++; // incrementer nbr de p f
-                            if (close > open) //pf>po automatiquement erreur
-                            {
-                                Console.WriteLine("position de l'erreur : " + (i + 1));
-                                nbrErreur++;
-                               // resultat = false;
-                            }
-                        }
-                    
-                }
-                if (close != open) nbrErreur++;
-
-
-                if (nbrErreur == 0)
-                    System.Console.WriteLine("La fonction est syntaxiquement juste !");
-                else
-                    Console.WriteLine("Il y a " + nbrErreur + " erreur(s)");
             }
 
-        
+            else
+            {
+                for (int i = 0; i < f.Length - 1; i++)
+                {
+                    if (estOperateurBinaire(f[i]))
+                    {
+                        if (i == 0)
+                        {
+                            erreursList.Add("Position 1 : Une fonction ne peut pas commencer par un operateur binaire (" + f[0] + ").");
+                            //erreursList.Add("0-1");
+                        }
 
+
+                        if (estOperateurBinaire(f[i + 1]) || f[i + 1] == ')')
+                        {
+                            erreursList.Add("Position " + (i + 1) + "-" + (i + 2) + " : Il manque une variable entre (" + f[i] + ") et (" + f[i + 1] + ").");
+                            //erreursList.Add("1-" + (i + 1) + "/" + (i + 2));
+                        }
+
+                    }
+                    else if (f[i] == '!')
+                    {
+                        if (estOperateurBinaire(f[i + 1]) || f[i + 1] == ')')
+                        {
+                            erreursList.Add("Position " + (i + 1) + "-" + (i + 2) + " : Il manque une variable entre (" + f[i] + ") et (" + f[i + 1] + ").");
+                            //erreursList.Add("1-" + (i + 1) + "/" + (i + 2));
+                        }
+                    }
+                    else if (f[i] == '(')
+                    {
+                        open++;
+                        if (estOperateurBinaire(f[i + 1]))
+                        {
+                            erreursList.Add("Position " + (i + 1) + "-" + (i + 2) + " : Il manque une variable entre (" + f[i] + ") et (" + f[i + 1] + ").");
+                            //erreursList.Add("1-" + (i + 1) + "/" + (i + 2));
+                        }
+                    }
+                    else if (f[i] == ')')
+                    {
+                        close++;
+                        if (close > open)
+                        {
+                            erreursList.Add("Position " + (i + 1) + " : Il manque une parenthese ouvrante.");
+                            //erreursList.Add("2-" + (i + 1));
+                        }
+                        if (!estOperateurBinaire(f[i + 1]) && f[i + 1] != ')')
+                        {
+                            erreursList.Add("Position " + (i + 1) + "-" + (i + 2) + " : Il manque un opérateur binaire.");
+                            //erreursList.Add("3-" + (i + 1) + "/" + (i + 2));
+                        }
+                    }
+                    else if (estUneVariable(f[i]))
+                    {
+                        if (f[i + 1] == '!' || f[i + 1] == '(')
+                        {
+                            erreursList.Add("Position " + (i + 1) + "-" + (i + 2) + " : Il manque un opérateur binaire.");
+                            //erreursList.Add("1-" + (i + 1) + "/" + (i + 2));
+                        }
+                    }
+                    else
+                    {
+                        erreursList.Add("Position " + (i + 1) + " : " + f[i] + " n'est pas inclus dans le langage.");
+                        //erreursList.Add("4-" + (i + 1));
+                    }
+                }
+                if (estOperateurBinaire(f[(f.Length) - 1]) || f[(f.Length) - 1] == '!')
+                {
+                    erreursList.Add("Position " + f.Length + " : La fonction ne peut pas se terminer par un operateur.");
+                    //erreursList.Add("5-" + f.Length);
+                }
+                else if (f[f.Length - 1] == '(')
+                {
+                    erreursList.Add("Position " + f.Length + " : La fonction ne peut pas se terminer par une parenthese ouvrante."); open++;
+                    //erreursList.Add("6-" + f.Length);
+                }
+
+                if ((f[f.Length - 1]) == ')')
+                {
+                    close++;
+                    if (close > open)
+                    {
+                        erreursList.Add("Position " + f.Length + " : Il manque une parenthese ouvrante.");
+                        //erreursList.Add("2-" + f.Length);
+                    }
+                }
+
+                if (open > close) //((()
+                {
+                    erreursList.Add("Position " + f.Length + " : Il manque " + (open - close) + " parenthese(s) fermente(s).");
+                }
+            }
+
+            return erreursList;
+        }
     }
 }
 
