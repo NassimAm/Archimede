@@ -52,8 +52,8 @@ namespace ArchimedeFront.Pages
                 InitializeComponent();
                 expression.Text = Data.expressionTransforme;
 
-                
-               
+
+
             }
             else
             {
@@ -73,13 +73,14 @@ namespace ArchimedeFront.Pages
                 InitializeComponent();
                 expression.Text = string.Join(" ,", Data.listMintermesString);
             }
-           
 
 
 
 
+            expandButtons.Margin = new Thickness(0, 200, 0, 0);
 
-            
+
+
             WrapPanel wrappanel;
             for (int i = 0;i < Data.stringListMinterm.Count;i++)
             {
@@ -110,7 +111,7 @@ namespace ArchimedeFront.Pages
             {
                 case 1:
                     _NextStep2.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step2.xaml", UriKind.RelativeOrAbsolute));
-                    step1.Margin = new Thickness(0, 0, 0,82);
+                    expandButtons.Margin = new Thickness(0, 0, 0, 0);
                    
                     stepNumber++;
                     expandButtons.BringIntoView();
@@ -430,9 +431,14 @@ namespace ArchimedeFront.Pages
 
         private StackPanel generateSelectedImplicant(string bincode)
         {
+            LinearGradientBrush LinearBrush = new LinearGradientBrush();
+            LinearBrush.StartPoint = new Point(0, 0);
+            LinearBrush.EndPoint = new Point(0, 1);
+            LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00CBBD"), 0.1));
+            LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00E17C"), 1));
             StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
-            Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new Path() { Style = FindResource("greenIcon") as Style, Data = (Geometry)FindResource("RIGHT_ARROW_ICON") , Fill =Brushes.Red } };
-            TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode , Foreground = Brushes.Red };
+            Viewbox viewbox = new Viewbox() {Visibility=Visibility.Hidden, Width = 24, Margin = new Thickness(0, 0, 14, 0)};
+            TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode , Foreground = LinearBrush};
             result.Children.Add(viewbox);
             result.Children.Add(text);
             return result;

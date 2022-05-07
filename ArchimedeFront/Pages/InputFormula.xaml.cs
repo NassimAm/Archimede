@@ -15,6 +15,7 @@ using Archimède;
 using dnf;
 using System.Windows.Media;
 using DetectionErreurs;
+using System.Windows.Media.Effects;
 
 namespace ArchimedeFront.Pages
 
@@ -29,7 +30,10 @@ namespace ArchimedeFront.Pages
         public InputFormula()
         {
             InitializeComponent();
+            SimplificationPopUP.Visibility = Visibility.Collapsed;
+            TransformationPopUP.Visibility = Visibility.Collapsed;
             errorsContainer.Children.Clear();
+            enableButtons();
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
@@ -56,9 +60,12 @@ namespace ArchimedeFront.Pages
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
         {
+            
+            
            errorsContainer.Children.Clear();
            Data.resete();
            Data.expression = expression.Text.Replace(" ","");
+            expression.Text = Data.expression;
             
             if ( numerique.IsChecked == true)
             {
@@ -89,6 +96,7 @@ namespace ArchimedeFront.Pages
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
                     errorsContainer.Children.Add(generateNewError("La liste de mintermes introduite depasse le nombre maximal de variables introduit "));
+                    disableButtons();
                     return;
                 }
             }
@@ -99,6 +107,7 @@ namespace ArchimedeFront.Pages
                 errorMessages= Erreurs.detectionErreurs(expression.Text);
                 if(errorMessages.Count > 0)
                 {
+                    disableButtons();
                     foreach(string error in errorMessages)
                     {
                         errorsContainer.Children.Add(generateNewError(error));
@@ -117,7 +126,10 @@ namespace ArchimedeFront.Pages
                     return;
                 }
             }
-            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+
+            pageContent.IsHitTestVisible = false;
+            pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
+            SimplificationPopUP.Visibility = Visibility.Visible;
         }
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
@@ -183,6 +195,7 @@ namespace ArchimedeFront.Pages
         {
             if (numberOfVariablesInput == null) return;
             errorsContainer.Children.Clear();
+            enableButtons();
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             expression.Text = "A.B + !A.B.C";
             operatorButtonsContainer.Visibility = Visibility.Visible;
@@ -195,6 +208,7 @@ namespace ArchimedeFront.Pages
             if (numberOfVariablesInput == null) return;
 
             errorsContainer.Children.Clear();
+            enableButtons();
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
             
@@ -246,7 +260,42 @@ namespace ArchimedeFront.Pages
             return error;
         }
 
-     
+        private void disableButtons()
+        {
+            if (buttonsContainer == null) return;
+            buttonsContainer.Opacity = 0.3;
+            buttonsContainer.IsHitTestVisible = false;
+        }
+
+        private void enableButtons()
+        {
+            if (buttonsContainer == null) return;
+            buttonsContainer.Opacity = 1;
+            buttonsContainer.IsHitTestVisible = true;
+        }
+
+        private void selectionChanged(object sender, RoutedEventArgs e)
+        {
+            enableButtons();
+        }
+
+        private void startSimplification_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+
+        }
+
+        private void startTransformation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void transformButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageContent.IsHitTestVisible = false;
+            pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
+            TransformationPopUP.Visibility = Visibility.Visible;
+        }
     }
 
 

@@ -139,6 +139,65 @@
     </Style>
 
 
+    <!-- samall green buttons style-->
+    <Style TargetType="Button" x:Key="greenSamallButton">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border  Background="{TemplateBinding Background}" BorderThickness="2"  CornerRadius="6"  >
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                    <GradientStop Offset="1"   Color="#00E17C"/>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <TextBlock 
+                                          x:Name="contentText" 
+                                          Style="{StaticResource fontUrbanist}"
+                                          TextAlignment="Center"
+                                          FontSize="22"
+                                          FontWeight="Bold"
+                                          Padding="{TemplateBinding Padding}"
+                                          Text="{TemplateBinding Content}"
+                                          
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" >
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                        <GradientStop Offset="1"   Color="#00E17C"/>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" >
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="1 0" EndPoint="0 0">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                            <GradientStop Offset="1"   Color="#00E17C"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="contentText" Property="Foreground"  Value="white"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- big green buttons style-->
     <Style TargetType="Button" x:Key="commencer">
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -213,7 +272,7 @@
                             </Grid>
                         </BulletDecorator.Bullet>
                         <!--Text element-->
-                        <TextBlock Style="{StaticResource fontUrbanist}" Margin="10,1,0,0" Foreground="black"  FontSize="28" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource fontUrbanist}" Margin="10,1,0,0" Foreground="black"  FontSize="{TemplateBinding FontSize}" VerticalAlignment="Center">
                             
                         <ContentPresenter />
                         </TextBlock>

@@ -50,11 +50,22 @@ namespace ArchimedeFront.Pages
                 }
             }
 
-            if(Data.literal && Data.impliquantsEnAttente.Count > 0)
+     
+
+            if (Data.literal && Data.impliquantsEnAttente.Count > 0)
             {
+                // linear gradiant background for impliquants en attente
+
+                LinearGradientBrush LinearBrush = new LinearGradientBrush();
+                LinearBrush.StartPoint = new Point(0, 0);
+                LinearBrush.EndPoint = new Point(0, 1);
+                LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00CBBD"), 0.1));
+                LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00E17C"), 1));
+                //-------
+
                 foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                 {
-                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, Foreground=Brushes.Red,FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, Foreground= LinearBrush,FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
                 }
 
                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = nbVariables * 16, Child = null };
