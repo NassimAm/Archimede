@@ -67,8 +67,38 @@ class Synthese
         }
     }
 
+    //Fonction pour ajouter des fils à l'arbre syntaxique m-aire
+    //Une valeur inférieure à 2 pour le nombre d'entrée considérera que le nombre d'entrées est illimité
+    private static void DevelopChildren(List<ExprBoolNode> children, dnf.Type op, ExprBoolNode simple_node, int nb_entrees)
+    {
+        if (nb_entrees >= 2)
+        {
+            if ((simple_node.type != op) && (children.Count + 1 <= nb_entrees))
+            {
+                children.Add(simple_node);
+            }
+            else
+            {
+                if (children.Count + simple_node.children.Count <= nb_entrees)
+                    children.AddRange(simple_node.children);
+                else
+                {
+                    if (children.Count + 1 <= nb_entrees)
+                        children.Add(simple_node);
+                }
+            }
+        }
+        else
+        {
+            if (simple_node.type != op)
+                children.Add(simple_node);
+            else
+                children.AddRange(simple_node.children);
+        }
+    }
+
     //Fonction récursive pour la création de l'arbre m-aire à partir de l'abre binaire
-    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree)
+    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or)
     {
         if(tree.type == dnf.Type.VALEUR)
         {
@@ -81,14 +111,23 @@ class Synthese
             ExprBoolNode simple_node;
             foreach (ExprBoolNode node in tree.children)
             {
-                simple_node = Binary_To_N_ary(node);
-                if (simple_node.type != op)
+                simple_node = Binary_To_N_ary(node, nb_and, nb_or);
+                switch(tree.type)
                 {
-                    children.Add(simple_node);
-                }
-                else
-                {
-                    children.AddRange(simple_node.children);
+                    case dnf.Type.ET:
+                    {
+                        DevelopChildren(children, op, simple_node, nb_and);
+                        break;
+                    }
+                    case dnf.Type.OU:
+                    {
+                        DevelopChildren(children, op, simple_node, nb_or);
+                        break;
+                    }
+                    default:
+                    {
+                        break;
+                    }
                 }
             }
             return new ExprBoolNode(tree.type, children);
@@ -96,7 +135,7 @@ class Synthese
     }
 
     //Convertit une expression en arbre syntaxique m-aire
-    public static ExprBoolNode To_N_ary(string expression)
+    public static ExprBoolNode To_N_ary(string expression,int nb_and,int nb_or)
     {
         string postfix = "";
         List<string> listVars = new List<string>();
@@ -104,7 +143,7 @@ class Synthese
         ExprBool? root = ExprBool.expressionTree(postfix, listVars);
         
         ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
-        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root);
+        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root,nb_and,nb_or);
         return n_ary_root;
     }
 
@@ -313,7 +352,7 @@ class Synthese
         // construction du fichier 'synthese.txt' (en langage DOT)
         File.AppendAllText(path, "graph arbre{\n");
         File.AppendAllText(path, "\tsplines = ortho;\n");
-        File.AppendAllText(path, "\trankdir=\"LR\";\n");
+        File.AppendAllText(path, "\trankdir=\"BT\";\n");
         File.AppendAllText(path, "\tranksep=1;\n");
         File.AppendAllText(path, "\tnode[width=0.5, height=0.5, shape=box, fontsize=16];\n");
         File.AppendAllText(path, "\tedge[arrowhead=none,penwidth=2];\n");
@@ -376,7 +415,7 @@ class Synthese
         {
             listentrees = listentrees.Substring(0, listentrees.Length - 1);
             listentrees += "}";
-            File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,width=.001,height = {1}] \n", nbnils, root.children.Count / 4));
+            File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,height=.001,width = {1}] \n", nbnils, root.children.Count / 4));
             File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\"\n", nbnils, root.id));
             File.AppendAllText(path, String.Format("\t{0} -- \"NIL{1}\"\n", listentrees, nbnils++));
         }

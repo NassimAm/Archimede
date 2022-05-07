@@ -1,18 +1,41 @@
 graph arbre{
 	splines = ortho;
-	rankdir="LR";
+	rankdir="BT";
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"97abfa5c578043a6b2f62a39cf3b703c" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"188711b20af549fca6f82c0ab960fd62" [label="c"] 
-	"92c20579b26c4beeab79229d317b4cbb" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"4113fcadbd194c098da1cbfadf981385" [label="b"] 
-	"b310a6b4b9b74f6ba3ec6e6651184dc3" [label="a"] 
-	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "92c20579b26c4beeab79229d317b4cbb"
-	{"4113fcadbd194c098da1cbfadf981385","b310a6b4b9b74f6ba3ec6e6651184dc3"} -- "NIL0"
-	"NIL1" [label="",shape = box,width=.001,height = 0] 
-	"NIL1" -- "97abfa5c578043a6b2f62a39cf3b703c"
-	{"188711b20af549fca6f82c0ab960fd62","92c20579b26c4beeab79229d317b4cbb"} -- "NIL1"
+	"492d0feb91564faba3ecb521bcf9ba9c" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"35937f7f592e45bd948fdc37bf4456c5" [label="o"] 
+	"e17714ad02354be5b92cffa8e5e9b6c2" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"e41f3aeb872f49d5b67daae95c922df3" [label="n"] 
+	"f095af41dd9f416d9a8530d5a831c428" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"8ccf63bd790e48228cf96de73d09480e" [label="m"] 
+	"21f8dd4da3e9422ca31419578b5fc9d2" [label="l"] 
+	"4467ac3feed14d20aa28dfdfc112c538" [label="k"] 
+	"NIL0" [label="",shape = box,height=.001,width = 0] 
+	"NIL0" -- "f095af41dd9f416d9a8530d5a831c428"
+	{"8ccf63bd790e48228cf96de73d09480e","21f8dd4da3e9422ca31419578b5fc9d2","4467ac3feed14d20aa28dfdfc112c538"} -- "NIL0"
+	"8d4b6d65e57c41a2bfbbd78f703072bc" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"8e9ba150371943ddb87ba61b64f5df90" [label="i"] 
+	"a175d846908749dcbdd75400dd5739b8" [label="h"] 
+	"c7e97f73dea14cd5a93f91debb3e8fbf" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"86ed571bf27348d09eab5469ff7c86f7" [label="g"] 
+	"b6ae455053434db195075e11f8c65e59" [label="f"] 
+	"c50f7177add94f5bafa057cab3f9e0e9" [label="e"] 
+	"8cd10fa9ecc44ae99ab0f19e745c0474" [label="d"] 
+	"651a38f064bf46448a2ee8579b297cea" [label="c"] 
+	"bead0c8c7cc44d25b09a4a241711350a" [label="b"] 
+	"528db61b9d35416b95f6721806649104" [label="a"] 
+	"NIL1" [label="",shape = box,height=.001,width = 1] 
+	"NIL1" -- "c7e97f73dea14cd5a93f91debb3e8fbf"
+	{"86ed571bf27348d09eab5469ff7c86f7","b6ae455053434db195075e11f8c65e59","c50f7177add94f5bafa057cab3f9e0e9","8cd10fa9ecc44ae99ab0f19e745c0474","651a38f064bf46448a2ee8579b297cea","bead0c8c7cc44d25b09a4a241711350a","528db61b9d35416b95f6721806649104"} -- "NIL1"
+	"NIL2" [label="",shape = box,height=.001,width = 0] 
+	"NIL2" -- "8d4b6d65e57c41a2bfbbd78f703072bc"
+	{"8e9ba150371943ddb87ba61b64f5df90","a175d846908749dcbdd75400dd5739b8","c7e97f73dea14cd5a93f91debb3e8fbf"} -- "NIL2"
+	"NIL3" [label="",shape = box,height=.001,width = 0] 
+	"NIL3" -- "e17714ad02354be5b92cffa8e5e9b6c2"
+	{"e41f3aeb872f49d5b67daae95c922df3","f095af41dd9f416d9a8530d5a831c428","8d4b6d65e57c41a2bfbbd78f703072bc"} -- "NIL3"
+	"NIL4" [label="",shape = box,height=.001,width = 0] 
+	"NIL4" -- "492d0feb91564faba3ecb521bcf9ba9c"
+	{"35937f7f592e45bd948fdc37bf4456c5","e17714ad02354be5b92cffa8e5e9b6c2"} -- "NIL4"
 }
