@@ -13,6 +13,11 @@ using System.Windows.Media.Animation;
 using ArchimedeFront.Styles;
 using Archimède;
 using dnf;
+using System.Windows.Media;
+using DetectionErreurs;
+using System.Windows.Media.Effects;
+using System.Diagnostics;
+
 namespace ArchimedeFront.Pages
 
 {
@@ -22,10 +27,14 @@ namespace ArchimedeFront.Pages
     public partial class InputFormula : Page
     {
         int caretPosition = 0;
+        bool activePopUp = false;
         public InputFormula()
         {
             InitializeComponent();
-            remove_error();
+            SimplificationPopUP.Visibility = Visibility.Collapsed;
+            TransformationPopUP.Visibility = Visibility.Collapsed;
+            errorsContainer.Children.Clear();
+            enableButtons();
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
@@ -47,13 +56,18 @@ namespace ArchimedeFront.Pages
             }
             
             operatorButtonsContainer.Children.Add(buttons);
+            
         
         }
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
         {
+            
+            
+           errorsContainer.Children.Clear();
            Data.resete();
-           Data.expression = expression.Text;
+           Data.expression = expression.Text.Replace(" ","");
+            expression.Text = Data.expression;
             
             if ( numerique.IsChecked == true)
             {
@@ -83,32 +97,40 @@ namespace ArchimedeFront.Pages
 
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
-                    show_error("La liste de mintermes introduite depasse le nombre maximal de variables introduit ");
-                    Data.resete();
+                    errorsContainer.Children.Add(generateNewError("La liste de mintermes introduite depasse le nombre maximal de variables introduit "));
+                    disableButtons();
                     return;
                 }
             }
             else
             {
                 Data.literal = true;
-                Data.expressionTransforme = ExprBool.transformerDNF(Data.expression.Replace(" ", ""));
-                Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
-                Data.nbVariables = Data.variables.Count;
-                Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
-
-                if( Data.stringListMinterm.Count == 0)
+                List<string> errorMessages = new List<string>();
+                errorMessages= Erreurs.detectionErreurs(expression.Text);
+                if(errorMessages.Count > 0)
                 {
-                    Data.resultatFaux = true;
-                    NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.Absolute));
+                    disableButtons();
+                    foreach(string error in errorMessages)
+                    {
+                        errorsContainer.Children.Add(generateNewError(error));
+                    }
                     return;
                 }
+               
             }
-            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+
+            pageContent.IsHitTestVisible = false;
+            activePopUp = true;
+            pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
+            SimplificationPopUP.Visibility = Visibility.Visible;
         }
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Synthese.xaml", UriKind.Absolute));
+            pageContent.IsHitTestVisible = false;
+            pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
+            SynthesePopUP.Visibility = Visibility.Visible;
+            activePopUp=true;
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)
@@ -162,31 +184,15 @@ namespace ArchimedeFront.Pages
             
         }
 
-        private void simplifyButton_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void show_error(string message)
-        {
-            buttonsContainer.Opacity = 0.3;
-            buttonsContainer.IsHitTestVisible = false;
-            errorMessage.Text = message;
-            errorContainer.Visibility = Visibility.Visible;
-        }
-        private void remove_error()
-        {
-            if(buttonsContainer != null) { 
-            buttonsContainer.Opacity = 1;
-            buttonsContainer.IsHitTestVisible = true;
-            errorContainer.Visibility = Visibility.Collapsed;
-            }
-        }
-
+        
+       
         private void literale_Checked(object sender, RoutedEventArgs e)
+
         {
             if (numberOfVariablesInput == null) return;
-            
+            errorsContainer.Children.Clear();
+            enableButtons();
+            transformButton.Visibility = Visibility.Visible;
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             expression.Text = "A.B + !A.B.C";
             operatorButtonsContainer.Visibility = Visibility.Visible;
@@ -197,8 +203,10 @@ namespace ArchimedeFront.Pages
         private void numerique_Checked(object sender, RoutedEventArgs e)
         {
             if (numberOfVariablesInput == null) return;
-            
-            
+
+            errorsContainer.Children.Clear();
+            enableButtons();
+            transformButton.Visibility = Visibility.Collapsed;
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
             
@@ -212,15 +220,259 @@ namespace ArchimedeFront.Pages
             guidePopUp.BeginAnimation(OpacityProperty, da);
         }
 
-        private void nbVariables_SelectionChanged(object sender, RoutedEventArgs e)
+        
+        
+
+        private StackPanel generateNewError(string message)
         {
 
-            remove_error();
+            //generate exclamation mark
+            Border border = new Border()
+            {
+                BorderThickness = new Thickness(2, 2, 2, 2),
+                BorderBrush = Brushes.Red ,
+                Width = 24 ,
+                Height = 24 ,
+                CornerRadius = new CornerRadius(24) ,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Child = new TextBlock() { Style= FindResource("fontProductSans") as Style ,FontSize =18 , Foreground=Brushes.Red,FontWeight= FontWeights.SemiBold ,VerticalAlignment = VerticalAlignment.Center , HorizontalAlignment = HorizontalAlignment.Center , Text="!" }
+                
+
+            };
+            TextBlock textBlock = 
+            new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(8, 0, 4, 0), Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Text = "Erreur signalée :" };
+            StackPanel errorSignal = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                VerticalAlignment = VerticalAlignment.Top,
+            };
+            errorSignal.Children.Add(border);
+            errorSignal.Children.Add(textBlock);
+
+            TextBlock errorMessage = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Top, TextWrapping = TextWrapping.Wrap, Text = message};
+
+            StackPanel error = new StackPanel() { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(10, 2, 10, 8) };
+            error.Children.Add(errorSignal);
+            error.Children.Add(errorMessage);
+            return error;
         }
 
-        private void expression_SelectionChanged(object sender, RoutedEventArgs e)
+        private void disableButtons()
         {
-            remove_error();
+            if (buttonsContainer == null) return;
+            buttonsContainer.Opacity = 0.3;
+            buttonsContainer.IsHitTestVisible = false;
+        }
+
+        private void enableButtons()
+        {
+            if (buttonsContainer == null) return;
+            buttonsContainer.Opacity = 1;
+            buttonsContainer.IsHitTestVisible = true;
+        }
+
+        private void selectionChanged(object sender, RoutedEventArgs e)
+        {
+            enableButtons();
+        }
+
+        private void startSimplification_Click(object sender, RoutedEventArgs e)
+        {
+
+            for (int i = 0; i < radioButtons.Children.Count; i++)
+            {
+                if (((RadioButton)radioButtons.Children[i]).IsChecked == true)
+                {
+                    Data.codeTransformation = ((RadioButton)radioButtons.Children[i]).Name[2];
+                    break;
+                }
+            }
+
+            if (Data.literal)
+            {
+                
+                if(Data.codeTransformation == '1')
+                {
+                    ExprBool tree = ExprBool.ParseExpression(Data.expression);
+                    tree = ExprBool.cnf(tree);
+                    StringBuilder sb = new StringBuilder();
+                    ExprBool.inorder(tree, sb);
+                    Data.expressionTransforme = sb.ToString();
+                    Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
+                    Data.nbVariables = Data.variables.Count;
+                    Data.stringListMinterm = ExprBool.getMaxterms(Data.expressionTransforme, Data.variables);
+                }
+                else
+                {
+                    Data.expressionTransforme = ExprBool.transformerDNF(Data.expression);
+                    Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
+                    Data.nbVariables = Data.variables.Count;
+                    Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
+                }
+               
+
+                if (Data.stringListMinterm.Count == 0)
+                {
+                    Data.resultatFaux = true;
+                    NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.Absolute));
+                    return;
+                }
+
+            }
+            if (activerTrace.IsChecked == false) Data.trace = false;
+            else Data.trace = true;
+            
+
+            
+
+            if (Data.trace)
+            {
+                NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("pack://application:,,,/Pages/ResultSimpNoTrace.xaml", UriKind.Absolute));
+            }
+
+        }
+
+        private void startTransformation_Click(object sender, RoutedEventArgs e)
+        {
+            
+            for (int i = 0; i < radioButtonsContainer.Children.Count; i++)
+            {
+                if (((RadioButton)radioButtonsContainer.Children[i]).IsChecked == true)
+                {
+                    Data.codeTransformation = ((RadioButton)radioButtonsContainer.Children[i]).Name[1];
+                    break;
+                }
+            }
+
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/ResultTransformation.xaml", UriKind.Absolute));
+        }
+
+        private void startSynthese_Button_Click(object sender , RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Synthese.xaml", UriKind.Absolute));
+
+        }
+
+        private void transformButton_Click(object sender, RoutedEventArgs e)
+        {
+            errorsContainer.Children.Clear();
+            Data.resete();
+            Data.expression = expression.Text.Replace(" ", "");
+            expression.Text = Data.expression;
+
+            Data.literal = true;
+            List<string> errorMessages;
+            errorMessages = Erreurs.detectionErreurs(expression.Text);
+            if (errorMessages.Count > 0)
+            {
+                disableButtons();
+                foreach (string error in errorMessages)
+                {
+                    errorsContainer.Children.Add(generateNewError(error));
+                }
+                return;
+            }
+
+            pageContent.IsHitTestVisible = false;
+            pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
+            TransformationPopUP.Visibility = Visibility.Visible;
+            activePopUp = true;
+
+            
+
+
+        }
+
+        private void exitSimpPopUP_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            pageContent.IsHitTestVisible = true;
+            pageContent.Effect = null;
+            SimplificationPopUP.Visibility = Visibility.Collapsed;
+        }
+
+        private void exitTransformPopUP_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            pageContent.IsHitTestVisible = true;
+            pageContent.Effect = null;
+            TransformationPopUP.Visibility = Visibility.Collapsed;
+        }
+        public void exitSynthesePopUp_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            pageContent.IsHitTestVisible = true;
+            pageContent.Effect = null;
+            SynthesePopUP.Visibility = Visibility.Collapsed;
+        }
+
+        private void ET_ilimite_Checked(object sender, RoutedEventArgs e)
+        {
+            if (et_entree_input == null) return;
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 1;
+            da.To = 0;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+
+            switch (((RadioButton)sender).GroupName)
+            {
+                case "ET_entrees":
+                    et_entree_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "OU_entrees":
+                    ou_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NAND_entrees":
+                    nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NOR_entrees":
+                    nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+            }
+        }
+    
+
+        private void ET_limite_Checked(object sender, RoutedEventArgs e)
+        {
+            if (et_entree_input == null) return;
+
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 1;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+           
+
+            switch (((RadioButton)sender).GroupName)
+            {
+                case "ET_entrees":
+                    et_entree_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "OU_entrees":
+                    ou_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NAND_entrees":
+                    nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NOR_entrees":
+                    nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+            }
+        }
+
+        private void outPopUp_MouseDown(object sender , MouseButtonEventArgs e)
+        {
+            if (activePopUp)
+            {
+                pageContent.IsHitTestVisible = true;
+                pageContent.Effect = null;
+                SynthesePopUP.Visibility = Visibility.Collapsed;
+                TransformationPopUP.Visibility = Visibility.Collapsed;
+                SimplificationPopUP.Visibility = Visibility.Collapsed;
+            }
         }
     }
 

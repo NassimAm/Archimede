@@ -16,20 +16,21 @@ namespace ArchimedeFront.Pages
     /// </summary>
     public partial class Step1 : Page
     {
+        
          int stepNumber = 1;
-         int step4Number = 0;
-        bool stop = false;
+         bool stop = false;
+         bool avecTrace = true ;
 
         public Step1()
         {
-            InitializeComponent();
-
+           
+            avecTrace = true ;
             List<string> mintermes = new List<string>() ;
             if (Data.literal)
             {
               
 
-                if(Data.stringListMinterm.Count > 0) { 
+                
                 int maxNbUns = Data.stringListMinterm.MaxBy(x => x.Count(ch => (ch == '1' || ch == '-'))).Count(ch => (ch == '1' || ch == '-'));
 
                 foreach (string mintermBinCode in Data.stringListMinterm)
@@ -47,18 +48,16 @@ namespace ArchimedeFront.Pages
                  }
 
                  Data.expressionTransforme = string.Join(" + ", mintermes);
-                 expression.Text = Data.expressionTransforme;
 
-                }
-                else
-                {
-                   
+                InitializeComponent();
+                expression.Text = Data.expressionTransforme;
 
-                }
+
+
             }
             else
             {
-                expression.Text = string.Join(" ,",Data.listMintermesString);
+
                 //Corriger les codes binaires (en ajoutant des zéros au début pour qu'ils aient tous la mê^me longueur)
                 for (int i = 0; i < Data.mintermes.Count; i++)
                 {
@@ -70,13 +69,18 @@ namespace ArchimedeFront.Pages
                 Data.impliquants = Data.groupeMintermes.InitImpliquants(Data.mintermes);
                 Data.stringListMinterm = Data.stringListMinterm.Distinct().ToList();
                 mintermes = Data.listMintermesString;
+
+                InitializeComponent();
+                expression.Text = string.Join(" ,", Data.listMintermesString);
             }
-           
 
 
 
 
-            
+            expandButtons.Margin = new Thickness(0, 200, 0, 0);
+
+
+
             WrapPanel wrappanel;
             for (int i = 0;i < Data.stringListMinterm.Count;i++)
             {
@@ -97,6 +101,8 @@ namespace ArchimedeFront.Pages
                     mintermesList.Children.Add(wrappanel);
                 }
             }
+
+           
         }
 
         private void nextStepButton_click(object sender, RoutedEventArgs e)
@@ -105,13 +111,14 @@ namespace ArchimedeFront.Pages
             {
                 case 1:
                     _NextStep2.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step2.xaml", UriKind.RelativeOrAbsolute));
-                    step1.Margin = new Thickness(0, 0, 0,82);
+                    expandButtons.Margin = new Thickness(0, 0, 0, 0);
                    
                     stepNumber++;
                     expandButtons.BringIntoView();
                     break;
                 case 2:
                     _NextStep3.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step3.xaml", UriKind.RelativeOrAbsolute));
+
                     _NextStep2.Margin = new Thickness(0, 0, 0, 82);
                   
 
@@ -377,6 +384,7 @@ namespace ArchimedeFront.Pages
                     break;
                 case 6:
                     NavigationService.Navigate((new Uri("pack://application:,,,/Pages/InputFormula.xaml", UriKind.RelativeOrAbsolute)));
+                    
                     break;
                 default:
                     break;
@@ -394,9 +402,8 @@ namespace ArchimedeFront.Pages
 
         private void skipButton_Click(object sender, RoutedEventArgs e)
         {
-
-            _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
-            expandButtons.Visibility = Visibility.Collapsed;
+                    avecTrace = false;
+                    nextStepButton_click(sender, e);
             
         }
 
@@ -425,13 +432,58 @@ namespace ArchimedeFront.Pages
 
         private StackPanel generateSelectedImplicant(string bincode)
         {
+            LinearGradientBrush LinearBrush = new LinearGradientBrush();
+            LinearBrush.StartPoint = new Point(0, 0);
+            LinearBrush.EndPoint = new Point(0, 1);
+            LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00CBBD"), 0.1));
+            LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00E17C"), 1));
             StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
-            Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new Path() { Style = FindResource("greenIcon") as Style, Data = (Geometry)FindResource("RIGHT_ARROW_ICON") , Fill =Brushes.Red } };
-            TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode , Foreground = Brushes.Red };
+            Viewbox viewbox = new Viewbox() {Visibility=Visibility.Hidden, Width = 24, Margin = new Thickness(0, 0, 14, 0)};
+            TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode , Foreground = LinearBrush};
             result.Children.Add(viewbox);
             result.Children.Add(text);
             return result;
         }
 
+        private void _NextStep2_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if(!avecTrace)
+            nextStepButton_click(sender, null);
+        }
+
+        private void _NextStep3_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if(!avecTrace)
+            nextStepButton_click(sender, null);
+        }
+
+        private void _NextStep4_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (!avecTrace)
+            {
+                    nextStepButton_click(sender, null);
+                    while(stepNumber == -1)
+                    {
+                        nextStepButton_click(sender, null);
+
+                    }
+                    nextStepButton_click(sender, null);
+            }
+            
+
+        }
+
+        private void _NextStep5_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if(!avecTrace)
+            nextStepButton_click(sender, null);
+        }
+
+        private void _NextStep6_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            //nextStepButton_click(sender, null);
+            avecTrace = true;
+
+        }
     }
 }

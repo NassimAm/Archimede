@@ -30,7 +30,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition  Height="auto"/>
                 <RowDefinition />
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <ToggleButton Name="menu" 
@@ -71,7 +71,7 @@
                                                 Storyboard.TargetProperty="Width"
                                                 BeginTime="0:0:0"
                                                 From="60" To="250"
-                                                Duration="0:0:0.2">
+                                                Duration="0:0:0.15">
 
                                 </DoubleAnimation>
 
@@ -112,7 +112,7 @@
 
         </Grid>
         
-        <Grid  Grid.Column="1" >
+        <Grid  Grid.Column="1"  VerticalAlignment="Stretch">
             <Frame Name="_PageContent"  NavigationUIVisibility="Hidden" />
         </Grid>
 

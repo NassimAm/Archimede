@@ -13,6 +13,12 @@
     <Compile Update="Pages\InputFormula.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ResultSimpNoTrace.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ResultTransformation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\Step1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +55,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\InputFormula.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResultSimpNoTrace.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ResultTransformation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\Step1.xaml">

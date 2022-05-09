@@ -24,13 +24,22 @@ namespace ArchimedeFront.Pages
         public Step6()
         {
             InitializeComponent();
-            if(Data.resultatFaux )
+            string resultat;
+            if (Data.resultatFaux )
             {
                 FonctionSimplifieContainer.Text = "FAUX";
             }
             else
             {
-                string resultat = Mintermes.getResultatExpression(Data.literal, Data.impliquantsEssentiels, Data.variables);
+                if(Data.codeTransformation == '1')
+                {
+                     resultat = Mintermes.getResultatExpressionCNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
+                }
+                else
+                {
+                     resultat = Mintermes.getResultatExpressionDNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
+                }
+
                 if (resultat.Length == 0) FonctionSimplifieContainer.Text = "VRAI";
                 else FonctionSimplifieContainer.Text = resultat;
             }
