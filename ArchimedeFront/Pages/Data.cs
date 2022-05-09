@@ -10,7 +10,7 @@ namespace ArchimedeFront.Pages
 {
     public class Data
     {
-
+        public static bool trace = true;
         public static bool literal = true;
         public static string? expression; //l'expression a simplifier ;
         public static string? expressionTransforme; //l'expression apres transformation en dnf 

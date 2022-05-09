@@ -296,7 +296,88 @@ namespace Archimède
             impliquantsEssentiels = impliquantsEssentiels.Distinct().ToList();
         }
 
-        public static string getResultatExpression(bool literale,List<Impliquant> impliquantsEssentiels,List<string> alphabets)
+      
+
+
+        public static void getListImpliquantsEssentiaux(ref List<Impliquant> impliquantsEssentiels, List<string> stringListMinterm, List<Impliquant> impliquantsPremiers)
+        {
+            int impliquantIndex = -1;
+            int mintermeIndex = 0;
+            int impliquantLevel = 1;
+            int count;
+
+
+            //Tant que la liste des mintermes n'est pas vide
+            while (stringListMinterm.Count > 0)
+            {
+
+                mintermeIndex = 0;
+                while (mintermeIndex < stringListMinterm.Count)
+                {
+                    count = 0;
+                    impliquantIndex = -1;
+                    for (int j = 0; j < impliquantsPremiers.Count; j++)
+                    {
+                        //Si l'impliquant j peut représenter le minterme i
+                        if (impliquantsPremiers[j].represente(stringListMinterm[mintermeIndex]))
+                        {
+                            count += 1;
+                            impliquantIndex = j;
+                        }
+                    }
+                    /*Si le minterme i est représenté par impliquantLevel impliquant(s) initialement si le minterme i
+                    est représenté uniquement par un impliquant donc il ajouté à la liste des impliquants essentiels
+                    et supprimer le minterme de la liste des mintermes car il a ainsi été traité*/
+                    if (count == impliquantLevel)
+                    {
+
+                        impliquantsEssentiels.Add(impliquantsPremiers[impliquantIndex]);
+
+                        stringListMinterm.RemoveAt(mintermeIndex);
+
+                    }
+                    else //Sinon avancer dans la liste des mintermes
+                    {
+                        mintermeIndex += 1;
+                    }
+                }
+
+
+                //Vérifier si en choisissant les impliquants essentiels quels mintermes on a traité
+                mintermeIndex = 0;
+                while (mintermeIndex < stringListMinterm.Count)
+                {
+                    count = 0;
+                    for (int j = 0; j < impliquantsEssentiels.Count; j++)
+                    {
+                        //Si l'impliquant essentiel j peut représenter le minterme i
+                        if (impliquantsEssentiels[j].represente(stringListMinterm[mintermeIndex]))
+                        {
+                            count += 1;
+                        }
+                    }
+                    /*Si le minterme est représenté par au moins un impliquant essentiel donc ce minterme est supprimé de la liste des mintermes
+                     car il a ainsi été traité*/
+                    if (count > 0)
+                    {
+                        stringListMinterm.RemoveAt(mintermeIndex);
+                    }
+                    else //Sinon avancer dans la liste des mintermes
+                    {
+                        mintermeIndex += 1;
+                    }
+                }
+                impliquantLevel += 1;
+
+
+
+            }
+
+            //Supprimer les doublons s'ils existent
+            impliquantsEssentiels = impliquantsEssentiels.Distinct().ToList();
+        }
+
+        public static string getResultatExpressionDNF(bool literale, List<Impliquant> impliquantsEssentiels, List<string> alphabets)
         {
             StringBuilder alphabet;
             String resultat = "";
@@ -348,15 +429,106 @@ namespace Archimède
                 {
                     resultat = resultat.Substring(0, resultat.Length - 1);
                 }
-                resultat += " + ";
+                resultat += "+";
             }
 
             //Enlever le " + " additionnel à la fin
             if (resultat.Length >= 1)
             {
-                resultat = resultat.Substring(0, resultat.Length - 3);
+                resultat = resultat.Substring(0, resultat.Length - 1);
             }
             return resultat;
+        }
+
+
+        public static string getResultatExpressionCNF(bool literale, List<Impliquant> impliquantsEssentiels, List<string> alphabets)
+        {
+            StringBuilder alphabet;
+            String resultat = "(";
+            string alpha;
+            for (int i = 0; i < impliquantsEssentiels.Count; i++)
+            {
+                for (int j = 0; j < impliquantsEssentiels[i].bincode.Length; j++)
+                {
+                    if (impliquantsEssentiels[i].bincode[j] != '-')
+                    {
+
+                        if (literale)
+                        {
+                            alpha = alphabets[j];
+                        }
+                        else
+                        {
+
+                            alphabet = new StringBuilder(" ");
+
+                            if (j >= 26)
+                            {
+                                alphabet = new StringBuilder("  ");
+
+
+                                alphabet[0] = (char)((65 + j / 26 - 1));
+                                alphabet[1] = (char)(65 + (j % 26));
+
+                            }
+                            else alphabet[0] = (char)(65 + j);
+
+                            alpha = alphabet.ToString();
+
+                        }
+
+                        //Nommer les variables dans l'ordre alphabétique
+                        if (impliquantsEssentiels[i].bincode[j] == '1')
+                        {                   
+                            resultat += "!" + alpha + "+";
+                        }
+                        else
+                        {
+                            resultat += alpha + "+";
+                        }
+                    }
+                }
+                //Enlever le "+" additionnel à la fin
+                if (resultat.Length >= 1)
+                {
+                    resultat = resultat.Substring(0, resultat.Length - 1);
+                }
+                resultat += ").(";
+            }
+
+            //Enlever le " + " additionnel à la fin
+            if (resultat.Length >= 1)
+            {
+                resultat = resultat.Substring(0, resultat.Length - 2);
+            }
+            return resultat;
+        }
+
+        public static List<Impliquant> simplifyMintermes(List<Impliquant> impliquants , List<Impliquant> impliquantsEnAttente,Mintermes groupeMintermes ,List<string> stringListMinterm , bool literal)
+        {
+
+
+            #region GROUPAGE
+            List<Impliquant> impliquantsPremiers = new List<Impliquant>();
+            groupeMintermes.GrouperListes(impliquants);
+
+
+            List<Impliquant> impliquantsEssentiels = new List<Impliquant>();
+
+            int cptGroupes = 0; // compteur de nombre de groupages
+            bool stop = false;
+            while (!stop)
+            {
+
+                cptGroupes++;
+                stop = groupeMintermes.generateNextGroupe(literal, cptGroupes, impliquantsEnAttente, impliquantsPremiers);
+            }
+            impliquantsPremiers = impliquantsPremiers.Distinct().ToList();
+            #endregion
+
+            Mintermes.getListImpliquantsEssentiaux(ref impliquantsEssentiels, stringListMinterm, impliquantsPremiers);
+
+            return impliquantsEssentiels;
         }
     }
 }

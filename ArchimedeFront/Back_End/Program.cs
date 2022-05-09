@@ -36,7 +36,7 @@ namespace Archimède
                 string expression = Console.ReadLine().Replace(" ", "");
 
 
-                alphabets = ExprBool.getVariables(expression);
+                alphabets = ExprBool.getVariablesDNF(expression);
                 int nbVariables = alphabets.Count;
                 stringListMinterm = ExprBool.getMinterms(expression, alphabets);
 

@@ -126,3 +126,5 @@ C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\o
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Synthese.baml
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\ResultTransformation.g.cs
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\ResultTransformation.baml
+C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\ResultSimpNoTrace.g.cs
+C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\ResultSimpNoTrace.baml

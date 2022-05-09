@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace dnf
 {
 
-    //type des noeuds de l'arbre syntaxique
     enum Type
     {
 
@@ -15,7 +14,8 @@ namespace dnf
         ET,
         OU,
         NON,
-        NAND
+        NAND,
+        NOR
 
     };
 
@@ -66,7 +66,10 @@ namespace dnf
                     this.info = "+";
                     break;
                 case Type.NAND:
-                    this.info = "#";
+                    this.info = "↑";
+                    break;
+                case Type.NOR:
+                    this.info = "↓";
                     break;
 
             }
@@ -1071,7 +1074,7 @@ namespace dnf
                             ExprBool
                                 notA = new ExprBool(Type.NON, null, t2),
                                 notB = new ExprBool(Type.NON, null, t1),
-                                notA_notB = new ExprBool(Type.ET, notA, notB);
+                                notA_notB = new ExprBool(Type.OU, notA, notB);
                             st.Push(notA_notB);
                         }
                         else if (postfix[i] == '<' || postfix[i]== '↓')
@@ -1079,7 +1082,7 @@ namespace dnf
                             ExprBool
                                 notA = new ExprBool(Type.NON, null, t2),
                                 notB = new ExprBool(Type.NON, null, t1),
-                                notA_notB = new ExprBool(Type.OU, notA, notB);
+                                notA_notB = new ExprBool(Type.ET, notA, notB);
                             st.Push(notA_notB);
                         }
                         else if (postfix[i] == '-')
@@ -1133,7 +1136,7 @@ namespace dnf
         {
             foreach (string minterm in minterms)
             {
-                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm))
+                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm)) 
                     return true;
             }
             return false;
@@ -1219,10 +1222,10 @@ namespace dnf
             {
                 if (!IsNegatedMaxterm(maxterms[i]))
                 {
-                    // eliminate idempotence using a HashSet
+                    // eliminate idempotence using a HashSet 
                     HashSet<string> litterals = new HashSet<string>(maxterms[i].Split('+'));
                     List<string> maxterm = new List<string>(litterals);
-                    maxterm.Sort();
+                    maxterm.Sort();  
                     out_maxterms.Add(string.Join('+', maxterm));
                 }
                 else
@@ -1260,19 +1263,28 @@ namespace dnf
         /// <summary>
         /// inorder traversal for a binary tree with parathesis for better reading
         /// </summary>
-        public static void inorderParanthese(ExprBool? root)
+        public static void inorderParanthese(ExprBool? root , StringBuilder expression)
         {
             if (root == null)
                 return;
-            if (root.type == Type.OU || root.type == Type.NAND) Console.Write("(");
+            if (root.type == Type.OU || root.type == Type.NAND || root.type == Type.NOR) expression.Append("(");
             
-            inorderParanthese(root.fg);
+            inorderParanthese(root.fg , expression);
 
-            Console.Write(root.info);
+            switch (root.type)
+            {
+                case Type.NON: expression.Append("!"); break;
+                case Type.ET: expression.Append("."); break;
+                case Type.OU: expression.Append("+"); break;
+                case Type.NAND: expression.Append("↑"); break;
+                case Type.NOR: expression.Append("↓"); break;
+                case Type.VALEUR: expression.Append(root.info); break;
 
-            inorderParanthese(root.fd);
+            }
+
+            inorderParanthese(root.fd , expression);
           
-            if (root.type == Type.OU || root.type == Type.NAND) Console.Write(")");
+            if (root.type == Type.OU || root.type == Type.NAND || root.type == Type.NOR) expression.Append(")");
 
         }
 
@@ -1289,6 +1301,8 @@ namespace dnf
                 case Type.NON: expression.Append("!"); break;
                 case Type.ET: expression.Append("."); break;
                 case Type.OU: expression.Append("+"); break;
+                case Type.NAND: expression.Append("↑"); break;
+                case Type.NOR: expression.Append("↓"); break;
                 case Type.VALEUR: expression.Append(root.info); break;
 
             }
@@ -1474,7 +1488,7 @@ namespace dnf
                 if (root.fg.type == Type.NON && root.fd.type == Type.NON)
                 {
                     //!a+!b = !(a.b) = a nand b 
-                    return new ExprBool(Type.NAND, root.fg.fd, root.fd.fd);
+                    return new ExprBool(Type.NAND,onlyNand( root.fg.fd),onlyNand( root.fd.fd));
                 }
                 else
                 {
@@ -1492,6 +1506,87 @@ namespace dnf
                 ExprBool a_b = new ExprBool(Type.NAND, onlyNand(root.fg), onlyNand(root.fd)); //( a nand b )
 
                 return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nand b ) nand  ( a nand b )
+            }
+
+            return null;
+        }
+
+        //exprimer l'expression avec que des nor : 
+
+        public static ExprBool? onlyNor(ExprBool? root)
+        {
+            if (root == null) return null;
+
+            //hauteur ==  1   
+            if (root.type == Type.VALEUR) return root;//a
+
+            //hauteur == 2
+            switch (root.type)
+            {
+                case Type.NON:
+
+                    if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NOR, root, root.clone());  //!a 
+                    break;
+
+                case Type.OU:
+                    if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR)
+                    {
+                        //a.b
+                        ExprBool a_b = new ExprBool(Type.NOR, root.fg, root.fd); //( a nand b )
+                        return new ExprBool(Type.NOR, a_b, a_b.clone()); // ( a nand b ) nand  ( a nand b )
+                    }
+                    break;
+                case Type.ET:
+                    if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR)
+                    {
+                        //a+b
+                        ExprBool a_a = new ExprBool(Type.NOR, root.fg, root.fg.clone()); //( a nor a )
+                        ExprBool b_b = new ExprBool(Type.NOR, root.fd, root.fd.clone()); //( a nor a )
+
+                        return new ExprBool(Type.NOR, a_a, b_b); // ( a nor a ) nor  ( b nor b )
+                    }
+                    break;
+
+                default:
+                    return null;
+            }
+
+            //hauteur >= 3
+
+            if (root.type == Type.NON)
+            {
+                if (root.fd.type == Type.OU) return new ExprBool(Type.NOR, onlyNor(root.fd.fg), onlyNor(root.fd.fd));
+                else if (root.fd.type == Type.NON) return onlyNor(root.fd.fd); //double negation 
+                else
+                {
+                    ExprBool a = onlyNor(root.fd);
+                    return new ExprBool(Type.NOR, a, a.clone());
+                }
+            }
+
+            if (root.type == Type.ET)
+            {
+                if (root.fg.type == Type.NON && root.fd.type == Type.NON)
+                {
+                    //!a.!b = !(a+b) = a nor b 
+                    return new ExprBool(Type.NOR, onlyNor(root.fg.fd), onlyNor(root.fd.fd));
+                }
+                else
+                {
+                    ExprBool a = onlyNor(root.fg);
+                    ExprBool b = onlyNor(root.fd);
+                    ExprBool a_a = new ExprBool(Type.NOR, a, a.clone()); //( a nor a )
+                    ExprBool b_b = new ExprBool(Type.NOR, b, b.clone()); //( a nor a )
+
+                    return new ExprBool(Type.NOR, a_a, b_b); // ( a nor a ) nor  ( b nor b )
+                }
+            }
+
+            if (root.type == Type.OU)
+            {
+                ExprBool a_b = new ExprBool(Type.NOR, onlyNor(root.fg), onlyNor(root.fd)); //( a nor b )
+
+                return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nor b ) nor  ( a nor b )
             }
 
             return null;
@@ -1646,6 +1741,64 @@ namespace dnf
 
             return stringListMinterm.Distinct().ToList(); ;
         }
+
+        public static List<string> getMaxterms(string expression, List<string> alphabets)
+        {
+            int indexCh = 0;
+            StringBuilder bincode;
+            StringBuilder term;
+
+            List<string> stringListMinterm = new List<string>();
+            while (indexCh < expression.Length)
+            {
+                bincode = new StringBuilder();
+                term = new StringBuilder();
+
+                //sparer le minterme dans la variable term 
+                while ((indexCh < expression.Length) && (expression[indexCh] != '.'))
+                {
+                    term.Append(expression[indexCh]);
+                    indexCh++;
+                }
+
+                string[] termAlphabets = term.ToString().Split('+'); //tableau qui va contenir les varibales present dans un minterm 
+
+                for (int i = 0; i < alphabets.Count; i++)
+                {
+
+
+                    if (termAlphabets.Contains(alphabets[i]) && termAlphabets.Contains("!" + alphabets[i]))
+                    {
+                        // a.!a = vide 
+                        bincode.Clear();
+                        break;
+
+                    }
+                    else if (termAlphabets.Contains(alphabets[i]))
+                    {
+                        // a
+
+                        bincode.Append('0');
+                    }
+                    else if (termAlphabets.Contains("!" + alphabets[i]))
+                    {
+                        // !a 
+                        bincode.Append('1');
+                    }
+                    else
+                    {
+                        // a n'est pas present donc soit 0 soit 1 => -
+                        bincode.Append('-');
+                    }
+                }
+
+                if (bincode.Length > 0) stringListMinterm.Add(bincode.ToString());
+                indexCh++;
+            }
+
+            return stringListMinterm.Distinct().ToList(); ;
+        }
+
 
     }
 

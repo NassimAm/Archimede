@@ -27,7 +27,7 @@ namespace ArchimedeFront.Pages
     public partial class InputFormula : Page
     {
         int caretPosition = 0;
-
+        bool activePopUp = false;
         public InputFormula()
         {
             InitializeComponent();
@@ -116,20 +116,11 @@ namespace ArchimedeFront.Pages
                     }
                     return;
                 }
-                Data.expressionTransforme = ExprBool.transformerDNF(Data.expression);
-                Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
-                Data.nbVariables = Data.variables.Count;
-                Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
-
-                if( Data.stringListMinterm.Count == 0)
-                {
-                    Data.resultatFaux = true;
-                    NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.Absolute));
-                    return;
-                }
+               
             }
 
             pageContent.IsHitTestVisible = false;
+            activePopUp = true;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             SimplificationPopUP.Visibility = Visibility.Visible;
         }
@@ -139,6 +130,7 @@ namespace ArchimedeFront.Pages
             pageContent.IsHitTestVisible = false;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             SynthesePopUP.Visibility = Visibility.Visible;
+            activePopUp=true;
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)
@@ -287,13 +279,68 @@ namespace ArchimedeFront.Pages
 
         private void startSimplification_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+
+            for (int i = 0; i < radioButtons.Children.Count; i++)
+            {
+                if (((RadioButton)radioButtons.Children[i]).IsChecked == true)
+                {
+                    Data.codeTransformation = ((RadioButton)radioButtons.Children[i]).Name[2];
+                    break;
+                }
+            }
+
+            if (Data.literal)
+            {
+                
+                if(Data.codeTransformation == '1')
+                {
+                    ExprBool tree = ExprBool.ParseExpression(Data.expression);
+                    tree = ExprBool.cnf(tree);
+                    StringBuilder sb = new StringBuilder();
+                    ExprBool.inorder(tree, sb);
+                    Data.expressionTransforme = sb.ToString();
+                    Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
+                    Data.nbVariables = Data.variables.Count;
+                    Data.stringListMinterm = ExprBool.getMaxterms(Data.expressionTransforme, Data.variables);
+                }
+                else
+                {
+                    Data.expressionTransforme = ExprBool.transformerDNF(Data.expression);
+                    Data.variables = ExprBool.getVariables(Data.expressionTransforme).OrderBy(ch => ch).ToList();
+                    Data.nbVariables = Data.variables.Count;
+                    Data.stringListMinterm = ExprBool.getMinterms(Data.expressionTransforme, Data.variables);
+                }
+               
+
+                if (Data.stringListMinterm.Count == 0)
+                {
+                    Data.resultatFaux = true;
+                    NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.Absolute));
+                    return;
+                }
+
+            }
+            if (activerTrace.IsChecked == false) Data.trace = false;
+            else Data.trace = true;
+            
+
+            
+
+            if (Data.trace)
+            {
+                NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step1.xaml", UriKind.Absolute));
+
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("pack://application:,,,/Pages/ResultSimpNoTrace.xaml", UriKind.Absolute));
+            }
 
         }
 
         private void startTransformation_Click(object sender, RoutedEventArgs e)
         {
-            string codeTransformation;
+            
             for (int i = 0; i < radioButtonsContainer.Children.Count; i++)
             {
                 if (((RadioButton)radioButtonsContainer.Children[i]).IsChecked == true)
@@ -335,6 +382,7 @@ namespace ArchimedeFront.Pages
             pageContent.IsHitTestVisible = false;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             TransformationPopUP.Visibility = Visibility.Visible;
+            activePopUp = true;
 
             
 
@@ -412,6 +460,18 @@ namespace ArchimedeFront.Pages
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
                     break;
+            }
+        }
+
+        private void outPopUp_MouseDown(object sender , MouseButtonEventArgs e)
+        {
+            if (activePopUp)
+            {
+                pageContent.IsHitTestVisible = true;
+                pageContent.Effect = null;
+                SynthesePopUP.Visibility = Visibility.Collapsed;
+                TransformationPopUP.Visibility = Visibility.Collapsed;
+                SimplificationPopUP.Visibility = Visibility.Collapsed;
             }
         }
     }

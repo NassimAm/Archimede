@@ -45,10 +45,10 @@ namespace ArchimedeFront.Pages
                     tree = ExprBool.cnf(tree);
                     ExprBool.inorder(tree, sb);
                     result = sb.ToString();
-                    result = ExprBool.SimplifyCNFExpression(result);
+                   //result = ExprBool.SimplifyCNFExpression(result);
                    
                     if (result == "0")
-                    { expressionTransforme.Text = "Faux";
+                    {   expressionTransforme.Text = "Faux";
                         return;
                     }
                     if (result == "1") {
@@ -78,22 +78,17 @@ namespace ArchimedeFront.Pages
                     ExprBool.inorder(tree, sb);
                     result = sb.ToString();
                     sb = new StringBuilder();
-                    sb.Append("(");
-                    for (int i = 0; i < result.Length; i++)
-                    {
-                        if (result[i] != '↑')
-                        {
-                            sb.Append(result[i]);
-                        }
-                        else
-                        {
-                            sb.Append(")↑(");
-                        }
-                    }
-                    sb.Append(")");
-                    result = sb.ToString();
+                    ExprBool.inorderParanthese(tree, sb);
+                    result= sb.ToString();
                     break;
                 case '3':
+                    tree = ExprBool.ParseExpression(Data.expression);
+                    tree = ExprBool.onlyNor(tree);
+                    
+                    sb = new StringBuilder();
+                    ExprBool.inorderParanthese(tree, sb);
+                   
+                    result = sb.ToString();
                     break;
                 default:
                     return;
