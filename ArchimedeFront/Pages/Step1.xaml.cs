@@ -384,6 +384,7 @@ namespace ArchimedeFront.Pages
                     break;
                 case 6:
                     NavigationService.Navigate((new Uri("pack://application:,,,/Pages/InputFormula.xaml", UriKind.RelativeOrAbsolute)));
+                    
                     break;
                 default:
                     break;

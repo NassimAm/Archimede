@@ -10,6 +10,7 @@ namespace ArchimedeFront.Pages
 {
     public class Data
     {
+
         public static bool literal = true;
         public static string? expression; //l'expression a simplifier ;
         public static string? expressionTransforme; //l'expression apres transformation en dnf 
@@ -26,6 +27,7 @@ namespace ArchimedeFront.Pages
         public static List<Impliquant> impliquantsEssentiels = new List<Impliquant>();
         public static List<List<char>> impliquantsType = new List<List<char>>();
         public static bool resultatFaux = false;
+        public static char codeTransformation; // 0 dnf 1 cnf 2 onlyNand 3 onlyNor
 
         public static void resete()
         {

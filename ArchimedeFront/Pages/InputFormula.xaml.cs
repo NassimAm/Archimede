@@ -16,6 +16,7 @@ using dnf;
 using System.Windows.Media;
 using DetectionErreurs;
 using System.Windows.Media.Effects;
+using System.Diagnostics;
 
 namespace ArchimedeFront.Pages
 
@@ -55,6 +56,7 @@ namespace ArchimedeFront.Pages
             }
             
             operatorButtonsContainer.Children.Add(buttons);
+            
         
         }
 
@@ -134,7 +136,9 @@ namespace ArchimedeFront.Pages
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Synthese.xaml", UriKind.Absolute));
+            pageContent.IsHitTestVisible = false;
+            pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
+            SynthesePopUP.Visibility = Visibility.Visible;
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)
@@ -196,6 +200,7 @@ namespace ArchimedeFront.Pages
             if (numberOfVariablesInput == null) return;
             errorsContainer.Children.Clear();
             enableButtons();
+            transformButton.Visibility = Visibility.Visible;
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             expression.Text = "A.B + !A.B.C";
             operatorButtonsContainer.Visibility = Visibility.Visible;
@@ -209,6 +214,7 @@ namespace ArchimedeFront.Pages
 
             errorsContainer.Children.Clear();
             enableButtons();
+            transformButton.Visibility = Visibility.Collapsed;
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
             
@@ -287,14 +293,126 @@ namespace ArchimedeFront.Pages
 
         private void startTransformation_Click(object sender, RoutedEventArgs e)
         {
+            string codeTransformation;
+            for (int i = 0; i < radioButtonsContainer.Children.Count; i++)
+            {
+                if (((RadioButton)radioButtonsContainer.Children[i]).IsChecked == true)
+                {
+                    Data.codeTransformation = ((RadioButton)radioButtonsContainer.Children[i]).Name[1];
+                    break;
+                }
+            }
+
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/ResultTransformation.xaml", UriKind.Absolute));
+        }
+
+        private void startSynthese_Button_Click(object sender , RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Synthese.xaml", UriKind.Absolute));
 
         }
 
         private void transformButton_Click(object sender, RoutedEventArgs e)
         {
+            errorsContainer.Children.Clear();
+            Data.resete();
+            Data.expression = expression.Text.Replace(" ", "");
+            expression.Text = Data.expression;
+
+            Data.literal = true;
+            List<string> errorMessages;
+            errorMessages = Erreurs.detectionErreurs(expression.Text);
+            if (errorMessages.Count > 0)
+            {
+                disableButtons();
+                foreach (string error in errorMessages)
+                {
+                    errorsContainer.Children.Add(generateNewError(error));
+                }
+                return;
+            }
+
             pageContent.IsHitTestVisible = false;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             TransformationPopUP.Visibility = Visibility.Visible;
+
+            
+
+
+        }
+
+        private void exitSimpPopUP_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            pageContent.IsHitTestVisible = true;
+            pageContent.Effect = null;
+            SimplificationPopUP.Visibility = Visibility.Collapsed;
+        }
+
+        private void exitTransformPopUP_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            pageContent.IsHitTestVisible = true;
+            pageContent.Effect = null;
+            TransformationPopUP.Visibility = Visibility.Collapsed;
+        }
+        public void exitSynthesePopUp_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            pageContent.IsHitTestVisible = true;
+            pageContent.Effect = null;
+            SynthesePopUP.Visibility = Visibility.Collapsed;
+        }
+
+        private void ET_ilimite_Checked(object sender, RoutedEventArgs e)
+        {
+            if (et_entree_input == null) return;
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 1;
+            da.To = 0;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+
+
+            switch (((RadioButton)sender).GroupName)
+            {
+                case "ET_entrees":
+                    et_entree_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "OU_entrees":
+                    ou_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NAND_entrees":
+                    nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NOR_entrees":
+                    nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+            }
+        }
+    
+
+        private void ET_limite_Checked(object sender, RoutedEventArgs e)
+        {
+            if (et_entree_input == null) return;
+
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 1;
+            da.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+           
+
+            switch (((RadioButton)sender).GroupName)
+            {
+                case "ET_entrees":
+                    et_entree_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "OU_entrees":
+                    ou_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NAND_entrees":
+                    nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "NOR_entrees":
+                    nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+            }
         }
     }
 

@@ -15,7 +15,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition  />
             </Grid.RowDefinitions>
-            <Border Name="SimplificationPopUP" Panel.ZIndex="100" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="50,36">
+            <Border Name="SimplificationPopUP" d:Visibility="Collapsed"  Panel.ZIndex="100" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center"  Padding="0,14,0,24">
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                         <LinearGradientBrush.GradientStops>
@@ -24,25 +24,47 @@
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <StackPanel HorizontalAlignment="Center" >
-                    <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Vous voulez simplifier l’expression en forme :</TextBlock>
-                    <StackPanel HorizontalAlignment="Left" Margin="0,14,0,20">
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
-                    </StackPanel>
-                    <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Voulez-vous afficher la trace ?</TextBlock>
-                    <StackPanel Orientation="Horizontal" Margin="0,10">
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,2,16,2" IsChecked="True" FontSize="22"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="Trace" >Oui</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,2"  FontSize="22"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="Trace"  >Non</RadioButton>
-                    </StackPanel>
+                <StackPanel  >
+                    <Grid HorizontalAlignment="Right" Background="White" Cursor="Hand" MouseDown="exitSimpPopUP_MouseDown" Margin="18,0">
+                        <Viewbox  Width="28" HorizontalAlignment="Right"  >
 
-                    <Button Style="{StaticResource greenSamallButton}"  Cursor="Hand" HorizontalAlignment="Right" Padding="16,2" Click='startSimplification_Click'>Aller</Button>
+                        <Path x:Name="menuIcon" 
+                        Data="{DynamicResource EXIT_ICON}"                
+                        VerticalAlignment="Top">
+                            <Path.Fill>
+                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                        <GradientStop Offset="1"   Color="#00E17C"  />
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Path.Fill>
+                        </Path>
 
+                    </Viewbox>
+                    </Grid>
+                    
+                    <StackPanel HorizontalAlignment="Center" Margin="58,8">
+                        <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Vous voulez simplifier l’expression en forme :</TextBlock>
+                        <StackPanel HorizontalAlignment="Left" Margin="0,14,0,20">
+                            <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
+                            <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
+                            <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
+                            <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Voulez-vous afficher la trace ?</TextBlock>
+                        <StackPanel Orientation="Horizontal" Margin="0,10">
+                            <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,2,16,2" IsChecked="True" FontSize="22"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="Trace" >Oui</RadioButton>
+                            <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,2"  FontSize="22"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="Trace"  >Non</RadioButton>
+                        </StackPanel>
+
+                        <Button Style="{StaticResource greenSamallButton}"  Cursor="Hand" HorizontalAlignment="Right" Padding="16,2" Click='startSimplification_Click'>Aller</Button>
+
+                    </StackPanel>
                 </StackPanel>
+                
             </Border>
-            <Border Name="TransformationPopUP" Panel.ZIndex="101" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="50,36">
+            <Border Name="TransformationPopUP" d:Visibility="Collapsed"  Panel.ZIndex="101" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,14,0,24">
                 <Border.BorderBrush>
                     <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                         <LinearGradientBrush.GradientStops>
@@ -51,19 +73,232 @@
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
                 </Border.BorderBrush>
-                <StackPanel HorizontalAlignment="Center" >
+                <StackPanel>
+                    <Grid HorizontalAlignment="Right" Background="White" Cursor="Hand" MouseDown="exitTransformPopUP_MouseDown" Margin="18,0">
+                        <Viewbox  Width="28" HorizontalAlignment="Right"  >
+
+                            <Path 
+                        Data="{DynamicResource EXIT_ICON}"                
+                        VerticalAlignment="Top">
+                                <Path.Fill>
+                                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                            <GradientStop Offset="1"   Color="#00E17C"  />
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+
+                        </Viewbox>
+                    </Grid>
+                    <StackPanel HorizontalAlignment="Center"  Margin="54,8">
                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Vous voulez transformer l’expression en forme :</TextBlock>
-                    <StackPanel HorizontalAlignment="Left" Margin="0,14,0,20">
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
-                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
+                    <StackPanel Name="radioButtonsContainer" HorizontalAlignment="Left" Margin="0,14,0,20">
+                        <RadioButton Name="_0"  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
+                        <RadioButton Name="_1" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
+                        <RadioButton Name="_2" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
+                        <RadioButton Name="_3" Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
                     </StackPanel>
                   
 
                     <Button Style="{StaticResource greenSamallButton}"  Cursor="Hand" HorizontalAlignment="Right" Padding="16,2" Click='startTransformation_Click'>Aller</Button>
 
                 </StackPanel>
+                </StackPanel>
+                    
+            </Border>
+            <Border Name="SynthesePopUP" Visibility="Collapsed"  Panel.ZIndex="102" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,14,0,24">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                            <GradientStop Offset="1"   Color="#00E17C"  />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <StackPanel>
+                    <Grid HorizontalAlignment="Right" Background="White" Cursor="Hand" MouseDown="exitSynthesePopUp_MouseDown" Margin="18,0">
+                        <Viewbox  Width="28" HorizontalAlignment="Right"  >
+
+                            <Path 
+                        Data="{DynamicResource EXIT_ICON}"                
+                        VerticalAlignment="Top">
+                                <Path.Fill>
+                                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                            <GradientStop Offset="1"   Color="#00E17C"  />
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+
+                        </Viewbox>
+                    </Grid>
+                    <StackPanel HorizontalAlignment="Center"  Margin="54,8">
+                        <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="450" TextAlignment="Left">Veuillez introduire le nombre d'entrées pour chacune des portes logique</TextBlock>
+                        <StackPanel HorizontalAlignment="Left" Margin="0,14,0,20">
+                            <StackPanel Margin="0,8">
+                                <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">ET</TextBlock>
+                                <StackPanel Orientation="Horizontal" >  
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="ET_entrees" Checked="ET_ilimite_Checked" >Illimité</RadioButton>
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="ET_entrees" Checked="ET_limite_Checked">Llimité</RadioButton>
+                                    <StackPanel Name="et_entree_input" Orientation="Horizontal" Opacity="0">
+                                        <Border    BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                        <GradientStop Offset="1"   Color="#00E17C"  />
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+
+                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+
+                                        </Border>
+                                        <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
+
+
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                            </StackPanel>
+                            <StackPanel Margin="0,8">
+                                <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">OU</TextBlock>
+                                <StackPanel Orientation="Horizontal" >
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="OU_entrees" Checked="ET_ilimite_Checked">Illimité</RadioButton>
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="OU_entrees" Checked="ET_limite_Checked">Llimité</RadioButton>
+                                    <StackPanel Name="ou_entrees_input" Orientation="Horizontal" Opacity="0">
+                                        <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                        <GradientStop Offset="1"   Color="#00E17C"  />
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+
+                                        </Border>
+                                        <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
+
+                                    </StackPanel>
+                                    
+                                </StackPanel>
+
+                            </StackPanel>
+                            <StackPanel Margin="0,8">
+                                <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">NAND</TextBlock>
+                                <StackPanel Orientation="Horizontal" >
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NAND_entrees" Checked="ET_ilimite_Checked" >Illimité</RadioButton>
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NAND_entrees"  Checked="ET_limite_Checked">Llimité</RadioButton>
+                                    <StackPanel Name="nand_entrees_input" Orientation="Horizontal" Opacity="0">
+                                        <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                        <GradientStop Offset="1"   Color="#00E17C"  />
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+
+                                        </Border>
+                                        <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
+
+                                    </StackPanel>
+                                   
+                                </StackPanel>
+                                
+                            </StackPanel>
+                            <StackPanel Margin="0,8">
+                                <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">NOR</TextBlock>
+                                <StackPanel Orientation="Horizontal" >
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NOR_entrees" Checked="ET_ilimite_Checked">Illimité</RadioButton>
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NOR_entrees"  Checked="ET_limite_Checked">Llimité</RadioButton>
+                                    <StackPanel Name="nor_entrees_input" Orientation="Horizontal" Opacity="0">
+                                        <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                        <GradientStop Offset="1"   Color="#00E17C"  />
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+
+                                        </Border>
+                                        <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
+                                    </StackPanel>
+                                   
+                                </StackPanel>
+
+                            </StackPanel>
+                            <!--
+
+                            <StackPanel Margin="0,8">
+                                <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">XOR</TextBlock>
+                                <StackPanel Orientation="Horizontal" >
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XOR_entrees" Checked="ET_ilimite_Checked" >Illimité</RadioButton>
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XOR_entrees" Checked="ET_limite_Checked">Llimité</RadioButton>
+                                    <StackPanel Name="xor_entees_input">
+                                        <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                        <GradientStop Offset="1"   Color="#00E17C"  />
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+
+                                        </Border>
+                                        <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
+
+                                    </StackPanel>
+                                    
+                                </StackPanel>
+
+                            </StackPanel>
+                            <StackPanel Margin="0,8">
+                                <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">XNOR</TextBlock>
+                                <StackPanel Orientation="Horizontal" >
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XNOR_entrees" >Illimité</RadioButton>
+                                    <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XNOR_entrees" >Llimité</RadioButton>
+                                    <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                                    <GradientStop Offset="1"   Color="#00E17C"  />
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+
+                                    </Border>
+                                    <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
+
+                                </StackPanel>
+
+                            </StackPanel>
+-->
+                        </StackPanel>
+                        
+                        
+
+
+                        <Button Style="{StaticResource greenSamallButton}"  Cursor="Hand" HorizontalAlignment="Right" Padding="16,2" Click='startSynthese_Button_Click'>Aller</Button>
+
+                    </StackPanel>
+                </StackPanel>
+
             </Border>
             <StackPanel Name="pageContent" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Style="{StaticResource fontProductSans}" FontSize="46" Foreground="#002725" TextWrapping="Wrap" TextAlignment="Center" >
@@ -142,7 +377,7 @@
 
           
                 <WrapPanel Name="buttonsContainer" Orientation="Horizontal" HorizontalAlignment="Center"   Margin="0,24">
-                    <Button Style="{StaticResource greenButton}" Margin="14,4" Click="transformButton_Click" Cursor="Hand" >Transformation</Button>
+                    <Button Name="transformButton" Style="{StaticResource greenButton}" Margin="14,4" Click="transformButton_Click" Cursor="Hand" >Transformation</Button>
 
                     <Button Name="simplifyButton" Style="{StaticResource greenButton}" Margin="14,4" Click="simplifyButton_Click" >Simplification</Button>
                     <Button Style="{StaticResource greenButton}" Margin="14,4" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
