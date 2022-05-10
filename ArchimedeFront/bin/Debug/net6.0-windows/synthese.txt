@@ -4,10 +4,24 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"3fa060628380410e9a25df33d1d2db0d" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"d49d8f8127b946e9b11b3c9684a4a0dd" [label="B "] 
-	"ef3b172873664def98c3d19d4c632338" [label="A"] 
+	"30f6917bb19345609d17355d44edb59e" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"66f4e7271ae44116b5c499acfc2183b1" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"d782925988fd4a6aa53d5d6e940aa23f" [label="B"] 
+	"85423e6e779f45fab2747d25c5042f45" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"3d3613bf04e447eaa9d5b98a3569f6ae" [label="A"] 
 	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "3fa060628380410e9a25df33d1d2db0d"
-	{"d49d8f8127b946e9b11b3c9684a4a0dd","ef3b172873664def98c3d19d4c632338"} -- "NIL0"
+	"NIL0" -- "85423e6e779f45fab2747d25c5042f45"
+	{"3d3613bf04e447eaa9d5b98a3569f6ae"} -- "NIL0"
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "66f4e7271ae44116b5c499acfc2183b1"
+	{"d782925988fd4a6aa53d5d6e940aa23f","85423e6e779f45fab2747d25c5042f45"} -- "NIL1"
+	"a645c003e9da4baca67f53d40ecf7ae5" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"83c47e0add1d41e29e1f07c389d52c0e" [label="B"] 
+	"0bb87002f91e4dcb9aa5ba555757ffc9" [label="A"] 
+	"NIL2" [label="",shape = box,width=.001,height = 0] 
+	"NIL2" -- "a645c003e9da4baca67f53d40ecf7ae5"
+	{"83c47e0add1d41e29e1f07c389d52c0e","0bb87002f91e4dcb9aa5ba555757ffc9"} -- "NIL2"
+	"NIL3" [label="",shape = box,width=.001,height = 0] 
+	"NIL3" -- "30f6917bb19345609d17355d44edb59e"
+	{"66f4e7271ae44116b5c499acfc2183b1","a645c003e9da4baca67f53d40ecf7ae5"} -- "NIL3"
 }

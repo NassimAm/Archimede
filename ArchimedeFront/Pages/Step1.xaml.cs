@@ -144,7 +144,7 @@ namespace ArchimedeFront.Pages
                     StackPanel groupesTable;
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) ,VerticalAlignment = VerticalAlignment.Top};
-                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Left , Height=60 });
+                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Left , Height=60 });
 
                     foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
@@ -243,7 +243,7 @@ namespace ArchimedeFront.Pages
                         }
 
                         groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
-                        if(groupesTable.Children.Count > 0) groupesTable.Children.Insert(0,new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Les adjacents tirés à partir du 1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Center , MaxWidth=300 ,Height=60});
+                        if(groupesTable.Children.Count > 0) groupesTable.Children.Insert(0,new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Les adjacents tirés à partir du 1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Center , MaxWidth=300 ,Height=60});
 
                         groupesMatrix.Children.Add(groupesTable);
 
@@ -265,7 +265,7 @@ namespace ArchimedeFront.Pages
 
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
-                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = groupeNumber + "eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Left, Height = 60 });
+                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = groupeNumber + "eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Left, Height = 60 });
 
                         foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
@@ -355,7 +355,7 @@ namespace ArchimedeFront.Pages
                             }
 
                             groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
-                            if (groupesTable.Children.Count > 0) groupesTable.Children.Insert(0, new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Les adjacents tirés à partir du "+groupeNumber+"eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Center, MaxWidth = 300, Height = 60 });
+                            if (groupesTable.Children.Count > 0) groupesTable.Children.Insert(0, new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Les adjacents tirés à partir du "+groupeNumber+"eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Center, MaxWidth = 300, Height = 60 });
 
                             groupesMatrix.Children.Add(groupesTable);
                           
@@ -505,6 +505,28 @@ namespace ArchimedeFront.Pages
             //nextStepButton_click(sender, null);
             avecTrace = true;
 
+        }
+
+        private void expandButtons_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(e.NewSize.Width < 500)
+            {
+                expandButtonContainer.HorizontalAlignment = HorizontalAlignment.Center;
+                expandButtonContainer.Margin=new Thickness(0, 0, 0, 0);
+                skipButtonContainer.HorizontalAlignment = HorizontalAlignment.Center;
+                skipButtonContainer.Margin = new Thickness(0, 0, 0, 0);
+                DockPanel.SetDock(expandButtonContainer, Dock.Top);
+                DockPanel.SetDock(skipButtonContainer,Dock.Bottom);
+            }
+            else
+            {
+                expandButtonContainer.HorizontalAlignment = HorizontalAlignment.Right;
+                skipButtonContainer.Margin = new Thickness(100, 0, 10, 0);
+                skipButtonContainer.HorizontalAlignment = HorizontalAlignment.Left;
+                expandButtonContainer.Margin = new Thickness(10, 0, 100, 0);
+                DockPanel.SetDock(expandButtonContainer, Dock.Right);
+                DockPanel.SetDock(skipButtonContainer, Dock.Left);
+            }
         }
     }
 }

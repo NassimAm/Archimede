@@ -12,7 +12,7 @@
 
 
         <TextBlock Style="{StaticResource paragraphe}" Margin="20,10,20,18" FontSize="40" FontWeight="Bold"> 
-            Votre expression
+            L’expression introduite
         </TextBlock>
 
         <Border HorizontalAlignment="Center" Padding="20,0" BorderThickness="2" CornerRadius="6"   Height="52" Margin="10,10">
@@ -36,9 +36,11 @@
         </Border>
 
         <TextBlock Style="{StaticResource paragraphe}" Margin="20,50,20,18" FontSize="40" FontWeight="Bold"> 
-            L’expression simplifiée
+            L’expression après simplification
         </TextBlock>
 
+        
+        
         <Border BorderThickness="2" CornerRadius="6" HorizontalAlignment="Center"  Padding="20,8" Margin="10,10" >
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">

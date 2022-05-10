@@ -22,7 +22,8 @@ namespace ArchimedeFront.Pages
     {
         public SynthesePage()
         {
-            Synthese.ExprBoolNode tree = Synthese.To_N_ary(Data.expression, Data.nb_and, Data.nb_or);
+
+            Synthese.ExprBoolNode tree = Synthese.To_N_ary(Data.expression.Replace(" ",""), Data.nb_and, Data.nb_or);
             Synthese.Circuit_Visualisation(tree);
             InitializeComponent();
         }

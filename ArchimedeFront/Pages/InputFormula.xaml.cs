@@ -54,8 +54,12 @@ namespace ArchimedeFront.Pages
                 operatorButton.Click += new RoutedEventHandler( operator_Click );
                 buttons.Children.Add(operatorButton);
             }
-            
+
             operatorButtonsContainer.Children.Add(buttons);
+
+
+
+           
             
         
         }
@@ -433,6 +437,12 @@ namespace ArchimedeFront.Pages
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
                     break;
+                case "XOR_entrees":
+                    xor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "XNOR_entrees":
+                    xnor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
             }
         }
     
@@ -462,6 +472,12 @@ namespace ArchimedeFront.Pages
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "XOR_entrees":
+                    xor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "XNOR_entrees":
+                    xnor_entrees_input.BeginAnimation(OpacityProperty, da);
                     break;
             }
         }

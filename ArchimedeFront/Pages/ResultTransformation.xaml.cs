@@ -28,7 +28,7 @@ namespace ArchimedeFront.Pages
             ExprBool? tree = null;
             StringBuilder sb = new StringBuilder();
             string result = "";
-
+            expression.Text = Data.expression;
             switch (Data.codeTransformation)
             {
                 

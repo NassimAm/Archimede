@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ArchimedeFront.Pages"
+      xmlns:local="clr-namespace:ArchimedeFront.Pages" xmlns:styles="clr-namespace:ArchimedeFront.Styles"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="Step1">
@@ -48,8 +48,8 @@
         <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
             <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" VerticalAlignment="Top" Margin="26,0"/>
         </ScrollViewer>
-            <WrapPanel Name="impliquant_labels" HorizontalAlignment="Center" Orientation="Horizontal" Visibility="Collapsed">
-                <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" HorizontalAlignment="Center" Padding="12,0" Margin="26,30,26,20" >
+            <styles:AlignableWrapPanel x:Name="impliquant_labels" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,30" >
+                <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" HorizontalAlignment="Center" Padding="12,0" Margin="26,0,26,10" >
                     <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,6">
                         <Viewbox Width="22" VerticalAlignment="Center">
                             <Path Data="{DynamicResource CHECKED_ICON}"
@@ -62,7 +62,7 @@
                         </TextBlock>
                     </StackPanel>
                 </Border>
-                <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" HorizontalAlignment="Center" Padding="12,0" Margin="0,30,0,20" >
+                <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" HorizontalAlignment="Center" Padding="12,0" Margin="0,0,0,10" >
                     <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,6">
                         <Ellipse Style="{StaticResource greenDot}"></Ellipse>
 
@@ -71,26 +71,22 @@
                         </TextBlock>
                     </StackPanel>
                 </Border>
-            </WrapPanel>
+            </styles:AlignableWrapPanel>
             
             <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep6_LoadCompleted"></Frame>
 
-        <Grid Name="expandButtons" VerticalAlignment="Bottom" Margin="0,0,0,0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Margin="100,0,10,0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
-                <Button Name="skipButton" Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click" Padding="0,24"/>
-            </StackPanel>
-            <StackPanel Margin="10,0,100,0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                <Button Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" Padding="0,24" />
-            </StackPanel>
-
-        </Grid>
+            <DockPanel Name="expandButtons"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,0" SizeChanged="expandButtons_SizeChanged" >
+                
+                <StackPanel Name="skipButtonContainer"  Margin="100,0,10,0" Orientation="Horizontal" DockPanel.Dock="Left" HorizontalAlignment="Left"  >
+                    <Button Name="skipButton" Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click" Padding="0,24"/>
+                </StackPanel>
+                
+                <StackPanel Name="expandButtonContainer"  Margin="10,0,100,0" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button  Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" Padding="0,24" />
+                </StackPanel>
+            </DockPanel>
+      
         
     </StackPanel>
     </ScrollViewer>
