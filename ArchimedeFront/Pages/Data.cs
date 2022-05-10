@@ -29,6 +29,10 @@ namespace ArchimedeFront.Pages
         public static bool resultatFaux = false;
         public static char codeTransformation; // 0 dnf 1 cnf 2 onlyNand 3 onlyNor
 
+        //Synthese
+        public static int nb_and = -1;
+        public static int nb_or = -1;
+
         public static void resete()
         {
             literal = true;

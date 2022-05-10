@@ -1,0 +1,13 @@
+graph arbre{
+	splines = ortho;
+	rankdir="LR";
+	ranksep=1;
+	node[width=0.5, height=0.5, shape=box, fontsize=16];
+	edge[arrowhead=none,penwidth=2];
+	"3fa060628380410e9a25df33d1d2db0d" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"d49d8f8127b946e9b11b3c9684a4a0dd" [label="B "] 
+	"ef3b172873664def98c3d19d4c632338" [label="A"] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "3fa060628380410e9a25df33d1d2db0d"
+	{"d49d8f8127b946e9b11b3c9684a4a0dd","ef3b172873664def98c3d19d4c632338"} -- "NIL0"
+}

@@ -16,12 +16,14 @@ using System.Windows.Shapes;
 namespace ArchimedeFront.Pages
 {
     /// <summary>
-    /// Logique d'interaction pour Synthese.xaml
+    /// Logique d'interaction pour SynthesePage.xaml
     /// </summary>
-    public partial class Synthese : Page
+    public partial class SynthesePage : Page
     {
-        public Synthese()
+        public SynthesePage()
         {
+            Synthese.ExprBoolNode tree = Synthese.To_N_ary(Data.expression, Data.nb_and, Data.nb_or);
+            Synthese.Circuit_Visualisation(tree);
             InitializeComponent();
         }
 
@@ -32,7 +34,7 @@ namespace ArchimedeFront.Pages
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
