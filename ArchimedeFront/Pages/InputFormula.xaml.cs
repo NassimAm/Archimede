@@ -206,7 +206,6 @@ namespace ArchimedeFront.Pages
 
             errorsContainer.Children.Clear();
             enableButtons();
-            transformButton.Visibility = Visibility.Collapsed;
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
             
@@ -216,7 +215,7 @@ namespace ArchimedeFront.Pages
             DoubleAnimation da = new DoubleAnimation();
             da.From = 1;
             da.To = 0;
-            da.Duration = new Duration(TimeSpan.FromSeconds(4));
+            da.Duration = new Duration(TimeSpan.FromSeconds(6));
             guidePopUp.BeginAnimation(OpacityProperty, da);
         }
 

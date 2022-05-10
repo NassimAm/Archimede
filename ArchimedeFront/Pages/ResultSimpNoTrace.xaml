@@ -9,11 +9,37 @@
       Title="ResultSimpNoTrace">
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,120">
-        <TextBlock Style="{StaticResource paragraphe}" Margin="20,10" FontSize="40" FontWeight="Bold"> 
-            L'expression après simplification
+
+
+        <TextBlock Style="{StaticResource paragraphe}" Margin="20,10,20,18" FontSize="40" FontWeight="Bold"> 
+            Votre expression
         </TextBlock>
 
-        <Border BorderThickness="2" CornerRadius="5" Width="auto" MinWidth="300" Height="54" Margin="10,10">
+        <Border HorizontalAlignment="Center" Padding="20,0" BorderThickness="2" CornerRadius="6"   Height="52" Margin="10,10">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.1"  Color="#00CBBD" />
+                        <GradientStop Offset="1"   Color="#00E17C"  />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+
+
+            <TextBox  Name="expression" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="#424242"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="4,0,4,0" IsReadOnly="True"  FontSize="26" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" />
+
+
+
+
+
+        </Border>
+
+        <TextBlock Style="{StaticResource paragraphe}" Margin="20,50,20,18" FontSize="40" FontWeight="Bold"> 
+            L’expression simplifiée
+        </TextBlock>
+
+        <Border BorderThickness="2" CornerRadius="6" HorizontalAlignment="Center"  Padding="20,8" Margin="10,10" >
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
@@ -22,7 +48,7 @@
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            <TextBox Name ="FonctionSimplifie" Style="{StaticResource fontUrbanist}"  Margin="15,4" FontSize="26" VerticalAlignment="Center" TextWrapping="NoWrap" IsReadOnly="True" BorderThickness="0" AcceptsReturn="False" Background="Transparent"/>
+            <TextBox Name ="FonctionSimplifie" HorizontalAlignment="Center" Style="{StaticResource fontUrbanist}"  FontSize="32" VerticalAlignment="Center" TextWrapping="NoWrap" IsReadOnly="True" BorderThickness="0" AcceptsReturn="False" Background="Transparent" TextAlignment="Center" Text="jdslfjaksd"/>
         </Border>
     </StackPanel>
 </Page>

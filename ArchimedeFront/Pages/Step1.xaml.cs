@@ -18,6 +18,7 @@ namespace ArchimedeFront.Pages
     {
         
          int stepNumber = 1;
+         int groupeNumber = 1;
          bool stop = false;
          bool avecTrace = true ;
 
@@ -76,7 +77,7 @@ namespace ArchimedeFront.Pages
 
 
 
-
+            impliquant_labels.Visibility=Visibility.Collapsed;
             expandButtons.Margin = new Thickness(0, 200, 0, 0);
 
 
@@ -102,7 +103,6 @@ namespace ArchimedeFront.Pages
                 }
             }
 
-           
         }
 
         private void nextStepButton_click(object sender, RoutedEventArgs e)
@@ -114,7 +114,8 @@ namespace ArchimedeFront.Pages
                     expandButtons.Margin = new Thickness(0, 0, 0, 0);
                    
                     stepNumber++;
-                    expandButtons.BringIntoView();
+                    
+                    scrollViewer.ScrollToEnd();
                     break;
                 case 2:
                     _NextStep3.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step3.xaml", UriKind.RelativeOrAbsolute));
@@ -123,11 +124,13 @@ namespace ArchimedeFront.Pages
                   
 
                     stepNumber++;
-                    expandButtons.BringIntoView();
+                    scrollViewer.ScrollToEnd();
+
                     break;
                 case 3:
                     _NextStep4.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step4.xaml", UriKind.RelativeOrAbsolute));
                     _NextStep3.Margin = new Thickness(0, 0, 0, 82);
+                    impliquant_labels.Visibility = Visibility.Visible;
                     groupesTableContainer.MaxHeight = 450;
                     groupesTableContainer.Margin = new Thickness(26, 10, 26, 10);
                   
@@ -141,9 +144,12 @@ namespace ArchimedeFront.Pages
                     StackPanel groupesTable;
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) ,VerticalAlignment = VerticalAlignment.Top};
-                        foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
+                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Left , Height=60 });
+
+                    foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
-                            if(groupe.Count > 0)
+
+                        if (groupe.Count > 0)
                             {
                                 foreach (Impliquant impliquant in groupe)
                                 {
@@ -151,9 +157,9 @@ namespace ArchimedeFront.Pages
                                      groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
                                     else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
 
-                            }
+                                }
 
-                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
+                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
                                 HorizontalAlignment = HorizontalAlignment.Center};
                                 groupesTable.Children.Add(border);
                             }
@@ -178,7 +184,8 @@ namespace ArchimedeFront.Pages
                         
                         stepNumber = -1;
                     // fin d'affichage 
-                    expandButtons.BringIntoView();
+                    scrollViewer.ScrollToEnd();
+
                     groupesTableContainer.ScrollToRightEnd();
 
 
@@ -214,10 +221,13 @@ namespace ArchimedeFront.Pages
                          
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
+                        
                         foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
-                            if(groupe.Count > 0)
+
+                            if (groupe.Count > 0)
                             {
+
                                 foreach (Impliquant impliquant in groupe)
                                 {
 
@@ -233,6 +243,8 @@ namespace ArchimedeFront.Pages
                         }
 
                         groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
+                        if(groupesTable.Children.Count > 0) groupesTable.Children.Insert(0,new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Les adjacents tirés à partir du 1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Center , MaxWidth=300 ,Height=60});
+
                         groupesMatrix.Children.Add(groupesTable);
 
 
@@ -246,12 +258,15 @@ namespace ArchimedeFront.Pages
                 case -1:
                     if (!stop)
                     {
+                        groupeNumber++;
                         Data.cptGroupes++;
                         Data.impliquants = Data.groupeMintermes.generateNextGroupeImpliquants(Data.cptGroupes, Data.impliquantsEnAttente);
                         //affichage du groupe
-                       
+
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
+                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = groupeNumber + "eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Left, Height = 60 });
+
                         foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
                             if(groupe.Count > 0)
@@ -340,6 +355,8 @@ namespace ArchimedeFront.Pages
                             }
 
                             groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
+                            if (groupesTable.Children.Count > 0) groupesTable.Children.Insert(0, new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Les adjacents tirés à partir du "+groupeNumber+"eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Center, MaxWidth = 300, Height = 60 });
+
                             groupesMatrix.Children.Add(groupesTable);
                           
 
@@ -359,17 +376,19 @@ namespace ArchimedeFront.Pages
                         expandBottomButton.Style = FindResource("expandButton") as Style;
                         stepNumber = 4;
                     }
-                    
-                        
-                   
-                    expandButtons.BringIntoView();
+
+
+
+                    scrollViewer.ScrollToEnd();
+
                     break;
                 case 4:
                     _NextStep5.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step5.xaml", UriKind.RelativeOrAbsolute));
-                    groupesTableContainer.Margin = new Thickness(0, 0, 0, 82);
+                    impliquant_labels.Margin = new Thickness(0, 0, 0, 82);
                
                     stepNumber++;
-                    expandButtons.BringIntoView();
+                    scrollViewer.ScrollToEnd();
+
                     break;
                 case 5:
                     _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
@@ -378,7 +397,9 @@ namespace ArchimedeFront.Pages
                     skipButton.Visibility = Visibility.Collapsed;
                      expandBottomButton.Style = FindResource("returnButton") as Style;
                     expandBottomButton.ContentStringFormat = "Retour";
-                    expandButtons.BringIntoView();
+                    scrollViewer.ScrollToEnd();
+
+
 
                     stepNumber++;
                     break;
@@ -410,7 +431,7 @@ namespace ArchimedeFront.Pages
 
         private StackPanel generateCheckedImplicant(string bincode)
         {
-            StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
+            StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) ,HorizontalAlignment=HorizontalAlignment.Center };
             Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new Path() { Data = (Geometry)FindResource("CHECKED_ICON"), Fill = (SolidColorBrush?)new BrushConverter().ConvertFrom("#C4C4C4") } };
             TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode };
             result.Children.Add(viewbox);
@@ -419,7 +440,7 @@ namespace ArchimedeFront.Pages
         }
         private StackPanel generatePrimeImplicant(string bincode)
         {
-            StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
+            StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) , HorizontalAlignment=HorizontalAlignment.Center};
             Grid grid = new Grid() { Width = 24, Margin = new Thickness(0, 0, 14, 0) };
             grid.Children.Add(new Ellipse() { Style = FindResource("greenDot") as Style });
             TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode };
@@ -437,7 +458,7 @@ namespace ArchimedeFront.Pages
             LinearBrush.EndPoint = new Point(0, 1);
             LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00CBBD"), 0.1));
             LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00E17C"), 1));
-            StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
+            StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) , HorizontalAlignment=HorizontalAlignment.Center };
             Viewbox viewbox = new Viewbox() {Visibility=Visibility.Hidden, Width = 24, Margin = new Thickness(0, 0, 14, 0)};
             TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode , Foreground = LinearBrush};
             result.Children.Add(viewbox);

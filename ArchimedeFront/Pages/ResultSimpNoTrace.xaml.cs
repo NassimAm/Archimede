@@ -39,15 +39,7 @@ namespace ArchimedeFront.Pages
                 }
 
                 Data.groupeMintermes = new Mintermes(maxNbUns);
-               /* for (int i = 0; i < Data.stringListMinterm.Count; i++)
-                {
-                    // mintermes[i] = string.Join(".", mintermes[i].Split(".").ToList().OrderBy(var => { if (var[0] == '!') return var[1..]; return var; }).ToList());
-                    mintermes.Add(Minterme.bincodeToMinterm(Data.stringListMinterm[i], Data.variables));
-                */
-
-               // Data.expressionTransforme = string.Join(" + ", mintermes);
-
-               // expression.Text = Data.expressionTransforme;
+                
 
 
 
@@ -69,10 +61,25 @@ namespace ArchimedeFront.Pages
 
                 //expression.Text = string.Join(" ,", Data.listMintermesString);
             }
+
+            expression.Text = Data.expression;
             Data.impliquantsEssentiels = Mintermes.simplifyMintermes(Data.impliquants, Data.impliquantsEnAttente, Data.groupeMintermes, Data.stringListMinterm, Data.literal);
-            string resultat = Mintermes.getResultatExpressionDNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
-            if (resultat.Length == 0) FonctionSimplifie.Text = "VRAI";
-            else FonctionSimplifie.Text = resultat;
+            string resultat;
+            if (Data.codeTransformation == '1')
+            {
+                resultat = Mintermes.getResultatExpressionCNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
+                if (resultat.Length == 0) FonctionSimplifie.Text = "Faux";
+                else FonctionSimplifie.Text = resultat;
+            }
+            else
+            {
+                resultat = Mintermes.getResultatExpressionDNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
+                if (resultat.Length == 0) FonctionSimplifie.Text = "Vrai";
+                else FonctionSimplifie.Text = resultat;
+            }
+
+
+           
 
 
         }

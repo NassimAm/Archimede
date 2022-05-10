@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,6 +162,10 @@ namespace dnf
         /// <returns>the root of the equivalent syntactic tree in CNF</returns>
         public static ExprBool? cnf(ExprBool tete)
         {
+            /*Trace.Write("cnf:");
+            inorder(tete);
+            Trace.WriteLine("");*/
+
             if (tete == null) return null;
 
             //hauteur ==  1   
@@ -364,7 +369,9 @@ namespace dnf
 
         public static ExprBool? dnf(ExprBool tete)
         {
-
+            Trace.Write("dnf:");
+            inorder(tete);
+            Trace.WriteLine("");
             if (tete == null) return null;
 
             //hauteur ==  1   
@@ -1134,10 +1141,12 @@ namespace dnf
 
         public static bool ContainsNegations(List<string> minterms)
         {
+
             foreach (string minterm in minterms)
             {
-                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm)) 
-                    return true;
+                if (!minterm.Contains("+") && !minterm.Contains("."))
+                    if (minterms.Contains(minterm) && minterms.Contains("!" + minterm))
+                        return true;
             }
             return false;
         }
@@ -1253,7 +1262,7 @@ namespace dnf
                 return;
             inorder(root.fg);
 
-            Console.Write(root.info);
+            Trace.Write(root.info);
 
             inorder(root.fd);
 
