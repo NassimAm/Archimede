@@ -1,0 +1,28 @@
+graph arbre{
+	splines = ortho;
+	rankdir="LR";
+	ranksep=1;
+	node[width=0.5, height=0.5, shape=box, fontsize=16];
+	edge[arrowhead=none,penwidth=2];
+	"42dd2e0d54804560802dc5489e538e67" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"8ad5deb3c5e04bb48fb5678671800204" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"82cc8e2e375849c5bc183a495198b328" [label="C"] 
+	"403ed0654f984a6e808cd7479e607fd4" [label="B"] 
+	"2d3bd46e7d5a4edbb6ea0efe326488f2" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"e9fbaf456ab64044b9f4c264d0928361" [label="A"] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "2d3bd46e7d5a4edbb6ea0efe326488f2"
+	{"e9fbaf456ab64044b9f4c264d0928361"} -- "NIL0"
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "8ad5deb3c5e04bb48fb5678671800204"
+	{"82cc8e2e375849c5bc183a495198b328","403ed0654f984a6e808cd7479e607fd4","2d3bd46e7d5a4edbb6ea0efe326488f2"} -- "NIL1"
+	"3d3ea3c555584091b700a49dd751f78f" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"7d1280428a594df19b2a5aeb1ccf1918" [label="B"] 
+	"d96a9d28b46140bc998222ca1f9b2137" [label="A"] 
+	"NIL2" [label="",shape = box,width=.001,height = 0] 
+	"NIL2" -- "3d3ea3c555584091b700a49dd751f78f"
+	{"7d1280428a594df19b2a5aeb1ccf1918","d96a9d28b46140bc998222ca1f9b2137"} -- "NIL2"
+	"NIL3" [label="",shape = box,width=.001,height = 0] 
+	"NIL3" -- "42dd2e0d54804560802dc5489e538e67"
+	{"8ad5deb3c5e04bb48fb5678671800204","3d3ea3c555584091b700a49dd751f78f"} -- "NIL3"
+}

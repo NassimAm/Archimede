@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <None Remove="Assets\Archimede_Logo.png" />
+    <None Remove="Assets\image.jpg" />
+    <None Remove="Assets\synthese.png" />
     <None Remove="Fonts\LeagueGothic-Font.ttf" />
     <None Remove="Fonts\Product Sans Bold.ttf" />
     <None Remove="Fonts\Rajdhani-Bold.ttf" />
@@ -19,6 +21,8 @@
     <Resource Include="Assets\Archimede_Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\image.jpg" />
+    <Resource Include="Assets\synthese.png" />
     <Resource Include="Fonts\LeagueGothic-Font.ttf" />
     <Resource Include="Fonts\Product Sans Bold.ttf" />
     <Resource Include="Fonts\Rajdhani-Bold.ttf" />

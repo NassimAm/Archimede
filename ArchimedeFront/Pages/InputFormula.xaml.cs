@@ -355,8 +355,8 @@ namespace ArchimedeFront.Pages
 
         private void startSynthese_Button_Click(object sender , RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Synthese.xaml", UriKind.Absolute));
-
+            Data.expression = expression.Text;
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
 
         private void transformButton_Click(object sender, RoutedEventArgs e)
@@ -422,9 +422,11 @@ namespace ArchimedeFront.Pages
             {
                 case "ET_entrees":
                     et_entree_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_and = -1;
                     break;
                 case "OU_entrees":
                     ou_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_or = -1;
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
@@ -450,9 +452,11 @@ namespace ArchimedeFront.Pages
             {
                 case "ET_entrees":
                     et_entree_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_and = int.Parse(et_entree_input_text.Text);
                     break;
                 case "OU_entrees":
                     ou_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_or = int.Parse(ou_entree_input_text.Text);
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);

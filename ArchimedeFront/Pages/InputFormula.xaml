@@ -155,7 +155,7 @@
                                                 </LinearGradientBrush>
                                             </Border.BorderBrush>
 
-                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+                                            <TextBox Name="et_entree_input_text" Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
 
                                         </Border>
                                         <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
@@ -180,7 +180,7 @@
                                                     </LinearGradientBrush.GradientStops>
                                                 </LinearGradientBrush>
                                             </Border.BorderBrush>
-                                            <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+                                            <TextBox Name="ou_entree_input_text" Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
 
                                         </Border>
                                         <TextBlock VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>

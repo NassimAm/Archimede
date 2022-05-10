@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\
 ArchimedeFront
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\App.xaml
-15918777567
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\App.xaml
+15-1258214333
 
-26-186903986
-194-1951243044
-Assets\Icons.xaml;MainWindow.xaml;Pages\Home.xaml;Pages\InputFormula.xaml;Pages\ResultSimpNoTrace.xaml;Pages\ResultTransformation.xaml;Pages\Step1.xaml;Pages\Step2.xaml;Pages\Step3.xaml;Pages\Step4.xaml;Pages\Step5.xaml;Pages\Step6.xaml;Pages\Synthese.xaml;Pages\Template.xaml;Styles\Styles.xaml;
+27528182101
+1941645785384
+Assets\Icons.xaml;MainWindow.xaml;Pages\Home.xaml;Pages\InputFormula.xaml;Pages\ResultSimpNoTrace.xaml;Pages\ResultTransformation.xaml;Pages\Step1.xaml;Pages\Step2.xaml;Pages\Step3.xaml;Pages\Step4.xaml;Pages\Step5.xaml;Pages\Step6.xaml;Pages\SynthesePage.xaml;Pages\Template.xaml;Styles\Styles.xaml;
 
 True
 
