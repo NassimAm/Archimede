@@ -150,7 +150,7 @@ namespace Archimède
             #region SYNTHESE
             Console.Write("Expression (Test Synthese): ");
             string exp =  Console.ReadLine();
-            Synthese.ExprBoolNode tree = Synthese.To_N_ary(exp,-1,3);
+            Synthese.ExprBoolNode tree = Synthese.To_N_ary(exp,-1,-1);
             Synthese.Affich_Arbre(tree);
             Synthese.Tree_Visualisation(tree);
             Synthese.Circuit_Visualisation(tree);

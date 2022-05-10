@@ -124,6 +124,11 @@ class Synthese
                         DevelopChildren(children, op, simple_node, nb_or);
                         break;
                     }
+                    case dnf.Type.NON:
+                    {
+                        DevelopChildren(children, op, simple_node, 1);
+                        break;
+                    }
                     default:
                     {
                         break;
@@ -352,7 +357,7 @@ class Synthese
         // construction du fichier 'synthese.txt' (en langage DOT)
         File.AppendAllText(path, "graph arbre{\n");
         File.AppendAllText(path, "\tsplines = ortho;\n");
-        File.AppendAllText(path, "\trankdir=\"BT\";\n");
+        File.AppendAllText(path, "\trankdir=\"LR\";\n");
         File.AppendAllText(path, "\tranksep=1;\n");
         File.AppendAllText(path, "\tnode[width=0.5, height=0.5, shape=box, fontsize=16];\n");
         File.AppendAllText(path, "\tedge[arrowhead=none,penwidth=2];\n");
@@ -415,7 +420,7 @@ class Synthese
         {
             listentrees = listentrees.Substring(0, listentrees.Length - 1);
             listentrees += "}";
-            File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,height=.001,width = {1}] \n", nbnils, root.children.Count / 4));
+            File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,width=.001,height = {1}] \n", nbnils, root.children.Count / 4));
             File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\"\n", nbnils, root.id));
             File.AppendAllText(path, String.Format("\t{0} -- \"NIL{1}\"\n", listentrees, nbnils++));
         }
