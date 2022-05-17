@@ -1,4 +1,4 @@
-![Logo](https://i.ibb.co/QDJdpPx/image.png =250x250)
+![Logo](https://i.ibb.co/QDJdpPx/image.png | width=100)
 
 # Projet 2CP -Archimède-
 Archimède est un outil d'optimisation de fonctions logiques  par des méthodes algorithmiques (notamment des améliorations de Quinn McCluskey), et synthèse de la fonction simplifiée.
