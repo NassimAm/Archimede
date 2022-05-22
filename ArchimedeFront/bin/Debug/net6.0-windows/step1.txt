@@ -1,0 +1,8 @@
+Liste de mintermes en binaire : 
+
+o 0000000
+o 0000001
+o 0000010
+o 0000011
+o 0001010
+o 1100100

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,12 @@ class Synthese
                     break;
                 case dnf.Type.NON:
                     this.info = "NOT";
+                    break;
+                case dnf.Type.NAND:
+                    this.info = "NAND";
+                    break;
+                case dnf.Type.NOR:
+                    this.info = "NOR";
                     break;
                 default:
                     break;
@@ -100,7 +107,7 @@ class Synthese
     }
 
     //Fonction récursive pour la création de l'arbre m-aire à partir de l'abre binaire
-    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or)
+    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or,int nb_nand,int nb_nor)
     {
         if (tree.type == dnf.Type.VALEUR)
         {
@@ -113,7 +120,7 @@ class Synthese
             ExprBoolNode simple_node;
             foreach (ExprBoolNode node in tree.children)
             {
-                simple_node = Binary_To_N_ary(node, nb_and, nb_or);
+                simple_node = Binary_To_N_ary(node, nb_and, nb_or,nb_nand,nb_nor);
                 switch (tree.type)
                 {
                     case dnf.Type.ET:
@@ -131,6 +138,16 @@ class Synthese
                             DevelopChildren(children, op, simple_node, 1);
                             break;
                         }
+                    case dnf.Type.NAND:
+                        {
+                            DevelopChildren(children, op, simple_node, nb_nand);
+                            break;
+                        }
+                    case dnf.Type.NOR:
+                        {
+                            DevelopChildren(children, op, simple_node, nb_nor);
+                            break;
+                        }
                     default:
                         {
                             break;
@@ -142,15 +159,16 @@ class Synthese
     }
 
     //Convertit une expression en arbre syntaxique m-aire
-    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or)
+    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or,int nb_nand,int nb_nor)
     {
+        expression = expression.Replace(" ", "");
         string postfix = "";
         List<string> listVars = new List<string>();
         ExprBool.To_RNP(expression, ref postfix, listVars);
         ExprBool? root = ExprBool.expressionTree(postfix, listVars);
 
         ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
-        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or);
+        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or,nb_nand,nb_nor);
         return n_ary_root;
     }
 
@@ -373,11 +391,13 @@ class Synthese
         System.Diagnostics.Process process = new System.Diagnostics.Process();
         System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
         // hide the terminal
-        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        startInfo.CreateNoWindow = true; 
         startInfo.FileName = "cmd.exe";
-        startInfo.Arguments = "/C dot -Tpng synthese.txt -o .\\..\\..\\..\\Assets\\synthese.png";
+        startInfo.Arguments = "/C dot -Tpng synthese.txt -o synthese.png";
         process.StartInfo = startInfo;
         process.Start();
+        process.WaitForExit();
         process.Close();
         // End visualisation
     }
@@ -400,6 +420,16 @@ class Synthese
             case "NOT":
                 {
                     File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NOT.png\",fixedsize=true,shape=plaintext] \n", root.id));
+                    break;
+                }
+            case "NAND":
+                {
+                    File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NAND.png\",fixedsize=true,shape=plaintext] \n", root.id));
+                    break;
+                }
+            case "NOR":
+                {
+                    File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NOR.png\",fixedsize=true,shape=plaintext] \n", root.id));
                     break;
                 }
             default:

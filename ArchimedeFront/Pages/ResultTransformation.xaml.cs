@@ -49,10 +49,12 @@ namespace ArchimedeFront.Pages
                    
                     if (result == "0")
                     {   expressionTransforme.Text = "Faux";
+                        Data.expression = "0";
                         return;
                     }
                     if (result == "1") {
                         expressionTransforme.Text = "Vrai";
+                        Data.expression = "1";
                         return ;
                     }
                     
@@ -95,9 +97,12 @@ namespace ArchimedeFront.Pages
             }
 
             expressionTransforme.Text = result;
+            Data.expression = result;
+        }
 
-
-
+        private void syntheseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
     }
 }

@@ -45,8 +45,9 @@
         </ScrollViewer>
         <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep6_LoadCompleted"></Frame>
+        <Button Name="syntheseButton" Visibility="Collapsed" Style="{StaticResource greenButton}" MaxWidth="200" Margin="14,0,14,100" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
 
-        <Grid Name="expandButtons" VerticalAlignment="Bottom" Margin="0,200,0,0" >
+            <Grid Name="expandButtons" VerticalAlignment="Bottom" Margin="0,200,0,0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />

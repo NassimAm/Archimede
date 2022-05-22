@@ -71,10 +71,20 @@ namespace ArchimedeFront.Pages
             }
             Data.impliquantsEssentiels = Mintermes.simplifyMintermes(Data.impliquants, Data.impliquantsEnAttente, Data.groupeMintermes, Data.stringListMinterm, Data.literal);
             string resultat = Mintermes.getResultatExpressionDNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
-            if (resultat.Length == 0) FonctionSimplifie.Text = "VRAI";
-            else FonctionSimplifie.Text = resultat;
+            if (resultat.Length == 0)
+            {
+                FonctionSimplifie.Text = "VRAI";
+                Data.expression = "1";
+            }
+            else {
+                FonctionSimplifie.Text = resultat;
+                Data.expression = resultat;
+            }
+        }
 
-
+        private void syntheseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
     }
 }

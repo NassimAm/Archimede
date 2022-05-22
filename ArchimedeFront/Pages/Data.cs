@@ -32,6 +32,8 @@ namespace ArchimedeFront.Pages
         //Synthese
         public static int nb_and = -1;
         public static int nb_or = -1;
+        public static int nb_nand = -1;
+        public static int nb_nor = -1;
 
         public static void resete()
         {

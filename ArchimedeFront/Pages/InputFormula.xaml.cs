@@ -62,8 +62,6 @@ namespace ArchimedeFront.Pages
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            
            errorsContainer.Children.Clear();
            Data.resete();
            Data.expression = expression.Text.Replace(" ","");
@@ -97,7 +95,7 @@ namespace ArchimedeFront.Pages
 
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
-                    errorsContainer.Children.Add(generateNewError("La liste de mintermes introduite depasse le nombre maximal de variables introduit "));
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
                     disableButtons();
                     return;
                 }
@@ -127,6 +125,61 @@ namespace ArchimedeFront.Pages
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
         {
+            errorsContainer.Children.Clear();
+            Data.resete();
+            Data.expression = expression.Text.Replace(" ", "");
+            expression.Text = Data.expression;
+
+            if (numerique.IsChecked == true)
+            {
+                Data.literal = false;
+                Data.nbVariables = int.Parse(nbVariables.Text);
+                Data.expression = expression.Text.Replace(" ", "");
+                Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
+                long parsedInt;
+
+                foreach (string minterm in Data.listMintermesString)
+                {
+
+                    try
+                    {
+                        parsedInt = long.Parse(minterm);
+                        Data.mintermes.Add(new Minterme(parsedInt));
+                    }
+                    catch (OverflowException)
+                    {
+                        Data.mintermes.Add(new Minterme(minterm));
+                    }
+
+                }
+
+                int maxNbUns = Minterme.maxNbUns;
+
+
+                if (Minterme.maxNbVariables > Data.nbVariables)
+                {
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}",Minterme.maxNbVariables)));
+                    disableButtons();
+                    return;
+                }
+            }
+            else
+            {
+                Data.literal = true;
+                List<string> errorMessages = new List<string>();
+                errorMessages = Erreurs.detectionErreurs(expression.Text);
+                if (errorMessages.Count > 0)
+                {
+                    disableButtons();
+                    foreach (string error in errorMessages)
+                    {
+                        errorsContainer.Children.Add(generateNewError(error));
+                    }
+                    return;
+                }
+
+            }
+
             pageContent.IsHitTestVisible = false;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             SynthesePopUP.Visibility = Visibility.Visible;
@@ -240,7 +293,7 @@ namespace ArchimedeFront.Pages
                 
 
             };
-            TextBlock textBlock = 
+            TextBlock textBlock =
             new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(8, 0, 4, 0), Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Text = "Erreur signalée :" };
             StackPanel errorSignal = new StackPanel()
             {
@@ -253,6 +306,41 @@ namespace ArchimedeFront.Pages
             TextBlock errorMessage = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Top, TextWrapping = TextWrapping.Wrap, Text = message};
 
             StackPanel error = new StackPanel() { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(10, 2, 10, 8) };
+            error.Children.Add(errorSignal);
+            error.Children.Add(errorMessage);
+            return error;
+        }
+
+        private StackPanel generateNewErrorNumerique(string message)
+        {
+
+            //generate exclamation mark
+            Border border = new Border()
+            {
+                BorderThickness = new Thickness(2, 2, 2, 2),
+                BorderBrush = Brushes.Red,
+                Width = 24,
+                Height = 24,
+                CornerRadius = new CornerRadius(24),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Child = new TextBlock() { Style = FindResource("fontProductSans") as Style, FontSize = 18, Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Text = "!" }
+
+
+            };
+            TextBlock textBlock =
+            new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(8, 0, 4, 0), Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Text = "Erreur signalée :" };
+            StackPanel errorSignal = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                VerticalAlignment = VerticalAlignment.Top,
+            };
+            errorSignal.Children.Add(border);
+            errorSignal.Children.Add(textBlock);
+
+            TextBlock errorMessage = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Top, TextWrapping = TextWrapping.Wrap, Text = message };
+
+            StackPanel error = new StackPanel() { Orientation = Orientation.Vertical, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(10, 2, 10, 8) };
             error.Children.Add(errorSignal);
             error.Children.Add(errorMessage);
             return error;

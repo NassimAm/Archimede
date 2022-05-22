@@ -530,5 +530,65 @@ namespace Archimède
 
             return impliquantsEssentiels;
         }
+
+        public static string getExpressionDeBincode(bool literale, string bincode, List<string> alphabets)
+        {
+            StringBuilder alphabet;
+            String resultat = "";
+            string alpha;
+            for (int j = 0; j < bincode.Length; j++)
+            {
+                if (bincode[j] != '-')
+                {
+
+                    if (literale)
+                    {
+                        alpha = alphabets[j];
+                    }
+                    else
+                    {
+
+                        alphabet = new StringBuilder(" ");
+
+                        if (j >= 26)
+                        {
+                            alphabet = new StringBuilder("  ");
+
+
+                            alphabet[0] = (char)((65 + j / 26 - 1));
+                            alphabet[1] = (char)(65 + (j % 26));
+
+                        }
+                        else alphabet[0] = (char)(65 + j);
+
+                        alpha = alphabet.ToString();
+
+                    }
+
+                    //Nommer les variables dans l'ordre alphabétique
+                    if (bincode[j] == '1')
+                    {
+                        resultat += alpha + ".";
+                    }
+                    else
+                    {
+                        resultat += "!" + alpha + ".";
+                    }
+                }
+            }
+            //Enlever le " . " additionnel à la fin
+            if (resultat.Length >= 1)
+            {
+                resultat = resultat.Substring(0, resultat.Length - 1);
+            }
+            resultat += "+";
+
+            //Enlever le " + " additionnel à la fin
+            if (resultat.Length >= 1)
+            {
+                resultat = resultat.Substring(0, resultat.Length - 1);
+            }
+            return resultat;
+        }
     }
 }

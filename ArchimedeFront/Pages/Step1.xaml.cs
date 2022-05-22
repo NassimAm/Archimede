@@ -8,6 +8,7 @@ using System.Windows.Shapes;
 using dnf;
 using Archimède;
 using System.Diagnostics;
+using System.IO;
 
 namespace ArchimedeFront.Pages
 {
@@ -23,7 +24,6 @@ namespace ArchimedeFront.Pages
 
         public Step1()
         {
-           
             avecTrace = true ;
             List<string> mintermes = new List<string>() ;
             if (Data.literal)
@@ -102,7 +102,14 @@ namespace ArchimedeFront.Pages
                 }
             }
 
-           
+            //Sauvegarde au fichier
+            string? path = Directory.GetCurrentDirectory() + "\\step1.txt";
+            File.WriteAllText(path, "");
+            File.AppendAllText(path, "Liste de mintermes en binaire : \n\n");
+            for(int i=0;i<Data.stringListMinterm.Count;i++)
+            {
+                File.AppendAllText(path,"o " + Data.stringListMinterm[i] + "\n");
+            }
         }
 
         private void nextStepButton_click(object sender, RoutedEventArgs e)
@@ -139,8 +146,13 @@ namespace ArchimedeFront.Pages
                    //affichage du groupe
                     Border border;
                     StackPanel groupesTable;
+                    string? path = Directory.GetCurrentDirectory() + "\\step4.txt";
+                    File.WriteAllText(path, "");
+                    File.AppendAllText(path, "Extraction des impliquants premiers\n");
+                    File.AppendAllText(path, "T: Déjà Traité  P: Premier  A: en attente\n\n");
+                    File.AppendAllText(path, String.Format("Groupage N°{0}\n", Data.cptGroupes));
 
-                        groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) ,VerticalAlignment = VerticalAlignment.Top};
+                    groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) ,VerticalAlignment = VerticalAlignment.Top};
                         foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
                             if(groupe.Count > 0)
@@ -148,12 +160,18 @@ namespace ArchimedeFront.Pages
                                 foreach (Impliquant impliquant in groupe)
                                 {
                                     if (impliquant.status)
-                                     groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
-                                    else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                    {
+                                        File.AppendAllText(path,"P "+impliquant.bincode+"\n");
+                                        groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
+                                    }
+                                    else 
+                                    {
+                                        File.AppendAllText(path, "T " + impliquant.bincode + "\n");
+                                        groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                    }
+                                }
 
-                            }
-
-                            border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
+                                border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
                                 HorizontalAlignment = HorizontalAlignment.Center};
                                 groupesTable.Children.Add(border);
                             }
@@ -165,6 +183,7 @@ namespace ArchimedeFront.Pages
                         {
                             foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                             {
+                                File.AppendAllText(path, "A " + impliquant.bincode + "\n");
                                 groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
                             }
                              
@@ -234,7 +253,7 @@ namespace ArchimedeFront.Pages
 
                         groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
                         groupesMatrix.Children.Add(groupesTable);
-
+                        File.AppendAllText(path, "\n");
 
                     }
                     else //Sinon Arrêter la boucle
@@ -247,6 +266,8 @@ namespace ArchimedeFront.Pages
                     if (!stop)
                     {
                         Data.cptGroupes++;
+                        path = Directory.GetCurrentDirectory() + "\\step4.txt";
+                        File.AppendAllText(path, String.Format("Groupage N°{0}\n", Data.cptGroupes));
                         Data.impliquants = Data.groupeMintermes.generateNextGroupeImpliquants(Data.cptGroupes, Data.impliquantsEnAttente);
                         //affichage du groupe
                        
@@ -259,9 +280,15 @@ namespace ArchimedeFront.Pages
                                 foreach (Impliquant impliquant in groupe)
                                 {
                                     if (impliquant.status)
+                                    {
+                                        File.AppendAllText(path, "P " + impliquant.bincode + "\n");
                                         groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
-                                    else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
-
+                                    }  
+                                    else
+                                    {
+                                        File.AppendAllText(path, "T " + impliquant.bincode + "\n");
+                                        groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                    }
                                 }
 
                                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null 
@@ -275,6 +302,7 @@ namespace ArchimedeFront.Pages
                         {
                             foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                             {
+                                File.AppendAllText(path, "A " + impliquant.bincode + "\n");
                                 groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
                             }
 
@@ -341,8 +369,8 @@ namespace ArchimedeFront.Pages
 
                             groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
                             groupesMatrix.Children.Add(groupesTable);
-                          
 
+                            File.AppendAllText(path, "\n");
 
                         }
                         else //Sinon Arrêter la boucle
@@ -374,9 +402,10 @@ namespace ArchimedeFront.Pages
                 case 5:
                     _NextStep6.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Step6.xaml", UriKind.RelativeOrAbsolute));
                     _NextStep5.Margin = new Thickness(0, 0, 0, 82);
-                   
+
+                    syntheseButton.Visibility = Visibility.Visible;
                     skipButton.Visibility = Visibility.Collapsed;
-                     expandBottomButton.Style = FindResource("returnButton") as Style;
+                    expandBottomButton.Style = FindResource("returnButton") as Style;
                     expandBottomButton.ContentStringFormat = "Retour";
                     expandButtons.BringIntoView();
 
@@ -400,6 +429,11 @@ namespace ArchimedeFront.Pages
 
         }
 
+        private void syntheseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate((new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute)));
+        }
+
         private void skipButton_Click(object sender, RoutedEventArgs e)
         {
                     avecTrace = false;
@@ -411,7 +445,7 @@ namespace ArchimedeFront.Pages
         private StackPanel generateCheckedImplicant(string bincode)
         {
             StackPanel result = new StackPanel() { Orientation = Orientation.Horizontal, Margin = new Thickness(10, 2, 10, 2) };
-            Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new Path() { Data = (Geometry)FindResource("CHECKED_ICON"), Fill = (SolidColorBrush?)new BrushConverter().ConvertFrom("#C4C4C4") } };
+            Viewbox viewbox = new Viewbox() { Width = 24, Margin = new Thickness(0, 0, 14, 0), Child = new System.Windows.Shapes.Path() { Data = (Geometry)FindResource("CHECKED_ICON"), Fill = (SolidColorBrush?)new BrushConverter().ConvertFrom("#C4C4C4") } };
             TextBlock text = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Text = bincode };
             result.Children.Add(viewbox);
             result.Children.Add(text);

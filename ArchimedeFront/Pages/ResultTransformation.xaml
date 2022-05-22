@@ -24,5 +24,6 @@
             </Border.BorderBrush>
             <TextBox Name ="expressionTransforme" Style="{StaticResource fontUrbanist}"  Margin="15,4" FontSize="26" VerticalAlignment="Center" TextWrapping="NoWrap" IsReadOnly="True" BorderThickness="0" AcceptsReturn="False" Background="Transparent"/>
         </Border>
+        <Button Name="syntheseButton" Style="{StaticResource greenButton}" MaxWidth="200" Margin="14,20,14,0" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
     </StackPanel>
 </Page>
