@@ -15,7 +15,10 @@ namespace dnf
         ET,
         OU,
         NON,
-        NAND
+        NAND,
+        NOR,
+        XOR,
+        XNOR,
 
     };
 
@@ -997,6 +1000,84 @@ namespace dnf
             }
             if (variable.CompareTo("") != 0)
                 vars.Add(variable);
+        }
+        
+        
+        public static ExprBool expressionTreeWithAllOperators(String postfix, List<string> vars)
+        {
+            Stack<ExprBool> st = new Stack<ExprBool>();
+            ExprBool t1, t2, temp;
+            Dictionary<char, Type> operators = new Dictionary<char, Type>();
+            operators.Add('!', Type.NON);
+            operators.Add('&', Type.ET);
+            operators.Add('|', Type.OU);
+            operators.Add('.', Type.ET);
+            operators.Add('+', Type.OU);
+            operators.Add('⊕', Type.XOR);
+            operators.Add('⊙', Type.XNOR);
+            operators.Add('↑', Type.NAND);
+            operators.Add('↓', Type.NOR);
+
+            string variable = "";
+
+            int i = 0, j = 0;
+            while (i < postfix.Length)  // we loop through the expression
+            {
+                if (!isOperator(postfix[i]))
+                {    // value found
+                    variable = vars[j++];
+                    temp = new ExprBool(variable);
+                    st.Push(temp);
+                    i += variable.Length;
+                }
+                else
+                {  // operator found
+
+                    if (postfix[i] == '!')
+                    { //  unary operator 
+                        temp = new ExprBool(Type.NON, null, null);  // creates a "NON" node temp with the operator as value
+                        t1 = st.Pop();
+                        temp.fd = t1;
+                        st.Push(temp);
+                    }
+                    else
+                    { //  binary operator
+                      //  pop two values of the stack
+
+                        t1 = st.Pop();
+                        t2 = st.Pop();
+
+                        if (postfix[i] == '-')
+                        {   // IMPLICATION : (a → b) = !a+b
+                            ExprBool
+                                notA = new ExprBool(Type.NON, null, t2),
+                                notA_B = new ExprBool(Type.OU, notA, t1);
+                            st.Push(notA_B);
+                        }
+                        else if (postfix[i] == '=')
+                        {   // EQUIVALENCE : (a ←→ b) = (!a+b).(!b+a)
+                            ExprBool
+                                notA = new ExprBool(Type.NON, null, t2),
+                                notB = new ExprBool(Type.NON, null, t1),
+                                notA_B = new ExprBool(Type.OU, notA, t1),
+                                notB_A = new ExprBool(Type.OU, notB, t2),
+                                A_B = new ExprBool(Type.ET, notA_B, notB_A);
+                            st.Push(A_B);
+                        }
+                        else
+                        {
+                            temp = new ExprBool(operators[postfix[i]], t2, t1);
+                            st.Push(temp);
+                        }
+
+                    }
+
+                    i++;
+                }
+
+            }
+            temp = st.Pop(); // we pop the remaining node in the stack, which will be the tree's root
+            return temp;
         }
 
         /// <summary>same as expressionTree , but works if the variables were strings</summary>
