@@ -28,7 +28,7 @@
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-            
+
             <local:ZoomBorder x:Name="border" ClipToBounds="True" Background="White">
                 <Image Source="pack://application:,,,/Assets/synthese.png"/>
             </local:ZoomBorder>

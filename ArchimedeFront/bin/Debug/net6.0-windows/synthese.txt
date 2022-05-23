@@ -4,24 +4,20 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"30f6917bb19345609d17355d44edb59e" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"66f4e7271ae44116b5c499acfc2183b1" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"d782925988fd4a6aa53d5d6e940aa23f" [label="B"] 
-	"85423e6e779f45fab2747d25c5042f45" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"3d3613bf04e447eaa9d5b98a3569f6ae" [label="A"] 
+	"8144678e03804e019738ba2f973f005a" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"03a1c2e628664d00828f6853a7be411e" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"7d7f2ad8a2344806b5f438a72990cbba" [label="C"] 
+	"1729a4f308e34706b27133f8b444b385" [label="B"] 
 	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "85423e6e779f45fab2747d25c5042f45"
-	{"3d3613bf04e447eaa9d5b98a3569f6ae"} -- "NIL0"
+	"NIL0" -- "03a1c2e628664d00828f6853a7be411e"
+	{"7d7f2ad8a2344806b5f438a72990cbba","1729a4f308e34706b27133f8b444b385"} -- "NIL0"
+	"2191970a6d744668aa886b429de914ce" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"bd0745fdf6464548811c3427f5e817c0" [label="B"] 
+	"df84a6c67ab24821840e397ec961abaf" [label="A"] 
 	"NIL1" [label="",shape = box,width=.001,height = 0] 
-	"NIL1" -- "66f4e7271ae44116b5c499acfc2183b1"
-	{"d782925988fd4a6aa53d5d6e940aa23f","85423e6e779f45fab2747d25c5042f45"} -- "NIL1"
-	"a645c003e9da4baca67f53d40ecf7ae5" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"83c47e0add1d41e29e1f07c389d52c0e" [label="B"] 
-	"0bb87002f91e4dcb9aa5ba555757ffc9" [label="A"] 
+	"NIL1" -- "2191970a6d744668aa886b429de914ce"
+	{"bd0745fdf6464548811c3427f5e817c0","df84a6c67ab24821840e397ec961abaf"} -- "NIL1"
 	"NIL2" [label="",shape = box,width=.001,height = 0] 
-	"NIL2" -- "a645c003e9da4baca67f53d40ecf7ae5"
-	{"83c47e0add1d41e29e1f07c389d52c0e","0bb87002f91e4dcb9aa5ba555757ffc9"} -- "NIL2"
-	"NIL3" [label="",shape = box,width=.001,height = 0] 
-	"NIL3" -- "30f6917bb19345609d17355d44edb59e"
-	{"66f4e7271ae44116b5c499acfc2183b1","a645c003e9da4baca67f53d40ecf7ae5"} -- "NIL3"
+	"NIL2" -- "8144678e03804e019738ba2f973f005a"
+	{"03a1c2e628664d00828f6853a7be411e","2191970a6d744668aa886b429de914ce"} -- "NIL2"
 }

@@ -75,6 +75,8 @@
             
             <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep6_LoadCompleted"></Frame>
+            <Button Name="syntheseButton" Visibility="Collapsed" Style="{StaticResource greenButton}" MaxWidth="200" Margin="14,0,14,100" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
+
 
             <DockPanel Name="expandButtons"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,0" SizeChanged="expandButtons_SizeChanged" >
                 

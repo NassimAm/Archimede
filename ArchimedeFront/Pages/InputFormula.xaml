@@ -206,7 +206,7 @@
                                                         </LinearGradientBrush.GradientStops>
                                                     </LinearGradientBrush>
                                                 </Border.BorderBrush>
-                                                <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+                                                <TextBox Name="nand_entree_input_text" Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
 
                                             </Border>
                                             <TextBlock Name="nand_entrees_input_txt" VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
@@ -231,7 +231,7 @@
                                                         </LinearGradientBrush.GradientStops>
                                                     </LinearGradientBrush>
                                                 </Border.BorderBrush>
-                                                <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+                                                <TextBox  Name="nor_entree_input_text" Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
 
                                             </Border>
                                             <TextBlock Name="nor_entrees_input_txt" VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
@@ -257,7 +257,7 @@
                                                         </LinearGradientBrush.GradientStops>
                                                     </LinearGradientBrush>
                                                 </Border.BorderBrush>
-                                                <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+                                                <TextBox Name="xor_entree_input_text" Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
 
                                             </Border>
                                             <TextBlock Name="xor_entrees_input_txt" VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>
@@ -281,7 +281,7 @@
                                                         </LinearGradientBrush.GradientStops>
                                                     </LinearGradientBrush>
                                                 </Border.BorderBrush>
-                                                <TextBox Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
+                                                <TextBox Name="xnor_entree_input_text" Width="38"  BorderThickness="0" Foreground="#424242" FontSize="22" AcceptsReturn="False" Style="{StaticResource fontUrbanist}"  TextWrapping="NoWrap" Text="2" TextAlignment="Center" VerticalAlignment="Center" MaxLength="3" Background="White" SelectionChanged="selectionChanged"  ></TextBox>
 
                                             </Border>
                                             <TextBlock Name="xnor_entrees_input_txt" VerticalAlignment="Center" Style="{StaticResource paragraphe}" FontSize="14" MaxWidth="140" TextAlignment="Left">un nombre supérieur ou égal à 2</TextBlock>

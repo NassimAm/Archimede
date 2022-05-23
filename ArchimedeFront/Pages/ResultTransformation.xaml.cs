@@ -28,41 +28,46 @@ namespace ArchimedeFront.Pages
             ExprBool? tree = null;
             StringBuilder sb = new StringBuilder();
             string result = "";
-            expression.Text = Data.expression;
+
             switch (Data.codeTransformation)
             {
-                
+
                 case '0':
                     tree = ExprBool.ParseExpression(Data.expression);
                     tree = ExprBool.dnf(tree);
                     ExprBool.inorder(tree, sb);
                     result = sb.ToString();
                     result = ExprBool.SimplifyDNFExpression(result);
-                    
+
                     break;
                 case '1':
                     tree = ExprBool.ParseExpression(Data.expression);
                     tree = ExprBool.cnf(tree);
                     ExprBool.inorder(tree, sb);
                     result = sb.ToString();
-                    result = ExprBool.SimplifyCNFExpression(result);
-                   
+                    //result = ExprBool.SimplifyCNFExpression(result);
+
                     if (result == "0")
-                    {   expressionTransforme.Text = "Faux";
+                    {
+                        expressionTransforme.Text = "Faux";
+                        Data.expression = "0";
                         return;
                     }
-                    if (result == "1") {
+                    if (result == "1")
+                    {
                         expressionTransforme.Text = "Vrai";
-                        return ;
+                        Data.expression = "1";
+                        return;
                     }
-                    
+
 
                     sb = new StringBuilder();
                     sb.Append("(");
                     for (int i = 0; i < result.Length; i++)
                     {
-                        if(result[i] != '.'){
-                        sb.Append(result[i]);
+                        if (result[i] != '.')
+                        {
+                            sb.Append(result[i]);
                         }
                         else
                         {
@@ -70,7 +75,7 @@ namespace ArchimedeFront.Pages
                         }
                     }
                     sb.Append(")");
-                    result = sb.ToString(); 
+                    result = sb.ToString();
                     break;
                 case '2':
                     tree = ExprBool.ParseExpression(Data.expression);
@@ -79,15 +84,15 @@ namespace ArchimedeFront.Pages
                     result = sb.ToString();
                     sb = new StringBuilder();
                     ExprBool.inorderParanthese(tree, sb);
-                    result= sb.ToString();
+                    result = sb.ToString();
                     break;
                 case '3':
                     tree = ExprBool.ParseExpression(Data.expression);
                     tree = ExprBool.onlyNor(tree);
-                    
+
                     sb = new StringBuilder();
                     ExprBool.inorderParanthese(tree, sb);
-                   
+
                     result = sb.ToString();
                     break;
                 default:
@@ -95,9 +100,12 @@ namespace ArchimedeFront.Pages
             }
 
             expressionTransforme.Text = result;
+            Data.expression = result;
+        }
 
-
-
+        private void syntheseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
     }
 }

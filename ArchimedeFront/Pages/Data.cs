@@ -12,6 +12,8 @@ namespace ArchimedeFront.Pages
     {
         public static bool trace = true;
         public static bool literal = true;
+        public static string? saveexpressionlitterale;
+        public static string? saveexpressionnumerique;
         public static string? expression; //l'expression a simplifier ;
         public static string? expressionTransforme; //l'expression apres transformation en dnf 
         public static List<string> variables = new List<string>(); // liste des variables ;
@@ -32,6 +34,10 @@ namespace ArchimedeFront.Pages
         //Synthese
         public static int nb_and = -1;
         public static int nb_or = -1;
+        public static int nb_nand = -1;
+        public static int nb_nor = -1;
+        public static int nb_xor = -1;
+        public static int nb_xnor = -1;
 
         public static void resete()
         {

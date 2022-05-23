@@ -62,14 +62,21 @@ namespace ArchimedeFront.Pages
                 //expression.Text = string.Join(" ,", Data.listMintermesString);
             }
 
-            expression.Text = Data.expression;
+           
             Data.impliquantsEssentiels = Mintermes.simplifyMintermes(Data.impliquants, Data.impliquantsEnAttente, Data.groupeMintermes, Data.stringListMinterm, Data.literal);
             string resultat;
             if (Data.codeTransformation == '1')
             {
                 resultat = Mintermes.getResultatExpressionCNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
-                if (resultat.Length == 0) FonctionSimplifie.Text = "Faux";
-                else FonctionSimplifie.Text = resultat;
+                if (resultat.Length == 0)
+                {
+                    FonctionSimplifie.Text = "Faux";
+                    Data.expression = "0";
+                }
+                else {
+                     FonctionSimplifie.Text = resultat;
+                     Data.expression = resultat;
+                }
             }
             else
             {
@@ -82,6 +89,11 @@ namespace ArchimedeFront.Pages
            
 
 
+        }
+
+        private void syntheseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
     }
 }

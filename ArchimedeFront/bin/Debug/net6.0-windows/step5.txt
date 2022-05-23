@@ -1,0 +1,6 @@
+Table d'impliquants essentiaux
+V:Vide  R:Représente  E:Essentiel
+
+     | 11- | 011 |
+ -11 |  V  |  E  |
+ 11- |  E  |  V  |

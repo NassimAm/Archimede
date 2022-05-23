@@ -38,7 +38,15 @@ namespace ArchimedeFront.Pages
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
-            caretPosition=expression.Text.Length -1;
+
+            if (Data.saveexpressionlitterale == null)
+            {
+                Data.saveexpressionlitterale = expression.Text;
+            }
+            else
+                expression.Text = Data.saveexpressionlitterale;
+
+            caretPosition =expression.Text.Length -1;
             Data.literal = true;
 
 
@@ -131,10 +139,65 @@ namespace ArchimedeFront.Pages
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
         {
+            errorsContainer.Children.Clear();
+            Data.resete();
+            Data.expression = expression.Text.Replace(" ", "");
+            expression.Text = Data.expression;
+
+            if (numerique.IsChecked == true)
+            {
+                Data.literal = false;
+                Data.nbVariables = int.Parse(nbVariables.Text);
+                Data.expression = expression.Text.Replace(" ", "");
+                Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
+                long parsedInt;
+
+                foreach (string minterm in Data.listMintermesString)
+                {
+
+                    try
+                    {
+                        parsedInt = long.Parse(minterm);
+                        Data.mintermes.Add(new Minterme(parsedInt));
+                    }
+                    catch (OverflowException)
+                    {
+                        Data.mintermes.Add(new Minterme(minterm));
+                    }
+
+                }
+
+                int maxNbUns = Minterme.maxNbUns;
+
+
+                if (Minterme.maxNbVariables > Data.nbVariables)
+                {
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
+                    disableButtons();
+                    return;
+                }
+            }
+            else
+            {
+                Data.literal = true;
+                List<string> errorMessages = new List<string>();
+                errorMessages = Erreurs.detectionErreurs(expression.Text);
+                if (errorMessages.Count > 0)
+                {
+                    disableButtons();
+                    foreach (string error in errorMessages)
+                    {
+                        errorsContainer.Children.Add(generateNewError(error));
+                    }
+                    return;
+                }
+
+            }
+
             pageContent.IsHitTestVisible = false;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             SynthesePopUP.Visibility = Visibility.Visible;
-            activePopUp=true;
+            activePopUp = true;
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)
@@ -198,7 +261,13 @@ namespace ArchimedeFront.Pages
             enableButtons();
             transformButton.Visibility = Visibility.Visible;
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
-            expression.Text = "A.B + !A.B.C";
+            if (Data.saveexpressionlitterale == null)
+            {
+                Data.saveexpressionlitterale = expression.Text;
+            }
+            else
+                expression.Text = Data.saveexpressionlitterale;
+
             operatorButtonsContainer.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 24, 0, 24);
             guidePopUp.Visibility = Visibility.Collapsed;
@@ -210,9 +279,16 @@ namespace ArchimedeFront.Pages
 
             errorsContainer.Children.Clear();
             enableButtons();
+            transformButton.Visibility = Visibility.Collapsed;
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
-            
+            if (Data.saveexpressionnumerique == null)
+            {
+                Data.saveexpressionnumerique = expression.Text;
+            }
+            else
+                expression.Text = Data.saveexpressionnumerique;
+
             operatorButtonsContainer.Visibility = Visibility.Collapsed;
             guidePopUp.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 58, 0, 24);
@@ -256,6 +332,41 @@ namespace ArchimedeFront.Pages
             TextBlock errorMessage = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Top, TextWrapping = TextWrapping.Wrap, Text = message};
 
             StackPanel error = new StackPanel() { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(10, 2, 10, 8) };
+            error.Children.Add(errorSignal);
+            error.Children.Add(errorMessage);
+            return error;
+        }
+
+        private StackPanel generateNewErrorNumerique(string message)
+        {
+
+            //generate exclamation mark
+            Border border = new Border()
+            {
+                BorderThickness = new Thickness(2, 2, 2, 2),
+                BorderBrush = Brushes.Red,
+                Width = 24,
+                Height = 24,
+                CornerRadius = new CornerRadius(24),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Child = new TextBlock() { Style = FindResource("fontProductSans") as Style, FontSize = 18, Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, Text = "!" }
+
+
+            };
+            TextBlock textBlock =
+            new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(8, 0, 4, 0), Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Text = "Erreur signalée :" };
+            StackPanel errorSignal = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+                VerticalAlignment = VerticalAlignment.Top,
+            };
+            errorSignal.Children.Add(border);
+            errorSignal.Children.Add(textBlock);
+
+            TextBlock errorMessage = new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(0, 0, 0, 0), VerticalAlignment = VerticalAlignment.Top, TextWrapping = TextWrapping.Wrap, Text = message };
+
+            StackPanel error = new StackPanel() { Orientation = Orientation.Vertical, HorizontalAlignment = HorizontalAlignment.Left, Margin = new Thickness(10, 2, 10, 8) };
             error.Children.Add(errorSignal);
             error.Children.Add(errorMessage);
             return error;
@@ -356,7 +467,8 @@ namespace ArchimedeFront.Pages
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/ResultTransformation.xaml", UriKind.Absolute));
         }
 
-        private void startSynthese_Button_Click(object sender , RoutedEventArgs e)
+       
+        private void startSynthese_Button_Click(object sender, RoutedEventArgs e)
         {
             Data.expression = expression.Text;
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
@@ -469,15 +581,19 @@ namespace ArchimedeFront.Pages
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nand = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nor = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "XOR_entrees":
                     xor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_xor = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "XNOR_entrees":
                     xnor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_xnor = int.Parse(nand_entree_input_text.Text);
                     break;
             }
         }

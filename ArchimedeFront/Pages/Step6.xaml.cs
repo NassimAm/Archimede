@@ -40,8 +40,16 @@ namespace ArchimedeFront.Pages
                      resultat = Mintermes.getResultatExpressionDNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
                 }
 
-                if (resultat.Length == 0) FonctionSimplifieContainer.Text = "VRAI";
-                else FonctionSimplifieContainer.Text = resultat;
+                if (resultat.Length == 0)
+                {
+                    FonctionSimplifieContainer.Text = "VRAI";
+                    Data.expression = "1";
+                }
+                else {
+                    FonctionSimplifieContainer.Text = resultat;
+                    Data.expression = resultat;
+                }
+                   
             }
             
         }
