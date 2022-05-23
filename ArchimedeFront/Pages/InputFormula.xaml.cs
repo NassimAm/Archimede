@@ -38,6 +38,13 @@ namespace ArchimedeFront.Pages
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
+            if (Data.saveexpressionlitterale == null)
+            {
+                Data.saveexpressionlitterale = expression.Text;
+            } 
+            else
+                expression.Text = Data.saveexpressionlitterale;
+
             caretPosition=expression.Text.Length -1;
             Data.literal = true;
 
@@ -247,7 +254,12 @@ namespace ArchimedeFront.Pages
             enableButtons();
             transformButton.Visibility = Visibility.Visible;
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
-            expression.Text = "A.B + !A.B.C";
+            if (Data.saveexpressionlitterale == null)
+            {
+                Data.saveexpressionlitterale = expression.Text;
+            }
+            else
+                expression.Text = Data.saveexpressionlitterale;
             operatorButtonsContainer.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 24, 0, 24);
             guidePopUp.Visibility = Visibility.Collapsed;
@@ -262,7 +274,12 @@ namespace ArchimedeFront.Pages
             transformButton.Visibility = Visibility.Collapsed;
             numberOfVariablesInput.Width = new GridLength(60, GridUnitType.Pixel);
             expression.Text = "0,1,2,3,10";
-            
+            if (Data.saveexpressionnumerique == null)
+            {
+                Data.saveexpressionnumerique = expression.Text;
+            }
+            else
+                expression.Text = Data.saveexpressionnumerique;
             operatorButtonsContainer.Visibility = Visibility.Collapsed;
             guidePopUp.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 58, 0, 24);
@@ -518,9 +535,11 @@ namespace ArchimedeFront.Pages
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nand = -1;
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nor = -1;
                     break;
             }
         }
@@ -548,9 +567,11 @@ namespace ArchimedeFront.Pages
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nand = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nor = int.Parse(nand_entree_input_text.Text);
                     break;
             }
         }

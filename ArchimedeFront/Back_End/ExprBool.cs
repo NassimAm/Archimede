@@ -15,8 +15,9 @@ namespace dnf
         OU,
         NON,
         NAND,
-        NOR
-
+        NOR,
+        XOR,
+        XNOR,
     };
 
     class ExprBool
@@ -193,7 +194,7 @@ namespace dnf
                     return cnf(tete.fd.fd);
 
                 tete = negationDNF(dnf(tete.fd)); // tete.fd est soit un "OU" ou bien un "ET", donc on doit le remplacer `tete` par sa negation (en appliquant les lois de DE MORGAN)
-                
+
                 return tete;
             }
 
@@ -708,7 +709,7 @@ namespace dnf
             {
                 case '!':
                     return 7;
-                
+
                 case '⊙':   // XNOR
                     return 6;
 
@@ -806,9 +807,9 @@ namespace dnf
 
         public static bool isOperator(char ch)
         {
-            
+
             if (ch == '!' || ch == '&' || ch == '.' || ch == '|' || ch == '+' || ch == '>' || ch == '<' || ch == '^' || ch == '§' || ch == '-' || ch == '=' ||
-                ch == '↑' || ch == '↓' || ch == '⊕' || ch == '⊙' )
+                ch == '↑' || ch == '↓' || ch == '⊕' || ch == '⊙')
             {
                 return true;
             }
@@ -1004,6 +1005,83 @@ namespace dnf
                 vars.Add(variable);
         }
 
+        public static ExprBool expressionTreeWithAllOperators(String postfix, List<string> vars)
+        {
+            Stack<ExprBool> st = new Stack<ExprBool>();
+            ExprBool t1, t2, temp;
+            Dictionary<char, Type> operators = new Dictionary<char, Type>();
+            operators.Add('!', Type.NON);
+            operators.Add('&', Type.ET);
+            operators.Add('|', Type.OU);
+            operators.Add('.', Type.ET);
+            operators.Add('+', Type.OU);
+            operators.Add('⊕', Type.XOR);
+            operators.Add('⊙', Type.XNOR);
+            operators.Add('↑', Type.NAND);
+            operators.Add('↓', Type.NOR);
+
+            string variable = "";
+
+            int i = 0, j = 0;
+            while (i < postfix.Length)  // we loop through the expression
+            {
+                if (!isOperator(postfix[i]))
+                {    // value found
+                    variable = vars[j++];
+                    temp = new ExprBool(variable);
+                    st.Push(temp);
+                    i += variable.Length;
+                }
+                else
+                {  // operator found
+
+                    if (postfix[i] == '!')
+                    { //  unary operator 
+                        temp = new ExprBool(Type.NON, null, null);  // creates a "NON" node temp with the operator as value
+                        t1 = st.Pop();
+                        temp.fd = t1;
+                        st.Push(temp);
+                    }
+                    else
+                    { //  binary operator
+                      //  pop two values of the stack
+
+                        t1 = st.Pop();
+                        t2 = st.Pop();
+
+                        if (postfix[i] == '-')
+                        {   // IMPLICATION : (a → b) = !a+b
+                            ExprBool
+                                notA = new ExprBool(Type.NON, null, t2),
+                                notA_B = new ExprBool(Type.OU, notA, t1);
+                            st.Push(notA_B);
+                        }
+                        else if (postfix[i] == '=')
+                        {   // EQUIVALENCE : (a ←→ b) = (!a+b).(!b+a)
+                            ExprBool
+                                notA = new ExprBool(Type.NON, null, t2),
+                                notB = new ExprBool(Type.NON, null, t1),
+                                notA_B = new ExprBool(Type.OU, notA, t1),
+                                notB_A = new ExprBool(Type.OU, notB, t2),
+                                A_B = new ExprBool(Type.ET, notA_B, notB_A);
+                            st.Push(A_B);
+                        }
+                        else
+                        {
+                            temp = new ExprBool(operators[postfix[i]], t2, t1);
+                            st.Push(temp);
+                        }
+
+                    }
+
+                    i++;
+                }
+
+            }
+            temp = st.Pop(); // we pop the remaining node in the stack, which will be the tree's root
+            return temp;
+        }
+
         /// <summary>same as expressionTree , but works if the variables were strings</summary>
         public static ExprBool expressionTree(String postfix, List<string> vars)
         {
@@ -1048,7 +1126,7 @@ namespace dnf
                         // pop two values of the stack
                         t1 = st.Pop();
                         t2 = st.Pop();
-                        
+
                         if (postfix[i] == '^' || postfix[i] == '⊕') // XOR
                         {
                             ExprBool
@@ -1077,7 +1155,7 @@ namespace dnf
                                 notA_notB = new ExprBool(Type.OU, notA, notB);
                             st.Push(notA_notB);
                         }
-                        else if (postfix[i] == '<' || postfix[i]== '↓')
+                        else if (postfix[i] == '<' || postfix[i] == '↓')
                         { // NOR
                             ExprBool
                                 notA = new ExprBool(Type.NON, null, t2),
@@ -1136,7 +1214,7 @@ namespace dnf
         {
             foreach (string minterm in minterms)
             {
-                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm)) 
+                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm))
                     return true;
             }
             return false;
@@ -1225,7 +1303,7 @@ namespace dnf
                     // eliminate idempotence using a HashSet 
                     HashSet<string> litterals = new HashSet<string>(maxterms[i].Split('+'));
                     List<string> maxterm = new List<string>(litterals);
-                    maxterm.Sort();  
+                    maxterm.Sort();
                     out_maxterms.Add(string.Join('+', maxterm));
                 }
                 else
@@ -1263,13 +1341,13 @@ namespace dnf
         /// <summary>
         /// inorder traversal for a binary tree with parathesis for better reading
         /// </summary>
-        public static void inorderParanthese(ExprBool? root , StringBuilder expression)
+        public static void inorderParanthese(ExprBool? root, StringBuilder expression)
         {
             if (root == null)
                 return;
             if (root.type == Type.OU || root.type == Type.NAND || root.type == Type.NOR) expression.Append("(");
-            
-            inorderParanthese(root.fg , expression);
+
+            inorderParanthese(root.fg, expression);
 
             switch (root.type)
             {
@@ -1282,8 +1360,8 @@ namespace dnf
 
             }
 
-            inorderParanthese(root.fd , expression);
-          
+            inorderParanthese(root.fd, expression);
+
             if (root.type == Type.OU || root.type == Type.NAND || root.type == Type.NOR) expression.Append(")");
 
         }
@@ -1341,81 +1419,81 @@ namespace dnf
 
 
 
-/*        //tree visualisation 
-        public static void arbre_to_txt(ExprBool? root, ref int nbNils, string path)
-        {
-
-            if (root != null)
-            {
-                // dessiner un arc vers le fils gauche
-                if (root.fg != null)
-                {
-                    File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"]  \n", root.fg.info, root.fg.id));
-                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fg.id));
-                }
-                else
+        /*        //tree visualisation 
+                public static void arbre_to_txt(ExprBool? root, ref int nbNils, string path)
                 {
 
-                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
-                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
-                    File.AppendAllText(path, " [style=invis];\n");
+                    if (root != null)
+                    {
+                        // dessiner un arc vers le fils gauche
+                        if (root.fg != null)
+                        {
+                            File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"]  \n", root.fg.info, root.fg.id));
+                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fg.id));
+                        }
+                        else
+                        {
+
+                            File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
+                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
+                            File.AppendAllText(path, " [style=invis];\n");
+                        }
+
+                        // Dessiner un fils NIL "virtuel" et "invisible" au milieu (pour une meilleure séparation des fils gauches et droits)
+
+                        File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
+                        File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
+                        File.AppendAllText(path, " [style=invis];\n");
+
+                        // Dessiner un arc vers le fils droit
+                        if (root.fd != null)
+                        {
+                            File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"] \n", root.fd.info, root.fd.id));
+                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fd.id));
+                        }
+                        else
+                        {
+
+                            File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
+                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
+                            File.AppendAllText(path, " [style=invis];\n");
+                        }
+
+                        // dessiner les sous-arbres gauche et droit
+                        arbre_to_txt(root.fg, ref nbNils, path);
+                        arbre_to_txt(root.fd, ref nbNils, path);
+                    }
                 }
 
-                // Dessiner un fils NIL "virtuel" et "invisible" au milieu (pour une meilleure séparation des fils gauches et droits)
-
-                File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
-                File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
-                File.AppendAllText(path, " [style=invis];\n");
-
-                // Dessiner un arc vers le fils droit
-                if (root.fd != null)
+                public static void Draw_Tree(ExprBool root)
                 {
-                    File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"] \n", root.fd.info, root.fd.id));
-                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fd.id));
+                    string? path = Directory.GetCurrentDirectory() + "\\tree.txt";
+                    File.WriteAllText(path, ""); // creer le fichier text 'tree.txt'
+                    int nbnils = 0; // nombre des noeuds nils
+                    // construction du fichier 'tree.txt' (en langage DOT)
+                    File.AppendAllText(path, "strict graph arbre {\n");
+                    File.AppendAllText(path, "\tordering = out;\n");
+                    File.AppendAllText(path, "\tsplines = false;\n");
+                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
+                    arbre_to_txt(root, ref nbnils, path);
+                    File.AppendAllText(path, "}\n");
+
+                    // conversion du fichier text en fichier png
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; // hide the terminal
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = "/C dot -Tpng tree.txt -o tree.png";
+                    process.StartInfo = startInfo;
+                    process.Start();
+                    process.Close();
+                    // ouverture du fichier 'tree.png'
+                    startInfo.Arguments = "/C tree.png";
+                    process.StartInfo = startInfo;
+                    process.Start();
+
                 }
-                else
-                {
-
-                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
-                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
-                    File.AppendAllText(path, " [style=invis];\n");
-                }
-
-                // dessiner les sous-arbres gauche et droit
-                arbre_to_txt(root.fg, ref nbNils, path);
-                arbre_to_txt(root.fd, ref nbNils, path);
-            }
-        }
-
-        public static void Draw_Tree(ExprBool root)
-        {
-            string? path = Directory.GetCurrentDirectory() + "\\tree.txt";
-            File.WriteAllText(path, ""); // creer le fichier text 'tree.txt'
-            int nbnils = 0; // nombre des noeuds nils
-            // construction du fichier 'tree.txt' (en langage DOT)
-            File.AppendAllText(path, "strict graph arbre {\n");
-            File.AppendAllText(path, "\tordering = out;\n");
-            File.AppendAllText(path, "\tsplines = false;\n");
-            File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
-            arbre_to_txt(root, ref nbnils, path);
-            File.AppendAllText(path, "}\n");
-
-            // conversion du fichier text en fichier png
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; // hide the terminal
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C dot -Tpng tree.txt -o tree.png";
-            process.StartInfo = startInfo;
-            process.Start();
-            process.Close();
-            // ouverture du fichier 'tree.png'
-            startInfo.Arguments = "/C tree.png";
-            process.StartInfo = startInfo;
-            process.Start();
-
-        }
-*/
+        */
 
         public static string generateID()  // for generating unique IDs
         {
@@ -1443,7 +1521,7 @@ namespace dnf
             switch (root.type)
             {
                 case Type.NON:
-                
+
                     if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NAND, root, root.clone());  //!a 
                     break;
 
@@ -1488,7 +1566,7 @@ namespace dnf
                 if (root.fg.type == Type.NON && root.fd.type == Type.NON)
                 {
                     //!a+!b = !(a.b) = a nand b 
-                    return new ExprBool(Type.NAND,onlyNand( root.fg.fd),onlyNand( root.fd.fd));
+                    return new ExprBool(Type.NAND, onlyNand(root.fg.fd), onlyNand(root.fd.fd));
                 }
                 else
                 {
@@ -1500,7 +1578,7 @@ namespace dnf
                     return new ExprBool(Type.NAND, a_a, b_b); // ( a nand a ) nand  ( b nand b )
                 }
             }
-          
+
             if (root.type == Type.ET)
             {
                 ExprBool a_b = new ExprBool(Type.NAND, onlyNand(root.fg), onlyNand(root.fd)); //( a nand b )

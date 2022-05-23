@@ -1,11 +1,5 @@
 Groupage 0 :
-o 0000000
 Groupage 1 :
-o 0000001
-o 0000010
 Groupage 2 :
-o 0000011
-o 0001010
-Groupage 3 :
-o 1100100
+o 11
 

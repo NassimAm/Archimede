@@ -165,7 +165,7 @@ class Synthese
         string postfix = "";
         List<string> listVars = new List<string>();
         ExprBool.To_RNP(expression, ref postfix, listVars);
-        ExprBool? root = ExprBool.expressionTree(postfix, listVars);
+        ExprBool? root = ExprBool.expressionTreeWithAllOperators(postfix, listVars);
 
         ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
         ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or,nb_nand,nb_nor);

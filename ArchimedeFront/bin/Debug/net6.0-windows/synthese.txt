@@ -4,5 +4,15 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"a9bca2f43c1949d2ac9ec521b39ad136" [label="1"] 
+	"b8bfe1b1bebb47e5ac3df70cc71d2878" [label="",image="rsc/images/gates/NAND.png",fixedsize=true,shape=plaintext] 
+	"c28d2dd1753943f28e6dbd5eef2b11f6" [label="a"] 
+	"2c3b7241f8e049f2b52d92e3dbb1cade" [label="a"] 
+	"0fd7d3a18e8441b9aa2d464d6d170938" [label="a"] 
+	"940c9907618742eca40d03f727f4c99b" [label="a"] 
+	"4fe11966e81a4369bf257e4ebdabaf67" [label="a"] 
+	"b37943e55c0349dd8f15d6d4e51c9c90" [label="a"] 
+	"6e7944a9b78144ce8516b3261df338bf" [label="a"] 
+	"NIL0" [label="",shape = box,width=.001,height = 1] 
+	"NIL0" -- "b8bfe1b1bebb47e5ac3df70cc71d2878"
+	{"c28d2dd1753943f28e6dbd5eef2b11f6","2c3b7241f8e049f2b52d92e3dbb1cade","0fd7d3a18e8441b9aa2d464d6d170938","940c9907618742eca40d03f727f4c99b","4fe11966e81a4369bf257e4ebdabaf67","b37943e55c0349dd8f15d6d4e51c9c90","6e7944a9b78144ce8516b3261df338bf"} -- "NIL0"
 }
