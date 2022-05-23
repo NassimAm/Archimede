@@ -25,10 +25,6 @@ namespace ArchimedeFront.Pages
 
         public Step2()
         {
-
-           
-
-
             int nbVariables = Data.nbVariables;
             Data.groupeMintermes.GrouperListes(Data.impliquants);
 
@@ -85,8 +81,6 @@ namespace ArchimedeFront.Pages
                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = nbVariables * 16, Child = null };
                 groupesTable.Children.Add(border);
             }
-          
-
 
             groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
 

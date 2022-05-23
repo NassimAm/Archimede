@@ -10,7 +10,7 @@
       >
 
 
-    <ScrollViewer >
+    <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition  />
@@ -28,22 +28,22 @@
                     <Grid HorizontalAlignment="Right" Background="White" Cursor="Hand" MouseDown="exitSimpPopUP_MouseDown" Margin="18,0">
                         <Viewbox  Width="28" HorizontalAlignment="Right"  >
 
-                        <Path x:Name="menuIcon" 
+                            <Path x:Name="menuIcon" 
                         Data="{DynamicResource EXIT_ICON}"                
                         VerticalAlignment="Top">
-                            <Path.Fill>
-                                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStop Offset="0.1"  Color="#00CBBD" />
-                                        <GradientStop Offset="1"   Color="#00E17C"  />
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-                            </Path.Fill>
-                        </Path>
+                                <Path.Fill>
+                                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                                            <GradientStop Offset="1"   Color="#00E17C"  />
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
 
-                    </Viewbox>
+                        </Viewbox>
                     </Grid>
-                    
+
                     <StackPanel HorizontalAlignment="Center" Margin="58,8">
                         <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Vous voulez simplifier l’expression en forme :</TextBlock>
                         <StackPanel Name="radioButtons" HorizontalAlignment="Left" Margin="0,14,0,20">
@@ -62,7 +62,7 @@
 
                     </StackPanel>
                 </StackPanel>
-                
+
             </Border>
             <Border Name="TransformationPopUP" d:Visibility="Collapsed"  Panel.ZIndex="101" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,14,0,24">
                 <Border.BorderBrush>
@@ -93,20 +93,20 @@
                         </Viewbox>
                     </Grid>
                     <StackPanel HorizontalAlignment="Center"  Margin="54,8">
-                    <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Vous voulez transformer l’expression en forme :</TextBlock>
-                    <StackPanel Name="radioButtonsContainer" HorizontalAlignment="Left" Margin="0,14,0,20">
-                        <RadioButton Name="_0"  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
-                        <RadioButton Name="_1" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
-                        <RadioButton Name="_2" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
-                        <RadioButton Name="_3" Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
+                        <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Vous voulez transformer l’expression en forme :</TextBlock>
+                        <StackPanel Name="radioButtonsContainer" HorizontalAlignment="Left" Margin="0,14,0,20">
+                            <RadioButton Name="_0"  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
+                            <RadioButton Name="_1" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
+                            <RadioButton Name="_2" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
+                            <RadioButton Name="_3" Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
+                        </StackPanel>
+
+
+                        <Button Style="{StaticResource greenSamallButton}"  Cursor="Hand" HorizontalAlignment="Right" Padding="16,2" Click='startTransformation_Click'>Aller</Button>
+
                     </StackPanel>
-                  
-
-                    <Button Style="{StaticResource greenSamallButton}"  Cursor="Hand" HorizontalAlignment="Right" Padding="16,2" Click='startTransformation_Click'>Aller</Button>
-
                 </StackPanel>
-                </StackPanel>
-                    
+
             </Border>
             <Border Name="SynthesePopUP" Visibility="Collapsed"  Panel.ZIndex="102" Background="White" BorderThickness="2" CornerRadius="20" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,14,0,24">
                 <Border.BorderBrush>
@@ -307,7 +307,7 @@
                 <TextBlock Style="{StaticResource fontProductSans}" FontSize="46" Foreground="#002725" TextWrapping="Wrap" TextAlignment="Center" >
                     Veuillez introduire votre expression
                 </TextBlock>
-           
+
                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,28">
                     <RadioButton Name="literale" Style="{StaticResource customRadioButton}"  IsChecked="True" FontSize="28" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0"  Checked="literale_Checked" GroupName="formeExpression">Expression littérale</RadioButton>
                     <RadioButton Name="numerique" Style="{StaticResource customRadioButton}" FontSize="28" Foreground="Black" VerticalContentAlignment="Center" Margin="30,16,30,0" Checked="numerique_Checked" GroupName="formeExpression">Expression numérique</RadioButton>
@@ -328,7 +328,7 @@
                             <ColumnDefinition  Width="1*"/>
                             <ColumnDefinition Name="numberOfVariablesInput"  Width="60"/>
                         </Grid.ColumnDefinitions>
-                    
+
                         <TextBox Grid.Column="0" Name="expression" VerticalAlignment="Center" Foreground="#424242" HorizontalAlignment="Stretch"  AcceptsReturn="False" Style="{StaticResource fontUrbanist}" Margin="16,0,0,0"  FontSize="28" Background="Transparent" BorderThickness="0" TextWrapping="NoWrap" Text="0,1,2,3,10" SelectionChanged="selectionChanged"></TextBox>
                         <Border  Name="numberInput" Grid.Column="1"  BorderThickness="2" BorderBrush="#002725" Opacity="0.8" Height="40" CornerRadius="6" Padding="2" Background="White" Margin="0,0,6,0" >
 
@@ -336,8 +336,8 @@
 
                         </Border>
                     </Grid>
-                
-                
+
+
 
                 </Border>
                 <Grid Name="guidePopUp"  HorizontalAlignment="Right" Margin="16,4">
@@ -386,6 +386,21 @@
                 </styles:AlignableWrapPanel>
 
             </StackPanel>
+            <!--
+            <ProgressBar Width="300" Height="30" Minimum="0" Maximum="100" Name="pbBar">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                            <GradientStop Offset="1"   Color="#00E17C"  />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+                <ProgressBar.Clip>
+                    <RectangleGeometry RadiusX="12.5" RadiusY="12.5" Rect="0,0,300,30"/>
+                </ProgressBar.Clip>
+            </ProgressBar>
+            -->
         </Grid>
     </ScrollViewer>
 

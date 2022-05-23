@@ -28,6 +28,7 @@ namespace ArchimedeFront.Pages
             if (Data.resultatFaux )
             {
                 FonctionSimplifieContainer.Text = "FAUX";
+                Data.expression = "0";
             }
             else
             {

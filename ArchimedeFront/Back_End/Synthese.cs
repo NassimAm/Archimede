@@ -159,6 +159,7 @@ class Synthese
     }
 
     //Convertit une expression en arbre syntaxique m-aire
+    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or,int nb_nand,int nb_nor)
     public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or, int nb_nand, int nb_nor)
     {
         expression = expression.Replace(" ", "");
@@ -168,6 +169,7 @@ class Synthese
         ExprBool? root = ExprBool.expressionTreeWithAllOperators(postfix, listVars);
 
         ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
+        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or,nb_nand,nb_nor);
         ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or, nb_nand, nb_nor);
         return n_ary_root;
     }
@@ -391,6 +393,8 @@ class Synthese
         System.Diagnostics.Process process = new System.Diagnostics.Process();
         System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
         // hide the terminal
+        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        startInfo.CreateNoWindow = true; 
         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
         startInfo.CreateNoWindow = true;
         startInfo.FileName = "cmd.exe";

@@ -74,8 +74,6 @@ namespace ArchimedeFront.Pages
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            
            errorsContainer.Children.Clear();
            Data.resete();
            Data.expression = expression.Text.Replace(" ","");
@@ -109,7 +107,7 @@ namespace ArchimedeFront.Pages
 
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
-                    errorsContainer.Children.Add(generateNewError("La liste de mintermes introduite depasse le nombre maximal de variables introduit "));
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
                     disableButtons();
                     return;
                 }
@@ -319,7 +317,7 @@ namespace ArchimedeFront.Pages
                 
 
             };
-            TextBlock textBlock = 
+            TextBlock textBlock =
             new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 20, Margin = new Thickness(8, 0, 4, 0), Foreground = Brushes.Red, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Text = "Erreur signalée :" };
             StackPanel errorSignal = new StackPanel()
             {
@@ -545,9 +543,11 @@ namespace ArchimedeFront.Pages
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nand = -1;
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_nor = -1;
                     break;
                 case "XOR_entrees":
                     xor_entrees_input.BeginAnimation(OpacityProperty, da);

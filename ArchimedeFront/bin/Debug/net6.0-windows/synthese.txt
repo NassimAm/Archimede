@@ -4,20 +4,15 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"8144678e03804e019738ba2f973f005a" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"03a1c2e628664d00828f6853a7be411e" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"7d7f2ad8a2344806b5f438a72990cbba" [label="C"] 
-	"1729a4f308e34706b27133f8b444b385" [label="B"] 
-	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "03a1c2e628664d00828f6853a7be411e"
-	{"7d7f2ad8a2344806b5f438a72990cbba","1729a4f308e34706b27133f8b444b385"} -- "NIL0"
-	"2191970a6d744668aa886b429de914ce" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"bd0745fdf6464548811c3427f5e817c0" [label="B"] 
-	"df84a6c67ab24821840e397ec961abaf" [label="A"] 
-	"NIL1" [label="",shape = box,width=.001,height = 0] 
-	"NIL1" -- "2191970a6d744668aa886b429de914ce"
-	{"bd0745fdf6464548811c3427f5e817c0","df84a6c67ab24821840e397ec961abaf"} -- "NIL1"
-	"NIL2" [label="",shape = box,width=.001,height = 0] 
-	"NIL2" -- "8144678e03804e019738ba2f973f005a"
-	{"03a1c2e628664d00828f6853a7be411e","2191970a6d744668aa886b429de914ce"} -- "NIL2"
+	"b8bfe1b1bebb47e5ac3df70cc71d2878" [label="",image="rsc/images/gates/NAND.png",fixedsize=true,shape=plaintext] 
+	"c28d2dd1753943f28e6dbd5eef2b11f6" [label="a"] 
+	"2c3b7241f8e049f2b52d92e3dbb1cade" [label="a"] 
+	"0fd7d3a18e8441b9aa2d464d6d170938" [label="a"] 
+	"940c9907618742eca40d03f727f4c99b" [label="a"] 
+	"4fe11966e81a4369bf257e4ebdabaf67" [label="a"] 
+	"b37943e55c0349dd8f15d6d4e51c9c90" [label="a"] 
+	"6e7944a9b78144ce8516b3261df338bf" [label="a"] 
+	"NIL0" [label="",shape = box,width=.001,height = 1] 
+	"NIL0" -- "b8bfe1b1bebb47e5ac3df70cc71d2878"
+	{"c28d2dd1753943f28e6dbd5eef2b11f6","2c3b7241f8e049f2b52d92e3dbb1cade","0fd7d3a18e8441b9aa2d464d6d170938","940c9907618742eca40d03f727f4c99b","4fe11966e81a4369bf257e4ebdabaf67","b37943e55c0349dd8f15d6d4e51c9c90","6e7944a9b78144ce8516b3261df338bf"} -- "NIL0"
 }

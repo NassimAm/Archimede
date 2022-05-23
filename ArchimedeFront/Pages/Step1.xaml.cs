@@ -25,7 +25,6 @@ namespace ArchimedeFront.Pages
 
         public Step1()
         {
-           
             avecTrace = true ;
             List<string> mintermes = new List<string>() ;
             if (Data.literal)
@@ -152,6 +151,11 @@ namespace ArchimedeFront.Pages
                    //affichage du groupe
                     Border border;
                     StackPanel groupesTable;
+                    string? path = Directory.GetCurrentDirectory() + "\\step4.txt";
+                    File.WriteAllText(path, "");
+                    File.AppendAllText(path, "Extraction des impliquants premiers\n");
+                    File.AppendAllText(path, "T: Déjà Traité  P: Premier  A: en attente\n\n");
+                    File.AppendAllText(path, String.Format("Groupage N°{0}\n", Data.cptGroupes));
 
                     string? path = Directory.GetCurrentDirectory() + "\\step4.txt";
                     File.WriteAllText(path, "");
@@ -187,6 +191,7 @@ namespace ArchimedeFront.Pages
                         {
                             foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                             {
+                                File.AppendAllText(path, "A " + impliquant.bincode + "\n");
                                 groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
                             }
                              
@@ -295,9 +300,15 @@ namespace ArchimedeFront.Pages
                                 foreach (Impliquant impliquant in groupe)
                                 {
                                     if (impliquant.status)
+                                    {
+                                        File.AppendAllText(path, "P " + impliquant.bincode + "\n");
                                         groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
-                                    else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
-
+                                    }  
+                                    else
+                                    {
+                                        File.AppendAllText(path, "T " + impliquant.bincode + "\n");
+                                        groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                    }
                                 }
 
                                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null 
@@ -418,7 +429,7 @@ namespace ArchimedeFront.Pages
 
                     syntheseButton.Visibility = Visibility.Visible;
                     skipButton.Visibility = Visibility.Collapsed;
-                     expandBottomButton.Style = FindResource("returnButton") as Style;
+                    expandBottomButton.Style = FindResource("returnButton") as Style;
                     expandBottomButton.ContentStringFormat = "Retour";
                     scrollViewer.ScrollToEnd();
 
