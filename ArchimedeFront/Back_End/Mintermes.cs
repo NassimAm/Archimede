@@ -590,5 +590,6 @@ namespace Archimède
             }
             return resultat;
         }
+
     }
 }

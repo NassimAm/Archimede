@@ -38,14 +38,15 @@ namespace ArchimedeFront.Pages
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
+
             if (Data.saveexpressionlitterale == null)
             {
                 Data.saveexpressionlitterale = expression.Text;
-            } 
+            }
             else
                 expression.Text = Data.saveexpressionlitterale;
 
-            caretPosition=expression.Text.Length -1;
+            caretPosition =expression.Text.Length -1;
             Data.literal = true;
 
 
@@ -61,8 +62,12 @@ namespace ArchimedeFront.Pages
                 operatorButton.Click += new RoutedEventHandler( operator_Click );
                 buttons.Children.Add(operatorButton);
             }
-            
+
             operatorButtonsContainer.Children.Add(buttons);
+
+
+
+           
             
         
         }
@@ -165,7 +170,7 @@ namespace ArchimedeFront.Pages
 
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
-                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}",Minterme.maxNbVariables)));
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
                     disableButtons();
                     return;
                 }
@@ -190,7 +195,7 @@ namespace ArchimedeFront.Pages
             pageContent.IsHitTestVisible = false;
             pageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
             SynthesePopUP.Visibility = Visibility.Visible;
-            activePopUp=true;
+            activePopUp = true;
         }
 
         private void operator_Click(object sender, RoutedEventArgs e)
@@ -260,6 +265,7 @@ namespace ArchimedeFront.Pages
             }
             else
                 expression.Text = Data.saveexpressionlitterale;
+
             operatorButtonsContainer.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 24, 0, 24);
             guidePopUp.Visibility = Visibility.Collapsed;
@@ -280,13 +286,14 @@ namespace ArchimedeFront.Pages
             }
             else
                 expression.Text = Data.saveexpressionnumerique;
+
             operatorButtonsContainer.Visibility = Visibility.Collapsed;
             guidePopUp.Visibility = Visibility.Visible;
             buttonsContainer.Margin = new Thickness(0, 58, 0, 24);
             DoubleAnimation da = new DoubleAnimation();
             da.From = 1;
             da.To = 0;
-            da.Duration = new Duration(TimeSpan.FromSeconds(4));
+            da.Duration = new Duration(TimeSpan.FromSeconds(6));
             guidePopUp.BeginAnimation(OpacityProperty, da);
         }
 
@@ -458,7 +465,8 @@ namespace ArchimedeFront.Pages
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/ResultTransformation.xaml", UriKind.Absolute));
         }
 
-        private void startSynthese_Button_Click(object sender , RoutedEventArgs e)
+       
+        private void startSynthese_Button_Click(object sender, RoutedEventArgs e)
         {
             Data.expression = expression.Text;
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
@@ -541,6 +549,12 @@ namespace ArchimedeFront.Pages
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
                     Data.nb_nor = -1;
                     break;
+                case "XOR_entrees":
+                    xor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
+                case "XNOR_entrees":
+                    xnor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    break;
             }
         }
     
@@ -572,6 +586,14 @@ namespace ArchimedeFront.Pages
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
                     Data.nb_nor = int.Parse(nand_entree_input_text.Text);
+                    break;
+                case "XOR_entrees":
+                    xor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_xor = int.Parse(nand_entree_input_text.Text);
+                    break;
+                case "XNOR_entrees":
+                    xnor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_xnor = int.Parse(nand_entree_input_text.Text);
                     break;
             }
         }

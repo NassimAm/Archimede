@@ -32,16 +32,16 @@ namespace ArchimedeFront.Pages
             File.AppendAllText(path, "Table d'impliquants essentiaux\n");
             File.AppendAllText(path, "V:Vide  R:Représente  E:Essentiel\n\n");
 
-            Mintermes.getListImpliquantsEssentiaux(ref Data.impliquantsEssentiels, Data.stringListMinterm, Data.impliquantsPremiers,Data.impliquantsType);
+            Mintermes.getListImpliquantsEssentiaux(ref Data.impliquantsEssentiels, Data.stringListMinterm, Data.impliquantsPremiers, Data.impliquantsType);
             /*Generation du premier rang ===========================================================*/
             WrapPanel wrappanel = new WrapPanel();
             wrappanel.Orientation = Orientation.Horizontal;
             wrappanel.VerticalAlignment = VerticalAlignment.Center;
-            wrappanel.Margin = new Thickness(0,20, 0, 0);
-            TopLeftCase.Children.Add(new Border() {BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 2), Width = 16*Data.nbVariables+42,Height=35, Child = null});
+            wrappanel.Margin = new Thickness(0, 20, 0, 0);
+            TopLeftCase.Children.Add(new Border() { BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 2), Width = 16 * Data.nbVariables + 42, Height = 35, Child = null });
 
-            string topTableString = " " + new string(' ',Data.nbVariables)+" |";
-            for(int i = 0; i < Data.stringListMinterm.Count; i++)
+            string topTableString = " " + new string(' ', Data.nbVariables) + " |";
+            for (int i = 0; i < Data.stringListMinterm.Count; i++)
             {
                 topTableString += " " + Data.stringListMinterm[i] + " |";
                 TextBlock tb = new TextBlock() { Style = FindResource("paragraphe") as Style, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 28, Width = 16 * Data.nbVariables + 40, Text = Data.stringListMinterm[i] };
@@ -54,58 +54,57 @@ namespace ArchimedeFront.Pages
                         Property = Control.BackgroundProperty,
                         Value = Brushes.Green
                     });
-
                     st.Triggers.Add(tg);
                 }
                 
                 tb.Style = st;*/
                 wrappanel.Children.Add(tb);
             }
-            Border border = new Border() {BorderBrush=Brushes.Gray, BorderThickness = new Thickness(0, 0, 0, 2), Child = wrappanel };
+            Border border = new Border() { BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 0, 2), Child = wrappanel };
 
             topTableString += "\n";
-            File.AppendAllText(path,topTableString);
+            File.AppendAllText(path, topTableString);
 
-            
+
             MintermeTable.Children.Add(border);
 
             /*Generation des autres rangs du tableau*/
             WrapPanel wrappanelinterne;
 
-            for(int i=0;i<Data.impliquantsPremiers.Count;i++)
+            for (int i = 0; i < Data.impliquantsPremiers.Count; i++)
             {
                 wrappanelinterne = new WrapPanel();
                 wrappanelinterne.Orientation = Orientation.Horizontal;
                 wrappanelinterne.VerticalAlignment = VerticalAlignment.Center;
                 wrappanelinterne.Margin = new Thickness(0, 10, 0, 10);
-                wrappanelinterne.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style,HorizontalAlignment=HorizontalAlignment.Center,Width = 16 * Data.nbVariables + 40, FontSize = 28, Text = Data.impliquantsPremiers[i].bincode});
-                border = new Border() { BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 0), Child = wrappanelinterne};
+                wrappanelinterne.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, HorizontalAlignment = HorizontalAlignment.Center, Width = 16 * Data.nbVariables + 40, FontSize = 28, Text = Data.impliquantsPremiers[i].bincode });
+                border = new Border() { BorderBrush = Brushes.Gray, BorderThickness = new Thickness(0, 0, 2, 0), Child = wrappanelinterne };
 
                 ImpliquantPremiersTable.Children.Add(border);
 
                 wrappanel = new WrapPanel() { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 7.5, 0, 7.5) };
 
-                string rowTableString = " " + Data.impliquantsPremiers[i].bincode+" |";
-                for (int j=0;j<Data.stringListMinterm.Count;j++)
+                string rowTableString = " " + Data.impliquantsPremiers[i].bincode + " |";
+                for (int j = 0; j < Data.stringListMinterm.Count; j++)
                 {
-                    rowTableString += " " + new string(' ',Convert.ToInt32((Data.nbVariables-1)/2));
+                    rowTableString += " " + new string(' ', Convert.ToInt32((Data.nbVariables - 1) / 2));
                     if (Data.impliquantsType[i][j] == 'E')
                     {
                         rowTableString += "E";
-                        wrappanel.Children.Add(generateImpliquantEssentielCase(i,j));
+                        wrappanel.Children.Add(generateImpliquantEssentielCase(i, j));
                     }
                     else
                     {
                         if (Data.impliquantsType[i][j] == 'R')
                         {
                             rowTableString += "R";
-                            wrappanel.Children.Add(generateImpliquantCase(i,j));
+                            wrappanel.Children.Add(generateImpliquantCase(i, j));
                         }
                         else
                         {
                             rowTableString += "V";
-                            wrappanel.Children.Add(generateCaseVide(i,j));
-                        }   
+                            wrappanel.Children.Add(generateCaseVide(i, j));
+                        }
                     }
                     rowTableString += new string(' ', Convert.ToInt32((Data.nbVariables - 1) / 2)) + " |";
                 }
@@ -115,7 +114,7 @@ namespace ArchimedeFront.Pages
                 ImpliquantsEssentiauxTable.Children.Add(wrappanel);
             }
         }
-        private WrapPanel generateImpliquantCase(int i,int j)
+        private WrapPanel generateImpliquantCase(int i, int j)
         {
             WrapPanel wrappanel = new WrapPanel();
             WrapPanel panel = new WrapPanel();
@@ -134,13 +133,13 @@ namespace ArchimedeFront.Pages
                 Property = Control.BackgroundProperty,
                 Value = Brushes.Green
             });
-            
+
             st.Triggers.Add(tg);
             wrappanel.Style = st;
             wrappanel.Name = String.Format("Wrappanel{0}{1}", i, j);
             return wrappanel;
         }
-        private WrapPanel generateImpliquantEssentielCase(int i,int j)
+        private WrapPanel generateImpliquantEssentielCase(int i, int j)
         {
             WrapPanel wrappanel = new WrapPanel();
             WrapPanel panel = new WrapPanel();
@@ -149,7 +148,7 @@ namespace ArchimedeFront.Pages
             panel.Width = Data.nbVariables * 16 + 40;
             panel.Height = 19;
             panel.Margin = new Thickness(0, 10, 0, 10);
-            panel.Children.Add(new Border() { Style=FindResource("ImpliquantEssentielBordure") as Style,Margin = new Thickness((panel.Width - 15) / 2, 0, 0, 0),Child = new Ellipse() {Style = FindResource("ImpliquantEssentielCercle") as Style } });
+            panel.Children.Add(new Border() { Style = FindResource("ImpliquantEssentielBordure") as Style, Margin = new Thickness((panel.Width - 15) / 2, 0, 0, 0), Child = new Ellipse() { Style = FindResource("ImpliquantEssentielCercle") as Style } });
             wrappanel.Children.Add(panel);
 
             Style st = new Style();
@@ -164,7 +163,7 @@ namespace ArchimedeFront.Pages
             wrappanel.Name = String.Format("Wrappanel{0}{1}", i, j);
             return wrappanel;
         }
-        private WrapPanel generateCaseVide(int i,int j)
+        private WrapPanel generateCaseVide(int i, int j)
         {
             WrapPanel wrappanel = new WrapPanel();
             WrapPanel panel = new WrapPanel();
@@ -188,7 +187,7 @@ namespace ArchimedeFront.Pages
             return wrappanel;
         }
 
-        public void ChangeBgColor(int i,int j)
+        public void ChangeBgColor(int i, int j)
         {
             ((WrapPanel)((Border)ImpliquantPremiersTable.Children[i]).Child).Background = Brushes.Green;
             ((WrapPanel)((Border)MintermeTable.Children[j]).Child).Background = Brushes.Green;

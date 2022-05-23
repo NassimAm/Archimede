@@ -1422,7 +1422,6 @@ namespace dnf
         /*        //tree visualisation 
                 public static void arbre_to_txt(ExprBool? root, ref int nbNils, string path)
                 {
-
                     if (root != null)
                     {
                         // dessiner un arc vers le fils gauche
@@ -1433,18 +1432,14 @@ namespace dnf
                         }
                         else
                         {
-
                             File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
                             File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
                             File.AppendAllText(path, " [style=invis];\n");
                         }
-
                         // Dessiner un fils NIL "virtuel" et "invisible" au milieu (pour une meilleure séparation des fils gauches et droits)
-
                         File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
                         File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
                         File.AppendAllText(path, " [style=invis];\n");
-
                         // Dessiner un arc vers le fils droit
                         if (root.fd != null)
                         {
@@ -1453,18 +1448,15 @@ namespace dnf
                         }
                         else
                         {
-
                             File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
                             File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
                             File.AppendAllText(path, " [style=invis];\n");
                         }
-
                         // dessiner les sous-arbres gauche et droit
                         arbre_to_txt(root.fg, ref nbNils, path);
                         arbre_to_txt(root.fd, ref nbNils, path);
                     }
                 }
-
                 public static void Draw_Tree(ExprBool root)
                 {
                     string? path = Directory.GetCurrentDirectory() + "\\tree.txt";
@@ -1477,7 +1469,6 @@ namespace dnf
                     File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
                     arbre_to_txt(root, ref nbnils, path);
                     File.AppendAllText(path, "}\n");
-
                     // conversion du fichier text en fichier png
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -1491,7 +1482,6 @@ namespace dnf
                     startInfo.Arguments = "/C tree.png";
                     process.StartInfo = startInfo;
                     process.Start();
-
                 }
         */
 

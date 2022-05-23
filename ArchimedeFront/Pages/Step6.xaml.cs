@@ -50,7 +50,7 @@ namespace ArchimedeFront.Pages
                     FonctionSimplifieContainer.Text = resultat;
                     Data.expression = resultat;
                 }
-                
+                   
             }
             
         }

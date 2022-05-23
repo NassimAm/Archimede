@@ -32,21 +32,23 @@ namespace ArchimedeFront.Pages
             InitializeComponent();
 
             Border border;
-
             string? path = Directory.GetCurrentDirectory() + "\\step2.txt";
             File.WriteAllText(path, "");
             int cpt = 0;
             foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
             {
-                File.AppendAllText(path, String.Format("Groupage {0} :\n",cpt));
-                if (groupe.Count > 0) { 
-                    foreach(Impliquant impliquant in groupe)
+                File.AppendAllText(path, String.Format("Groupage {0} :\n", cpt));
+                if (groupe.Count > 0)
+                {
+                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Poid " + cpt, FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Left });
+
+                    foreach (Impliquant impliquant in groupe)
                     {
-                        File.AppendAllText(path, "o "+impliquant.bincode+"\n");
-                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style , FontSize = 28 , Margin = new Thickness(36,2,36,2) , Text = impliquant.bincode});
+                        File.AppendAllText(path, "o " + impliquant.bincode + "\n");
+                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, Padding = new Thickness(4, 0, 4, 0), FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
                     }
-                
-                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8) , Width = nbVariables*16 , Child = null  };
+
+                    border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = nbVariables * 16, Child = null };
                     groupesTable.Children.Add(border);
                 }
                 cpt += 1;
@@ -54,8 +56,12 @@ namespace ArchimedeFront.Pages
 
             File.AppendAllText(path, "\n");
 
+
+
             if (Data.literal && Data.impliquantsEnAttente.Count > 0)
             {
+
+
                 // linear gradiant background for impliquants en attente
                 File.AppendAllText(path, "Impliquants en attente :\n");
                 LinearGradientBrush LinearBrush = new LinearGradientBrush();
@@ -64,10 +70,11 @@ namespace ArchimedeFront.Pages
                 LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00CBBD"), 0.1));
                 LinearBrush.GradientStops.Add(new GradientStop((Color)ColorConverter.ConvertFromString("#00E17C"), 1));
                 //-------
+                groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "Impliquant en attente", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Left, TextAlignment = TextAlignment.Left });
 
                 foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                 {
-                    File.AppendAllText(path,"o " + impliquant.bincode + "\n");
+                    File.AppendAllText(path, "o " + impliquant.bincode + "\n");
                     groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, Foreground= LinearBrush,FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
                 }
 

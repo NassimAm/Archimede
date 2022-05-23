@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:ArchimedeFront.Pages"
+      xmlns:local="clr-namespace:ArchimedeFront.Pages" xmlns:styles="clr-namespace:ArchimedeFront.Styles"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="Step1">
@@ -11,8 +11,13 @@
     <ScrollViewer Name="scrollViewer" >
         
     
-    <StackPanel Name="step1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Border BorderThickness="2" CornerRadius="14"  MinWidth="400" Width="auto" HorizontalAlignment="Center" Height="52" Margin="24,10,24,10">
+    <StackPanel Name="step1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+
+            <TextBlock Margin="0,34,0,10" HorizontalAlignment="Center" VerticalAlignment="Center"  MaxWidth="900"  Style="{StaticResource fontUrbanist}"  FontSize="28" Background="Transparent"  TextWrapping="NoWrap"  >
+                La fonction sous forme disjonctive
+            </TextBlock>
+
+            <Border BorderThickness="2" CornerRadius="14"  MinWidth="400" Width="auto" HorizontalAlignment="Center" Height="52" Margin="24,10,24,10">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
                     <LinearGradientBrush.GradientStops>
@@ -34,7 +39,7 @@
         </TextBlock>
 
         <ScrollViewer Name="mintermesListContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0" >
-            <WrapPanel Name="mintermesList" HorizontalAlignment="Center" Margin="0,20" Orientation="Horizontal" Height="100" />
+            <WrapPanel Name="mintermesList" HorizontalAlignment="Center" Margin="0,20" Orientation="Horizontal"  />
         </ScrollViewer>
 
         <Frame Name="_NextStep2"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep2_LoadCompleted" ></Frame>
@@ -43,25 +48,48 @@
         <ScrollViewer Name="groupesTableContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" Width="auto" Height="auto"  Margin="26,0">
             <StackPanel x:Name="groupesMatrix" Orientation="Horizontal" VerticalAlignment="Top" Margin="26,0"/>
         </ScrollViewer>
-        <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
+            <styles:AlignableWrapPanel x:Name="impliquant_labels" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,30" >
+                <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" HorizontalAlignment="Center" Padding="12,0" Margin="26,0,26,10" >
+                    <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,6">
+                        <Viewbox Width="22" VerticalAlignment="Center">
+                            <Path Data="{DynamicResource CHECKED_ICON}"
+                                  Fill="#C4C4C4">
+
+                            </Path>
+                        </Viewbox>
+                        <TextBlock  VerticalAlignment="Center" Style="{StaticResource paragraphe}" Margin="15,0" FontSize="20"> 
+                            Impliquant traité
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <Border BorderBrush="#00CBBD" BorderThickness="2" CornerRadius="5" MaxWidth="350" HorizontalAlignment="Center" Padding="12,0" Margin="0,0,0,10" >
+                    <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,6">
+                        <Ellipse Style="{StaticResource greenDot}"></Ellipse>
+
+                        <TextBlock Style="{StaticResource paragraphe}" Margin="15,0" FontSize="20"> 
+                    Impliquant premier
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </styles:AlignableWrapPanel>
+            
+            <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
         <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep6_LoadCompleted"></Frame>
-        <Button Name="syntheseButton" Visibility="Collapsed" Style="{StaticResource greenButton}" MaxWidth="200" Margin="14,0,14,100" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
+            <Button Name="syntheseButton" Visibility="Collapsed" Style="{StaticResource greenButton}" MaxWidth="200" Margin="14,0,14,100" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
 
-            <Grid Name="expandButtons" VerticalAlignment="Bottom" Margin="0,200,0,0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="100,0,10,0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" >
-                <Button Name="skipButton" Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click" Margin="0,24"/>
-            </StackPanel>
-            <StackPanel Margin="10,0,100,0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
-                <Button Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" Margin="0,24" />
-            </StackPanel>
-
-        </Grid>
+            <DockPanel Name="expandButtons"  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,0" SizeChanged="expandButtons_SizeChanged" >
+                
+                <StackPanel Name="skipButtonContainer"  Margin="100,0,10,0" Orientation="Horizontal" DockPanel.Dock="Left" HorizontalAlignment="Left"  >
+                    <Button Name="skipButton" Style="{StaticResource expandButton}" ContentStringFormat="Passer" Click="skipButton_Click" Padding="0,24"/>
+                </StackPanel>
+                
+                <StackPanel Name="expandButtonContainer"  Margin="10,0,100,0" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+                    <Button  Name="expandBottomButton" Style="{StaticResource expandButton}"  ContentStringFormat="Suivant" Click="nextStepButton_click" Padding="0,24" />
+                </StackPanel>
+            </DockPanel>
+      
+        
     </StackPanel>
     </ScrollViewer>
 </Page>

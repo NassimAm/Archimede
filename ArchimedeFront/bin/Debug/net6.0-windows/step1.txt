@@ -1,3 +1,4 @@
 Liste de mintermes en binaire : 
 
-o 11
+o 11-
+o 011

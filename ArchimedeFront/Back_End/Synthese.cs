@@ -107,7 +107,7 @@ class Synthese
     }
 
     //Fonction récursive pour la création de l'arbre m-aire à partir de l'abre binaire
-    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or,int nb_nand,int nb_nor)
+    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or, int nb_nand, int nb_nor)
     {
         if (tree.type == dnf.Type.VALEUR)
         {
@@ -120,7 +120,7 @@ class Synthese
             ExprBoolNode simple_node;
             foreach (ExprBoolNode node in tree.children)
             {
-                simple_node = Binary_To_N_ary(node, nb_and, nb_or,nb_nand,nb_nor);
+                simple_node = Binary_To_N_ary(node, nb_and, nb_or, nb_nand, nb_nor);
                 switch (tree.type)
                 {
                     case dnf.Type.ET:
@@ -160,6 +160,7 @@ class Synthese
 
     //Convertit une expression en arbre syntaxique m-aire
     public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or,int nb_nand,int nb_nor)
+    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or, int nb_nand, int nb_nor)
     {
         expression = expression.Replace(" ", "");
         string postfix = "";
@@ -169,6 +170,7 @@ class Synthese
 
         ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
         ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or,nb_nand,nb_nor);
+        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or, nb_nand, nb_nor);
         return n_ary_root;
     }
 
@@ -393,6 +395,8 @@ class Synthese
         // hide the terminal
         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
         startInfo.CreateNoWindow = true; 
+        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+        startInfo.CreateNoWindow = true;
         startInfo.FileName = "cmd.exe";
         startInfo.Arguments = "/C dot -Tpng synthese.txt -o synthese.png";
         process.StartInfo = startInfo;
@@ -454,5 +458,3 @@ class Synthese
         }
     }
 }
-
-

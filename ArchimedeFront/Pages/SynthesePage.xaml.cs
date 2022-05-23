@@ -27,19 +27,19 @@ namespace ArchimedeFront.Pages
         public SynthesePage()
         {
             Synthese.ExprBoolNode tree;
-            if(Data.literal)
+            if (Data.literal)
             {
                 tree = Synthese.To_N_ary(Data.expression, Data.nb_and, Data.nb_or, Data.nb_nand, Data.nb_nor);
             }
             else
             {
                 string expression = "";
-                for(int i=0;i<Data.mintermes.Count;i++)
+                for (int i = 0; i < Data.mintermes.Count; i++)
                 {
                     expression += Mintermes.getExpressionDeBincode(Data.literal, Data.mintermes[i].bincode, Data.variables) + "+";
                 }
-                if(expression.Length>0)
-                    expression = expression.Substring(0,expression.Length-1);
+                if (expression.Length > 0)
+                    expression = expression.Substring(0, expression.Length - 1);
                 tree = Synthese.To_N_ary(expression, Data.nb_and, Data.nb_or, Data.nb_nand, Data.nb_nor);
             }
             Synthese.Circuit_Visualisation(tree);
@@ -50,7 +50,7 @@ namespace ArchimedeFront.Pages
             bitmap.UriCachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() +"\\synthese.png", UriKind.Relative);
+            bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() + "\\synthese.png", UriKind.Relative);
             bitmap.EndInit();
             syntheseImage.Source = bitmap;
             InitializeComponent();
