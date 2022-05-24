@@ -38,6 +38,13 @@ namespace ArchimedeFront.Pages
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
+            Data.nb_and = 16;
+            Data.nb_or = 16;
+            Data.nb_nand = 2;
+            Data.nb_nor = 2;
+            Data.nb_xor = 2;
+            Data.nb_xnor = 2;
+
 
             if (Data.saveexpressionlitterale == null)
             {
@@ -535,27 +542,27 @@ namespace ArchimedeFront.Pages
             {
                 case "ET_entrees":
                     et_entree_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_and = -1;
+                    Data.nb_and = 16;
                     break;
                 case "OU_entrees":
                     ou_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_or = -1;
+                    Data.nb_or = 16;
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_nand = -1;
+                    Data.nb_nand = 2;
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_nor = -1;
+                    Data.nb_nor = 2;
                     break;
                 case "XOR_entrees":
                     xor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_xor = -1;
+                    Data.nb_xor = 2;
                     break;
                 case "XNOR_entrees":
                     xnor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_xnor = -1;
+                    Data.nb_xnor = 2;
                     break;
             }
         }

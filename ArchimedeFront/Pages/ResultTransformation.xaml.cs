@@ -45,7 +45,7 @@ namespace ArchimedeFront.Pages
                     tree = ExprBool.cnf(tree);
                     ExprBool.inorder(tree, sb);
                     result = sb.ToString();
-                    //result = ExprBool.SimplifyCNFExpression(result);
+                    result = ExprBool.SimplifyCNFExpression(result);
 
                     if (result == "0")
                     {

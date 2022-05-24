@@ -32,12 +32,12 @@ namespace ArchimedeFront.Pages
         public static char codeTransformation; // 0 dnf 1 cnf 2 onlyNand 3 onlyNor
 
         //Synthese
-        public static int nb_and = -1;
-        public static int nb_or = -1;
-        public static int nb_nand = -1;
-        public static int nb_nor = -1;
-        public static int nb_xor = -1;
-        public static int nb_xnor = -1;
+        public static int nb_and = 16;
+        public static int nb_or = 16;
+        public static int nb_nand = 2;
+        public static int nb_nor = 2;
+        public static int nb_xor = 2;
+        public static int nb_xnor = 2;
 
         public static void resete()
         {

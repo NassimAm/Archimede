@@ -1214,7 +1214,7 @@ namespace dnf
         {
             foreach (string minterm in minterms)
             {
-                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm))
+                if (minterms.Contains(minterm) && minterms.Contains("!" + minterm) & !minterm.Contains("+") & !minterm.Contains("."))
                     return true;
             }
             return false;
@@ -1512,7 +1512,7 @@ namespace dnf
             {
                 case Type.NON:
 
-                    if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NAND, root, root.clone());  //!a 
+                    if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NAND, root.fd, root.fd.clone());  //!a 
                     break;
 
                 case Type.ET:
@@ -1593,7 +1593,7 @@ namespace dnf
             {
                 case Type.NON:
 
-                    if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NOR, root, root.clone());  //!a 
+                    if (root.fd.type == Type.VALEUR) return new ExprBool(Type.NOR, root.fd , root.fd.clone());  //!a 
                     break;
 
                 case Type.OU:
