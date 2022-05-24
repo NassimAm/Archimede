@@ -107,7 +107,7 @@ namespace ArchimedeFront.Pages
 
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
-                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit,\nLe nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
                     disableButtons();
                     return;
                 }
@@ -170,7 +170,7 @@ namespace ArchimedeFront.Pages
 
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
-                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit, Le nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
+                    errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit,\nLe nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
                     disableButtons();
                     return;
                 }
@@ -551,9 +551,11 @@ namespace ArchimedeFront.Pages
                     break;
                 case "XOR_entrees":
                     xor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_xor = -1;
                     break;
                 case "XNOR_entrees":
                     xnor_entrees_input.BeginAnimation(OpacityProperty, da);
+                    Data.nb_xnor = -1;
                     break;
             }
         }

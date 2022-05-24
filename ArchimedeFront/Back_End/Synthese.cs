@@ -42,6 +42,12 @@ class Synthese
                 case dnf.Type.NOR:
                     this.info = "NOR";
                     break;
+                case dnf.Type.XOR:
+                    this.info = "XOR";
+                    break;
+                case dnf.Type.XNOR:
+                    this.info = "XNOR";
+                    break;
                 default:
                     break;
             }
@@ -103,11 +109,54 @@ class Synthese
                 children.Add(simple_node);
             else
                 children.AddRange(simple_node.children);
+            /*nb_entrees = getAutoNbEntrees(children.Count + 1);
+              if ((simple_node.type != op) && (children.Count + 1 <= nb_entrees))
+              {
+                  children.Add(simple_node);
+              }
+              else
+              {
+                  nb_entrees = getAutoNbEntrees(children.Count + simple_node.children.Count);
+                  if (children.Count + simple_node.children.Count <= nb_entrees)
+                      children.AddRange(simple_node.children);
+                  else
+                  {
+                      nb_entrees = getAutoNbEntrees(children.Count + 1);
+                      if (children.Count + 1 <= nb_entrees)
+                          children.Add(simple_node);
+                  }
+              }*/
+        }
+    }
+    
+    private static int getAutoNbEntrees(int nb_children)
+    {
+        if(nb_children<4)
+        {
+            return 2;
+        }
+        else
+        {
+            if((nb_children>=4)&&(nb_children<8))
+            {
+                return 4;
+            }
+            else
+            {
+                if ((nb_children >= 8) && (nb_children < 16))
+                {
+                    return 8;
+                }
+                else
+                {
+                    return 16;
+                }
+            }
         }
     }
 
     //Fonction récursive pour la création de l'arbre m-aire à partir de l'abre binaire
-    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or, int nb_nand, int nb_nor)
+    private static ExprBoolNode Binary_To_N_ary(ExprBoolNode tree, int nb_and, int nb_or, int nb_nand, int nb_nor,int nb_xor, int nb_xnor, Dictionary<string,int> gates)
     {
         if (tree.type == dnf.Type.VALEUR)
         {
@@ -120,7 +169,7 @@ class Synthese
             ExprBoolNode simple_node;
             foreach (ExprBoolNode node in tree.children)
             {
-                simple_node = Binary_To_N_ary(node, nb_and, nb_or, nb_nand, nb_nor);
+                simple_node = Binary_To_N_ary(node, nb_and, nb_or, nb_nand, nb_nor,nb_xor,nb_xnor,gates);
                 switch (tree.type)
                 {
                     case dnf.Type.ET:
@@ -148,6 +197,16 @@ class Synthese
                             DevelopChildren(children, op, simple_node, nb_nor);
                             break;
                         }
+                    case dnf.Type.XOR:
+                        {
+                            DevelopChildren(children, op, simple_node, nb_xor);
+                            break;
+                        }
+                    case dnf.Type.XNOR:
+                        {
+                            DevelopChildren(children, op, simple_node, nb_xnor);
+                            break;
+                        }
                     default:
                         {
                             break;
@@ -159,8 +218,7 @@ class Synthese
     }
 
     //Convertit une expression en arbre syntaxique m-aire
-    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or,int nb_nand,int nb_nor)
-    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or, int nb_nand, int nb_nor)
+    public static ExprBoolNode To_N_ary(string expression, int nb_and, int nb_or, int nb_nand, int nb_nor,int nb_xor,int nb_xnor, Dictionary<string, int> gates)
     {
         expression = expression.Replace(" ", "");
         string postfix = "";
@@ -169,8 +227,17 @@ class Synthese
         ExprBool? root = ExprBool.expressionTreeWithAllOperators(postfix, listVars);
 
         ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
-        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or,nb_nand,nb_nor);
-        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or, nb_nand, nb_nor);
+        if(gates == null)
+            gates = new Dictionary<string, int>();
+        gates["ET"] = 0;
+        gates["OU"] = 0;
+        gates["NON"] = 0;
+        gates["NAND"] = 0;
+        gates["NOR"] = 0;
+        gates["XOR"] = 0;
+        gates["XNOR"] = 0;
+        ExprBoolNode n_ary_root = Binary_To_N_ary(binary_root, nb_and, nb_or,nb_nand,nb_nor,nb_xor,nb_xnor,gates);
+        CalculerNbPortes(n_ary_root, gates);
         return n_ary_root;
     }
 
@@ -194,6 +261,110 @@ class Synthese
             foreach (ExprBoolNode node in tree.children)
             {
                 Affich_Arbre(node);
+            }
+        }
+    }
+
+    //Caluler le nombre de portes d'un circuit
+    public static void CalculerNbPortes(ExprBoolNode tree, Dictionary<string, int> gates)
+    {
+        if (tree != null)
+        {
+            switch (tree.type)
+            {
+                case dnf.Type.ET:
+                    {
+                        gates["ET"] += 1;
+                        break;
+                    }
+                case dnf.Type.OU:
+                    {
+                        gates["OU"] += 1;
+                        break;
+                    }
+                case dnf.Type.NON:
+                    {
+                        gates["NON"] += 1;
+                        break;
+                    }
+                case dnf.Type.NAND:
+                    {
+                        gates["NAND"] += 1;
+                        break;
+                    }
+                case dnf.Type.NOR:
+                    {
+                        gates["NOR"] += 1;
+                        break;
+                    }
+                case dnf.Type.XOR:
+                    {
+                        gates["XOR"] += 1;
+                        break;
+                    }
+                case dnf.Type.XNOR:
+                    {
+                        gates["XNOR"] += 1;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            CalculerNbPortesRecursive(tree, gates);
+        }
+    }
+    //Caluler le nombre de portes d'un circuit (Récursive)
+    public static void CalculerNbPortesRecursive(ExprBoolNode tree,Dictionary<string,int> gates)
+    {
+        if (tree != null)
+        {
+            foreach (ExprBoolNode node in tree.children)
+            {
+                CalculerNbPortesRecursive(node,gates);
+                switch(node.type)
+                {
+                    case dnf.Type.ET:
+                        {
+                            gates["ET"] += 1;
+                            break;
+                        }
+                    case dnf.Type.OU:
+                        {
+                            gates["OU"] += 1;
+                            break;
+                        }
+                    case dnf.Type.NON:
+                        {
+                            gates["NON"] += 1;
+                            break;
+                        }
+                    case dnf.Type.NAND:
+                        {
+                            gates["NAND"] += 1;
+                            break;
+                        }
+                    case dnf.Type.NOR:
+                        {
+                            gates["NOR"] += 1;
+                            break;
+                        }
+                    case dnf.Type.XOR:
+                        {
+                            gates["XOR"] += 1;
+                            break;
+                        }
+                    case dnf.Type.XNOR:
+                        {
+                            gates["XNOR"] += 1;
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
             }
         }
     }
@@ -434,6 +605,16 @@ class Synthese
             case "NOR":
                 {
                     File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/NOR.png\",fixedsize=true,shape=plaintext] \n", root.id));
+                    break;
+                }
+            case "XOR":
+                {
+                    File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/XOR.png\",fixedsize=true,shape=plaintext] \n", root.id));
+                    break;
+                }
+            case "XNOR":
+                {
+                    File.AppendAllText(path, String.Format("\t\"{0}\" [label=\"\",image=\"rsc/images/gates/XNOR.png\",fixedsize=true,shape=plaintext] \n", root.id));
                     break;
                 }
             default:

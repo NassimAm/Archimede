@@ -151,11 +151,6 @@ namespace ArchimedeFront.Pages
                    //affichage du groupe
                     Border border;
                     StackPanel groupesTable;
-                    string? path = Directory.GetCurrentDirectory() + "\\step4.txt";
-                    File.WriteAllText(path, "");
-                    File.AppendAllText(path, "Extraction des impliquants premiers\n");
-                    File.AppendAllText(path, "T: Déjà Traité  P: Premier  A: en attente\n\n");
-                    File.AppendAllText(path, String.Format("Groupage N°{0}\n", Data.cptGroupes));
 
                     string? path = Directory.GetCurrentDirectory() + "\\step4.txt";
                     File.WriteAllText(path, "");

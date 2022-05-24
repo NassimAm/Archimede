@@ -143,7 +143,7 @@
                                 <StackPanel Margin="0,8">
                                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">ET</TextBlock>
                                     <StackPanel Orientation="Horizontal" >
-                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="ET_entrees" Checked="ET_ilimite_Checked" >Illimité</RadioButton>
+                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="ET_entrees" Checked="ET_ilimite_Checked" >Auto</RadioButton>
                                         <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="ET_entrees" Checked="ET_limite_Checked">Limité</RadioButton>
                                         <StackPanel Name="et_entree_input" Orientation="Horizontal" Opacity="0">
                                             <Border    BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
@@ -169,7 +169,7 @@
                                 <StackPanel Margin="0,8">
                                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">OU</TextBlock>
                                     <StackPanel Orientation="Horizontal" >
-                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="OU_entrees" Checked="ET_ilimite_Checked">Illimité</RadioButton>
+                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="OU_entrees" Checked="ET_ilimite_Checked">Auto</RadioButton>
                                         <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="OU_entrees" Checked="ET_limite_Checked">Limité</RadioButton>
                                         <StackPanel Name="ou_entrees_input" Orientation="Horizontal" Opacity="0">
                                             <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
@@ -194,7 +194,7 @@
                                 <StackPanel Margin="0,8">
                                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">NAND</TextBlock>
                                     <StackPanel Orientation="Horizontal" >
-                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NAND_entrees" Checked="ET_ilimite_Checked" >Illimité</RadioButton>
+                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NAND_entrees" Checked="ET_ilimite_Checked" >Auto</RadioButton>
                                         <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NAND_entrees"  Checked="ET_limite_Checked">Limité</RadioButton>
                                         <StackPanel Name="nand_entrees_input" Orientation="Horizontal" Opacity="0">
                                             <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
@@ -219,7 +219,7 @@
                                 <StackPanel Margin="0,8">
                                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">NOR</TextBlock>
                                     <StackPanel Orientation="Horizontal" >
-                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NOR_entrees" Checked="ET_ilimite_Checked">Illimité</RadioButton>
+                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NOR_entrees" Checked="ET_ilimite_Checked">Auto</RadioButton>
                                         <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="NOR_entrees"  Checked="ET_limite_Checked">Limité</RadioButton>
                                         <StackPanel Name="nor_entrees_input" Orientation="Horizontal" Opacity="0">
                                             <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
@@ -245,7 +245,7 @@
                                 <StackPanel Margin="0,8">
                                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">XOR</TextBlock>
                                     <StackPanel Orientation="Horizontal" >
-                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XOR_entrees" Checked="ET_ilimite_Checked" >Illimité</RadioButton>
+                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XOR_entrees" Checked="ET_ilimite_Checked" >Auto</RadioButton>
                                         <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XOR_entrees" Checked="ET_limite_Checked">Limité</RadioButton>
                                         <StackPanel Name="xor_entrees_input" Orientation="Horizontal" Opacity="0">
                                             <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >
@@ -269,7 +269,7 @@
                                 <StackPanel Margin="0,8">
                                     <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="20" TextAlignment="Left">XNOR</TextBlock>
                                     <StackPanel Orientation="Horizontal" >
-                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XNOR_entrees" Checked="ET_ilimite_Checked">Illimité</RadioButton>
+                                        <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,28,10" IsChecked="True" FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XNOR_entrees" Checked="ET_ilimite_Checked">Auto</RadioButton>
                                         <RadioButton  Style="{StaticResource customRadioButton}" Margin="0,8,22,10"  FontSize="18"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="XNOR_entrees" Checked="ET_limite_Checked" >Limité</RadioButton>
                                         <StackPanel Name="xnor_entrees_input" Orientation="Horizontal" Opacity="0">
                                             <Border   BorderThickness="2" Opacity="0.8" Height="32" CornerRadius="4" Padding="10,0" Background="White" Margin="0,0,6,0" >

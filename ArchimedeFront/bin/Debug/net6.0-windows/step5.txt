@@ -1,6 +1,15 @@
 Table d'impliquants essentiaux
 V:Vide  R:Représente  E:Essentiel
 
-     | 11- | 011 |
- -11 |  V  |  E  |
- 11- |  E  |  V  |
+        | 000000 | 000001 | 000010 | 000011 | 001010 | 001011 | 001100 | 001101 | 001110 | 001111 | 010000 | 010001 | 010010 | 010011 | 010100 | 010101 | 010110 | 010111 | 011110 | 100001 | 100011 | 101000 | 101001 | 101011 |
+ 10100- |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   E   |   R   |   V   |
+ 0-1110 |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   V   |   V   |   V   |   V   |   V   |
+ 01-110 |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   V   |   E   |   V   |   V   |   V   |   V   |   V   |
+ -000-1 |   V   |   R   |   V   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   R   |   V   |   V   |   V   |
+ 00-01- |   V   |   V   |   R   |   R   |   R   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |
+ -0-011 |   V   |   V   |   V   |   R   |   V   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   V   |   V   |   R   |
+ 001-1- |   V   |   V   |   V   |   V   |   E   |   R   |   V   |   V   |   R   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |
+ 0011-- |   V   |   V   |   V   |   V   |   V   |   V   |   E   |   E   |   R   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |
+ 10-0-1 |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   E   |   R   |   V   |   R   |   E   |
+ 0-00-- |   E   |   R   |   R   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   R   |   R   |   R   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |
+ 010--- |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   V   |   R   |   R   |   R   |   R   |   E   |   E   |   R   |   E   |   V   |   V   |   V   |   V   |   V   |   V   |

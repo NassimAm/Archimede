@@ -4,15 +4,426 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"b8bfe1b1bebb47e5ac3df70cc71d2878" [label="",image="rsc/images/gates/NAND.png",fixedsize=true,shape=plaintext] 
-	"c28d2dd1753943f28e6dbd5eef2b11f6" [label="a"] 
-	"2c3b7241f8e049f2b52d92e3dbb1cade" [label="a"] 
-	"0fd7d3a18e8441b9aa2d464d6d170938" [label="a"] 
-	"940c9907618742eca40d03f727f4c99b" [label="a"] 
-	"4fe11966e81a4369bf257e4ebdabaf67" [label="a"] 
-	"b37943e55c0349dd8f15d6d4e51c9c90" [label="a"] 
-	"6e7944a9b78144ce8516b3261df338bf" [label="a"] 
-	"NIL0" [label="",shape = box,width=.001,height = 1] 
-	"NIL0" -- "b8bfe1b1bebb47e5ac3df70cc71d2878"
-	{"c28d2dd1753943f28e6dbd5eef2b11f6","2c3b7241f8e049f2b52d92e3dbb1cade","0fd7d3a18e8441b9aa2d464d6d170938","940c9907618742eca40d03f727f4c99b","4fe11966e81a4369bf257e4ebdabaf67","b37943e55c0349dd8f15d6d4e51c9c90","6e7944a9b78144ce8516b3261df338bf"} -- "NIL0"
+	"40bce6152313438a94526de6fe84b1bb" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"db2056506c2c4f7e82e3a25e45f5ec87" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"588a4609fcd24ff9a1a3dad1151eb842" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"4185e1c03f0e48aca99d92ae34e783a5" [label="J"] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "588a4609fcd24ff9a1a3dad1151eb842"
+	{"4185e1c03f0e48aca99d92ae34e783a5"} -- "NIL0"
+	"0b4d6e9e7e3f4654b69e20e21fb18afc" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"fc6caba8d5f1400b858449f0bda4636a" [label="I"] 
+	"f8a281bff1ed4e1780087a4b71b93c89" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"0ada31c289244707a8ea6838f1fa7aae" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"19c4d49898ff42018cd619516dbc8964" [label="H"] 
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "0ada31c289244707a8ea6838f1fa7aae"
+	{"19c4d49898ff42018cd619516dbc8964"} -- "NIL1"
+	"c5df0c4a6cae4801b3700f927ecc0efe" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"ed157d43ad274cb189d46797ac710c04" [label="G"] 
+	"b27d154034ad460084646aa4155638c5" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"b33a583842324d0aaada1adb328e2e6f" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"9548f66c6104459f877d55cd936c1082" [label="F"] 
+	"NIL2" [label="",shape = box,width=.001,height = 0] 
+	"NIL2" -- "b33a583842324d0aaada1adb328e2e6f"
+	{"9548f66c6104459f877d55cd936c1082"} -- "NIL2"
+	"6b88cd29be3241599c262322145118e1" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"13b4c804e91741669669063096446508" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"2de03d6ca32d4f5f8974a44acdc8e1fe" [label="E"] 
+	"NIL3" [label="",shape = box,width=.001,height = 0] 
+	"NIL3" -- "13b4c804e91741669669063096446508"
+	{"2de03d6ca32d4f5f8974a44acdc8e1fe"} -- "NIL3"
+	"68e17610192f4d1faedc79504c7efc2f" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"e04223d9aa444a88ba81d75badc04a5b" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"172540040da24f1993c155c85674e4fc" [label="D"] 
+	"NIL4" [label="",shape = box,width=.001,height = 0] 
+	"NIL4" -- "e04223d9aa444a88ba81d75badc04a5b"
+	{"172540040da24f1993c155c85674e4fc"} -- "NIL4"
+	"c0587460bc7146bfbd14231387c2c3d4" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"9ca57f69e4424ae5801ccfbf51751416" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"f5cd52ce949f40ac8b2ebf938ceb41c3" [label="C"] 
+	"NIL5" [label="",shape = box,width=.001,height = 0] 
+	"NIL5" -- "9ca57f69e4424ae5801ccfbf51751416"
+	{"f5cd52ce949f40ac8b2ebf938ceb41c3"} -- "NIL5"
+	"6a0aca4d45de4b59a2a5edd9a43d42ed" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"2cdeac0a5a2b4e6bac1abeeffec27a4f" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"c227a8254c0c43e8b2d05bbe369621ed" [label="B"] 
+	"NIL6" [label="",shape = box,width=.001,height = 0] 
+	"NIL6" -- "2cdeac0a5a2b4e6bac1abeeffec27a4f"
+	{"c227a8254c0c43e8b2d05bbe369621ed"} -- "NIL6"
+	"88bf2e4210be4ba18b5801ba459984d9" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"e2937b7deb7a4508892512e41a0329e2" [label="A"] 
+	"NIL7" [label="",shape = box,width=.001,height = 0] 
+	"NIL7" -- "88bf2e4210be4ba18b5801ba459984d9"
+	{"e2937b7deb7a4508892512e41a0329e2"} -- "NIL7"
+	"NIL8" [label="",shape = box,width=.001,height = 0] 
+	"NIL8" -- "6a0aca4d45de4b59a2a5edd9a43d42ed"
+	{"2cdeac0a5a2b4e6bac1abeeffec27a4f","88bf2e4210be4ba18b5801ba459984d9"} -- "NIL8"
+	"NIL9" [label="",shape = box,width=.001,height = 0] 
+	"NIL9" -- "c0587460bc7146bfbd14231387c2c3d4"
+	{"9ca57f69e4424ae5801ccfbf51751416","6a0aca4d45de4b59a2a5edd9a43d42ed"} -- "NIL9"
+	"NIL10" [label="",shape = box,width=.001,height = 0] 
+	"NIL10" -- "68e17610192f4d1faedc79504c7efc2f"
+	{"e04223d9aa444a88ba81d75badc04a5b","c0587460bc7146bfbd14231387c2c3d4"} -- "NIL10"
+	"NIL11" [label="",shape = box,width=.001,height = 0] 
+	"NIL11" -- "6b88cd29be3241599c262322145118e1"
+	{"13b4c804e91741669669063096446508","68e17610192f4d1faedc79504c7efc2f"} -- "NIL11"
+	"NIL12" [label="",shape = box,width=.001,height = 0] 
+	"NIL12" -- "b27d154034ad460084646aa4155638c5"
+	{"b33a583842324d0aaada1adb328e2e6f","6b88cd29be3241599c262322145118e1"} -- "NIL12"
+	"NIL13" [label="",shape = box,width=.001,height = 0] 
+	"NIL13" -- "c5df0c4a6cae4801b3700f927ecc0efe"
+	{"ed157d43ad274cb189d46797ac710c04","b27d154034ad460084646aa4155638c5"} -- "NIL13"
+	"NIL14" [label="",shape = box,width=.001,height = 0] 
+	"NIL14" -- "f8a281bff1ed4e1780087a4b71b93c89"
+	{"0ada31c289244707a8ea6838f1fa7aae","c5df0c4a6cae4801b3700f927ecc0efe"} -- "NIL14"
+	"NIL15" [label="",shape = box,width=.001,height = 0] 
+	"NIL15" -- "0b4d6e9e7e3f4654b69e20e21fb18afc"
+	{"fc6caba8d5f1400b858449f0bda4636a","f8a281bff1ed4e1780087a4b71b93c89"} -- "NIL15"
+	"NIL16" [label="",shape = box,width=.001,height = 0] 
+	"NIL16" -- "db2056506c2c4f7e82e3a25e45f5ec87"
+	{"588a4609fcd24ff9a1a3dad1151eb842","0b4d6e9e7e3f4654b69e20e21fb18afc"} -- "NIL16"
+	"52dd8d4909b4469fa0f20e1592e9e7ba" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"e794b0d0653947318d00cff57453b35e" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"2c683395c230471eb8adc790eec15a74" [label="J"] 
+	"ad6f5ba2fb0b4ccb851cb06adb292521" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"83c1cd2c2db245abbd77b1cfd6851c22" [label="I"] 
+	"fc504e37492849ecb08db14fd8b1b966" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"83558a4d497043ddb95e593394bb70cb" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"861cbd9492744e14b7083ce758af3744" [label="H"] 
+	"NIL17" [label="",shape = box,width=.001,height = 0] 
+	"NIL17" -- "83558a4d497043ddb95e593394bb70cb"
+	{"861cbd9492744e14b7083ce758af3744"} -- "NIL17"
+	"00c35ba9fcc9446bb461b7ad8996f972" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"68701214bd0a49ae9d074a0785d6d17c" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"620b57409fc84776a250973a1fefa704" [label="G"] 
+	"NIL18" [label="",shape = box,width=.001,height = 0] 
+	"NIL18" -- "68701214bd0a49ae9d074a0785d6d17c"
+	{"620b57409fc84776a250973a1fefa704"} -- "NIL18"
+	"70cb24f67865429eaf0813caa9726176" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"49f0aad9b36046f6a11d751dcf099325" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"06344efd46b544fa85ee74d40d9aa612" [label="F"] 
+	"NIL19" [label="",shape = box,width=.001,height = 0] 
+	"NIL19" -- "49f0aad9b36046f6a11d751dcf099325"
+	{"06344efd46b544fa85ee74d40d9aa612"} -- "NIL19"
+	"7067c9f16ca74c36be8c610762f70900" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"8cb98ea1568143d9bac3d3807f89bdbc" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"26ce2d0c15284f589b267831dd58ad41" [label="E"] 
+	"NIL20" [label="",shape = box,width=.001,height = 0] 
+	"NIL20" -- "8cb98ea1568143d9bac3d3807f89bdbc"
+	{"26ce2d0c15284f589b267831dd58ad41"} -- "NIL20"
+	"adea1b5f30ba436491c49bdf55dfea00" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"0f9b1d6ecb7d4720a80a8e231f96bb43" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"1ed0a7d0fdef4c439ced0b62070b0dd1" [label="D"] 
+	"NIL21" [label="",shape = box,width=.001,height = 0] 
+	"NIL21" -- "0f9b1d6ecb7d4720a80a8e231f96bb43"
+	{"1ed0a7d0fdef4c439ced0b62070b0dd1"} -- "NIL21"
+	"45a918c983ef4bafb02c8c234789a915" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"3268325c23634e99a389d09e245033ea" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"9b6610976dd841d393d9863815c3cbc9" [label="C"] 
+	"NIL22" [label="",shape = box,width=.001,height = 0] 
+	"NIL22" -- "3268325c23634e99a389d09e245033ea"
+	{"9b6610976dd841d393d9863815c3cbc9"} -- "NIL22"
+	"2f83f9b44dac4f47a0700e659f8ab52d" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"ef268019724445b6994ea7976e79e360" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"6b696133b20444a1a47e289e2e03971a" [label="B"] 
+	"NIL23" [label="",shape = box,width=.001,height = 0] 
+	"NIL23" -- "ef268019724445b6994ea7976e79e360"
+	{"6b696133b20444a1a47e289e2e03971a"} -- "NIL23"
+	"a7deb8b0965b45cc833190e9732563fd" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"3ebb826f76544f5196dd727fa8c0f3ad" [label="A"] 
+	"NIL24" [label="",shape = box,width=.001,height = 0] 
+	"NIL24" -- "a7deb8b0965b45cc833190e9732563fd"
+	{"3ebb826f76544f5196dd727fa8c0f3ad"} -- "NIL24"
+	"NIL25" [label="",shape = box,width=.001,height = 0] 
+	"NIL25" -- "2f83f9b44dac4f47a0700e659f8ab52d"
+	{"ef268019724445b6994ea7976e79e360","a7deb8b0965b45cc833190e9732563fd"} -- "NIL25"
+	"NIL26" [label="",shape = box,width=.001,height = 0] 
+	"NIL26" -- "45a918c983ef4bafb02c8c234789a915"
+	{"3268325c23634e99a389d09e245033ea","2f83f9b44dac4f47a0700e659f8ab52d"} -- "NIL26"
+	"NIL27" [label="",shape = box,width=.001,height = 0] 
+	"NIL27" -- "adea1b5f30ba436491c49bdf55dfea00"
+	{"0f9b1d6ecb7d4720a80a8e231f96bb43","45a918c983ef4bafb02c8c234789a915"} -- "NIL27"
+	"NIL28" [label="",shape = box,width=.001,height = 0] 
+	"NIL28" -- "7067c9f16ca74c36be8c610762f70900"
+	{"8cb98ea1568143d9bac3d3807f89bdbc","adea1b5f30ba436491c49bdf55dfea00"} -- "NIL28"
+	"NIL29" [label="",shape = box,width=.001,height = 0] 
+	"NIL29" -- "70cb24f67865429eaf0813caa9726176"
+	{"49f0aad9b36046f6a11d751dcf099325","7067c9f16ca74c36be8c610762f70900"} -- "NIL29"
+	"NIL30" [label="",shape = box,width=.001,height = 0] 
+	"NIL30" -- "00c35ba9fcc9446bb461b7ad8996f972"
+	{"68701214bd0a49ae9d074a0785d6d17c","70cb24f67865429eaf0813caa9726176"} -- "NIL30"
+	"NIL31" [label="",shape = box,width=.001,height = 0] 
+	"NIL31" -- "fc504e37492849ecb08db14fd8b1b966"
+	{"83558a4d497043ddb95e593394bb70cb","00c35ba9fcc9446bb461b7ad8996f972"} -- "NIL31"
+	"NIL32" [label="",shape = box,width=.001,height = 0] 
+	"NIL32" -- "ad6f5ba2fb0b4ccb851cb06adb292521"
+	{"83c1cd2c2db245abbd77b1cfd6851c22","fc504e37492849ecb08db14fd8b1b966"} -- "NIL32"
+	"NIL33" [label="",shape = box,width=.001,height = 0] 
+	"NIL33" -- "e794b0d0653947318d00cff57453b35e"
+	{"2c683395c230471eb8adc790eec15a74","ad6f5ba2fb0b4ccb851cb06adb292521"} -- "NIL33"
+	"edf26eea3e51418b97bb271d50416c7a" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"664b900bd9704370a2bb46a36c6fa46b" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"1606b94a3a4d42458463b8c9e7a8a349" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"049fca40f8824e3ab0c82e824069664e" [label="J"] 
+	"NIL34" [label="",shape = box,width=.001,height = 0] 
+	"NIL34" -- "1606b94a3a4d42458463b8c9e7a8a349"
+	{"049fca40f8824e3ab0c82e824069664e"} -- "NIL34"
+	"78891d091e324b9e88920270facd2ac2" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"b7ab884651af4e62824b405f8825dc58" [label="I"] 
+	"15d7c1fec9724aabb4e0d399211b2a1a" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"9c4fd02352b44323a97499bf981b0cfb" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"25b1551173954bfe992b35df578b977a" [label="H"] 
+	"NIL35" [label="",shape = box,width=.001,height = 0] 
+	"NIL35" -- "9c4fd02352b44323a97499bf981b0cfb"
+	{"25b1551173954bfe992b35df578b977a"} -- "NIL35"
+	"12c10431c9fb4cebb096a5aff7eda1fd" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"62a01ab79e19464f91ed794e0dbd9304" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"c0a0301ec694413b91be20fc0fffaabf" [label="G"] 
+	"NIL36" [label="",shape = box,width=.001,height = 0] 
+	"NIL36" -- "62a01ab79e19464f91ed794e0dbd9304"
+	{"c0a0301ec694413b91be20fc0fffaabf"} -- "NIL36"
+	"4c57acdb245846f6beb4ca71a6ca4321" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"7234a9f0409c490982632ea2750e25f7" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"d01f9716e278432cb795289fc5f3ce3a" [label="F"] 
+	"NIL37" [label="",shape = box,width=.001,height = 0] 
+	"NIL37" -- "7234a9f0409c490982632ea2750e25f7"
+	{"d01f9716e278432cb795289fc5f3ce3a"} -- "NIL37"
+	"5bcb002ecaa14ec29d5ac129084dd860" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"d9edea67192e4588812e3a5d386c7456" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"9133587f2bfb4d1d952201f8581ce6dc" [label="E"] 
+	"NIL38" [label="",shape = box,width=.001,height = 0] 
+	"NIL38" -- "d9edea67192e4588812e3a5d386c7456"
+	{"9133587f2bfb4d1d952201f8581ce6dc"} -- "NIL38"
+	"1eea48ffe882484d9dec00517c27697f" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"b39e254372a34e4c899bfd807800d152" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"256a02d08f67431592dfa24e06793fcd" [label="D"] 
+	"NIL39" [label="",shape = box,width=.001,height = 0] 
+	"NIL39" -- "b39e254372a34e4c899bfd807800d152"
+	{"256a02d08f67431592dfa24e06793fcd"} -- "NIL39"
+	"b28c05a93107438c8a58a27d13667174" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"08225cf6f85d49de9a38f7d9b4b01713" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"b3653991b8ec4f708d45a85856c6f4c7" [label="C"] 
+	"NIL40" [label="",shape = box,width=.001,height = 0] 
+	"NIL40" -- "08225cf6f85d49de9a38f7d9b4b01713"
+	{"b3653991b8ec4f708d45a85856c6f4c7"} -- "NIL40"
+	"fce13a5488d34fa29bd2be58eb7ef216" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"13486b66961b4e37bf5ee4b53736e884" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"22df5ec64ae04bf88a3b481bbb7916cb" [label="B"] 
+	"NIL41" [label="",shape = box,width=.001,height = 0] 
+	"NIL41" -- "13486b66961b4e37bf5ee4b53736e884"
+	{"22df5ec64ae04bf88a3b481bbb7916cb"} -- "NIL41"
+	"22334a79096c43b588e0e5f8f168b530" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"f7b53961b0f046c7ab5800f6664a8b7c" [label="A"] 
+	"NIL42" [label="",shape = box,width=.001,height = 0] 
+	"NIL42" -- "22334a79096c43b588e0e5f8f168b530"
+	{"f7b53961b0f046c7ab5800f6664a8b7c"} -- "NIL42"
+	"NIL43" [label="",shape = box,width=.001,height = 0] 
+	"NIL43" -- "fce13a5488d34fa29bd2be58eb7ef216"
+	{"13486b66961b4e37bf5ee4b53736e884","22334a79096c43b588e0e5f8f168b530"} -- "NIL43"
+	"NIL44" [label="",shape = box,width=.001,height = 0] 
+	"NIL44" -- "b28c05a93107438c8a58a27d13667174"
+	{"08225cf6f85d49de9a38f7d9b4b01713","fce13a5488d34fa29bd2be58eb7ef216"} -- "NIL44"
+	"NIL45" [label="",shape = box,width=.001,height = 0] 
+	"NIL45" -- "1eea48ffe882484d9dec00517c27697f"
+	{"b39e254372a34e4c899bfd807800d152","b28c05a93107438c8a58a27d13667174"} -- "NIL45"
+	"NIL46" [label="",shape = box,width=.001,height = 0] 
+	"NIL46" -- "5bcb002ecaa14ec29d5ac129084dd860"
+	{"d9edea67192e4588812e3a5d386c7456","1eea48ffe882484d9dec00517c27697f"} -- "NIL46"
+	"NIL47" [label="",shape = box,width=.001,height = 0] 
+	"NIL47" -- "4c57acdb245846f6beb4ca71a6ca4321"
+	{"7234a9f0409c490982632ea2750e25f7","5bcb002ecaa14ec29d5ac129084dd860"} -- "NIL47"
+	"NIL48" [label="",shape = box,width=.001,height = 0] 
+	"NIL48" -- "12c10431c9fb4cebb096a5aff7eda1fd"
+	{"62a01ab79e19464f91ed794e0dbd9304","4c57acdb245846f6beb4ca71a6ca4321"} -- "NIL48"
+	"NIL49" [label="",shape = box,width=.001,height = 0] 
+	"NIL49" -- "15d7c1fec9724aabb4e0d399211b2a1a"
+	{"9c4fd02352b44323a97499bf981b0cfb","12c10431c9fb4cebb096a5aff7eda1fd"} -- "NIL49"
+	"NIL50" [label="",shape = box,width=.001,height = 0] 
+	"NIL50" -- "78891d091e324b9e88920270facd2ac2"
+	{"b7ab884651af4e62824b405f8825dc58","15d7c1fec9724aabb4e0d399211b2a1a"} -- "NIL50"
+	"NIL51" [label="",shape = box,width=.001,height = 0] 
+	"NIL51" -- "664b900bd9704370a2bb46a36c6fa46b"
+	{"1606b94a3a4d42458463b8c9e7a8a349","78891d091e324b9e88920270facd2ac2"} -- "NIL51"
+	"648483f7a19d4067acc4ac8ae7b07746" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"2e63fb1702704ac98fb8f704996c21d6" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"688916f06c9541be85c7c80e4486440f" [label="J"] 
+	"04f502d374f44ea6a2ca87f8db4de27f" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"f960bf5cdec24da9822c0bf4ebbcb76b" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"b947f0796f054f89b04cfd366a785fa5" [label="I"] 
+	"NIL52" [label="",shape = box,width=.001,height = 0] 
+	"NIL52" -- "f960bf5cdec24da9822c0bf4ebbcb76b"
+	{"b947f0796f054f89b04cfd366a785fa5"} -- "NIL52"
+	"ab414a2c65f84c6bba620cc2240390d2" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"dcba72caa092461a819be9c43f90a8f7" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"062880c7a4a942d29dc432caae357b2f" [label="H"] 
+	"NIL53" [label="",shape = box,width=.001,height = 0] 
+	"NIL53" -- "dcba72caa092461a819be9c43f90a8f7"
+	{"062880c7a4a942d29dc432caae357b2f"} -- "NIL53"
+	"f4abad4205b245b596874df889d36622" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"3e5b73a9bd8149468796c5e9c14fcd55" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"d78d06662e4247349885f1aa99ce9d24" [label="G"] 
+	"NIL54" [label="",shape = box,width=.001,height = 0] 
+	"NIL54" -- "3e5b73a9bd8149468796c5e9c14fcd55"
+	{"d78d06662e4247349885f1aa99ce9d24"} -- "NIL54"
+	"88ec721771d64fb9badda155fda09627" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"04b5a51062d24882a7e886729bde68ad" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"39ae64ba1d4840c5914c5ffe4bee6cf7" [label="F"] 
+	"NIL55" [label="",shape = box,width=.001,height = 0] 
+	"NIL55" -- "04b5a51062d24882a7e886729bde68ad"
+	{"39ae64ba1d4840c5914c5ffe4bee6cf7"} -- "NIL55"
+	"37e896589d2443ffa54ac3423b0b1d42" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"b00f9472d21d43e3934738cde3deb6c0" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"0136bf1295f34d1f9499b1db086e5cd0" [label="E"] 
+	"NIL56" [label="",shape = box,width=.001,height = 0] 
+	"NIL56" -- "b00f9472d21d43e3934738cde3deb6c0"
+	{"0136bf1295f34d1f9499b1db086e5cd0"} -- "NIL56"
+	"9133338b665040709a7a4934915718ac" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"6888c5f4f4214389a1d552585894e199" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"4fc6785cde574826a56c48db500a498c" [label="D"] 
+	"NIL57" [label="",shape = box,width=.001,height = 0] 
+	"NIL57" -- "6888c5f4f4214389a1d552585894e199"
+	{"4fc6785cde574826a56c48db500a498c"} -- "NIL57"
+	"8d0dd2b53c364e1ba4aa5affbc98280b" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"90a632767d2e4754aa8a53071ec3905c" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"458f0799afd84f3c880af1d900b0fe4a" [label="C"] 
+	"NIL58" [label="",shape = box,width=.001,height = 0] 
+	"NIL58" -- "90a632767d2e4754aa8a53071ec3905c"
+	{"458f0799afd84f3c880af1d900b0fe4a"} -- "NIL58"
+	"92a995bad2f54ee09becb95bfb36bd97" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"1898fd7aef9647e4a0fe4e8abf7b6bce" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"67e2c94c9e50426eaed3d10fe41f0ebf" [label="B"] 
+	"NIL59" [label="",shape = box,width=.001,height = 0] 
+	"NIL59" -- "1898fd7aef9647e4a0fe4e8abf7b6bce"
+	{"67e2c94c9e50426eaed3d10fe41f0ebf"} -- "NIL59"
+	"31a4715e8ddc415bb70e9ab005260dad" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"46694ad57e6647b89eb48dd9bd21defc" [label="A"] 
+	"NIL60" [label="",shape = box,width=.001,height = 0] 
+	"NIL60" -- "31a4715e8ddc415bb70e9ab005260dad"
+	{"46694ad57e6647b89eb48dd9bd21defc"} -- "NIL60"
+	"NIL61" [label="",shape = box,width=.001,height = 0] 
+	"NIL61" -- "92a995bad2f54ee09becb95bfb36bd97"
+	{"1898fd7aef9647e4a0fe4e8abf7b6bce","31a4715e8ddc415bb70e9ab005260dad"} -- "NIL61"
+	"NIL62" [label="",shape = box,width=.001,height = 0] 
+	"NIL62" -- "8d0dd2b53c364e1ba4aa5affbc98280b"
+	{"90a632767d2e4754aa8a53071ec3905c","92a995bad2f54ee09becb95bfb36bd97"} -- "NIL62"
+	"NIL63" [label="",shape = box,width=.001,height = 0] 
+	"NIL63" -- "9133338b665040709a7a4934915718ac"
+	{"6888c5f4f4214389a1d552585894e199","8d0dd2b53c364e1ba4aa5affbc98280b"} -- "NIL63"
+	"NIL64" [label="",shape = box,width=.001,height = 0] 
+	"NIL64" -- "37e896589d2443ffa54ac3423b0b1d42"
+	{"b00f9472d21d43e3934738cde3deb6c0","9133338b665040709a7a4934915718ac"} -- "NIL64"
+	"NIL65" [label="",shape = box,width=.001,height = 0] 
+	"NIL65" -- "88ec721771d64fb9badda155fda09627"
+	{"04b5a51062d24882a7e886729bde68ad","37e896589d2443ffa54ac3423b0b1d42"} -- "NIL65"
+	"NIL66" [label="",shape = box,width=.001,height = 0] 
+	"NIL66" -- "f4abad4205b245b596874df889d36622"
+	{"3e5b73a9bd8149468796c5e9c14fcd55","88ec721771d64fb9badda155fda09627"} -- "NIL66"
+	"NIL67" [label="",shape = box,width=.001,height = 0] 
+	"NIL67" -- "ab414a2c65f84c6bba620cc2240390d2"
+	{"dcba72caa092461a819be9c43f90a8f7","f4abad4205b245b596874df889d36622"} -- "NIL67"
+	"NIL68" [label="",shape = box,width=.001,height = 0] 
+	"NIL68" -- "04f502d374f44ea6a2ca87f8db4de27f"
+	{"f960bf5cdec24da9822c0bf4ebbcb76b","ab414a2c65f84c6bba620cc2240390d2"} -- "NIL68"
+	"NIL69" [label="",shape = box,width=.001,height = 0] 
+	"NIL69" -- "2e63fb1702704ac98fb8f704996c21d6"
+	{"688916f06c9541be85c7c80e4486440f","04f502d374f44ea6a2ca87f8db4de27f"} -- "NIL69"
+	"fd3826b3eebf43cfa3f33c877291717f" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"78a14f8ff39d4e04952b9275301f3f70" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"f9d796994c68452a8629dc59b6fb779e" [label="J"] 
+	"NIL70" [label="",shape = box,width=.001,height = 0] 
+	"NIL70" -- "78a14f8ff39d4e04952b9275301f3f70"
+	{"f9d796994c68452a8629dc59b6fb779e"} -- "NIL70"
+	"cef9a404a91f4087abbe02a740a79bed" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"cea0f3de0e4d48dab11abc39cc2039cf" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"d1665a3166234f8bb1d87ee5e4e44ae5" [label="I"] 
+	"NIL71" [label="",shape = box,width=.001,height = 0] 
+	"NIL71" -- "cea0f3de0e4d48dab11abc39cc2039cf"
+	{"d1665a3166234f8bb1d87ee5e4e44ae5"} -- "NIL71"
+	"812d298a090c4808abe5fb0f749ca942" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"3f01391f79e248a69770dc6695976d5d" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"755dc382782645f0b20a10e4c4fe62b2" [label="H"] 
+	"NIL72" [label="",shape = box,width=.001,height = 0] 
+	"NIL72" -- "3f01391f79e248a69770dc6695976d5d"
+	{"755dc382782645f0b20a10e4c4fe62b2"} -- "NIL72"
+	"e0dfe23de58645acaffa133d97d683f7" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"e5187432e69c4e1e8e7ab9c4dfab44fe" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"a83242c246664b008e631c44fe4193de" [label="G"] 
+	"NIL73" [label="",shape = box,width=.001,height = 0] 
+	"NIL73" -- "e5187432e69c4e1e8e7ab9c4dfab44fe"
+	{"a83242c246664b008e631c44fe4193de"} -- "NIL73"
+	"4adecf190d4c43dcb257c40523f87d7e" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"ac2ec7ca342d4741bebac97b7faf1548" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"49b7fa6acc3949e8be193b2b2dd0ea0d" [label="F"] 
+	"NIL74" [label="",shape = box,width=.001,height = 0] 
+	"NIL74" -- "ac2ec7ca342d4741bebac97b7faf1548"
+	{"49b7fa6acc3949e8be193b2b2dd0ea0d"} -- "NIL74"
+	"b88063f0b2dc44dd9fd4105b45a28997" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"cf7f92ce86b243baae019de2d2885c7f" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"dc84c4dbe29e4589a4c78655c688b98e" [label="E"] 
+	"NIL75" [label="",shape = box,width=.001,height = 0] 
+	"NIL75" -- "cf7f92ce86b243baae019de2d2885c7f"
+	{"dc84c4dbe29e4589a4c78655c688b98e"} -- "NIL75"
+	"50fb0445ae224dbd9acfa8ae7a6189d6" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"3f3a11279c844a579725748e8493d2cc" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"1eaf9fdea6b640aa8df857f0a8c257b4" [label="D"] 
+	"NIL76" [label="",shape = box,width=.001,height = 0] 
+	"NIL76" -- "3f3a11279c844a579725748e8493d2cc"
+	{"1eaf9fdea6b640aa8df857f0a8c257b4"} -- "NIL76"
+	"d111b5e924db47baadfda04ec0f3b9e0" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"5ba757a7a0b34e679eac56db9c87b5bc" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"5e8dfd2d1b5c4e95a60dcee2e5a2ff57" [label="C"] 
+	"NIL77" [label="",shape = box,width=.001,height = 0] 
+	"NIL77" -- "5ba757a7a0b34e679eac56db9c87b5bc"
+	{"5e8dfd2d1b5c4e95a60dcee2e5a2ff57"} -- "NIL77"
+	"d9f082f98f974464aeadb8a468625955" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"00ba6ec47dc54708bb66a725d061dcc7" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"46f58cdcae65448483482310551e905d" [label="B"] 
+	"NIL78" [label="",shape = box,width=.001,height = 0] 
+	"NIL78" -- "00ba6ec47dc54708bb66a725d061dcc7"
+	{"46f58cdcae65448483482310551e905d"} -- "NIL78"
+	"260804cc0d6e4bc590b7a661de9c2622" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"d25658d3c1f84977b0505789acb3d7ab" [label="A"] 
+	"NIL79" [label="",shape = box,width=.001,height = 0] 
+	"NIL79" -- "260804cc0d6e4bc590b7a661de9c2622"
+	{"d25658d3c1f84977b0505789acb3d7ab"} -- "NIL79"
+	"NIL80" [label="",shape = box,width=.001,height = 0] 
+	"NIL80" -- "d9f082f98f974464aeadb8a468625955"
+	{"00ba6ec47dc54708bb66a725d061dcc7","260804cc0d6e4bc590b7a661de9c2622"} -- "NIL80"
+	"NIL81" [label="",shape = box,width=.001,height = 0] 
+	"NIL81" -- "d111b5e924db47baadfda04ec0f3b9e0"
+	{"5ba757a7a0b34e679eac56db9c87b5bc","d9f082f98f974464aeadb8a468625955"} -- "NIL81"
+	"NIL82" [label="",shape = box,width=.001,height = 0] 
+	"NIL82" -- "50fb0445ae224dbd9acfa8ae7a6189d6"
+	{"3f3a11279c844a579725748e8493d2cc","d111b5e924db47baadfda04ec0f3b9e0"} -- "NIL82"
+	"NIL83" [label="",shape = box,width=.001,height = 0] 
+	"NIL83" -- "b88063f0b2dc44dd9fd4105b45a28997"
+	{"cf7f92ce86b243baae019de2d2885c7f","50fb0445ae224dbd9acfa8ae7a6189d6"} -- "NIL83"
+	"NIL84" [label="",shape = box,width=.001,height = 0] 
+	"NIL84" -- "4adecf190d4c43dcb257c40523f87d7e"
+	{"ac2ec7ca342d4741bebac97b7faf1548","b88063f0b2dc44dd9fd4105b45a28997"} -- "NIL84"
+	"NIL85" [label="",shape = box,width=.001,height = 0] 
+	"NIL85" -- "e0dfe23de58645acaffa133d97d683f7"
+	{"e5187432e69c4e1e8e7ab9c4dfab44fe","4adecf190d4c43dcb257c40523f87d7e"} -- "NIL85"
+	"NIL86" [label="",shape = box,width=.001,height = 0] 
+	"NIL86" -- "812d298a090c4808abe5fb0f749ca942"
+	{"3f01391f79e248a69770dc6695976d5d","e0dfe23de58645acaffa133d97d683f7"} -- "NIL86"
+	"NIL87" [label="",shape = box,width=.001,height = 0] 
+	"NIL87" -- "cef9a404a91f4087abbe02a740a79bed"
+	{"cea0f3de0e4d48dab11abc39cc2039cf","812d298a090c4808abe5fb0f749ca942"} -- "NIL87"
+	"NIL88" [label="",shape = box,width=.001,height = 0] 
+	"NIL88" -- "fd3826b3eebf43cfa3f33c877291717f"
+	{"78a14f8ff39d4e04952b9275301f3f70","cef9a404a91f4087abbe02a740a79bed"} -- "NIL88"
+	"NIL89" [label="",shape = box,width=.001,height = 0] 
+	"NIL89" -- "648483f7a19d4067acc4ac8ae7b07746"
+	{"2e63fb1702704ac98fb8f704996c21d6","fd3826b3eebf43cfa3f33c877291717f"} -- "NIL89"
+	"NIL90" [label="",shape = box,width=.001,height = 0] 
+	"NIL90" -- "edf26eea3e51418b97bb271d50416c7a"
+	{"664b900bd9704370a2bb46a36c6fa46b","648483f7a19d4067acc4ac8ae7b07746"} -- "NIL90"
+	"NIL91" [label="",shape = box,width=.001,height = 0] 
+	"NIL91" -- "52dd8d4909b4469fa0f20e1592e9e7ba"
+	{"e794b0d0653947318d00cff57453b35e","edf26eea3e51418b97bb271d50416c7a"} -- "NIL91"
+	"NIL92" [label="",shape = box,width=.001,height = 0] 
+	"NIL92" -- "40bce6152313438a94526de6fe84b1bb"
+	{"db2056506c2c4f7e82e3a25e45f5ec87","52dd8d4909b4469fa0f20e1592e9e7ba"} -- "NIL92"
 }

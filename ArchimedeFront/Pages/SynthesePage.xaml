@@ -19,20 +19,30 @@
             Synthèse :
         </TextBlock>
 
-        <Border Grid.Row="1" BorderThickness="2" CornerRadius="5" Margin="0,20" Padding="10,10">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStop Offset="0.1"  Color="#00CBBD" />
-                        <GradientStop Offset="1"   Color="#00E17C"  />
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderThickness="2" CornerRadius="5" Margin="0,0,0,10" Padding="10,10">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.1"  Color="#00CBBD" />
+                            <GradientStop Offset="1"   Color="#00E17C"  />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
 
-            <local:ZoomBorder x:Name="border" ClipToBounds="True" Background="White">
-                <Image Source="pack://application:,,,/Assets/synthese.png"/>
-            </local:ZoomBorder>
-        </Border>
+                <local:ZoomBorder x:Name="border" ClipToBounds="True" Background="White">
+                    <Image Source="pack://application:,,,/Assets/synthese.png"/>
+                </local:ZoomBorder>
+            </Border>
+
+            <ScrollViewer Grid.Row="1" Margin="0,5,0,10" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                <StackPanel Name="numberGatesPanel" Orientation="Horizontal"/>
+            </ScrollViewer>
+        </Grid>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
