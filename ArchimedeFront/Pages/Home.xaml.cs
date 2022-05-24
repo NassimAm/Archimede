@@ -69,5 +69,17 @@ namespace ArchimedeFront.Pages
             }
             
         }
+
+        private void toWebSite_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.CreateNoWindow = true;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C Website\\src\\index.html";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
     }
 }

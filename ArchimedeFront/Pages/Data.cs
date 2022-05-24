@@ -34,10 +34,10 @@ namespace ArchimedeFront.Pages
         //Synthese
         public static int nb_and = 16;
         public static int nb_or = 16;
-        public static int nb_nand = 2;
-        public static int nb_nor = 2;
-        public static int nb_xor = 2;
-        public static int nb_xnor = 2;
+        public static int nb_nand = 8;
+        public static int nb_nor = 8;
+        public static int nb_xor = 8;
+        public static int nb_xnor = 8;
 
         public static void resete()
         {

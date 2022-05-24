@@ -563,9 +563,7 @@ class Synthese
         // conversion du fichier text en fichier png
         System.Diagnostics.Process process = new System.Diagnostics.Process();
         System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-        // hide the terminal
-        startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-        startInfo.CreateNoWindow = true; 
+        // hide the terminal 
         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
         startInfo.CreateNoWindow = true;
         startInfo.FileName = "cmd.exe";

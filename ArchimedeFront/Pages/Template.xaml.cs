@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace ArchimedeFront.Pages
         {
             _PageContent.IsHitTestVisible = false;
             _PageContent.Effect = new BlurEffect() { Radius = 30, KernelType = KernelType.Gaussian };
-            menuIcon.SetResourceReference(Path.DataProperty, "EXIT_ICON");
+            menuIcon.SetResourceReference(System.Windows.Shapes.Path.DataProperty, "EXIT_ICON");
             menu.Margin = new Thickness(0, 12, 16, 0);
             menu.HorizontalAlignment = HorizontalAlignment.Right;
             navBar.Opacity = 1;
@@ -50,7 +51,7 @@ namespace ArchimedeFront.Pages
             _PageContent.IsHitTestVisible=true;
             _PageContent.Effect = null;
 
-            menuIcon.SetResourceReference(Path.DataProperty, "MENU_ICON");
+            menuIcon.SetResourceReference(System.Windows.Shapes.Path.DataProperty, "MENU_ICON");
             menu.Margin = new Thickness(0, 20, 0, 0);
             menu.HorizontalAlignment = HorizontalAlignment.Center;
             navBar.Opacity = 0;
@@ -67,7 +68,14 @@ namespace ArchimedeFront.Pages
 
         private void toWebSite_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.CreateNoWindow = true;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C Website\\src\\index.html";
+            process.StartInfo = startInfo;
+            process.Start();
         }
 
         

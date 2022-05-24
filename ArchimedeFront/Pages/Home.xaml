@@ -40,7 +40,7 @@
                         Fill="#fff"
                         />
                 </Viewbox>
-                <TextBlock Style="{StaticResource paragraphe}" FontSize="20" Foreground="#fff" TextAlignment="Center">Visitez notre site web</TextBlock>
+                <TextBlock Style="{StaticResource paragraphe}" Cursor="Hand" FontSize="20" Foreground="#fff" TextAlignment="Center" PreviewMouseDown="toWebSite_PreviewMouseDown">Visitez notre site web</TextBlock>
               
             </StackPanel>
         </Grid>
