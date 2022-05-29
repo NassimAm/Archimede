@@ -53,7 +53,7 @@ namespace ArchimedeFront.Pages
             bitmap.UriCachePolicy = new RequestCachePolicy(RequestCacheLevel.BypassCache);
             bitmap.CacheOption = BitmapCacheOption.OnLoad;
             bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() + "\\synthese.png", UriKind.Relative);
+            bitmap.UriSource = new Uri(Directory.GetCurrentDirectory() + "\\Synthese\\synthese.png", UriKind.Relative);
             bitmap.EndInit();
             syntheseImage.Source = bitmap;
             InitializeComponent();
@@ -105,7 +105,7 @@ namespace ArchimedeFront.Pages
 
             if (dlg.ShowDialog() == true)
             {
-                string sourceFile = Directory.GetCurrentDirectory()+"\\synthese.png";
+                string sourceFile = Directory.GetCurrentDirectory()+"\\Synthese\\synthese.png";
                 string destinationFile = dlg.FileName;
                 try
                 {

@@ -104,7 +104,8 @@ namespace ArchimedeFront.Pages
 
 
             //Sauvegarde au fichier
-            string? path = Directory.GetCurrentDirectory() + "\\step1.txt";
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Trace");
+            string? path = Directory.GetCurrentDirectory() + "\\Trace\\step1.txt";
             File.WriteAllText(path, "");
             File.AppendAllText(path, "Liste de mintermes en binaire : \n\n");
             for (int i = 0; i < Data.stringListMinterm.Count; i++)
@@ -152,7 +153,7 @@ namespace ArchimedeFront.Pages
                     Border border;
                     StackPanel groupesTable;
 
-                    string? path = Directory.GetCurrentDirectory() + "\\step4.txt";
+                    string? path = Directory.GetCurrentDirectory() + "\\Trace\\step4.txt";
                     File.WriteAllText(path, "");
                     File.AppendAllText(path, "Extraction des impliquants premiers\n");
                     File.AppendAllText(path, "T: Déjà Traité  P: Premier  A: en attente\n\n");
@@ -278,7 +279,7 @@ namespace ArchimedeFront.Pages
                     {
                         groupeNumber++;
                         Data.cptGroupes++;
-                        path = Directory.GetCurrentDirectory() + "\\step4.txt";
+                        path = Directory.GetCurrentDirectory() + "\\Trace\\step4.txt";
                         File.AppendAllText(path, String.Format("Groupage N°{0}\n", Data.cptGroupes));
                         
                         Data.impliquants = Data.groupeMintermes.generateNextGroupeImpliquants(Data.cptGroupes, Data.impliquantsEnAttente);
@@ -452,6 +453,7 @@ namespace ArchimedeFront.Pages
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
         {
+            Data.literal = true;
             NavigationService.Navigate((new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute)));
         }
 
@@ -525,6 +527,11 @@ namespace ArchimedeFront.Pages
                     nextStepButton_click(sender, null);
             }
             
+
+        }
+
+        private void voirPlus_click(object sender, RoutedEventArgs e)
+        {
 
         }
 

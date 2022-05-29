@@ -27,7 +27,7 @@ namespace ArchimedeFront.Pages
         {
             InitializeComponent();
 
-            string? path = Directory.GetCurrentDirectory() + "\\step5.txt";
+            string? path = Directory.GetCurrentDirectory() + "\\Trace\\step5.txt";
             File.WriteAllText(path, "");
             File.AppendAllText(path, "Table d'impliquants essentiaux\n");
             File.AppendAllText(path, "V:Vide  R:Représente  E:Essentiel\n\n");

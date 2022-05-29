@@ -90,6 +90,8 @@ namespace ArchimedeFront.Pages
             {
                 Data.literal = false;
                 Data.nbVariables = int.Parse(nbVariables.Text);
+                Minterme.maxNbVariables = 0;
+                Minterme.maxNbUns = 0;
                 Data.expression = expression.Text.Replace(" ","");
                 Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
                 long parsedInt;

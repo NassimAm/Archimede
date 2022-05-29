@@ -1,0 +1,33 @@
+graph arbre{
+	splines = ortho;
+	rankdir="LR";
+	ranksep=1;
+	node[width=0.5, height=0.5, shape=box, fontsize=16];
+	edge[arrowhead=none,penwidth=2];
+	"583c71289ca140fd8d4bdd09aae199e9" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"5d243223485542babd9ab30cce7fe957" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"bb2feca476234de08f78490861dded96" [label="",image="rsc/images/gates/XNOR.png",fixedsize=true,shape=plaintext] 
+	"6d7db5d560bb406c989c07f072a86228" [label="D"] 
+	"eba21f7ef17c4e318afc85108b93f1e3" [label="C"] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "bb2feca476234de08f78490861dded96" [label="2 bit(s)"]
+	{"6d7db5d560bb406c989c07f072a86228","eba21f7ef17c4e318afc85108b93f1e3"} -- "NIL0"
+	"e06cbd535239444b90043397077c2bff" [label="B"] 
+	"f6610cc66ae94d2ab05c394956bd31ea" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"c86f8125fb6b418fbfd82455c36ee1d2" [label="A"] 
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "f6610cc66ae94d2ab05c394956bd31ea" [label="1 bit(s)"]
+	{"c86f8125fb6b418fbfd82455c36ee1d2"} -- "NIL1"
+	"NIL2" [label="",shape = box,width=.001,height = 0] 
+	"NIL2" -- "5d243223485542babd9ab30cce7fe957" [label="3 bit(s)"]
+	{"bb2feca476234de08f78490861dded96","e06cbd535239444b90043397077c2bff","f6610cc66ae94d2ab05c394956bd31ea"} -- "NIL2"
+	"69b7d2972e644a318b04807a3f7fc29e" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"4eecda2c97024540b8a2d026f9343143" [label="B"] 
+	"ce6af7f26c52479f9881ff05280ad2f4" [label="A"] 
+	"NIL3" [label="",shape = box,width=.001,height = 0] 
+	"NIL3" -- "69b7d2972e644a318b04807a3f7fc29e" [label="2 bit(s)"]
+	{"4eecda2c97024540b8a2d026f9343143","ce6af7f26c52479f9881ff05280ad2f4"} -- "NIL3"
+	"NIL4" [label="",shape = box,width=.001,height = 0] 
+	"NIL4" -- "583c71289ca140fd8d4bdd09aae199e9" [label="2 bit(s)"]
+	{"5d243223485542babd9ab30cce7fe957","69b7d2972e644a318b04807a3f7fc29e"} -- "NIL4"
+}

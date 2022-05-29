@@ -28,7 +28,7 @@ namespace ArchimedeFront.Pages
             if (Data.resultatFaux )
             {
                 FonctionSimplifieContainer.Text = "FAUX";
-                Data.expression = "0";
+                resultat = "0";
             }
             else
             {
@@ -44,15 +44,15 @@ namespace ArchimedeFront.Pages
                 if (resultat.Length == 0)
                 {
                     FonctionSimplifieContainer.Text = "VRAI";
-                    Data.expression = "1";
+                    resultat = "1";
                 }
                 else {
                     FonctionSimplifieContainer.Text = resultat;
-                    Data.expression = resultat;
                 }
                    
             }
-            
+            Data.expression = resultat;
+
         }
     }
 }

@@ -541,7 +541,8 @@ class Synthese
     //Construit le circuit grâce à GraphViz (DOT)
     public static void Circuit_Visualisation(ExprBoolNode root)
     {
-        string? path = Directory.GetCurrentDirectory() + "\\synthese.txt";
+        Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Synthese");
+        string? path = Directory.GetCurrentDirectory() + "\\Synthese\\synthese.txt";
         // creer le fichier text 'synthese.txt'
         File.WriteAllText(path, "");
         // nombre des noeuds nils
@@ -567,7 +568,7 @@ class Synthese
         startInfo.WindowStyle = ProcessWindowStyle.Hidden;
         startInfo.CreateNoWindow = true;
         startInfo.FileName = "cmd.exe";
-        startInfo.Arguments = "/C dot -Tpng synthese.txt -o synthese.png";
+        startInfo.Arguments = "/C dot -Tpng Synthese\\synthese.txt -o Synthese\\synthese.png";
         process.StartInfo = startInfo;
         process.Start();
         process.WaitForExit();
@@ -632,7 +633,7 @@ class Synthese
             listentrees = listentrees.Substring(0, listentrees.Length - 1);
             listentrees += "}";
             File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,width=.001,height = {1}] \n", nbnils, root.children.Count / 4));
-            File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\"\n", nbnils, root.id));
+            File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\" [label=\"{2} bit(s)\"]\n", nbnils, root.id,root.children.Count));
             File.AppendAllText(path, String.Format("\t{0} -- \"NIL{1}\"\n", listentrees, nbnils++));
         }
     }

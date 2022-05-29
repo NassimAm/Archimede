@@ -32,7 +32,7 @@ namespace ArchimedeFront.Pages
             InitializeComponent();
 
             Border border;
-            string? path = Directory.GetCurrentDirectory() + "\\step2.txt";
+            string? path = Directory.GetCurrentDirectory() + "\\Trace\\step2.txt";
             File.WriteAllText(path, "");
             int cpt = 0;
             foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
