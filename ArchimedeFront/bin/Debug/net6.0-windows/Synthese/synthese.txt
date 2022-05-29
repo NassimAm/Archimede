@@ -4,30 +4,73 @@ graph arbre{
 	ranksep=1;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"583c71289ca140fd8d4bdd09aae199e9" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"5d243223485542babd9ab30cce7fe957" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"bb2feca476234de08f78490861dded96" [label="",image="rsc/images/gates/XNOR.png",fixedsize=true,shape=plaintext] 
-	"6d7db5d560bb406c989c07f072a86228" [label="D"] 
-	"eba21f7ef17c4e318afc85108b93f1e3" [label="C"] 
+	"23b19c6a62354deb9471e9fb8764eaf8" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"8f06a817f1d549f7a24560ec944f7788" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"c4752182a53544fbbd081d6931273d57" [label="K"] 
+	"6d71d3d4589a4495beb05b8cbaa42763" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"fb84575192f148c9aeb6f6955ffc6471" [label="G"] 
 	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "bb2feca476234de08f78490861dded96" [label="2 bit(s)"]
-	{"6d7db5d560bb406c989c07f072a86228","eba21f7ef17c4e318afc85108b93f1e3"} -- "NIL0"
-	"e06cbd535239444b90043397077c2bff" [label="B"] 
-	"f6610cc66ae94d2ab05c394956bd31ea" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"c86f8125fb6b418fbfd82455c36ee1d2" [label="A"] 
+	"NIL0" -- "6d71d3d4589a4495beb05b8cbaa42763" [label="1 bit(s)"]
+	{"fb84575192f148c9aeb6f6955ffc6471"} -- "NIL0"
+	"e53abe1509f14e958f1d41006ed655f7" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"cd5a0d56ecfa45559f3e4a2491d5ada3" [label="F"] 
 	"NIL1" [label="",shape = box,width=.001,height = 0] 
-	"NIL1" -- "f6610cc66ae94d2ab05c394956bd31ea" [label="1 bit(s)"]
-	{"c86f8125fb6b418fbfd82455c36ee1d2"} -- "NIL1"
+	"NIL1" -- "e53abe1509f14e958f1d41006ed655f7" [label="1 bit(s)"]
+	{"cd5a0d56ecfa45559f3e4a2491d5ada3"} -- "NIL1"
 	"NIL2" [label="",shape = box,width=.001,height = 0] 
-	"NIL2" -- "5d243223485542babd9ab30cce7fe957" [label="3 bit(s)"]
-	{"bb2feca476234de08f78490861dded96","e06cbd535239444b90043397077c2bff","f6610cc66ae94d2ab05c394956bd31ea"} -- "NIL2"
-	"69b7d2972e644a318b04807a3f7fc29e" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"4eecda2c97024540b8a2d026f9343143" [label="B"] 
-	"ce6af7f26c52479f9881ff05280ad2f4" [label="A"] 
+	"NIL2" -- "8f06a817f1d549f7a24560ec944f7788" [label="3 bit(s)"]
+	{"c4752182a53544fbbd081d6931273d57","6d71d3d4589a4495beb05b8cbaa42763","e53abe1509f14e958f1d41006ed655f7"} -- "NIL2"
+	"c678869ff06a48da84a581f6ed6f6f36" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"b7ad2d0a058e458dbeb93a1132320cd3" [label="K"] 
+	"4d012f4d899a4843bd3345399065036c" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"864316c102ac4da69da2edb23e72fb82" [label="E"] 
 	"NIL3" [label="",shape = box,width=.001,height = 0] 
-	"NIL3" -- "69b7d2972e644a318b04807a3f7fc29e" [label="2 bit(s)"]
-	{"4eecda2c97024540b8a2d026f9343143","ce6af7f26c52479f9881ff05280ad2f4"} -- "NIL3"
+	"NIL3" -- "4d012f4d899a4843bd3345399065036c" [label="1 bit(s)"]
+	{"864316c102ac4da69da2edb23e72fb82"} -- "NIL3"
 	"NIL4" [label="",shape = box,width=.001,height = 0] 
-	"NIL4" -- "583c71289ca140fd8d4bdd09aae199e9" [label="2 bit(s)"]
-	{"5d243223485542babd9ab30cce7fe957","69b7d2972e644a318b04807a3f7fc29e"} -- "NIL4"
+	"NIL4" -- "c678869ff06a48da84a581f6ed6f6f36" [label="2 bit(s)"]
+	{"b7ad2d0a058e458dbeb93a1132320cd3","4d012f4d899a4843bd3345399065036c"} -- "NIL4"
+	"1f58f81bba9b4e949c8122227e107ae2" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"d88e896208b3412685cd63d34afb4480" [label="K"] 
+	"05ee002d435f4807b409848761342683" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"75e8e87501cc419fbe777bc2b0a51a7b" [label="D"] 
+	"NIL5" [label="",shape = box,width=.001,height = 0] 
+	"NIL5" -- "05ee002d435f4807b409848761342683" [label="1 bit(s)"]
+	{"75e8e87501cc419fbe777bc2b0a51a7b"} -- "NIL5"
+	"NIL6" [label="",shape = box,width=.001,height = 0] 
+	"NIL6" -- "1f58f81bba9b4e949c8122227e107ae2" [label="2 bit(s)"]
+	{"d88e896208b3412685cd63d34afb4480","05ee002d435f4807b409848761342683"} -- "NIL6"
+	"dce4daa39a214bdba1e6cdafcdb2cdd7" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"2fd987fbbf83480a91e1c4b34af4e366" [label="K"] 
+	"3aa7a6855a344fb6add54f39531b8f58" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"f3a5297de7194a1682b81f973895b004" [label="C"] 
+	"NIL7" [label="",shape = box,width=.001,height = 0] 
+	"NIL7" -- "3aa7a6855a344fb6add54f39531b8f58" [label="1 bit(s)"]
+	{"f3a5297de7194a1682b81f973895b004"} -- "NIL7"
+	"NIL8" [label="",shape = box,width=.001,height = 0] 
+	"NIL8" -- "dce4daa39a214bdba1e6cdafcdb2cdd7" [label="2 bit(s)"]
+	{"2fd987fbbf83480a91e1c4b34af4e366","3aa7a6855a344fb6add54f39531b8f58"} -- "NIL8"
+	"39b8f0a2154c40c581e7fa61af248a76" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"e39f1fc3317a425ba3d47c144b82ef89" [label="K"] 
+	"6f0f1e86f8914a9a9dd766a92442202a" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"788e10d7f90c421c98d7a3eacd77068b" [label="B"] 
+	"NIL9" [label="",shape = box,width=.001,height = 0] 
+	"NIL9" -- "6f0f1e86f8914a9a9dd766a92442202a" [label="1 bit(s)"]
+	{"788e10d7f90c421c98d7a3eacd77068b"} -- "NIL9"
+	"NIL10" [label="",shape = box,width=.001,height = 0] 
+	"NIL10" -- "39b8f0a2154c40c581e7fa61af248a76" [label="2 bit(s)"]
+	{"e39f1fc3317a425ba3d47c144b82ef89","6f0f1e86f8914a9a9dd766a92442202a"} -- "NIL10"
+	"ba3c1cfe3e2a4a19bce98e72b5e734ff" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"55351d48639140e7929d797bb925f53f" [label="K"] 
+	"93394b5bb01047a88887eb4dc671f391" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"a895ddb8272c42cca8278bfcee91c424" [label="A"] 
+	"NIL11" [label="",shape = box,width=.001,height = 0] 
+	"NIL11" -- "93394b5bb01047a88887eb4dc671f391" [label="1 bit(s)"]
+	{"a895ddb8272c42cca8278bfcee91c424"} -- "NIL11"
+	"NIL12" [label="",shape = box,width=.001,height = 0] 
+	"NIL12" -- "ba3c1cfe3e2a4a19bce98e72b5e734ff" [label="2 bit(s)"]
+	{"55351d48639140e7929d797bb925f53f","93394b5bb01047a88887eb4dc671f391"} -- "NIL12"
+	"NIL13" [label="",shape = box,width=.001,height = 1] 
+	"NIL13" -- "23b19c6a62354deb9471e9fb8764eaf8" [label="6 bit(s)"]
+	{"8f06a817f1d549f7a24560ec944f7788","c678869ff06a48da84a581f6ed6f6f36","1f58f81bba9b4e949c8122227e107ae2","dce4daa39a214bdba1e6cdafcdb2cdd7","39b8f0a2154c40c581e7fa61af248a76","ba3c1cfe3e2a4a19bce98e72b5e734ff"} -- "NIL13"
 }

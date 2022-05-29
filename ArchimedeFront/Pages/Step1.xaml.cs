@@ -162,6 +162,8 @@ namespace ArchimedeFront.Pages
                     groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) ,VerticalAlignment = VerticalAlignment.Top};
                     groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = "1er regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Left , Height=60 });
 
+                    int cpt = 0;
+
                     foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
 
@@ -170,15 +172,32 @@ namespace ArchimedeFront.Pages
                                 foreach (Impliquant impliquant in groupe)
                                 {
                                     if (impliquant.status)
-                                     groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
-                                    else groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
-
+                                    {
+                                        File.AppendAllText(path, "P " + impliquant.bincode + "\n");
+                                        if (cpt < Data.step4LimitRows)
+                                            groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
+                                        else
+                                            voirPlusContainer.Visibility = Visibility.Visible;
+                                    }  
+                                    else
+                                    {
+                                        File.AppendAllText(path, "T " + impliquant.bincode + "\n");
+                                        if (cpt < Data.step4LimitRows)
+                                            groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                        else
+                                            voirPlusContainer.Visibility = Visibility.Visible;
+                                    }
+                                    cpt++;
                                 }
 
                                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
                                 HorizontalAlignment = HorizontalAlignment.Center};
-                                groupesTable.Children.Add(border);
-                            }
+                                if (cpt < Data.step4LimitRows)
+                                    groupesTable.Children.Add(border);
+                                else
+                                    voirPlusContainer.Visibility = Visibility.Visible;
+                                cpt++;
+                        }
                             
 
                         }
@@ -188,12 +207,20 @@ namespace ArchimedeFront.Pages
                             foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                             {
                                 File.AppendAllText(path, "A " + impliquant.bincode + "\n");
-                                groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
+                                if(cpt< Data.step4LimitRows)
+                                    groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
+                                else
+                                    voirPlusContainer.Visibility = Visibility.Visible;
+                                cpt++;
                             }
                              
                             border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36,8), Width = Data.nbVariables * 14, Child = null ,
                             HorizontalAlignment=HorizontalAlignment.Center};
-                            groupesTable.Children.Add(border);
+                            if (cpt < Data.step4LimitRows)
+                                groupesTable.Children.Add(border);
+                            else
+                                voirPlusContainer.Visibility = Visibility.Visible;
+                            cpt++;
                         }
 
                         groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
@@ -238,7 +265,7 @@ namespace ArchimedeFront.Pages
                          
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
-                        
+                        cpt = 0;
                         foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
 
@@ -248,12 +275,20 @@ namespace ArchimedeFront.Pages
                                 foreach (Impliquant impliquant in groupe)
                                 {
 
-                                    groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                                    if (cpt < Data.step4LimitRows)
+                                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                                    else
+                                        voirPlusContainer.Visibility = Visibility.Visible;
+                                    cpt++;
                                 }
 
                                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null ,
                                 HorizontalAlignment=HorizontalAlignment.Center};
-                                groupesTable.Children.Add(border);
+                                if (cpt < Data.step4LimitRows)
+                                    groupesTable.Children.Add(border);
+                                else
+                                    voirPlusContainer.Visibility = Visibility.Visible;
+                                cpt++;
                             }      
                             
 
@@ -288,7 +323,7 @@ namespace ArchimedeFront.Pages
 
                         groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
                         groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 22, Margin = new Thickness(36, 6, 36, 6), Text = groupeNumber + "eme regroupement", FontWeight = FontWeights.Bold, HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Left, Height = 60 });
-
+                        cpt = 0;
                         foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                         {
                             if(groupe.Count > 0)
@@ -298,18 +333,29 @@ namespace ArchimedeFront.Pages
                                     if (impliquant.status)
                                     {
                                         File.AppendAllText(path, "P " + impliquant.bincode + "\n");
-                                        groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
-                                    }  
+                                        if (cpt < Data.step4LimitRows)
+                                            groupesTable.Children.Add(generatePrimeImplicant(impliquant.bincode));
+                                        else
+                                            voirPlusContainer.Visibility = Visibility.Visible;
+                                    }
                                     else
                                     {
                                         File.AppendAllText(path, "T " + impliquant.bincode + "\n");
-                                        groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                        if (cpt < Data.step4LimitRows)
+                                            groupesTable.Children.Add(generateCheckedImplicant(impliquant.bincode));
+                                        else
+                                            voirPlusContainer.Visibility = Visibility.Visible;
                                     }
+                                    cpt++;
                                 }
 
                                 border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null 
                                     , HorizontalAlignment = HorizontalAlignment.Center };
-                                groupesTable.Children.Add(border);
+                                if (cpt < Data.step4LimitRows)
+                                    groupesTable.Children.Add(border);
+                                else
+                                    voirPlusContainer.Visibility = Visibility.Visible;
+                                cpt++;
                             }
                             
 
@@ -319,12 +365,20 @@ namespace ArchimedeFront.Pages
                             foreach (Impliquant impliquant in Data.impliquantsEnAttente)
                             {
                                 File.AppendAllText(path, "A " + impliquant.bincode + "\n");
-                                groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
+                                if (cpt < Data.step4LimitRows)
+                                    groupesTable.Children.Add(generateSelectedImplicant(impliquant.bincode));
+                                else
+                                    voirPlusContainer.Visibility = Visibility.Visible;
+                                cpt++;
                             }
 
                             border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 8, 36, 8), Width = Data.nbVariables * 14, Child = null , 
                                 HorizontalAlignment=HorizontalAlignment.Center };
-                            groupesTable.Children.Add(border);
+                            if (cpt < Data.step4LimitRows)
+                                groupesTable.Children.Add(border);
+                            else
+                                voirPlusContainer.Visibility = Visibility.Visible;
+                            cpt++;
                         }
 
                         groupesTable.Children.RemoveAt(groupesTable.Children.Count - 1);
@@ -365,6 +419,7 @@ namespace ArchimedeFront.Pages
 
 
                             groupesTable = new StackPanel() { Margin = new Thickness(10, 30, 10, 30) };
+                            cpt = 0;
                             foreach (List<Impliquant> groupe in Data.groupeMintermes.groupesImpliquants)
                             {
                                 if(groupe.Count > 0)
@@ -372,12 +427,20 @@ namespace ArchimedeFront.Pages
                                     foreach (Impliquant impliquant in groupe)
                                     {
 
-                                        groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                                        if (cpt < Data.step4LimitRows)
+                                            groupesTable.Children.Add(new TextBlock() { Style = FindResource("paragraphe") as Style, FontSize = 28, Margin = new Thickness(36, 2, 36, 2), Text = impliquant.bincode });
+                                        else
+                                            voirPlusContainer.Visibility = Visibility.Visible;
+                                        cpt++;
                                     }
 
                                     border = new Border() { Style = FindResource("dashedBorder") as Style, BorderThickness = new Thickness(0, 0, 0, 2), Margin = new Thickness(36, 4, 36, 4), Width = Data.nbVariables * 14, Child = null
                                         , HorizontalAlignment=HorizontalAlignment.Center };
-                                    groupesTable.Children.Add(border);
+                                    if (cpt < Data.step4LimitRows)
+                                        groupesTable.Children.Add(border);
+                                    else
+                                        voirPlusContainer.Visibility = Visibility.Visible;
+                                    cpt++;
                                 }
                                 
 
@@ -532,7 +595,17 @@ namespace ArchimedeFront.Pages
 
         private void voirPlus_click(object sender, RoutedEventArgs e)
         {
-
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            // hide the terminal 
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.CreateNoWindow = true;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C Trace\\step4.txt";
+            process.StartInfo = startInfo;
+            process.Start();
+            process.WaitForExit();
+            process.Close();
         }
 
         private void _NextStep5_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)

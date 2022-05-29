@@ -39,6 +39,9 @@ namespace ArchimedeFront.Pages
         public static int nb_xor = 8;
         public static int nb_xnor = 8;
 
+        //Affichage
+        public static int step4LimitRows = 30;
+
         public static void resete()
         {
             literal = true;

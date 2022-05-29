@@ -73,12 +73,11 @@
                 </Border>
             </styles:AlignableWrapPanel>
 
-            <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
-
-            <StackPanel Name="voirPlusContainer" Margin="10,0,100,0" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
+            <StackPanel Name="voirPlusContainer" Visibility="Collapsed"  Margin="10,0,100,0" Orientation="Horizontal" DockPanel.Dock="Right" HorizontalAlignment="Right">
                 <Button  Name="voirPlusButton" Style="{StaticResource expandButton}"  ContentStringFormat="Voir Plus" Click="voirPlus_click" Padding="0,24" />
             </StackPanel>
 
+            <Frame Name="_NextStep5"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep5_LoadCompleted"></Frame>
             <Frame Name="_NextStep6"  NavigationUIVisibility="Hidden" LoadCompleted="_NextStep6_LoadCompleted"></Frame>
             <Button Name="syntheseButton" Visibility="Collapsed" Style="{StaticResource greenButton}" MaxWidth="200" Margin="14,0,14,100" Click="syntheseButton_Click" Cursor="Hand" >Synthèse</Button>
 
