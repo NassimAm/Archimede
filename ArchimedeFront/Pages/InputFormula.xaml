@@ -49,8 +49,6 @@
                         <StackPanel Name="radioButtons" HorizontalAlignment="Left" Margin="0,14,0,20">
                             <RadioButton Name="_00" Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
                             <RadioButton Name="_01" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
-                            <RadioButton Name="_02" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
-                            <RadioButton Name="_03" Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
                         </StackPanel>
                         <TextBlock Style="{StaticResource paragraphe}" FontWeight="Bold" FontSize="24" MaxWidth="400" TextAlignment="Left">Voulez-vous afficher la trace ?</TextBlock>
                         <StackPanel Orientation="Horizontal" Margin="0,10">

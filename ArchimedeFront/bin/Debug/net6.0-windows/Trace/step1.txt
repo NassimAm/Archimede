@@ -1,7 +1,7 @@
 Liste de mintermes en binaire : 
 
-o 0000
-o 0001
-o 0010
-o 0011
-o 1010
+o 0-0
+o 00-
+o -00
+o -0-
+o 10-

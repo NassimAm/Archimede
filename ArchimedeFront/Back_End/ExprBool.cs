@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace dnf
 {
 
-    enum Type
+    public enum Type
     {
 
         VALEUR,
@@ -20,7 +21,7 @@ namespace dnf
         XNOR,
     };
 
-    class ExprBool
+    public class ExprBool
     {
 
         public Type type;
@@ -1419,71 +1420,71 @@ namespace dnf
 
 
 
-        /*        //tree visualisation 
-                public static void arbre_to_txt(ExprBool? root, ref int nbNils, string path)
+        //tree visualisation 
+        public static void arbre_to_txt(ExprBool? root, ref int nbNils, string path)
+        {
+            if (root != null)
+            {
+                // dessiner un arc vers le fils gauche
+                if (root.fg != null)
                 {
-                    if (root != null)
-                    {
-                        // dessiner un arc vers le fils gauche
-                        if (root.fg != null)
-                        {
-                            File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"]  \n", root.fg.info, root.fg.id));
-                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fg.id));
-                        }
-                        else
-                        {
-                            File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
-                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
-                            File.AppendAllText(path, " [style=invis];\n");
-                        }
-                        // Dessiner un fils NIL "virtuel" et "invisible" au milieu (pour une meilleure séparation des fils gauches et droits)
-                        File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
-                        File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
-                        File.AppendAllText(path, " [style=invis];\n");
-                        // Dessiner un arc vers le fils droit
-                        if (root.fd != null)
-                        {
-                            File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"] \n", root.fd.info, root.fd.id));
-                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fd.id));
-                        }
-                        else
-                        {
-                            File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
-                            File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
-                            File.AppendAllText(path, " [style=invis];\n");
-                        }
-                        // dessiner les sous-arbres gauche et droit
-                        arbre_to_txt(root.fg, ref nbNils, path);
-                        arbre_to_txt(root.fd, ref nbNils, path);
-                    }
+                    File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"]  \n", root.fg.info, root.fg.id));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fg.id));
                 }
-                public static void Draw_Tree(ExprBool root)
+                else
                 {
-                    string? path = Directory.GetCurrentDirectory() + "\\tree.txt";
-                    File.WriteAllText(path, ""); // creer le fichier text 'tree.txt'
-                    int nbnils = 0; // nombre des noeuds nils
-                    // construction du fichier 'tree.txt' (en langage DOT)
-                    File.AppendAllText(path, "strict graph arbre {\n");
-                    File.AppendAllText(path, "\tordering = out;\n");
-                    File.AppendAllText(path, "\tsplines = false;\n");
-                    File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
-                    arbre_to_txt(root, ref nbnils, path);
-                    File.AppendAllText(path, "}\n");
-                    // conversion du fichier text en fichier png
-                    System.Diagnostics.Process process = new System.Diagnostics.Process();
-                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; // hide the terminal
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = "/C dot -Tpng tree.txt -o tree.png";
-                    process.StartInfo = startInfo;
-                    process.Start();
-                    process.Close();
-                    // ouverture du fichier 'tree.png'
-                    startInfo.Arguments = "/C tree.png";
-                    process.StartInfo = startInfo;
-                    process.Start();
+                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
+                    File.AppendAllText(path, " [style=invis];\n");
                 }
-        */
+                // Dessiner un fils NIL "virtuel" et "invisible" au milieu (pour une meilleure séparation des fils gauches et droits)
+                File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
+                File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
+                File.AppendAllText(path, " [style=invis];\n");
+                // Dessiner un arc vers le fils droit
+                if (root.fd != null)
+                {
+                    File.AppendAllText(path, String.Format("  \"{1}\" [label=\"{0}\"] \n", root.fd.info, root.fd.id));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"{1}\"; \n", root.id, root.fd.id));
+                }
+                else
+                {
+                    File.AppendAllText(path, String.Format("  \"NIL{0}\" [style=invis];\n", nbNils));
+                    File.AppendAllText(path, String.Format("  \"{0}\" -- \"NIL{1}\" ", root.id, nbNils++));
+                    File.AppendAllText(path, " [style=invis];\n");
+                }
+                // dessiner les sous-arbres gauche et droit
+                arbre_to_txt(root.fg, ref nbNils, path);
+                arbre_to_txt(root.fd, ref nbNils, path);
+            }
+        }
+        public static void Draw_Tree(ExprBool root)
+        {
+            string? path = Directory.GetCurrentDirectory() + "\\tree.txt";
+            File.WriteAllText(path, ""); // creer le fichier text 'tree.txt'
+            int nbnils = 0; // nombre des noeuds nils
+                            // construction du fichier 'tree.txt' (en langage DOT)
+            File.AppendAllText(path, "strict graph arbre {\n");
+            File.AppendAllText(path, "\tordering = out;\n");
+            File.AppendAllText(path, "\tsplines = false;\n");
+            File.AppendAllText(path, String.Format(" \"{1}\" [label=\"{0}\"] \n", root.info, root.id));
+            arbre_to_txt(root, ref nbnils, path);
+            File.AppendAllText(path, "}\n");
+            // conversion du fichier text en fichier png
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden; // hide the terminal
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C dot -Tpng tree.txt -o tree.png";
+            process.StartInfo = startInfo;
+            process.Start();
+            process.Close();
+            // ouverture du fichier 'tree.png'
+            startInfo.Arguments = "/C tree.png";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
 
         public static string generateID()  // for generating unique IDs
         {
@@ -1519,7 +1520,7 @@ namespace dnf
                     if (root.fg.type == Type.VALEUR && root.fd.type == Type.VALEUR)
                     {
                         //a.b
-                        ExprBool a_b = new ExprBool(Type.NAND, root.fg, root.fd); //( a nand b )
+                        ExprBool a_b = new ExprBool(Type.NAND, root.fg, root.fd) ; //( a nand b )
                         return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nand b ) nand  ( a nand b )
                     }
                     break;
@@ -1654,7 +1655,7 @@ namespace dnf
             {
                 ExprBool a_b = new ExprBool(Type.NOR, onlyNor(root.fg), onlyNor(root.fd)); //( a nor b )
 
-                return new ExprBool(Type.NAND, a_b, a_b.clone()); // ( a nor b ) nor  ( a nor b )
+                return new ExprBool(Type.NOR, a_b, a_b.clone()); // ( a nor b ) nor  ( a nor b )
             }
 
             return null;
@@ -1736,7 +1737,7 @@ namespace dnf
                 alphabet = new StringBuilder(); // alphabet represente la variable (puisque on peut aller a plus de 26 variables l'alphabet sont des string aaa, aabadf ... )
 
                 //une boucle pour separer  les operateurs du l'alphabet 
-                while ((indexCh < expression.Length) && (expression[indexCh] != '+') && (expression[indexCh] != '.') && (expression[indexCh] != '!'))
+                while ((indexCh < expression.Length) && (expression[indexCh] != ')') && (expression[indexCh] != '(') && (expression[indexCh] != '⊙') && (expression[indexCh] != '⊕') && (expression[indexCh] != '↓') && (expression[indexCh] != '↑') && (expression[indexCh] != '+') && (expression[indexCh] != '.') && (expression[indexCh] != '!'))
                 {
 
                     alphabet.Append(expression[indexCh]);

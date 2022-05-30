@@ -1,9 +1,10 @@
 Groupage 0 :
-o 0000
 Groupage 1 :
-o 0001
-o 0010
 Groupage 2 :
-o 0011
-o 1010
 
+Impliquants en attente :
+o 0-0
+o 00-
+o -00
+o -0-
+o 10-

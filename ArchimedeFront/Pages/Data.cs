@@ -31,6 +31,10 @@ namespace ArchimedeFront.Pages
         public static bool resultatFaux = false;
         public static char codeTransformation; // 0 dnf 1 cnf 2 onlyNand 3 onlyNor
 
+        //Transformation
+        public static bool aPartirDeTransformation = false;
+        public static ExprBool? binaryTree = null;
+
         //Synthese
         public static bool syntheseAuto = true;
         public static int nb_and = 16;
@@ -45,6 +49,8 @@ namespace ArchimedeFront.Pages
 
         public static void resete()
         {
+            Minterme.maxNbVariables = 0;
+            Minterme.maxNbUns = 0;
             literal = true;
             expression = ""; //l'expression a simplifier ;
             expressionTransforme = ""; //l'expression apres transformation en dnf 

@@ -4,295 +4,255 @@ graph arbre{
 	ranksep=2;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"OR17" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"AND149" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT134" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"J" [label="J"] 
+	"OR23" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"AND69" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"NOT48" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"J" [label="J",width=0.75,height=0.75] 
 	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "NOT134" [label="1 bit(s)",len=1]
+	"NIL0" -- "NOT48" [label="1 bit(s)",len=1]
 	{"J"} -- "NIL0"
-	"I" [label="I"] 
-	"NOT135" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"H" [label="H"] 
+	"I" [label="I",width=0.75,height=0.75] 
+	"NOT49" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"H" [label="H",width=0.75,height=0.75] 
 	"NIL1" [label="",shape = box,width=.001,height = 0] 
-	"NIL1" -- "NOT135" [label="1 bit(s)",len=1]
+	"NIL1" -- "NOT49" [label="1 bit(s)",len=1]
 	{"H"} -- "NIL1"
-	"AND146" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"G" [label="G"] 
-	"NOT136" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"F" [label="F"] 
+	"G" [label="G",width=0.75,height=0.75] 
+	"NOT50" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"F" [label="F",width=0.75,height=0.75] 
 	"NIL2" [label="",shape = box,width=.001,height = 0] 
-	"NIL2" -- "NOT136" [label="1 bit(s)",len=1]
+	"NIL2" -- "NOT50" [label="1 bit(s)",len=1]
 	{"F"} -- "NIL2"
-	"NOT137" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"E" [label="E"] 
+	"NOT51" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"E" [label="E",width=0.75,height=0.75] 
 	"NIL3" [label="",shape = box,width=.001,height = 0] 
-	"NIL3" -- "NOT137" [label="1 bit(s)",len=1]
+	"NIL3" -- "NOT51" [label="1 bit(s)",len=1]
 	{"E"} -- "NIL3"
-	"AND143" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT138" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"D" [label="D"] 
+	"NOT52" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"D" [label="D",width=0.75,height=0.75] 
 	"NIL4" [label="",shape = box,width=.001,height = 0] 
-	"NIL4" -- "NOT138" [label="1 bit(s)",len=1]
+	"NIL4" -- "NOT52" [label="1 bit(s)",len=1]
 	{"D"} -- "NIL4"
-	"NOT139" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"C" [label="C"] 
+	"NOT53" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"C" [label="C",width=0.75,height=0.75] 
 	"NIL5" [label="",shape = box,width=.001,height = 0] 
-	"NIL5" -- "NOT139" [label="1 bit(s)",len=1]
+	"NIL5" -- "NOT53" [label="1 bit(s)",len=1]
 	{"C"} -- "NIL5"
-	"NOT140" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"B" [label="B"] 
+	"NOT54" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B",width=0.75,height=0.75] 
 	"NIL6" [label="",shape = box,width=.001,height = 0] 
-	"NIL6" -- "NOT140" [label="1 bit(s)",len=1]
+	"NIL6" -- "NOT54" [label="1 bit(s)",len=1]
 	{"B"} -- "NIL6"
-	"NOT141" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"A" [label="A"] 
+	"NOT55" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"A" [label="A",width=0.75,height=0.75] 
 	"NIL7" [label="",shape = box,width=.001,height = 0] 
-	"NIL7" -- "NOT141" [label="1 bit(s)",len=1]
+	"NIL7" -- "NOT55" [label="1 bit(s)",len=1]
 	{"A"} -- "NIL7"
-	"NIL8" [label="",shape = box,width=.001,height = 1] 
-	"NIL8" -- "AND143" [label="4 bit(s)",len=1]
-	{"NOT138","NOT139","NOT140","NOT141"} -- "NIL8"
-	"NIL9" [label="",shape = box,width=.001,height = 1] 
-	"NIL9" -- "AND146" [label="4 bit(s)",len=1]
-	{"G","NOT136","NOT137","AND143"} -- "NIL9"
-	"NIL10" [label="",shape = box,width=.001,height = 1] 
-	"NIL10" -- "AND149" [label="4 bit(s)",len=1]
-	{"NOT134","I","NOT135","AND146"} -- "NIL10"
-	"AND158" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"J" [label="J"] 
-	"I" [label="I"] 
-	"NOT142" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"H" [label="H"] 
+	"NIL8" [label="",shape = box,width=.001,height = 2] 
+	"NIL8" -- "AND69" [label="10 bit(s)",len=1]
+	{"NOT48","I","NOT49","G","NOT50","NOT51","NOT52","NOT53","NOT54","NOT55"} -- "NIL8"
+	"AND78" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"J" [label="J",width=0.75,height=0.75] 
+	"I" [label="I",width=0.75,height=0.75] 
+	"NOT56" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"H" [label="H",width=0.75,height=0.75] 
+	"NIL9" [label="",shape = box,width=.001,height = 0] 
+	"NIL9" -- "NOT56" [label="1 bit(s)",len=1]
+	{"H"} -- "NIL9"
+	"NOT57" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"G" [label="G",width=0.75,height=0.75] 
+	"NIL10" [label="",shape = box,width=.001,height = 0] 
+	"NIL10" -- "NOT57" [label="1 bit(s)",len=1]
+	{"G"} -- "NIL10"
+	"NOT58" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"F" [label="F",width=0.75,height=0.75] 
 	"NIL11" [label="",shape = box,width=.001,height = 0] 
-	"NIL11" -- "NOT142" [label="1 bit(s)",len=1]
-	{"H"} -- "NIL11"
-	"AND155" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT143" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"G" [label="G"] 
+	"NIL11" -- "NOT58" [label="1 bit(s)",len=1]
+	{"F"} -- "NIL11"
+	"NOT59" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"E" [label="E",width=0.75,height=0.75] 
 	"NIL12" [label="",shape = box,width=.001,height = 0] 
-	"NIL12" -- "NOT143" [label="1 bit(s)",len=1]
-	{"G"} -- "NIL12"
-	"NOT144" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"F" [label="F"] 
+	"NIL12" -- "NOT59" [label="1 bit(s)",len=1]
+	{"E"} -- "NIL12"
+	"NOT60" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"D" [label="D",width=0.75,height=0.75] 
 	"NIL13" [label="",shape = box,width=.001,height = 0] 
-	"NIL13" -- "NOT144" [label="1 bit(s)",len=1]
-	{"F"} -- "NIL13"
-	"NOT145" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"E" [label="E"] 
+	"NIL13" -- "NOT60" [label="1 bit(s)",len=1]
+	{"D"} -- "NIL13"
+	"NOT61" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"C" [label="C",width=0.75,height=0.75] 
 	"NIL14" [label="",shape = box,width=.001,height = 0] 
-	"NIL14" -- "NOT145" [label="1 bit(s)",len=1]
-	{"E"} -- "NIL14"
-	"AND152" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT146" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"D" [label="D"] 
+	"NIL14" -- "NOT61" [label="1 bit(s)",len=1]
+	{"C"} -- "NIL14"
+	"NOT62" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B",width=0.75,height=0.75] 
 	"NIL15" [label="",shape = box,width=.001,height = 0] 
-	"NIL15" -- "NOT146" [label="1 bit(s)",len=1]
-	{"D"} -- "NIL15"
-	"NOT147" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"C" [label="C"] 
+	"NIL15" -- "NOT62" [label="1 bit(s)",len=1]
+	{"B"} -- "NIL15"
+	"NOT63" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"A" [label="A",width=0.75,height=0.75] 
 	"NIL16" [label="",shape = box,width=.001,height = 0] 
-	"NIL16" -- "NOT147" [label="1 bit(s)",len=1]
-	{"C"} -- "NIL16"
-	"NOT148" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"B" [label="B"] 
-	"NIL17" [label="",shape = box,width=.001,height = 0] 
-	"NIL17" -- "NOT148" [label="1 bit(s)",len=1]
-	{"B"} -- "NIL17"
-	"NOT149" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"A" [label="A"] 
+	"NIL16" -- "NOT63" [label="1 bit(s)",len=1]
+	{"A"} -- "NIL16"
+	"NIL17" [label="",shape = box,width=.001,height = 2] 
+	"NIL17" -- "AND78" [label="10 bit(s)",len=1]
+	{"J","I","NOT56","NOT57","NOT58","NOT59","NOT60","NOT61","NOT62","NOT63"} -- "NIL17"
+	"AND87" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"NOT64" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"J" [label="J",width=0.75,height=0.75] 
 	"NIL18" [label="",shape = box,width=.001,height = 0] 
-	"NIL18" -- "NOT149" [label="1 bit(s)",len=1]
-	{"A"} -- "NIL18"
-	"NIL19" [label="",shape = box,width=.001,height = 1] 
-	"NIL19" -- "AND152" [label="4 bit(s)",len=1]
-	{"NOT146","NOT147","NOT148","NOT149"} -- "NIL19"
-	"NIL20" [label="",shape = box,width=.001,height = 1] 
-	"NIL20" -- "AND155" [label="4 bit(s)",len=1]
-	{"NOT143","NOT144","NOT145","AND152"} -- "NIL20"
-	"NIL21" [label="",shape = box,width=.001,height = 1] 
-	"NIL21" -- "AND158" [label="4 bit(s)",len=1]
-	{"J","I","NOT142","AND155"} -- "NIL21"
-	"AND167" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT150" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"J" [label="J"] 
+	"NIL18" -- "NOT64" [label="1 bit(s)",len=1]
+	{"J"} -- "NIL18"
+	"I" [label="I",width=0.75,height=0.75] 
+	"NOT65" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"H" [label="H",width=0.75,height=0.75] 
+	"NIL19" [label="",shape = box,width=.001,height = 0] 
+	"NIL19" -- "NOT65" [label="1 bit(s)",len=1]
+	{"H"} -- "NIL19"
+	"NOT66" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"G" [label="G",width=0.75,height=0.75] 
+	"NIL20" [label="",shape = box,width=.001,height = 0] 
+	"NIL20" -- "NOT66" [label="1 bit(s)",len=1]
+	{"G"} -- "NIL20"
+	"NOT67" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"F" [label="F",width=0.75,height=0.75] 
+	"NIL21" [label="",shape = box,width=.001,height = 0] 
+	"NIL21" -- "NOT67" [label="1 bit(s)",len=1]
+	{"F"} -- "NIL21"
+	"NOT68" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"E" [label="E",width=0.75,height=0.75] 
 	"NIL22" [label="",shape = box,width=.001,height = 0] 
-	"NIL22" -- "NOT150" [label="1 bit(s)",len=1]
-	{"J"} -- "NIL22"
-	"I" [label="I"] 
-	"NOT151" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"H" [label="H"] 
+	"NIL22" -- "NOT68" [label="1 bit(s)",len=1]
+	{"E"} -- "NIL22"
+	"NOT69" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"D" [label="D",width=0.75,height=0.75] 
 	"NIL23" [label="",shape = box,width=.001,height = 0] 
-	"NIL23" -- "NOT151" [label="1 bit(s)",len=1]
-	{"H"} -- "NIL23"
-	"AND164" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT152" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"G" [label="G"] 
+	"NIL23" -- "NOT69" [label="1 bit(s)",len=1]
+	{"D"} -- "NIL23"
+	"NOT70" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"C" [label="C",width=0.75,height=0.75] 
 	"NIL24" [label="",shape = box,width=.001,height = 0] 
-	"NIL24" -- "NOT152" [label="1 bit(s)",len=1]
-	{"G"} -- "NIL24"
-	"NOT153" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"F" [label="F"] 
+	"NIL24" -- "NOT70" [label="1 bit(s)",len=1]
+	{"C"} -- "NIL24"
+	"NOT71" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B",width=0.75,height=0.75] 
 	"NIL25" [label="",shape = box,width=.001,height = 0] 
-	"NIL25" -- "NOT153" [label="1 bit(s)",len=1]
-	{"F"} -- "NIL25"
-	"NOT154" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"E" [label="E"] 
+	"NIL25" -- "NOT71" [label="1 bit(s)",len=1]
+	{"B"} -- "NIL25"
+	"NOT72" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"A" [label="A",width=0.75,height=0.75] 
 	"NIL26" [label="",shape = box,width=.001,height = 0] 
-	"NIL26" -- "NOT154" [label="1 bit(s)",len=1]
-	{"E"} -- "NIL26"
-	"AND161" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT155" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"D" [label="D"] 
-	"NIL27" [label="",shape = box,width=.001,height = 0] 
-	"NIL27" -- "NOT155" [label="1 bit(s)",len=1]
-	{"D"} -- "NIL27"
-	"NOT156" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"C" [label="C"] 
+	"NIL26" -- "NOT72" [label="1 bit(s)",len=1]
+	{"A"} -- "NIL26"
+	"NIL27" [label="",shape = box,width=.001,height = 2] 
+	"NIL27" -- "AND87" [label="10 bit(s)",len=1]
+	{"NOT64","I","NOT65","NOT66","NOT67","NOT68","NOT69","NOT70","NOT71","NOT72"} -- "NIL27"
+	"AND96" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"J" [label="J",width=0.75,height=0.75] 
+	"NOT73" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"I" [label="I",width=0.75,height=0.75] 
 	"NIL28" [label="",shape = box,width=.001,height = 0] 
-	"NIL28" -- "NOT156" [label="1 bit(s)",len=1]
-	{"C"} -- "NIL28"
-	"NOT157" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"B" [label="B"] 
+	"NIL28" -- "NOT73" [label="1 bit(s)",len=1]
+	{"I"} -- "NIL28"
+	"NOT74" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"H" [label="H",width=0.75,height=0.75] 
 	"NIL29" [label="",shape = box,width=.001,height = 0] 
-	"NIL29" -- "NOT157" [label="1 bit(s)",len=1]
-	{"B"} -- "NIL29"
-	"NOT158" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"A" [label="A"] 
+	"NIL29" -- "NOT74" [label="1 bit(s)",len=1]
+	{"H"} -- "NIL29"
+	"NOT75" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"G" [label="G",width=0.75,height=0.75] 
 	"NIL30" [label="",shape = box,width=.001,height = 0] 
-	"NIL30" -- "NOT158" [label="1 bit(s)",len=1]
-	{"A"} -- "NIL30"
-	"NIL31" [label="",shape = box,width=.001,height = 1] 
-	"NIL31" -- "AND161" [label="4 bit(s)",len=1]
-	{"NOT155","NOT156","NOT157","NOT158"} -- "NIL31"
-	"NIL32" [label="",shape = box,width=.001,height = 1] 
-	"NIL32" -- "AND164" [label="4 bit(s)",len=1]
-	{"NOT152","NOT153","NOT154","AND161"} -- "NIL32"
-	"NIL33" [label="",shape = box,width=.001,height = 1] 
-	"NIL33" -- "AND167" [label="4 bit(s)",len=1]
-	{"NOT150","I","NOT151","AND164"} -- "NIL33"
-	"AND176" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"J" [label="J"] 
-	"NOT159" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"I" [label="I"] 
+	"NIL30" -- "NOT75" [label="1 bit(s)",len=1]
+	{"G"} -- "NIL30"
+	"NOT76" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"F" [label="F",width=0.75,height=0.75] 
+	"NIL31" [label="",shape = box,width=.001,height = 0] 
+	"NIL31" -- "NOT76" [label="1 bit(s)",len=1]
+	{"F"} -- "NIL31"
+	"NOT77" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"E" [label="E",width=0.75,height=0.75] 
+	"NIL32" [label="",shape = box,width=.001,height = 0] 
+	"NIL32" -- "NOT77" [label="1 bit(s)",len=1]
+	{"E"} -- "NIL32"
+	"NOT78" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"D" [label="D",width=0.75,height=0.75] 
+	"NIL33" [label="",shape = box,width=.001,height = 0] 
+	"NIL33" -- "NOT78" [label="1 bit(s)",len=1]
+	{"D"} -- "NIL33"
+	"NOT79" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"C" [label="C",width=0.75,height=0.75] 
 	"NIL34" [label="",shape = box,width=.001,height = 0] 
-	"NIL34" -- "NOT159" [label="1 bit(s)",len=1]
-	{"I"} -- "NIL34"
-	"NOT160" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"H" [label="H"] 
+	"NIL34" -- "NOT79" [label="1 bit(s)",len=1]
+	{"C"} -- "NIL34"
+	"NOT80" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B",width=0.75,height=0.75] 
 	"NIL35" [label="",shape = box,width=.001,height = 0] 
-	"NIL35" -- "NOT160" [label="1 bit(s)",len=1]
-	{"H"} -- "NIL35"
-	"AND173" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT161" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"G" [label="G"] 
+	"NIL35" -- "NOT80" [label="1 bit(s)",len=1]
+	{"B"} -- "NIL35"
+	"NOT81" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"A" [label="A",width=0.75,height=0.75] 
 	"NIL36" [label="",shape = box,width=.001,height = 0] 
-	"NIL36" -- "NOT161" [label="1 bit(s)",len=1]
-	{"G"} -- "NIL36"
-	"NOT162" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"F" [label="F"] 
-	"NIL37" [label="",shape = box,width=.001,height = 0] 
-	"NIL37" -- "NOT162" [label="1 bit(s)",len=1]
-	{"F"} -- "NIL37"
-	"NOT163" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"E" [label="E"] 
+	"NIL36" -- "NOT81" [label="1 bit(s)",len=1]
+	{"A"} -- "NIL36"
+	"NIL37" [label="",shape = box,width=.001,height = 2] 
+	"NIL37" -- "AND96" [label="10 bit(s)",len=1]
+	{"J","NOT73","NOT74","NOT75","NOT76","NOT77","NOT78","NOT79","NOT80","NOT81"} -- "NIL37"
+	"AND105" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"NOT82" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"J" [label="J",width=0.75,height=0.75] 
 	"NIL38" [label="",shape = box,width=.001,height = 0] 
-	"NIL38" -- "NOT163" [label="1 bit(s)",len=1]
-	{"E"} -- "NIL38"
-	"AND170" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT164" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"D" [label="D"] 
+	"NIL38" -- "NOT82" [label="1 bit(s)",len=1]
+	{"J"} -- "NIL38"
+	"NOT83" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"I" [label="I",width=0.75,height=0.75] 
 	"NIL39" [label="",shape = box,width=.001,height = 0] 
-	"NIL39" -- "NOT164" [label="1 bit(s)",len=1]
-	{"D"} -- "NIL39"
-	"NOT165" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"C" [label="C"] 
+	"NIL39" -- "NOT83" [label="1 bit(s)",len=1]
+	{"I"} -- "NIL39"
+	"NOT84" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"H" [label="H",width=0.75,height=0.75] 
 	"NIL40" [label="",shape = box,width=.001,height = 0] 
-	"NIL40" -- "NOT165" [label="1 bit(s)",len=1]
-	{"C"} -- "NIL40"
-	"NOT166" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"B" [label="B"] 
+	"NIL40" -- "NOT84" [label="1 bit(s)",len=1]
+	{"H"} -- "NIL40"
+	"NOT85" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"G" [label="G",width=0.75,height=0.75] 
 	"NIL41" [label="",shape = box,width=.001,height = 0] 
-	"NIL41" -- "NOT166" [label="1 bit(s)",len=1]
-	{"B"} -- "NIL41"
-	"NOT167" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"A" [label="A"] 
+	"NIL41" -- "NOT85" [label="1 bit(s)",len=1]
+	{"G"} -- "NIL41"
+	"NOT86" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"F" [label="F",width=0.75,height=0.75] 
 	"NIL42" [label="",shape = box,width=.001,height = 0] 
-	"NIL42" -- "NOT167" [label="1 bit(s)",len=1]
-	{"A"} -- "NIL42"
-	"NIL43" [label="",shape = box,width=.001,height = 1] 
-	"NIL43" -- "AND170" [label="4 bit(s)",len=1]
-	{"NOT164","NOT165","NOT166","NOT167"} -- "NIL43"
-	"NIL44" [label="",shape = box,width=.001,height = 1] 
-	"NIL44" -- "AND173" [label="4 bit(s)",len=1]
-	{"NOT161","NOT162","NOT163","AND170"} -- "NIL44"
-	"NIL45" [label="",shape = box,width=.001,height = 1] 
-	"NIL45" -- "AND176" [label="4 bit(s)",len=1]
-	{"J","NOT159","NOT160","AND173"} -- "NIL45"
-	"AND185" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT168" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"J" [label="J"] 
+	"NIL42" -- "NOT86" [label="1 bit(s)",len=1]
+	{"F"} -- "NIL42"
+	"NOT87" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"E" [label="E",width=0.75,height=0.75] 
+	"NIL43" [label="",shape = box,width=.001,height = 0] 
+	"NIL43" -- "NOT87" [label="1 bit(s)",len=1]
+	{"E"} -- "NIL43"
+	"NOT88" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"D" [label="D",width=0.75,height=0.75] 
+	"NIL44" [label="",shape = box,width=.001,height = 0] 
+	"NIL44" -- "NOT88" [label="1 bit(s)",len=1]
+	{"D"} -- "NIL44"
+	"NOT89" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"C" [label="C",width=0.75,height=0.75] 
+	"NIL45" [label="",shape = box,width=.001,height = 0] 
+	"NIL45" -- "NOT89" [label="1 bit(s)",len=1]
+	{"C"} -- "NIL45"
+	"NOT90" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B",width=0.75,height=0.75] 
 	"NIL46" [label="",shape = box,width=.001,height = 0] 
-	"NIL46" -- "NOT168" [label="1 bit(s)",len=1]
-	{"J"} -- "NIL46"
-	"NOT169" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"I" [label="I"] 
+	"NIL46" -- "NOT90" [label="1 bit(s)",len=1]
+	{"B"} -- "NIL46"
+	"NOT91" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"A" [label="A",width=0.75,height=0.75] 
 	"NIL47" [label="",shape = box,width=.001,height = 0] 
-	"NIL47" -- "NOT169" [label="1 bit(s)",len=1]
-	{"I"} -- "NIL47"
-	"NOT170" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"H" [label="H"] 
-	"NIL48" [label="",shape = box,width=.001,height = 0] 
-	"NIL48" -- "NOT170" [label="1 bit(s)",len=1]
-	{"H"} -- "NIL48"
-	"AND182" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT171" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"G" [label="G"] 
-	"NIL49" [label="",shape = box,width=.001,height = 0] 
-	"NIL49" -- "NOT171" [label="1 bit(s)",len=1]
-	{"G"} -- "NIL49"
-	"NOT172" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"F" [label="F"] 
-	"NIL50" [label="",shape = box,width=.001,height = 0] 
-	"NIL50" -- "NOT172" [label="1 bit(s)",len=1]
-	{"F"} -- "NIL50"
-	"NOT173" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"E" [label="E"] 
-	"NIL51" [label="",shape = box,width=.001,height = 0] 
-	"NIL51" -- "NOT173" [label="1 bit(s)",len=1]
-	{"E"} -- "NIL51"
-	"AND179" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"NOT174" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"D" [label="D"] 
-	"NIL52" [label="",shape = box,width=.001,height = 0] 
-	"NIL52" -- "NOT174" [label="1 bit(s)",len=1]
-	{"D"} -- "NIL52"
-	"NOT175" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"C" [label="C"] 
-	"NIL53" [label="",shape = box,width=.001,height = 0] 
-	"NIL53" -- "NOT175" [label="1 bit(s)",len=1]
-	{"C"} -- "NIL53"
-	"NOT176" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"B" [label="B"] 
-	"NIL54" [label="",shape = box,width=.001,height = 0] 
-	"NIL54" -- "NOT176" [label="1 bit(s)",len=1]
-	{"B"} -- "NIL54"
-	"NOT177" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"A" [label="A"] 
-	"NIL55" [label="",shape = box,width=.001,height = 0] 
-	"NIL55" -- "NOT177" [label="1 bit(s)",len=1]
-	{"A"} -- "NIL55"
-	"NIL56" [label="",shape = box,width=.001,height = 1] 
-	"NIL56" -- "AND179" [label="4 bit(s)",len=1]
-	{"NOT174","NOT175","NOT176","NOT177"} -- "NIL56"
-	"NIL57" [label="",shape = box,width=.001,height = 1] 
-	"NIL57" -- "AND182" [label="4 bit(s)",len=1]
-	{"NOT171","NOT172","NOT173","AND179"} -- "NIL57"
-	"NIL58" [label="",shape = box,width=.001,height = 1] 
-	"NIL58" -- "AND185" [label="4 bit(s)",len=1]
-	{"NOT168","NOT169","NOT170","AND182"} -- "NIL58"
-	"NIL59" [label="",shape = box,width=.001,height = 1] 
-	"NIL59" -- "OR17" [label="5 bit(s)",len=1]
-	{"AND149","AND158","AND167","AND176","AND185"} -- "NIL59"
+	"NIL47" -- "NOT91" [label="1 bit(s)",len=1]
+	{"A"} -- "NIL47"
+	"NIL48" [label="",shape = box,width=.001,height = 2] 
+	"NIL48" -- "AND105" [label="10 bit(s)",len=1]
+	{"NOT82","NOT83","NOT84","NOT85","NOT86","NOT87","NOT88","NOT89","NOT90","NOT91"} -- "NIL48"
+	"NIL49" [label="",shape = box,width=.001,height = 1] 
+	"NIL49" -- "OR23" [label="5 bit(s)",len=1]
+	{"AND69","AND78","AND87","AND96","AND105"} -- "NIL49"
 	{rank = same; A;B;C;D;E;F;G;H;I;J;A;B;C;D;E;F;G;H;I;J;A;B;C;D;E;F;G;H;I;J;A;B;C;D;E;F;G;H;I;J;A;B;C;D;E;F;G;H;I;J;}
 }

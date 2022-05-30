@@ -28,79 +28,92 @@ namespace ArchimedeFront.Pages
             ExprBool? tree = null;
             StringBuilder sb = new StringBuilder();
             string result = "";
-
-            switch (Data.codeTransformation)
+            try
             {
+                switch (Data.codeTransformation)
+                {
 
-                case '0':
-                    tree = ExprBool.ParseExpression(Data.expression);
-                    tree = ExprBool.dnf(tree);
-                    ExprBool.inorder(tree, sb);
-                    result = sb.ToString();
-                    result = ExprBool.SimplifyDNFExpression(result);
+                    case '0':
+                        tree = ExprBool.ParseExpression(Data.expression);
+                        tree = ExprBool.dnf(tree);
+                        ExprBool.inorder(tree, sb);
+                        result = sb.ToString();
+                        result = ExprBool.SimplifyDNFExpression(result);
 
-                    break;
-                case '1':
-                    tree = ExprBool.ParseExpression(Data.expression);
-                    tree = ExprBool.cnf(tree);
-                    ExprBool.inorder(tree, sb);
-                    result = sb.ToString();
-                    result = ExprBool.SimplifyCNFExpression(result);
+                        break;
+                    case '1':
+                        tree = ExprBool.ParseExpression(Data.expression);
+                        tree = ExprBool.cnf(tree);
+                        ExprBool.inorder(tree, sb);
+                        result = sb.ToString();
+                        result = ExprBool.SimplifyCNFExpression(result);
 
-                    if (result == "0")
-                    {
-                        expressionTransforme.Text = "Faux";
-                        Data.expression = "0";
-                        return;
-                    }
-                    if (result == "1")
-                    {
-                        expressionTransforme.Text = "Vrai";
-                        Data.expression = "1";
-                        return;
-                    }
-
-
-                    sb = new StringBuilder();
-                    sb.Append("(");
-                    for (int i = 0; i < result.Length; i++)
-                    {
-                        if (result[i] != '.')
+                        if (result == "0")
                         {
-                            sb.Append(result[i]);
+                            expressionTransforme.Text = "Faux";
+                            Data.expression = "0";
+                            return;
                         }
-                        else
+                        if (result == "1")
                         {
-                            sb.Append(").(");
+                            expressionTransforme.Text = "Vrai";
+                            Data.expression = "1";
+                            return;
                         }
-                    }
-                    sb.Append(")");
-                    result = sb.ToString();
-                    break;
-                case '2':
-                    tree = ExprBool.ParseExpression(Data.expression);
-                    tree = ExprBool.onlyNand(tree);
-                    ExprBool.inorder(tree, sb);
-                    result = sb.ToString();
-                    sb = new StringBuilder();
-                    ExprBool.inorderParanthese(tree, sb);
-                    result = sb.ToString();
-                    break;
-                case '3':
-                    tree = ExprBool.ParseExpression(Data.expression);
-                    tree = ExprBool.onlyNor(tree);
 
-                    sb = new StringBuilder();
-                    ExprBool.inorderParanthese(tree, sb);
 
-                    result = sb.ToString();
-                    break;
-                default:
-                    return;
+                        sb = new StringBuilder();
+                        sb.Append("(");
+                        for (int i = 0; i < result.Length; i++)
+                        {
+                            if (result[i] != '.')
+                            {
+                                sb.Append(result[i]);
+                            }
+                            else
+                            {
+                                sb.Append(").(");
+                            }
+                        }
+                        sb.Append(")");
+                        result = sb.ToString();
+                        break;
+                    case '2':
+                        tree = ExprBool.ParseExpression(Data.expression);
+                        tree = ExprBool.onlyNand(tree);
+                        ExprBool.inorder(tree, sb);
+                        result = sb.ToString();
+                        sb = new StringBuilder();
+                        ExprBool.inorderParanthese(tree, sb);
+                        result = sb.ToString();
+
+                        Data.aPartirDeTransformation = true;
+                        Data.binaryTree = tree;
+                        break;
+                    case '3':
+                        tree = ExprBool.ParseExpression(Data.expression);
+                        tree = ExprBool.onlyNor(tree);
+
+                        sb = new StringBuilder();
+                        ExprBool.inorderParanthese(tree, sb);
+
+                        result = sb.ToString();
+
+                        Data.aPartirDeTransformation = true;
+                        Data.binaryTree = tree;
+                        break;
+                    default:
+                        return;
+                }
+                expressionTransforme.Text = result;
+                Data.expression = result;
             }
-
-            expressionTransforme.Text = result;
-            Data.expression = result;
+            catch (Exception e)
+            {
+                expressionTransforme.Text = "ERREUR";
+                Data.expression = result;
+            }
+            
         }
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)

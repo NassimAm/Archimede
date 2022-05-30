@@ -69,10 +69,10 @@ namespace ArchimedeFront.Pages
             //Initialiser les paramètres de synthèse
             Data.nb_and = 16;
             Data.nb_or = 16;
-            Data.nb_nand = 8;
-            Data.nb_nor = 8;
-            Data.nb_xor = 8;
-            Data.nb_xnor = 8;
+            Data.nb_nand = 2;
+            Data.nb_nor = 2;
+            Data.nb_xor = 2;
+            Data.nb_xnor = 2;
         }
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
@@ -86,8 +86,6 @@ namespace ArchimedeFront.Pages
             {
                 Data.literal = false;
                 Data.nbVariables = int.Parse(nbVariables.Text);
-                Minterme.maxNbVariables = 0;
-                Minterme.maxNbUns = 0;
                 Data.expression = expression.Text.Replace(" ","");
                 Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
                 long parsedInt;
@@ -558,19 +556,19 @@ namespace ArchimedeFront.Pages
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_nand = 8;
+                    Data.nb_nand = 2;
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_nor = 8;
+                    Data.nb_nor = 2;
                     break;
                 case "XOR_entrees":
                     xor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_xor = 8;
+                    Data.nb_xor = 2;
                     break;
                 case "XNOR_entrees":
                     xnor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_xnor = 8;
+                    Data.nb_xnor = 2;
                     break;
             }
         }

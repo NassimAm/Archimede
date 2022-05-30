@@ -263,6 +263,25 @@ class Synthese
         return n_ary_root;
     }
 
+    //Convertit une expression en arbre syntaxique m-aire d'un arbre binaire
+    public static ExprBoolNode To_N_ary_From_Binary(ExprBool root, Dictionary<string, int> gates)
+    {
+        //ExprBool.Draw_Tree(root);
+        ExprBoolNode binary_root = Binary_To_ExprBoolNode(root);
+        
+        if (gates == null)
+            gates = new Dictionary<string, int>();
+        gates["ET"] = 0;
+        gates["OU"] = 0;
+        gates["NON"] = 0;
+        gates["NAND"] = 0;
+        gates["NOR"] = 0;
+        gates["XOR"] = 0;
+        gates["XNOR"] = 0;
+        CalculerNbPortes(binary_root, gates);
+        return binary_root;
+    }
+
     //Affiche un arbre binaire de type ExprBool
     public static void Affich_Binary(ExprBool tree)
     {
@@ -647,7 +666,7 @@ class Synthese
                 }
             default:
                 {
-                    File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\"] \n", root.info.Replace("!", ""), root.id));
+                    File.AppendAllText(path, String.Format("\t\"{1}\" [label=\"{0}\",width=0.75,height=0.75] \n", root.info.Replace("!", ""), root.id));
                     break;
                 }
         }

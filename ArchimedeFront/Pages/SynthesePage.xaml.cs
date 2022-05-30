@@ -30,22 +30,32 @@ namespace ArchimedeFront.Pages
         {
             Synthese.ExprBoolNode tree;
             Dictionary<string, int> gates = new Dictionary<string, int>();
-            if (Data.literal)
+            if(!Data.aPartirDeTransformation)
             {
-                tree = Synthese.To_N_ary(Data.expression, Data.nb_and, Data.nb_or, Data.nb_nand,Data.nb_nor,Data.nb_xor,Data.nb_xnor,gates);
-                Data.variables = dnf.ExprBool.getVariables(Data.expression);
+                if (Data.literal)
+                {
+                    tree = Synthese.To_N_ary(Data.expression, Data.nb_and, Data.nb_or, Data.nb_nand, Data.nb_nor, Data.nb_xor, Data.nb_xnor, gates);
+                    Data.variables = dnf.ExprBool.getVariables(Data.expression);
+                }
+                else
+                {
+                    string expression = "";
+                    for (int i = 0; i < Data.mintermes.Count; i++)
+                    {
+                        expression += Mintermes.getExpressionDeBincode(Data.literal, Data.mintermes[i].bincode.PadLeft(Data.nbVariables, '0'), Data.variables) + "+";
+                    }
+                    if (expression.Length > 0)
+                        expression = expression.Substring(0, expression.Length - 1);
+                    tree = Synthese.To_N_ary(expression, Data.nb_and, Data.nb_or, Data.nb_nand, Data.nb_nor, Data.nb_xor, Data.nb_xnor, gates);
+                }
             }
             else
             {
-                string expression = "";
-                for (int i = 0; i < Data.mintermes.Count; i++)
-                {
-                    expression += Mintermes.getExpressionDeBincode(Data.literal, Data.mintermes[i].bincode.PadLeft(Data.nbVariables, '0'), Data.variables) + "+";
-                }
-                if (expression.Length > 0)
-                    expression = expression.Substring(0, expression.Length - 1);
-                tree = Synthese.To_N_ary(expression, Data.nb_and, Data.nb_or, Data.nb_nand, Data.nb_nor, Data.nb_xor, Data.nb_xnor, gates);
+                tree = Synthese.To_N_ary_From_Binary(Data.binaryTree, gates);
+                Data.variables = dnf.ExprBool.getVariables(Data.expression);
+                Data.aPartirDeTransformation = false;
             }
+
             Synthese.Circuit_Visualisation(tree,Data.variables);
             Image syntheseImage = new Image();
             BitmapImage bitmap = new BitmapImage();
