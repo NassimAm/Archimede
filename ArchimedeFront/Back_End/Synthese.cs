@@ -15,12 +15,20 @@ class Synthese
         public string info = "";
         public List<ExprBoolNode> children = new List<ExprBoolNode>();
         public string? id;
+        public static int nbAND = 0;
+        public static int nbOR = 0;
+        public static int nbNOT = 0;
+        public static int nbNAND = 0;
+        public static int nbNOR = 0;
+        public static int nbXOR = 0;
+        public static int nbXNOR = 0;
 
         public ExprBoolNode(string value)
         {
             this.info = value;
             this.type = dnf.Type.VALEUR;
-            this.id = ExprBool.generateID();
+            //this.id = ExprBool.generateID();
+            this.id = info;
         }
 
         public ExprBoolNode(dnf.Type type, List<ExprBoolNode> children)
@@ -29,31 +37,45 @@ class Synthese
             {
                 case dnf.Type.ET:
                     this.info = "AND";
+                    this.id = this.info + String.Format("{0}", nbAND);
+                    nbAND++;
                     break;
                 case dnf.Type.OU:
                     this.info = "OR";
+                    this.id = this.info + String.Format("{0}", nbOR);
+                    nbOR++;
                     break;
                 case dnf.Type.NON:
                     this.info = "NOT";
+                    this.id = this.info + String.Format("{0}", nbNOT);
+                    nbNOT++;
                     break;
                 case dnf.Type.NAND:
                     this.info = "NAND";
+                    this.id = this.info + String.Format("{0}", nbNAND);
+                    nbNAND++;
                     break;
                 case dnf.Type.NOR:
                     this.info = "NOR";
+                    this.id = this.info + String.Format("{0}", nbNOR);
+                    nbNOR++;
                     break;
                 case dnf.Type.XOR:
                     this.info = "XOR";
+                    this.id = this.info + String.Format("{0}", nbXOR);
+                    nbXOR++;
                     break;
                 case dnf.Type.XNOR:
                     this.info = "XNOR";
+                    this.id = this.info + String.Format("{0}", nbXNOR);
+                    nbXNOR++;
                     break;
                 default:
                     break;
             }
             this.type = type;
             this.children = children;
-            this.id = ExprBool.generateID();
+            //this.id = ExprBool.generateID();
 
         }
 
@@ -539,7 +561,7 @@ class Synthese
     }
 
     //Construit le circuit grâce à GraphViz (DOT)
-    public static void Circuit_Visualisation(ExprBoolNode root)
+    public static void Circuit_Visualisation(ExprBoolNode root,List<string> variables)
     {
         Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Synthese");
         string? path = Directory.GetCurrentDirectory() + "\\Synthese\\synthese.txt";
@@ -552,12 +574,19 @@ class Synthese
         File.AppendAllText(path, "graph arbre{\n");
         File.AppendAllText(path, "\tsplines = ortho;\n");
         File.AppendAllText(path, "\trankdir=\"LR\";\n");
-        File.AppendAllText(path, "\tranksep=1;\n");
+        File.AppendAllText(path, "\tranksep=2;\n");
         File.AppendAllText(path, "\tnode[width=0.5, height=0.5, shape=box, fontsize=16];\n");
         File.AppendAllText(path, "\tedge[arrowhead=none,penwidth=2];\n");
 
         Circuit_Visualisation_Recursive(root, path, ref nbnils);
 
+        string rankSettings = "\t{rank = same; ";
+        for (int i=0;i<variables.Count;i++)
+        {
+            rankSettings += variables[i] + ";";
+        }
+        rankSettings += "}\n";
+        File.AppendAllText(path, rankSettings);
         File.AppendAllText(path, "}\n");
         // End construction
 
@@ -633,7 +662,7 @@ class Synthese
             listentrees = listentrees.Substring(0, listentrees.Length - 1);
             listentrees += "}";
             File.AppendAllText(path, String.Format("\t\"NIL{0}\" [label=\"\",shape = box,width=.001,height = {1}] \n", nbnils, root.children.Count / 4));
-            File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\" [label=\"{2} bit(s)\"]\n", nbnils, root.id,root.children.Count));
+            File.AppendAllText(path, String.Format("\t\"NIL{0}\" -- \"{1}\" [label=\"{2} bit(s)\",len=1]\n", nbnils, root.id,root.children.Count));
             File.AppendAllText(path, String.Format("\t{0} -- \"NIL{1}\"\n", listentrees, nbnils++));
         }
     }

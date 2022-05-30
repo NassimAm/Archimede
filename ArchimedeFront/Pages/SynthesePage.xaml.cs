@@ -33,6 +33,7 @@ namespace ArchimedeFront.Pages
             if (Data.literal)
             {
                 tree = Synthese.To_N_ary(Data.expression, Data.nb_and, Data.nb_or, Data.nb_nand,Data.nb_nor,Data.nb_xor,Data.nb_xnor,gates);
+                Data.variables = dnf.ExprBool.getVariables(Data.expression);
             }
             else
             {
@@ -45,7 +46,7 @@ namespace ArchimedeFront.Pages
                     expression = expression.Substring(0, expression.Length - 1);
                 tree = Synthese.To_N_ary(expression, Data.nb_and, Data.nb_or, Data.nb_nand, Data.nb_nor, Data.nb_xor, Data.nb_xnor, gates);
             }
-            Synthese.Circuit_Visualisation(tree);
+            Synthese.Circuit_Visualisation(tree,Data.variables);
             Image syntheseImage = new Image();
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();

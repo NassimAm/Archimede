@@ -38,12 +38,6 @@ namespace ArchimedeFront.Pages
             numberOfVariablesInput.Width = new GridLength(0, GridUnitType.Star);
             guidePopUp.Visibility = Visibility.Collapsed;
             expression.Text = "A.B + !A.B.C";
-            Data.nb_and = 16;
-            Data.nb_or = 16;
-            Data.nb_nand = 8;
-            Data.nb_nor = 8;
-            Data.nb_xor = 8;
-            Data.nb_xnor = 8;
 
 
             if (Data.saveexpressionlitterale == null)
@@ -72,11 +66,13 @@ namespace ArchimedeFront.Pages
 
             operatorButtonsContainer.Children.Add(buttons);
 
-
-
-           
-            
-        
+            //Initialiser les paramètres de synthèse
+            Data.nb_and = 16;
+            Data.nb_or = 16;
+            Data.nb_nand = 8;
+            Data.nb_nor = 8;
+            Data.nb_xor = 8;
+            Data.nb_xnor = 8;
         }
 
         private void simplifyButton_Click(object sender, RoutedEventArgs e)
@@ -478,6 +474,15 @@ namespace ArchimedeFront.Pages
         private void startSynthese_Button_Click(object sender, RoutedEventArgs e)
         {
             Data.expression = expression.Text;
+            if(!Data.syntheseAuto)
+            {
+                Data.nb_and = int.Parse(et_entree_input_text.Text);
+                Data.nb_or = int.Parse(ou_entree_input_text.Text);
+                Data.nb_nand = int.Parse(nand_entree_input_text.Text);
+                Data.nb_nor = int.Parse(nand_entree_input_text.Text);
+                Data.nb_xor = int.Parse(nand_entree_input_text.Text);
+                Data.nb_xnor = int.Parse(nand_entree_input_text.Text);
+            }
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
 
@@ -534,6 +539,7 @@ namespace ArchimedeFront.Pages
         private void ET_ilimite_Checked(object sender, RoutedEventArgs e)
         {
             if (et_entree_input == null) return;
+            Data.syntheseAuto = true;
             DoubleAnimation da = new DoubleAnimation();
             da.From = 1;
             da.To = 0;
@@ -573,6 +579,7 @@ namespace ArchimedeFront.Pages
         private void ET_limite_Checked(object sender, RoutedEventArgs e)
         {
             if (et_entree_input == null) return;
+            Data.syntheseAuto = false;
 
             DoubleAnimation da = new DoubleAnimation();
             da.From = 0;
@@ -584,27 +591,21 @@ namespace ArchimedeFront.Pages
             {
                 case "ET_entrees":
                     et_entree_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_and = int.Parse(et_entree_input_text.Text);
                     break;
                 case "OU_entrees":
                     ou_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_or = int.Parse(ou_entree_input_text.Text);
                     break;
                 case "NAND_entrees":
                     nand_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_nand = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "NOR_entrees":
                     nor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_nor = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "XOR_entrees":
                     xor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_xor = int.Parse(nand_entree_input_text.Text);
                     break;
                 case "XNOR_entrees":
                     xnor_entrees_input.BeginAnimation(OpacityProperty, da);
-                    Data.nb_xnor = int.Parse(nand_entree_input_text.Text);
                     break;
             }
         }

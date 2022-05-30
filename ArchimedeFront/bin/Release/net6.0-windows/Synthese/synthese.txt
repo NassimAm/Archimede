@@ -1,0 +1,28 @@
+graph arbre{
+	splines = ortho;
+	rankdir="LR";
+	ranksep=1;
+	node[width=0.5, height=0.5, shape=box, fontsize=16];
+	edge[arrowhead=none,penwidth=2];
+	"OR1" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"AND4" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"C" [label="C"] 
+	"B" [label="B"] 
+	"NOT1" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
+	"A" [label="A"] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "NOT1" [label="1 bit(s)"]
+	{"A"} -- "NIL0"
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "AND4" [label="3 bit(s)"]
+	{"C","B","NOT1"} -- "NIL1"
+	"AND5" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B"] 
+	"A" [label="A"] 
+	"NIL2" [label="",shape = box,width=.001,height = 0] 
+	"NIL2" -- "AND5" [label="2 bit(s)"]
+	{"B","A"} -- "NIL2"
+	"NIL3" [label="",shape = box,width=.001,height = 0] 
+	"NIL3" -- "OR1" [label="2 bit(s)"]
+	{"AND4","AND5"} -- "NIL3"
+}

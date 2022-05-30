@@ -410,6 +410,7 @@ namespace Archimède
                             else alphabet[0] = (char)(65 + j);
 
                             alpha = alphabet.ToString();
+                            alphabets.Add(alpha);
 
                         }
 
@@ -474,6 +475,7 @@ namespace Archimède
                             else alphabet[0] = (char)(65 + j);
 
                             alpha = alphabet.ToString();
+                            alphabets.Add(alpha);
 
                         }
 
@@ -562,6 +564,7 @@ namespace Archimède
                         else alphabet[0] = (char)(65 + j);
 
                         alpha = alphabet.ToString();
+                        alphabets.Add(alpha);
 
                     }
 
