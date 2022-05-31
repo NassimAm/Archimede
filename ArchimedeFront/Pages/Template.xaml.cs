@@ -82,6 +82,10 @@ namespace ArchimedeFront.Pages
 
         private void toDocumentation_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            _PageContent.IsHitTestVisible = true;
+            _PageContent.Effect = null;
+            _PageContent.NavigationService.Navigate(new Uri("pack://application:,,,/Pages/Documentation.xaml", UriKind.RelativeOrAbsolute));
+            
 
         }
     }

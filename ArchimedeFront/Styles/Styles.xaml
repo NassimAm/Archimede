@@ -589,4 +589,50 @@
         <Setter Property="Stroke" Value="White"/>
         <Setter Property="StrokeThickness" Value="2"/>
     </Style>
+
+
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="H1">
+
+        <Setter Property="FontFamily" Value="/Fonts/#Urbanist" />
+        <Setter Property="Foreground"  Value="#002725"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="36" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="H2">
+
+        <Setter Property="FontFamily" Value="/Fonts/#Urbanist" />
+        <Setter Property="Foreground"  Value="#002725"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="24" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="H3">
+
+        <Setter Property="FontFamily" Value="/Fonts/#Urbanist" />
+        <Setter Property="Foreground"  Value="#002725"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="22" />
+    </Style>
+
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="p">
+
+        <Setter Property="FontFamily" Value="/Fonts/#Urbanist" />
+        <Setter Property="Foreground"  Value="#002725"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="TextAlignment" Value="Justify"/>
+        <Setter Property="Margin" Value="0,4"/>
+    </Style>
+
+
 </ResourceDictionary>
