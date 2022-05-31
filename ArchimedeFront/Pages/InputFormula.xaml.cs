@@ -85,7 +85,38 @@ namespace ArchimedeFront.Pages
             if ( numerique.IsChecked == true)
             {
                 Data.literal = false;
-                Data.nbVariables = int.Parse(nbVariables.Text);
+
+
+                List<string> errorMessages = new List<string>();
+                errorMessages = Erreurs.detectionErreurs(expression.Text, false);
+                if (errorMessages.Count > 0)
+                {
+                    disableButtons();
+                    foreach (string error in errorMessages)
+                    {
+                        errorsContainer.Children.Add(generateNewError(error));
+                    }
+                    return;
+                }
+
+
+
+                Boolean nbVariableAuto  = nbVariables.Text.Replace(" ","").Equals("");
+
+                if (!nbVariableAuto) {
+                    try
+                    {
+                        Data.nbVariables = int.Parse(nbVariables.Text);
+                    }
+                    catch (Exception)
+                    {
+                        disableButtons();
+                        errorsContainer.Children.Add(generateNewError("Nombre de variable invalide ."));
+                        return;
+                    }
+                }
+               
+                
                 Data.expression = expression.Text.Replace(" ","");
                 Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
                 long parsedInt;
@@ -106,8 +137,8 @@ namespace ArchimedeFront.Pages
                 }
 
                 int maxNbUns = Minterme.maxNbUns;
-                
 
+                if (nbVariableAuto) Data.nbVariables = Minterme.maxNbVariables;
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
                     errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit,\nLe nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
@@ -119,7 +150,7 @@ namespace ArchimedeFront.Pages
             {
                 Data.literal = true;
                 List<string> errorMessages = new List<string>();
-                errorMessages= Erreurs.detectionErreurs(expression.Text);
+                errorMessages= Erreurs.detectionErreurs(expression.Text,true);
                 if(errorMessages.Count > 0)
                 {
                     disableButtons();
@@ -148,7 +179,38 @@ namespace ArchimedeFront.Pages
             if (numerique.IsChecked == true)
             {
                 Data.literal = false;
-                Data.nbVariables = int.Parse(nbVariables.Text);
+
+
+                  List<string> errorMessages = new List<string>();
+                errorMessages = Erreurs.detectionErreurs(expression.Text, false);
+                if (errorMessages.Count > 0)
+                {
+                    disableButtons();
+                    foreach (string error in errorMessages)
+                    {
+                        errorsContainer.Children.Add(generateNewError(error));
+                    }
+                    return;
+                }
+
+
+
+                Boolean nbVariableAuto = nbVariables.Text.Replace(" ", "").Equals("");
+
+                if (!nbVariableAuto)
+                {
+                    try
+                    {
+                        Data.nbVariables = int.Parse(nbVariables.Text);
+                    }
+                    catch (Exception)
+                    {
+                        disableButtons();
+                        errorsContainer.Children.Add(generateNewError("Nombre de variable invalide ."));
+                        return;
+                    }
+                }
+
                 Data.expression = expression.Text.Replace(" ", "");
                 Data.listMintermesString = Data.expression.Split(",").Distinct().ToList();
                 long parsedInt;
@@ -170,7 +232,7 @@ namespace ArchimedeFront.Pages
 
                 int maxNbUns = Minterme.maxNbUns;
 
-
+                if (nbVariableAuto) Data.nbVariables = Minterme.maxNbVariables;
                 if (Minterme.maxNbVariables > Data.nbVariables)
                 {
                     errorsContainer.Children.Add(generateNewErrorNumerique(String.Format("La liste de mintermes introduite dépasse le nombre maximal de variables introduit,\nLe nombre de variables minimal pour cette liste est de : {0}", Minterme.maxNbVariables)));
@@ -182,7 +244,7 @@ namespace ArchimedeFront.Pages
             {
                 Data.literal = true;
                 List<string> errorMessages = new List<string>();
-                errorMessages = Erreurs.detectionErreurs(expression.Text);
+                errorMessages = Erreurs.detectionErreurs(expression.Text,true);
                 if (errorMessages.Count > 0)
                 {
                     disableButtons();
@@ -493,7 +555,7 @@ namespace ArchimedeFront.Pages
 
             Data.literal = true;
             List<string> errorMessages;
-            errorMessages = Erreurs.detectionErreurs(expression.Text);
+            errorMessages = Erreurs.detectionErreurs(expression.Text , true);
             if (errorMessages.Count > 0)
             {
                 disableButtons();

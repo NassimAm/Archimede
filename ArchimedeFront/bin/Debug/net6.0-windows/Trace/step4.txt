@@ -2,18 +2,9 @@ Extraction des impliquants premiers
 T: Déjà Traité  P: Premier  A: en attente
 
 Groupage N°1
-T 00000
-T 00001
-T 00010
-T 00011
-T 01010
+T 011
+A 11-
 
 Groupage N°2
-T 0000-
-T 000-0
-T 000-1
-T 0001-
-P 0-010
-
-Groupage N°3
-P 000--
+P -11
+P 11-

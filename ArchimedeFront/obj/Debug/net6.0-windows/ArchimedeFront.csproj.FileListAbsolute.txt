@@ -134,3 +134,5 @@ D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFron
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\SynthesePage.g.cs
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\SynthesePage.baml
+C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Documentation.g.cs
+C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Debug\net6.0-windows\Pages\Documentation.baml

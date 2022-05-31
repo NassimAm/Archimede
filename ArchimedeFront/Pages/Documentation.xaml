@@ -1,0 +1,290 @@
+﻿<Page x:Class="ArchimedeFront.Pages.Documentation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ArchimedeFront.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="9000" d:DesignWidth="800"
+      Title="Documentation">
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+    <StackPanel d:Background="White" Margin="38,28">
+        <TextBlock Style="{StaticResource H1}" Margin="0,12">
+            1ère approche (QMC)
+        </TextBlock>
+        <TextBlock Style="{StaticResource p}">
+            Premièrement, une implémentation de l’algorithme de Quinn McCluskey qui a servi comme test des limites de ce dernier.
+        </TextBlock>
+       
+        <TextBlock Style="{StaticResource H2}" Margin="0,4">Explication de l’algorithme :</TextBlock>
+       
+        <TextBlock Style="{StaticResource p}">La technique de Quine-McCluskey s’applique de la même manière aux expressions disjonctives qu’aux expressions conjonctives. Nous nous concentrerons dans ce qui suit sur le cas des expressions disjonctives.</TextBlock>
+        <TextBlock Style="{StaticResource p}" TextDecorations="Underline">L’algorithme s’exprime ainsi :</TextBlock>
+        <StackPanel Margin="36,6,0,6">
+            <TextBlock Style="{StaticResource p}" Margin="0,2">1. Exprimer la fonction sous forme canonique disjonctive.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">2. Exprimer les mintermes sous forme binaire.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">3. Grouper les termes selon leur poids.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">4. Unir les termes deux à deux.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">5. Répéter l’étape (4) autant de fois que nécessaire.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">6. Identifier les impliquants premiers.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">7. Identifier les impliquants premiers essentiels.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">8. Si la fonction est entièrement exprimée par ses impliquants premiers essentiels, arrêter.</TextBlock>
+            <TextBlock Style="{StaticResource p}" Margin="0,2">9. Sinon, choisir, les impliquants premiers non essentiels permettant une couverture complète.</TextBlock>
+        </StackPanel>
+
+        <TextBlock Style="{StaticResource H2}" Margin="0,4">Resultat :</TextBlock>
+        <TextBlock Style="{StaticResource p}">Bien que l’algorithme de Quine-McCluskey soit très bien adapté pour être implémenté dans un programme informatique, le résultat est encore loin d'être efficace en termes de temps de traitement et d'utilisation de la mémoire. L'ajout d'une variable à la fonction doublera -à peu près- les deux, car la capacite de la table de vérité augmente de façon exponentielle avec le nombre de variables. Par conséquent, la méthode Quine-McCluskey n'est pratique que pour les fonctions avec un nombre limité de variables d'entrée.</TextBlock>
+        <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure1.png" MaxWidth="650" Margin="0,16"></Image>
+
+            <TextBlock Style="{StaticResource H1}" Margin="0,12">
+            2ème approche (Petrick)
+            </TextBlock>
+            <TextBlock Style="{StaticResource p}">
+                Pour régler le problème , nous avons eu l’idée d’implémenter une hybridation de l’algorithme Quinn McCluskey et l’algorithme du scientifique américain Stanley R. Petrick.
+            </TextBlock>
+            <TextBlock Style="{StaticResource H2}" Margin="0,4">Explication de l’algorithme :</TextBlock>
+            <TextBlock Style="{StaticResource p}" TextDecorations="Underline">Petrick fonctionne en procédant comme suit:</TextBlock>
+            <StackPanel Margin="36,6,0,6">
+                <TextBlock Style="{StaticResource p}" Margin="0,5">1. Réduction des impliquants premiers de la table en supprimant les lignes contenant des impliquants premiers essentiels (et leurs colonnes respectives).</TextBlock>
+                <TextBlock Style="{StaticResource p}" Margin="0,5">2. Le marquage des lignes de la table réduite .</TextBlock>
+                <TextBlock Style="{StaticResource p}" Margin="0,5">3. Construction d'une fonction logique cela est vrai lorsque toutes les colonnes sont couvertes ( Il est constitué par un produit de sommes, dans lequel chaque terme de la somme est de la forme , quand représenter une rangée qui couvre la colonne ).</TextBlock>
+                <TextBlock Style="{StaticResource p}" Margin="0,5">4. Minimisation des en somme de produits en appliquant l'équivalence (Chaque terme dans le résultat est une solution, qui est un ensemble de lignes qui couvre tous les minterms du tableau).</TextBlock>
+                <TextBlock Style="{StaticResource p}" Margin="0,5">5. Détermination des solutions minimales identifiant les termes qui contiennent le moins de impliquants premiers.</TextBlock>
+                <TextBlock Style="{StaticResource p}" Margin="0,5">6. Comptez le nombre de littéraux dans chacune impliquant d'abord des termes trouvés précédemment et la recherche du nombre total de littéraux.</TextBlock>
+                <TextBlock Style="{StaticResource p}" Margin="0,5">7. La sélection des termes formés par le plus petit nombre de littéraux et d'écrire les sommes correspondantes des impliquants premiers.</TextBlock>
+            </StackPanel>
+            <TextBlock Style="{StaticResource H2}" Margin="0,4">Resultat :</TextBlock>
+            <TextBlock Style="{StaticResource p}">Il existe une légère difference entre le temps d’execution de cet algorithme et celui de QMC . En effet il est plus réduit ainsi il assure une réduction d’espace memoire visible lors des tests.</TextBlock>
+            <TextBlock Style="{StaticResource p}">Tandis que dans certain cas, l’algorithme de Petrick donne des résultats  meilleurs par rapport à celle de QMC mais le problème de nombre de variables persiste toujours puisque il se base sur la complétion des variables pour trouver des adjacents qui vont être groupés et simplifiés par la suite .</TextBlock>
+            <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure2.png" MaxWidth="650" Margin="0,16"></Image>
+            <TextBlock Style="{StaticResource H1}" Margin="0,12">
+            3ème et dernière approche (QMC x Espresso)
+            </TextBlock>
+            <TextBlock Style="{StaticResource p}">
+                Nous avons créé notre propre algorithme qui a été inspiré par l’algorithme de QMC et l’algorithme Espresso.
+            </TextBlock>
+            <TextBlock Style="{StaticResource p}">
+                L’idee de l’algorithme est de faire le groupage sans complétion de la formule en forme canonique (donc éviter l’augmentation du nombre de mintermes d’une manière exponentielle) et alors résoudre le probleme du nombre de variables (qui a été limité par 13) car la fomule va préserver sa forme originale et le nombre de mintermes va rester constant d’où on va réduire la compléxite de l’algorithme , optimiser le temps d’execution ainsi que l’espace mémoire.
+            </TextBlock>
+            <TextBlock Style="{StaticResource H2}" Margin="0,4" TextDecorations="Underline" FontWeight="Medium">Explication détaillée de l’algorithme :</TextBlock>
+            <StackPanel Margin="14,2">
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 1 (transformation en forme disjonctive) :
+                </TextBlock>
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">- L’expression introduite va être transformée en notation polonaise postfixée .</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">- Le résultat va être exprimée en un arbre syntaxique</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">- L’arbre généré va être transformé en forme disjonctive à travers un algorithme récursif optimisé qui va faire des changement sur ses differents noeuds</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">- Récupérer l’expression transformée à travers un parcours inordre de l’arbre.</TextBlock>
+                </StackPanel>
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 2 (traduction en binaire):
+                </TextBlock>
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">Fixer l’ordre des variables dans un tableau (chaque variable a son propre poids).</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">Traduire les mintermes en binaire selon l’ordre des variables.</TextBlock>
+
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Si la variable n’est pas précédée par un symbole de négation on va la traduire par un 1.</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Sinon par un 0.</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Puisque on ne procèdera pas à la complétion de l’expression en forme canonique , on trouvera des mintermes avec des variables manquantes, ces derniers seront traduits par un tiret qui signifie 0 et 1 en meme temps (état indéfini).</TextBlock>
+                    </StackPanel>
+
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">Exemple : a + a.b.!c + !b.c</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3" TextDecorations="Underline">1- Ordre des variables (du poids fort au poids faible ) :</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="20,3,0,3">[ a , b , c ]</TextBlock>
+                    
+                    <TextBlock Style="{StaticResource p}" Margin="0,3" TextDecorations="Underline">2- Commencer la traduction de chaque minterme :</TextBlock>
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3"> ●  a =  1 - -  ( un seul minterme est équivalent à 4:  a.!b.!c + a.!b.c + a.b.!c + a.b.c  ).</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">●  a.b.!c  =  1 1 0  (forme canonique).</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">●  !b.c     =  - 0 1  (équivalent à :   a.!b.c + !a.!b.c  =  1 0 1 + 0 0 1  ).</TextBlock>
+
+
+                    </StackPanel>
+
+
+
+
+
+                </StackPanel>
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 3 (Trier les mintermes):
+                </TextBlock>
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">La liste des codes binaires des minterms sera filtrée en 2 sous listes:</TextBlock>
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3"> ●  Liste des mintermes : en forme canonique</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">●  Liste des impliquants en attente : des mintermes qui contiennent des tirets (-)  c-à-d non pas en forme canonique</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">●  !b.c     =  - 0 1  (équivalent à :   a.!b.c + !a.!b.c  =  1 0 1 + 0 0 1  ).</TextBlock>
+
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">La première liste des mintermes en forme canonique sera triée selon le nombre des 1 dans chaque minterme  c-à-d on procèdera tel qu”il suit :</TextBlock>
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3"> ●  Les mintermes avec un seul 1 dans un groupe séparé (Poids 1).</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">●  Les mintermes avec deux 1 dans un autre groupe (Poids 2).</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">●  Et ainsi de suite …</TextBlock>
+
+                    </StackPanel>
+
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">La liste des impliquants en attente restera dans un groupe séparé.</TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3" TextDecorations="Underline">Exemple:</TextBlock>
+                    <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure3.png" MaxWidth="650" Margin="0,16"></Image>
+
+                </StackPanel>
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 4 (Commencer le groupage) :
+                </TextBlock>
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">Il est necessaire de vous rappeler qu’à la fin de l’étape 3 on obtient :</TextBlock>
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Un tableau de listes de mintermes:</TextBlock>
+                        <StackPanel Margin="42,2,0,2">
+                            <TextBlock Style="{StaticResource p}" Margin="0,3"> ●  selon l’indice “i” dans le tableau: le tableau à l’indice i contient une liste constituée de mintermes qui contiennent un nombre de 1 égal à i c-a-d :</TextBlock>
+                            <TextBlock Style="{StaticResource p}" Margin="6,3">⇒ tab[0] represente une liste des minterms qui contient ne contient pas de 1</TextBlock>
+                            <TextBlock Style="{StaticResource p}" Margin="6,3">⇒ tab[5] represente une liste des minterms qui contient cinq 1</TextBlock>
+
+                        </StackPanel>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Une liste d’impliquants en attente.</TextBlock>
+
+                    </StackPanel>
+
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">On commence par l’explication du groupage dans l’algorithme classique de QMC  :</TextBlock>
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Pour commencer, il s’agit de trouver les adjacents de chaque minterme et les fusionner ( de façon à éliminer une variable si cela est possible ) et donc générer un nouveau groupe.
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- On dit que deux mintermes sont adjacents si le code binaire d’un minterme diffère de l’autre dans une et une seule position (une variable) ex : 1001 et 1000 sont des adjacents et le résultat de leur fusionnement est 100- (la variable qui diffère est éliminée ) , (a.!b.!c.d + a.!b.!c.!d = a.!b.!c)
+.</TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Pour cela chaque minterme sera comparé avec les mintermes du groupe qui suit car c’est impossible de trouver un adjacent avec autre groupe puisque les mintermes diffèrent forcément dans plus qu’une position..</TextBlock>
+
+                    </StackPanel>
+
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+                        Dans notre algorithme on ajoutera une comparaison supplémentaire avec la liste des impliquants en attente, en fait, on trouvera tous les adjacents possibles à partir d’un impliquant en attente car concrètement il représente plusieurs mintermes donc il suffit de trouver le minterme dont on a besoin.
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3" TextDecorations="Underline">Exemple:</TextBlock>
+                    <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure4.png" MaxWidth="550" Margin="0,16"></Image>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+                        Dans cette figure : les impliquants en vert sont des impliquants en attente
+                    </TextBlock>
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Si vous remarquez (011 et 1xx) sont groupés pour former (x11) car le seul adjacent qu’on peut tirer de 1xx est 111 et si on groupe 011 et 111 on trouvera le meme resultat x11
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+A la fin de cette étape on va générer une nouvelle collection du groupe et le nombre de variables va être décrémenté par 1 , de plus on va comparer tous les impliquants en attente et si le nombre de variables d’un d’eux égal le nombre de variables dans la collection générée, ce dernier ne va plus être un impliquant en attente (son tour arrive pour être inclu dans la collection originale des groupes ) -d’où le nom impliquant en attente-
+                    </TextBlock>
+
+
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 5 (Générer les impliquants premiers):
+                </TextBlock>
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">Répéter l’étape 4 avec les nouveaux termes jusqu’à ce qu’il n’y ait plus d’association possible.
+                    </TextBlock>
+
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">En parallèle en va identifier les impliquants premiers (ce sont les impliquants non traités qui n’ont aucun adjacent )
+                    </TextBlock>
+                    <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure5.png" MaxWidth="800" Margin="0,16"></Image>
+
+
+
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 6 (Trouver les impliquants premiers essentiels ):           
+                </TextBlock>
+
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+                        La sortie de l’étape 5 est une liste des impliquants premiers ces derniers représentent bien la fonction booléenne en entrée mais il se peut qu’un impliquant premier ne soit pas essentiel d’où la nécessité de trouver seulement les impliquants premier essentiels. Comment?
+                    </TextBlock>
+
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+                        Il s’agit d’un simple parcours de tous les impliquants premiers et pour chaque impliquant on va verifier s’il est nécessaire pour représenter la liste des mintermes de la fonction.
+                    </TextBlock>
+
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Les mintermes sont représentés en colonnes.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Les impliquants premiers sont représentés en lignes.
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- L’intersection d’un minterme et un impliquant premier donne:
+                        </TextBlock>
+
+                        <StackPanel Margin="42,2,0,2">
+                            <TextBlock Style="{StaticResource p}" Margin="6,3">●  Une case vide si l’impliquant premier ne représente pas le minterme
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource p}" Margin="6,3">●  Un simple cercle noir si l’impliquant premier représente le minterme
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource p}" Margin="6,3">●  Un cercle noir spécial si l’impliquant premier est essentiel pour le minterme
+                            </TextBlock>
+
+                            <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure6.png" MaxWidth="600" Margin="0,16"></Image>
+
+                        </StackPanel>
+
+
+
+                    </StackPanel>
+
+
+
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Etape 7 (Un retour vers la forme littérale):
+                </TextBlock>
+
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+                        Pour cela on va traduire les impliquants premiers essentiels en des mintermes sous forme littérale.</TextBlock>
+                </StackPanel>
+
+                <TextBlock Style="{StaticResource H3}" Margin="0,4">
+                    Remarque:
+                </TextBlock>
+
+                <StackPanel Margin="36,6,0,6">
+                    <TextBlock Style="{StaticResource p}" Margin="0,3">
+                        La simplification en forme conjonctive fonctionne avec le même principe de celle en forme disjonctive mais avec quelques changements :                    
+                    </TextBlock>
+
+                    <StackPanel Margin="42,2,0,2">
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- La fonction en entrée sera transformée en fome conjonctive.
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- On récupère la négation du résultat trouvé, cette dernière sera en forme disjonctive (négation d’une forme conjonctive).
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Simplifier le résultat de la négation à l’aide de l’algorithme presenté précédemment.
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource p}" Margin="0,3">- Refaire la négation du resultat de simplification pour récupérer la formule simplifiée en forme conjonctive.
+                        </TextBlock>
+
+                    </StackPanel>
+                    </StackPanel>
+
+
+
+            </StackPanel>
+
+
+            <TextBlock Style="{StaticResource H2}" Margin="0,4">Resultat :</TextBlock>
+            <Image HorizontalAlignment="Center" Source="pack://application:,,,/Assets/docImages/figure7.png" MaxWidth="650" Margin="0,16"></Image>
+
+
+
+
+
+
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
+

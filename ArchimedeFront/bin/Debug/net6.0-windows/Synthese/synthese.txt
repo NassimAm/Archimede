@@ -4,28 +4,21 @@ graph arbre{
 	ranksep=2;
 	node[width=0.5, height=0.5, shape=box, fontsize=16];
 	edge[arrowhead=none,penwidth=2];
-	"AND199" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
-	"OR29" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
-	"E" [label="E",width=0.75,height=0.75] 
-	"NOT183" [label="",image="rsc/images/gates/NOT.png",fixedsize=true,shape=plaintext] 
-	"D" [label="D",width=0.75,height=0.75] 
-	"NIL0" [label="",shape = box,width=.001,height = 0] 
-	"NIL0" -- "NOT183" [label="1 bit(s)",len=1]
-	{"D"} -- "NIL0"
-	"C" [label="C",width=0.75,height=0.75] 
-	"A" [label="A",width=0.75,height=0.75] 
-	"NIL1" [label="",shape = box,width=.001,height = 1] 
-	"NIL1" -- "OR29" [label="4 bit(s)",len=1]
-	{"E","NOT183","C","A"} -- "NIL1"
-	"OR31" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"OR1" [label="",image="rsc/images/gates/OR.png",fixedsize=true,shape=plaintext] 
+	"AND2" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
 	"C" [label="C",width=0.75,height=0.75] 
 	"B" [label="B",width=0.75,height=0.75] 
+	"NIL0" [label="",shape = box,width=.001,height = 0] 
+	"NIL0" -- "AND2" [label="2 bit(s)",len=1]
+	{"C","B"} -- "NIL0"
+	"AND3" [label="",image="rsc/images/gates/AND.png",fixedsize=true,shape=plaintext] 
+	"B" [label="B",width=0.75,height=0.75] 
 	"A" [label="A",width=0.75,height=0.75] 
+	"NIL1" [label="",shape = box,width=.001,height = 0] 
+	"NIL1" -- "AND3" [label="2 bit(s)",len=1]
+	{"B","A"} -- "NIL1"
 	"NIL2" [label="",shape = box,width=.001,height = 0] 
-	"NIL2" -- "OR31" [label="3 bit(s)",len=1]
-	{"C","B","A"} -- "NIL2"
-	"NIL3" [label="",shape = box,width=.001,height = 0] 
-	"NIL3" -- "AND199" [label="2 bit(s)",len=1]
-	{"OR29","OR31"} -- "NIL3"
-	{rank = same; A;B;C;D;E;}
+	"NIL2" -- "OR1" [label="2 bit(s)",len=1]
+	{"AND2","AND3"} -- "NIL2"
+	{rank = same; A;B;C;}
 }
