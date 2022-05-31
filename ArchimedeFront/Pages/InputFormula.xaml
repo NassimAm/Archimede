@@ -96,7 +96,7 @@
                             <RadioButton Name="_0"  Style="{StaticResource customRadioButton}" Margin="0,8" IsChecked="True" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left" GroupName="formeLogique" >Normale Disjonctive</RadioButton>
                             <RadioButton Name="_1" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >Normale Conjonctive</RadioButton>
                             <RadioButton Name="_2" Style="{StaticResource customRadioButton}" Margin="0,8"  FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NAND seulement</RadioButton>
-                            <RadioButton Name="_3" Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulemnt</RadioButton>
+                            <RadioButton Name="_3" Style="{StaticResource customRadioButton}" Margin="0,8" FontSize="20"  VerticalContentAlignment="Center"  HorizontalAlignment="Left"  GroupName="formeLogique"  >NOR seulement</RadioButton>
                         </StackPanel>
 
 

@@ -1,0 +1,17 @@
+strict graph arbre {
+	ordering = out;
+	splines = false;
+ "OR1" [label="OR"] 
+ "AND4" [label="AND"] 
+ "C" [label="C"] 
+ "B" [label="B"] 
+ "NOT1" [label="NOT"] 
+ "A" [label="A"] 
+	"NOT1" -- {"A"}
+	"AND4" -- {"C","B","NOT1"}
+ "AND5" [label="AND"] 
+ "B" [label="B"] 
+ "A" [label="A"] 
+	"AND5" -- {"B","A"}
+	"OR1" -- {"AND4","AND5"}
+}
