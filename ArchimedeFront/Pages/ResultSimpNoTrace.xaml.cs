@@ -81,18 +81,22 @@ namespace ArchimedeFront.Pages
             else
             {
                 resultat = Mintermes.getResultatExpressionDNF(Data.literal, Data.impliquantsEssentiels, Data.variables);
-                if (resultat.Length == 0) FonctionSimplifie.Text = "Vrai";
-                else FonctionSimplifie.Text = resultat;
+                if (resultat.Length == 0)
+                {
+                    FonctionSimplifie.Text = "Vrai";
+                    Data.expression = "1";
+                }
+                else
+                {
+                    FonctionSimplifie.Text = resultat;
+                    Data.expression = resultat;
+                }
             }
-
-
-           
-
-
         }
 
         private void syntheseButton_Click(object sender, RoutedEventArgs e)
         {
+            Data.literal = true;
             NavigationService.Navigate(new Uri("pack://application:,,,/Pages/SynthesePage.xaml", UriKind.Absolute));
         }
     }
