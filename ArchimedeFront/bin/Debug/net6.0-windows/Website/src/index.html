@@ -23,7 +23,7 @@
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="#about">Installer</a></li>
                     <li><a href="#guide">Guide</a></li>
-                    <li><a href="#">A propos</a></li>
+                    <li><a href="#apropos">A propos</a></li>
                 </ul>
             </div>
             <i class="menu" id="menu" onclick="showmenu()"><img src="../Assets/Icons/menu.svg"></i>
@@ -62,16 +62,22 @@
         </div>
         <div class="cards">
             <div class="card">
-                <img src="../Assets/Icons/download.svg">
-                <p>Télécharger</p>
+                <a href="../Files/ArchimedeSetup.zip" target="_blank" download>
+                    <img src="../Assets/Icons/download.svg">
+                    <p>Télécharger</p>
+                </a>
             </div>
             <div class="card">
-                <img src="../Assets/Icons/question.svg">
-                <p>Comment Utiliser ?</p>
+                <a href="../Files/Guide d'utilisation.pdf" target="_blank" download>
+                    <img src="../Assets/Icons/question.svg">
+                    <p>Comment Utiliser ?</p>
+                </a>
             </div>
             <div class="card">
-                <img src="../Assets/Icons/doc.svg">
-                <p>Documentation</p>
+                <a href="../Files/Guide d'utilisation.pdf" target="_blank" download>
+                    <img src="../Assets/Icons/doc.svg">
+                    <p>Documentation</p>
+                </a>
             </div>
         </div>
         
@@ -156,12 +162,26 @@
             <div><p>Cliquant sur "Aller", le circuit s'affichera en proposant une option de sauvegarde du circuit en format PNG.</p></div>
             <img src="../Assets/Guide/synthèse.png">
             <div>
-                <h1 style="color: var(--mablue); text-align: center;">Remerciements :</h1>
+                <h2 style="color: var(--mablue); text-align: center;">Remerciements :</h2>
                 <p style="text-align: center; font-style: italic;">Merci, cher utilisateur, de nous faire confiance.</p>
                 <p style="text-align: center; font-style: italic;">Nous espérons que cela donnera un coup de main à quiconque en aurait besoin.</p>
             </div>
         </div>
     </section>
+    <section class="apropos" id="apropos">
+        <div class="content">
+            <h2>A propos de nous :</h2>
+            <div><p>L'équipe N°10 : Archimède Team</p></div>
+            <div class="members">
+                <div class="gridcol" style="background-image: url('../Assets/Team/nassim.jpg');"><h3 class="nom">Nassim AMEUR [ CE ]</h3></div>
+                <div class="gridcol" style="background-image: url('../Assets/Team/wahid.jpg');"><h3 class="nom" id="nassim">ASSELAH Wahid</h3></div>
+                <div class="gridcol" style="background-image: url('../Assets/Team/marouane.jpg');"><h3 class="nom" id="nassim">BENBETKA Merouane</h3></div>
+                <div class="gridcol" style="background-image: url('../Assets/Team/aniss.jpg');"><h3 class="nom" id="aniss">BESSALAH Aniss</h3></div>
+                <div class="gridcol" style="background-image: url('../Assets/Team/Hania.jpg');"><h3 class="nom" id="hania">Hania MENNAD</h3></div>
+                <div class="gridcol" style="background-image: url('../Assets/Team/fayssal.jpg'); background-size: cover;"><h3 class="nom" id="nassim">ZEMMOURI Fayssal</h3></div>
+            </div>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
