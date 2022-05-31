@@ -26,7 +26,8 @@ html {
     position: relative;
 }
 nav {
-    max-height: 10vh;
+    /* max-height: 10vh; */
+    height: 70px;
     display: flex;
     padding: 2% 6%;
     justify-content: space-between;
@@ -121,11 +122,13 @@ h1 {
     width: 20px;
     height: auto;
 }
-.hero-btn a {
+a {
+    text-decoration: none;
+}
+.hero-btn span {
     color: white;
     font-family: 'Urbanist', sans-serif;
     font-size: 20px;
-    text-decoration: none;
     margin-right: 20px;
     
 }
@@ -170,8 +173,12 @@ nav .close, nav .menu {
     border: 1px solid transparent;
     border-radius: 10px;
 }
-.card a p {
+.card a {
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .card:hover {
     border: 1px solid white;
@@ -186,6 +193,7 @@ nav .close, nav .menu {
 }
 .card p {
     font-family: 'Urbanist', sans-serif;
+    text-align: center;
     font-size: 20px;
     width: fit-content;
 }
@@ -199,9 +207,17 @@ nav .close, nav .menu {
     padding: 5vh 0;
     
 }
-.guide .content, .apropos .content {
+.apropos .content {
     max-width: 80vw;
     margin: auto;
+}
+.guide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.guide .content {
+    max-width: 70vw;
 }
 .guide .content h1, .guide .content h2, .guide .content div, .guide .content h1 img {
     padding-top: 7vh;
@@ -224,23 +240,24 @@ h2 {
 }
 .members {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
     gap: 3vw;
     padding: 10px;
     margin: 20px 0;
 }
 .gridcol {
-    height: 50vh;
-    width: auto;
+    height: 350px;
+    width: 280px;
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
     align-items: flex-start;
     border-radius: 15px;
+    transition-duration: .6;
 }
 .gridcol:hover {
-    /*transform: translateY(20px);*/
-    transition: 0.6s;
     cursor: pointer;
 }
 .gridcol:before {
@@ -248,7 +265,9 @@ h2 {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 11, 14, 0.5), rgba(0, 11, 14, 1));
+    bottom: 0;
+    /* background: linear-gradient(rgba(0, 11, 14, 0.5), rgba(0, 11, 14, 1)); */
+    background: linear-gradient(transparent, rgba(0, 11, 14, 1));
     border: solid 1px var(--dark);
     z-index: 2;
     transition: 0.5s all;
@@ -258,20 +277,25 @@ h2 {
     opacity: 1;
 }
 .gridcol .nom {
-    margin: 20px;
-    position: relative;
+    /* margin: 20px; */
+    position: absolute;
+    bottom: 0;
+    left: 10%;
     z-index: 3;
-    transform: translateY(30px);
+    /* transform: translateY(-30px); */
     transition: 0.5s all;
     opacity: 0;
     color: #fff;
     font-family: 'Product Sans';
+    font-size: 22px;
+    /* left: 3%; */
     font-weight: 500;
 }
 .gridcol:hover .nom {
-    transform: translateY(0px);
+    /* transform: translateY(0px); */
     opacity: 1;
-    margin-top: 80%;
+    bottom: 40px;
+    /* margin-top: 80%; */
 }
 @media(min-width: 750px) {
     nav .menu {
@@ -281,6 +305,9 @@ h2 {
 @media(max-width: 1000px) {
     .hero h1 {
         font-size: 24px;
+    }
+    .members {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 @media(max-width: 750px) {
@@ -310,12 +337,12 @@ h2 {
         position: absolute;
         background: rgba(0, 0, 0, 0.85);
         height: 100vh;
-        width: 200px;
+        width: 50vw;
         top: 0;
-        right: -200px;
+        right: -50vw;
         text-align: left;
         z-index: 4;
-        transition: 1s;
+        transition-duration: .5s;
     }
     nav .close, nav .menu {
         display: block;
@@ -344,5 +371,7 @@ h2 {
     .card {
         margin-bottom: 10px;
     }
-
+    .members {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }

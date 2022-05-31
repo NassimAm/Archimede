@@ -1,6 +1,6 @@
 Table d'impliquants essentiaux
 V:Vide  R:Représente  E:Essentiel
 
-            | 0000000000 | 0000000001 | 0000000010 | 0000000011 | 0000001010 |
- 000000-010 |     V     |     V     |     R     |     V     |     E     |
- 00000000-- |     E     |     E     |     R     |     E     |     V     |
+     | 11- | 011 |
+ -11 |  V  |  E  |
+ 11- |  E  |  V  |
