@@ -98,3 +98,5 @@ C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\o
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Release\net6.0-windows\ref\ArchimedeFront.dll
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Release\net6.0-windows\Pages\Documentation.g.cs
 C:\Users\ASUS ROG\OneDrive\Desktop\c#\OriginalProject\Archimede\ArchimedeFront\obj\Release\net6.0-windows\Pages\Documentation.baml
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Release\net6.0-windows\Pages\Documentation.g.cs
+D:\ESI_Prj_2CP\Première_Implémentation\Archimede_front\Archimede\ArchimedeFront\obj\Release\net6.0-windows\Pages\Documentation.baml

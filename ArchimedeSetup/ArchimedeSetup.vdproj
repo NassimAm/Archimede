@@ -21,13 +21,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_08B2541F108346EC9A2EB2C0E17E57DA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0CEB476746904F69B6896446AED45A0E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_11BBAD11E6904EC292A6842C767FDA5D"
+        "MsmKey" = "8:_0EA0DC02FBCD45EDB15EACFE72BF680B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0F1B663EAC664793A3E04B84C9B50146"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,31 +51,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1846CFF84084479EB135D6509D5A6AA2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1CFC69751B874AC5B2E4045F80787A95"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_21889EE06F4A4FBA8DEF57250129776A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2580A64CC65641F1A61F7E462D800630"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2A79F4A72C144C29BB834E4420877DF6"
+        "MsmKey" = "8:_1D79A1D99FC84C638A32DE6277DD9DDC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -75,19 +69,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2E1F73B2C959448996DD95786D325363"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_37166CAE6F48489BB7CE84D6BD032AA1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3E2BD68AA59449E1B6DEAEEE1042AEFD"
+        "MsmKey" = "8:_3FB6A0AB79A240058C6E2228C0B0DE55"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -105,13 +93,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4C9ED9A9E8E84FF4B08BCAC2C170E6DA"
+        "MsmKey" = "8:_4F241766D9C84C48BDED9E3AE6884560"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4F241766D9C84C48BDED9E3AE6884560"
+        "MsmKey" = "8:_53006530F9F74C2A8D4E0649EACACF9B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -123,7 +111,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_57C61CB63AF649CC970B8529CBA2FCF4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_58393B1845D04AC09FFC2D5012A49ADA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5B0388DCCABF4A61B69AD985DCB10182"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5BBFDC1E6FC64FEB8F8543B01A6AA721"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -135,25 +141,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5F8040A7D25245B19502C892154D9910"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_60376516EA8D4A32AC39F6929128DBA1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_60B48C825A364802ADC46E51099E6FBF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_627847FE851B4B7B95F4EFB836862262"
+        "MsmKey" = "8:_64B5F7D7354E445F8BB9D190BF999D41"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -171,7 +165,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6E792FC6110C4E91806499F1ABB4EFD2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_6EE9CA704B7D4A6998FA076EAD2FCF24"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_79E8072D3AD549A0B24888CBCB24DA9D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -184,6 +190,18 @@
         "Entry"
         {
         "MsmKey" = "8:_903D99B65C104A60A96C4AEBF05DD497"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_907B5FB356834B4DA18EAC4EE605E788"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9A779AEA73C6404D998F87D17301BDEB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -207,7 +225,19 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_ABDF26BF8D814783A0EC7D591E891AEF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AFA55E5C13204B539E3F7001DC4F9CAA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B31841A3EDAA4841B92A83F79A4A40D1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -219,13 +249,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C44943EF1A644CF99C2508FBECED7F45"
+        "MsmKey" = "8:_BAEAE855E1A64B298B298F0C6F63E069"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_CBA1451610BE4A25B292B5F1EA64C064"
+        "MsmKey" = "8:_CDC5AB1E426E4A428BD5E00561D8D87D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -237,13 +267,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D5A5C88719D14FDEB238A05153C90CA0"
+        "MsmKey" = "8:_D540DD5D2CBC42D8981082180CDEF743"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DAC022AAE2CE4DBA9ED217D505B0CD67"
+        "MsmKey" = "8:_D5A5C88719D14FDEB238A05153C90CA0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -261,37 +291,43 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E478D4319FDA40E4B792C4AAE73804AB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E998E964F84B4DFABF946BF18BDAE6AB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_ED407BED4A3143559B32337DB244223E"
+        "MsmKey" = "8:_ECF1FFD2B95245A6B7CB38586FC09D43"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F3CD036E42C74AEBA1CE95CA7ED893DE"
+        "MsmKey" = "8:_F2CCB28DBA13498B97D59456FFBD40CC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F5D339D0AD7C40229C668CBA0B1DA910"
+        "MsmKey" = "8:_F427A918399A4B4D827F2E851542B160"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FA7A07E5D95D4A5686782BA7A93873FE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_FCDE4F6EA6EA4D0082D7AA8882FCC5C7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FF15FEFB62E643DAB30FFA6E4DEFF30E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -417,6 +453,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08B2541F108346EC9A2EB2C0E17E57DA"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\src\\script.js"
+            "TargetName" = "8:script.js"
+            "Tag" = "8:"
+            "Folder" = "8:_B029B7C4D46C4AB5B206A3A871C461D0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0CEB476746904F69B6896446AED45A0E"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Icons\\close.svg"
@@ -437,10 +493,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11BBAD11E6904EC292A6842C767FDA5D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0EA0DC02FBCD45EDB15EACFE72BF680B"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\composant.png"
-            "TargetName" = "8:composant.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\src\\index.html"
+            "TargetName" = "8:index.html"
+            "Tag" = "8:"
+            "Folder" = "8:_B029B7C4D46C4AB5B206A3A871C461D0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0F1B663EAC664793A3E04B84C9B50146"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\synthèse.png"
+            "TargetName" = "8:synthèse.png"
             "Tag" = "8:"
             "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
@@ -477,26 +553,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1846CFF84084479EB135D6509D5A6AA2"
-            {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\numérique.png"
-            "TargetName" = "8:numérique.png"
-            "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1CFC69751B874AC5B2E4045F80787A95"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Icons\\download.svg"
@@ -517,52 +573,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21889EE06F4A4FBA8DEF57250129776A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1D79A1D99FC84C638A32DE6277DD9DDC"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Pop-up transformation.png"
-            "TargetName" = "8:Pop-up transformation.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Team\\fayssal.jpg"
+            "TargetName" = "8:fayssal.jpg"
             "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2580A64CC65641F1A61F7E462D800630"
-            {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\src\\script.js"
-            "TargetName" = "8:script.js"
-            "Tag" = "8:"
-            "Folder" = "8:_B029B7C4D46C4AB5B206A3A871C461D0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A79F4A72C144C29BB834E4420877DF6"
-            {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\disjonctive transformation.png"
-            "TargetName" = "8:disjonctive transformation.png"
-            "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Folder" = "8:_FF43AC0843014DE9992050D2FE811152"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -597,26 +613,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2E1F73B2C959448996DD95786D325363"
-            {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\nor transformation.png"
-            "TargetName" = "8:nor transformation.png"
-            "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37166CAE6F48489BB7CE84D6BD032AA1"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\XNOR.svg"
@@ -637,10 +633,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3E2BD68AA59449E1B6DEAEEE1042AEFD"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3FB6A0AB79A240058C6E2228C0B0DE55"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Temp.png"
-            "TargetName" = "8:Temp.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\nor transformation.png"
+            "TargetName" = "8:nor transformation.png"
             "Tag" = "8:"
             "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
@@ -697,12 +693,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4C9ED9A9E8E84FF4B08BCAC2C170E6DA"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F241766D9C84C48BDED9E3AE6884560"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\synthèse.png"
-            "TargetName" = "8:synthèse.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\NOR.svg"
+            "TargetName" = "8:NOR.svg"
             "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -717,12 +713,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4F241766D9C84C48BDED9E3AE6884560"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_53006530F9F74C2A8D4E0649EACACF9B"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\NOR.svg"
-            "TargetName" = "8:NOR.svg"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Pop-up transformation.png"
+            "TargetName" = "8:Pop-up transformation.png"
             "Tag" = "8:"
-            "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -757,6 +753,46 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_57C61CB63AF649CC970B8529CBA2FCF4"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Temp.png"
+            "TargetName" = "8:Temp.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_58393B1845D04AC09FFC2D5012A49ADA"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Menuicon.png"
+            "TargetName" = "8:Menuicon.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B0388DCCABF4A61B69AD985DCB10182"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Icons\\menu.svg"
@@ -777,10 +813,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5F8040A7D25245B19502C892154D9910"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BBFDC1E6FC64FEB8F8543B01A6AA721"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Menuicon.png"
-            "TargetName" = "8:Menuicon.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Pop-up synthèse.png"
+            "TargetName" = "8:Pop-up synthèse.png"
             "Tag" = "8:"
             "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
@@ -817,32 +853,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_60B48C825A364802ADC46E51099E6FBF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_64B5F7D7354E445F8BB9D190BF999D41"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\littérale.png"
-            "TargetName" = "8:littérale.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\disjonctive transformation.png"
+            "TargetName" = "8:disjonctive transformation.png"
             "Tag" = "8:"
             "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_627847FE851B4B7B95F4EFB836862262"
-            {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\src\\styles.css"
-            "TargetName" = "8:styles.css"
-            "Tag" = "8:"
-            "Folder" = "8:_B029B7C4D46C4AB5B206A3A871C461D0"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -897,12 +913,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E792FC6110C4E91806499F1ABB4EFD2"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\nand transformation.png"
+            "TargetName" = "8:nand transformation.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6EE9CA704B7D4A6998FA076EAD2FCF24"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\OR.png"
             "TargetName" = "8:OR.png"
             "Tag" = "8:"
             "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_79E8072D3AD549A0B24888CBCB24DA9D"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\conjonctive transformation.png"
+            "TargetName" = "8:conjonctive transformation.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -943,6 +999,46 @@
             "TargetName" = "8:XOR.png"
             "Tag" = "8:"
             "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_907B5FB356834B4DA18EAC4EE605E788"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Team\\aniss.jpg"
+            "TargetName" = "8:aniss.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_FF43AC0843014DE9992050D2FE811152"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A779AEA73C6404D998F87D17301BDEB"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Team\\wahid.jpg"
+            "TargetName" = "8:wahid.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_FF43AC0843014DE9992050D2FE811152"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1017,12 +1113,52 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ABDF26BF8D814783A0EC7D591E891AEF"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\src\\styles.css"
+            "TargetName" = "8:styles.css"
+            "Tag" = "8:"
+            "Folder" = "8:_B029B7C4D46C4AB5B206A3A871C461D0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AFA55E5C13204B539E3F7001DC4F9CAA"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\OR.svg"
             "TargetName" = "8:OR.svg"
             "Tag" = "8:"
             "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B31841A3EDAA4841B92A83F79A4A40D1"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\composant.png"
+            "TargetName" = "8:composant.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1057,12 +1193,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C44943EF1A644CF99C2508FBECED7F45"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BAEAE855E1A64B298B298F0C6F63E069"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\src\\index.html"
-            "TargetName" = "8:index.html"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Team\\Hania.jpg"
+            "TargetName" = "8:Hania.jpg"
             "Tag" = "8:"
-            "Folder" = "8:_B029B7C4D46C4AB5B206A3A871C461D0"
+            "Folder" = "8:_FF43AC0843014DE9992050D2FE811152"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1077,10 +1213,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CBA1451610BE4A25B292B5F1EA64C064"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CDC5AB1E426E4A428BD5E00561D8D87D"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\écran d_acceuil.png"
-            "TargetName" = "8:écran d_acceuil.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\numérique.png"
+            "TargetName" = "8:numérique.png"
             "Tag" = "8:"
             "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
@@ -1117,12 +1253,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5A5C88719D14FDEB238A05153C90CA0"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D540DD5D2CBC42D8981082180CDEF743"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\AND.svg"
-            "TargetName" = "8:AND.svg"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\écran d_acceuil.png"
+            "TargetName" = "8:écran d_acceuil.png"
             "Tag" = "8:"
-            "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1137,12 +1273,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DAC022AAE2CE4DBA9ED217D505B0CD67"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5A5C88719D14FDEB238A05153C90CA0"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\nand transformation.png"
-            "TargetName" = "8:nand transformation.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\AND.svg"
+            "TargetName" = "8:AND.svg"
             "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Folder" = "8:_99D2F4548DEE45E5B739DA58AA3804C4"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1197,6 +1333,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E478D4319FDA40E4B792C4AAE73804AB"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Menu.png"
+            "TargetName" = "8:Menu.png"
+            "Tag" = "8:"
+            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E998E964F84B4DFABF946BF18BDAE6AB"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\rsc\\images\\gates\\XOR.svg"
@@ -1217,7 +1373,27 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED407BED4A3143559B32337DB244223E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECF1FFD2B95245A6B7CB38586FC09D43"
+            {
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Team\\nassim.jpg"
+            "TargetName" = "8:nassim.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_FF43AC0843014DE9992050D2FE811152"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F2CCB28DBA13498B97D59456FFBD40CC"
             {
             "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Pop-up simplification.png"
             "TargetName" = "8:Pop-up simplification.png"
@@ -1237,12 +1413,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F3CD036E42C74AEBA1CE95CA7ED893DE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F427A918399A4B4D827F2E851542B160"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\conjonctive transformation.png"
-            "TargetName" = "8:conjonctive transformation.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Team\\marouane.jpg"
+            "TargetName" = "8:marouane.jpg"
             "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
+            "Folder" = "8:_FF43AC0843014DE9992050D2FE811152"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1257,10 +1433,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F5D339D0AD7C40229C668CBA0B1DA910"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA7A07E5D95D4A5686782BA7A93873FE"
             {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Menu.png"
-            "TargetName" = "8:Menu.png"
+            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\littérale.png"
+            "TargetName" = "8:littérale.png"
             "Tag" = "8:"
             "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
@@ -1283,26 +1459,6 @@
             "TargetName" = "8:White.svg"
             "Tag" = "8:"
             "Folder" = "8:_182EF9686789437DA2DE60CAE44EE4B3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF15FEFB62E643DAB30FFA6E4DEFF30E"
-            {
-            "SourcePath" = "8:..\\ArchimedeFront\\bin\\Debug\\net6.0-windows\\Website\\Assets\\Guide\\Pop-up synthèse.png"
-            "TargetName" = "8:Pop-up synthèse.png"
-            "Tag" = "8:"
-            "Folder" = "8:_FF06B5EFFCEA48069584197B2D74F5AC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1413,6 +1569,17 @@
                                     "Condition" = "8:"
                                     "Transitive" = "11:FALSE"
                                     "Property" = "8:_144DBF3149C44E558BF757153D7FD35D"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_FF43AC0843014DE9992050D2FE811152"
+                                    {
+                                    "Name" = "8:Team"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_8194C4818B254546A9DF61B593FAF819"
                                         "Folders"
                                         {
                                         }
@@ -1528,7 +1695,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ArchimedeSetup"
         "ProductCode" = "8:{FFF2CBD3-EB4B-45B3-AF0B-F9D1DEEEEE21}"
-        "PackageCode" = "8:{F02F17AB-BC9A-452D-BF33-FE7DC3A048EF}"
+        "PackageCode" = "8:{EB75FCDE-5FF8-4864-9F30-29662A79162A}"
         "UpgradeCode" = "8:{290C7A58-2C4B-4EA3-BCD4-5062911BCB91}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
